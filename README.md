@@ -1,92 +1,151 @@
-# Poodle_Learning_Platform
+![](RackMultipart20220525-1-bou3y4_html_53d1e378b299ba4c.png)
 
-A new system that will be used by trainers to deliver online learning content.
+![](RackMultipart20220525-1-bou3y4_html_1a8dddf43e63d360.png)
+ ![Shape1](RackMultipart20220525-1-bou3y4_html_b861174202058472.gif)
 
-## Getting started
+# **Poodle**
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+# e-Learning Platform
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+# Project Description
 
-## Add your files
+Your task is to design the new system that will be used by Telerik Academy trainers to deliver online learning content.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+The system consists of three main entities – **Users** (either teacher or student), **Courses** (either public or private) and **Sections**
 
-```
-cd existing_repo
-git remote add origin https://gitlab.com/m8776/poodle_learning_platform.git
-git branch -M main
-git push -uf origin main
-```
+**Teachers** can create courses, add **sections** to them and optionally enroll students.
 
-## Integrate with your tools
+**Students** can browse available courses and view their content
 
-- [ ] [Set up project integrations](https://gitlab.com/m8776/poodle_learning_platform/-/settings/integrations)
+# Functional Requirements
 
-## Collaborate with your team
+-
+#### Each **user** must have an email, first name, last name, and a password
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Automatically merge when pipeline succeeds](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+  - Teachers are predefined in the system
+  - Newly registered users are students by default and cannot be promoted to teachers
+  - The email serves as a username
+-
+#### Each **course** must have a title (unique), description, and is either public/private and can later be augmented with **sections**
+-
+#### Each **section** must have a title, content (HTML), shouldhave order (integer), and shouldbe restricted by date or for specific users, or have no restrictions. Its content culdbe configured to either open as a new page (default) or be embedded on the main course page (useful for small pieces of content)
 
-## Test and Deploy
+## Public Part
 
-Use the built-in continuous integration in GitLab.
+The public part must be accessible without authentication i.e., for anonymous users.
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
+Anonymous users mustbe able to see the title and description of available public courses, but not be able to open them.
 
-***
+Anonymous users mustbe able to login.
 
-# Editing this README
+Anonymous users mustbe able to register
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!).  Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
+## Private part
 
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+Accessible only if the user is authenticated.
 
-## Name
-Choose a self-explaining name for your project.
+### Main private page:
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+**Students** must be able to see the courses that they are enrolled in (both public/private). Private courses are visible only if the student is enrolled and can&#39;t be accessed in any other way (such as manually typing in the URL)
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+**Students** must be able to see available public courses – if they visit one, they are automatically enrolled in it (on first visit)
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+**Teachers** must be able to see all courses
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+**Teachers** must have a link to a **create course page** (or the create course can be somehow embedded in the main page, either in a popup or some other way)
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+### Create course view:
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+Either individual page or part of the main page.
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+Must be accessible/visible only if the user is a **teacher**
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+Must have a form to create a new course – required inputs are title, description, and public/private check. Other data can be added later
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+Could have real-time validation that checks if the title is not already used by another course
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+### Course page:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+Accessible to both students and teachers.
 
-## License
-For open source projects, say how it is licensed.
+Students must be able to see all the available sections.
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+Sections are displayed sorted by their order ascending if it&#39;s implemented should
+
+The section opens as a new page (default, must)– they see only the title and navigate to the section page on click
+
+If should and could requirements be implemented:
+
+If the section is embedded on the course page (could), then it is no longer a link, and the content is visible below the title
+
+If the section is currently restricted (should), the restriction message is visible and the section can neither be opened, nor the content, can be seen, only the title and the message.
+
+Students could see an unenroll button that removes them from the course and navigates them back to the main private page
+
+Teachers must see everything that students can see. Date and user restrictions don&#39;t apply to them.
+
+Teachers must see an **&quot;add section&quot;** link
+
+If the course is private – teachers must see **&quot;enroll students&quot;** link
+
+### Add section page:
+
+Available to teachers only.
+
+Must have an input for setting **title** and **content**. The content is expected to be HTML, so either use a text area input, or could integrate RTI like [Ace](https://ace.c9.io/). Think about potential problematic tags, when dealing with custom HTML.
+
+Should have an input to set the **order** of the page. The other is calculated to be (the last section order + 1) but can be changed to any integer not used by another section on the current course.
+
+Should have an input to either set a date **restriction** , or be available only to specific users (must be part of the course), or have no restriction (default)
+
+Could have an input to configure the section to open as a new page (default) or be embedded in the course page
+
+Must redirect back to the course page, after the section is added.
+
+### Enroll students page:
+
+Available to teachers only and opens for а specific private course.Must not open if the target course is public
+
+Must provide a way to search for students that are currently not enrolled in the current course
+
+Must provide a way to enroll single or multiple users
+
+Must have a link back to the course page.
+
+# Use Cases
+
+## Learning Swedish
+
+You plan on moving to Sweden. You search the web for free Swedish courses and find the Poodle website. You see an available course for Swedish, but on click you are redirected to the login form. After registering and logging, you can browse the course and there are tons of useful materials along with embedded videos of native speakers.
+
+## Creating a course
+
+You are a teacher that wants to create a new course. You add the title and description and mark the course as private. You visit the course page which is currently empty. You create several sections and add nice HTML markup for each one of them. In one of the sections, you embed a YouTube video. After you are finished, you click on the enroll students link and enroll 25 students to your course.
+
+# Technical Requirements
+
+## General
+
+- Follow REST API design [best practices](https://blog.florimondmanca.com/restful-api-design-13-best-practices-to-make-your-users-happy) when designing the REST API (see Appendix)
+- Use tiered project structure (separate the application in layers)
+- You should implement proper error handling
+- Try to think ahead. When developing something, think – &quot;How hard would it be to change/modify this later?&quot;
+
+## Git
+
+Commits in the GitLab repository should give a good overview of how the project was developed, which features were created first and the people who contributed. Contributions from all team members must be evident through the git commit history! The repository must contain the complete application source code and any scripts (database scripts, for example).
+
+Provide a link to a GitLab repository with the following information in the README.md file:
+
+  - Project description
+  - Link to the hosted project (if hosted online)
+  - Instructions how to setup and run the project locally
+  - Images of the database relations (must)
+
+## Optional Requirements
+
+Besides all requirements marked as should and could, here are some more _optional_ requirements:
+
+- Integrate your project with a Continuous Integration server (e.g., GitLab&#39;s own) and configure your unit tests to run on each commit to your master branch
+- Host your application&#39;s backend in a public hosting provider of your choice (e.g., AWS, Azure, Heroku)
+- Use branches while working with Git
