@@ -22,9 +22,7 @@
 
   <ItemGroup>
     <Folder Include="Controllers\Api\" />
-    <Folder Include="Data\EntityModels\" />
     <Folder Include="Helpers\" />
-    <Folder Include="Exceptions\" />
     <Folder Include="Services\" />
     <Folder Include="Repositories\" />
   </ItemGroup>
