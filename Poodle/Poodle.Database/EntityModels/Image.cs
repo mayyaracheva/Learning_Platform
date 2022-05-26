@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poodle.Data.EntityModels
+namespace Poodle.Database.EntityModels
 {
     public class Image
     {

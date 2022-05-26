@@ -1,6 +1,6 @@
 using System;
 
-namespace Poodle.Models
+namespace Poodle.API.Models
 {
     public class ErrorViewModel
     {

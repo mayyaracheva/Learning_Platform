@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 
-namespace Poodle.Data.EntityModels
+namespace Poodle.Database.EntityModels
 {
 	public class User
 	{

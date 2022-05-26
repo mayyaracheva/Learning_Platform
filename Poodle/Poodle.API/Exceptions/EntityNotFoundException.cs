@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Poodle.Exceptions
+namespace Poodle.API.Exceptions
 {
 	public class EntityNotFoundException : ApplicationException
 	{

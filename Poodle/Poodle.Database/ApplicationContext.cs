@@ -1,11 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Poodle.Data.EntityModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using Poodle.Database.Data;
+using Poodle.Database.EntityModels;
 
-namespace Poodle.Data
+namespace Poodle.Database.Database
 {
     public class ApplicationContext : DbContext
     {

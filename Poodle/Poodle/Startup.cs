@@ -11,7 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poodle
+namespace Poodle.API
 {
     public class Startup
     {
