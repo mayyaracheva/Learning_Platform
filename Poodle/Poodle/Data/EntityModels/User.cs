@@ -20,6 +20,11 @@ namespace Poodle.Data.EntityModels
 		public int RoleId { get; set; }
 		public Role Role { get; set; }
 
+		//one to one relationship - one user can have one profile photo
+		
+		public int? ImageId { get; set; }
+		public Image Image { get; set; }
+
 		public ICollection<Course> Courses { get; set; }
 
 	}
