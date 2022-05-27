@@ -8,8 +8,8 @@ namespace Poodle.Database.EntityModels
 		public string Title { get; set; }
 		public string Description { get; set; }
 
-		public int TypeId { get; set; }
-		public Category Type { get; set; }
+		public int CategoryId { get; set; }
+		public Category Category { get; set; }
 
 		//a course can have many sections and many users
 		public ICollection<Section> Sections { get; set; }
