@@ -142,3 +142,5 @@ Besides all requirements marked as should and could, here are some more _optiona
 - Integrate your project with a Continuous Integration server (e.g., GitLab&#39;s own) and configure your unit tests to run on each commit to your master branch
 - Host your application&#39;s backend in a public hosting provider of your choice (e.g., AWS, Azure, Heroku)
 - Use branches while working with Git
+
+![Entities diagram](Poodle.Diagram.jpg "DB Diagram")
