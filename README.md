@@ -143,4 +143,5 @@ Besides all requirements marked as should and could, here are some more _optiona
 - Host your application&#39;s backend in a public hosting provider of your choice (e.g., AWS, Azure, Heroku)
 - Use branches while working with Git
 
+# [Database Diagram](#)
 ![Entities diagram](Poodle.Diagram.jpg "DB Diagram")
