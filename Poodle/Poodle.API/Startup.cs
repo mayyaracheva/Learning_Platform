@@ -7,7 +7,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Poodle.Database.Database;
 
-namespace Poodle.API.API
+namespace Poodle.API
 {
 	public class Startup
 	{
