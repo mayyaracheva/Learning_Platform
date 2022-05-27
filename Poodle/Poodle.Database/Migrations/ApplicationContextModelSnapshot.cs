@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Poodle.Database.Database;
+using Poodle.Data;
 
 namespace Poodle.Data.Migrations
 {
@@ -33,7 +33,7 @@ namespace Poodle.Data.Migrations
                     b.ToTable("CourseUser");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Category", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Category", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +65,7 @@ namespace Poodle.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Course", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Course", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -129,7 +129,7 @@ namespace Poodle.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Image", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Image", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -209,7 +209,7 @@ namespace Poodle.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Role", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -241,7 +241,7 @@ namespace Poodle.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Section", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Section", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -353,7 +353,7 @@ namespace Poodle.Data.Migrations
                         });
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.User", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -496,22 +496,22 @@ namespace Poodle.Data.Migrations
 
             modelBuilder.Entity("CourseUser", b =>
                 {
-                    b.HasOne("Poodle.Database.EntityModels.Course", null)
+                    b.HasOne("Poodle.Data.EntityModels.Course", null)
                         .WithMany()
                         .HasForeignKey("CoursesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Poodle.Database.EntityModels.User", null)
+                    b.HasOne("Poodle.Data.EntityModels.User", null)
                         .WithMany()
                         .HasForeignKey("UsersId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Course", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Course", b =>
                 {
-                    b.HasOne("Poodle.Database.EntityModels.Category", "Category")
+                    b.HasOne("Poodle.Data.EntityModels.Category", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -520,9 +520,9 @@ namespace Poodle.Data.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Section", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Section", b =>
                 {
-                    b.HasOne("Poodle.Database.EntityModels.Course", "Course")
+                    b.HasOne("Poodle.Data.EntityModels.Course", "Course")
                         .WithMany("Sections")
                         .HasForeignKey("CourseId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -531,15 +531,15 @@ namespace Poodle.Data.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.User", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.User", b =>
                 {
-                    b.HasOne("Poodle.Database.EntityModels.Image", "Image")
+                    b.HasOne("Poodle.Data.EntityModels.Image", "Image")
                         .WithOne("User")
-                        .HasForeignKey("Poodle.Database.EntityModels.User", "ImageId")
+                        .HasForeignKey("Poodle.Data.EntityModels.User", "ImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Poodle.Database.EntityModels.Role", "Role")
+                    b.HasOne("Poodle.Data.EntityModels.Role", "Role")
                         .WithMany("Users")
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -550,17 +550,17 @@ namespace Poodle.Data.Migrations
                     b.Navigation("Role");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Course", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Course", b =>
                 {
                     b.Navigation("Sections");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Image", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Image", b =>
                 {
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("Poodle.Database.EntityModels.Role", b =>
+            modelBuilder.Entity("Poodle.Data.EntityModels.Role", b =>
                 {
                     b.Navigation("Users");
                 });

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Poodle.Database.EntityModels;
+using Poodle.Data.EntityModels;
 using System;
 using System.Collections.Generic;
 
-namespace Poodle.Database.Data
+namespace Poodle.Data
 {
     public static class ModelBuilderExtension
     {

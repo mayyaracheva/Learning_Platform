@@ -1,4 +1,4 @@
-﻿namespace Poodle.Database.EntityModels
+﻿namespace Poodle.Data.EntityModels
 {
 	public class Category
 	{

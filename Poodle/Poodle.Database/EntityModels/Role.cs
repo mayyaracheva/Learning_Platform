@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Poodle.Database.EntityModels
+namespace Poodle.Data.EntityModels
 {
 	public class Role
 	{

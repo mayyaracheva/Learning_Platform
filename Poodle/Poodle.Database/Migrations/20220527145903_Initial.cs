@@ -2,7 +2,7 @@
 
 namespace Poodle.Data.Migrations
 {
-    public partial class Initial5 : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
