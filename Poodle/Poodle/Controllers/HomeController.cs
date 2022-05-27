@@ -1,13 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Poodle.API.Models;
-using System;
-using System.Collections.Generic;
+using Poodle.Web.Models;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace Poodle.API.Controllers
+namespace Poodle.Web.Controllers
 {
     public class HomeController : Controller
     {
