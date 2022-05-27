@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.2.32516.85
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32413.511
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Web", "Poodle\Poodle.Web.csproj", "{7FA768A5-8355-42EE-852C-928D7ADBB427}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.Database", "Poodle.Database\Poodle.Database.csproj", "{745AF352-9BDA-4131-9423-CFBD113D06B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Data", "Poodle.Database\Poodle.Data.csproj", "{745AF352-9BDA-4131-9423-CFBD113D06B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.API", "Poodle.API\Poodle.API.csproj", "{85C730A8-A574-485B-A2E4-35C2091C938E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.API", "Poodle.API\Poodle.API.csproj", "{85C730A8-A574-485B-A2E4-35C2091C938E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.Services", "Poodle.Services\Poodle.Services.csproj", "{47978BA9-F05C-4B8A-A508-A116EE507A23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Services", "Poodle.Services\Poodle.Services.csproj", "{47978BA9-F05C-4B8A-A508-A116EE507A23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.Repositories", "Poodle.Repositories\Poodle.Repositories.csproj", "{B630EEEC-36B6-4618-8FFF-33AB5D972439}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{47978BA9-F05C-4B8A-A508-A116EE507A23}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47978BA9-F05C-4B8A-A508-A116EE507A23}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47978BA9-F05C-4B8A-A508-A116EE507A23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Poodle.Database.Database;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,10 +28,9 @@ namespace Poodle.API
         {
             services.AddControllersWithViews().AddNewtonsoftJson(
                 options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
-            // EF 
-            //services.AddDbContext<ApplicationContext>(options =>
-                //options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+           
+            services.AddDbContext<ApplicationContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSession(options =>
             {
@@ -39,7 +39,7 @@ namespace Poodle.API
                 options.Cookie.IsEssential = true;
             });
 
-            //Swagger
+           
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Poodle", Version = "v1" });

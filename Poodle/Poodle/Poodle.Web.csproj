@@ -32,13 +32,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\Api\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Poodle.API\Poodle.API.csproj" />
-    <ProjectReference Include="..\Poodle.Database\Poodle.Database.csproj" />
     <ProjectReference Include="..\Poodle.Services\Poodle.Services.csproj" />
   </ItemGroup>
 
