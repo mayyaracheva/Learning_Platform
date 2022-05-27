@@ -79,6 +79,12 @@ namespace Poodle.Database.Data
 			{
 				Id = 8,
 				ImageUrl = defaultImageData,
+				UserId = 8
+			});
+			profileimages.Add(new Image
+			{
+				Id = 9,
+				ImageUrl = defaultImageData,
 				UserId = 9
 			});
 			profileimages.Add(new Image
@@ -86,12 +92,6 @@ namespace Poodle.Database.Data
 				Id = 10,
 				ImageUrl = defaultImageData,
 				UserId = 10
-			});
-			profileimages.Add(new Image
-			{
-				Id = 11,
-				ImageUrl = defaultImageData,
-				UserId = 11
 			});
 
 			return profileimages;
@@ -106,7 +106,7 @@ namespace Poodle.Database.Data
 				Password = "adminADMIN123?",
 				FirstName = "Ragnar",
 				LastName = "Lodbrock",
-				Email = "John.Hanes@gmail.com",
+				Email = "Ragnar.Lodbrock@abv.com",
 				RoleId = 1,
 				ImageId = 1,
 				//CreatedOn = DateTime.UtcNow,
@@ -132,7 +132,7 @@ namespace Poodle.Database.Data
 				LastName = "Davis",
 				Email = "Jonathan.Davis@gmail.com",
 				RoleId = 2,
-				ImageId = 2,
+				ImageId = 3,
 				//CreatedOn = DateTime.UtcNow,
 				//ModifiedOn = DateTime.UtcNow
 			});

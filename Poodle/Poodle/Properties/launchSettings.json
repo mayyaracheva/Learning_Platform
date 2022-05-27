@@ -1,6 +1,5 @@
 ﻿{
-
-  "Poodle": {
+  "Poodle.Web": {
     "commandName": "Project",
     "dotnetRunMessages": "true",
     "launchBrowser": true,   

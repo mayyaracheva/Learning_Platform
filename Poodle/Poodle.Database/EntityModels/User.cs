@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Database.EntityModels
 {
@@ -20,8 +21,8 @@ namespace Poodle.Database.EntityModels
 		public Role Role { get; set; }
 
 		//one to one relationship - one user can have one profile photo
-		
-		public int? ImageId { get; set; }
+		[ForeignKey("Image")]
+		public int ImageId { get; set; }
 		public Image Image { get; set; }
 
 		public ICollection<Course> Courses { get; set; }
