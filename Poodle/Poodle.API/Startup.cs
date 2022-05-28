@@ -38,7 +38,7 @@ namespace Poodle.API
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Poodle.API", Version = "v1" });
 			});
 
-
+			services.AddScoped<IUsersRepository, UsersRepository>();
 			services.AddScoped<IUsersService, UsersService>();
 			services.AddTransient<UserMapper>();
 
@@ -57,7 +57,7 @@ namespace Poodle.API
 			}
 
 			app.UseRouting();
-			app.UseAuthentication();
+			//app.UseAuthentication();
 
 			app.UseAuthorization();
 
