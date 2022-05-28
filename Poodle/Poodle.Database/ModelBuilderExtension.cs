@@ -10,8 +10,8 @@ namespace Poodle.Data
 		private static string defaultImageData = "/Images/DefaultImage.jpg";
 		public static void Seed(this ModelBuilder modelBuilder)
 		{			
-			List<Image> profileImages = GetImages();
-			modelBuilder.Entity<Image>().HasData(profileImages);
+			List<Image> Images = GetImages();
+			modelBuilder.Entity<Image>().HasData(Images);
 
 			List<User> users = GetUsers();
 			modelBuilder.Entity<User>().HasData(users);
@@ -109,8 +109,8 @@ namespace Poodle.Data
 				Email = "Ragnar.Lodbrock@abv.com",
 				RoleId = 1,
 				ImageId = 1,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -121,8 +121,8 @@ namespace Poodle.Data
 				Email = "Jack.Richmond@yahoo.com",
 				RoleId = 2,
 				ImageId = 2,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -133,8 +133,8 @@ namespace Poodle.Data
 				Email = "Jonathan.Davis@gmail.com",
 				RoleId = 2,
 				ImageId = 3,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -145,8 +145,8 @@ namespace Poodle.Data
 				Email = "Ignatio.Italiano@gmail.com",
 				RoleId = 2,
 				ImageId = 4,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -157,8 +157,8 @@ namespace Poodle.Data
 				Email = "Reginald.Hargreeves@gmail.com",
 				RoleId = 3,
 				ImageId = 5,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -169,8 +169,8 @@ namespace Poodle.Data
 				Email = "John.Hanes@gmail.com",
 				RoleId = 3,
 				ImageId = 6,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -181,8 +181,8 @@ namespace Poodle.Data
 				Email = "Horatio.Spanish@gmail.com",
 				RoleId = 3,
 				ImageId = 7,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -193,8 +193,8 @@ namespace Poodle.Data
 				Email = "Herbert.Spencer@gmail.com",
 				RoleId = 3,
 				ImageId = 8,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -205,8 +205,8 @@ namespace Poodle.Data
 				Email = "Harriet.Dark@gmail.com",
 				RoleId = 3,
 				ImageId = 9,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			users.Add(new User
 			{
@@ -217,8 +217,8 @@ namespace Poodle.Data
 				Email = "Mario.Caruso@gmail.com",
 				RoleId = 3,
 				ImageId = 10,
-				//CreatedOn = DateTime.UtcNow,
-				//ModifiedOn = DateTime.UtcNow
+				CreatedOn = DateTime.UtcNow,
+				ModifiedOn = DateTime.UtcNow
 			});
 			return users;
 		}
@@ -523,7 +523,7 @@ namespace Poodle.Data
 			categories.Add(new Category
 			{
 				Id = 3,
-				Name = "Hidden"
+				Name = "Restricted"
 			});
 
 			return categories;
