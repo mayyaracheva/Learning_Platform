@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Poodle.Repositories
+namespace Poodle.Repositories.Contracts
 {
 	public interface ICourseRepository
 	{

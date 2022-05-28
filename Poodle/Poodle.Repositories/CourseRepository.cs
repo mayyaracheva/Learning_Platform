@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Poodle.Data;
 using Poodle.Data.EntityModels;
+using Poodle.Repositories.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;

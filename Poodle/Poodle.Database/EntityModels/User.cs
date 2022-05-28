@@ -15,8 +15,6 @@ namespace Poodle.Data.EntityModels
 
 		public string Email { get; set; }
 
-		public bool IsDeleted { get; set; }
-
 		//Navigation properties
 		//foreign key, user can have one role
 		public int RoleId { get; set; }

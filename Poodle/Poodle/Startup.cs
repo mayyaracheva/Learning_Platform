@@ -7,10 +7,11 @@ using Microsoft.Extensions.Hosting;
 using Newtonsoft.Json;
 using Poodle.Data;
 using Poodle.Repositories;
+using Poodle.Repositories.Contracts;
 
 namespace Poodle.Web
 {
-    public class Startup
+	public class Startup
     {
         public Startup(IConfiguration configuration)
         {
