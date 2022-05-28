@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Data.EntityModels
 {
-	public class User
+	public class User : Entity
 	{
 		public int Id { get; set; }
 
@@ -14,6 +14,8 @@ namespace Poodle.Data.EntityModels
 		public string Password { get; set; }
 
 		public string Email { get; set; }
+
+		public bool IsDeleted { get; set; }
 
 		//Navigation properties
 		//foreign key, user can have one role

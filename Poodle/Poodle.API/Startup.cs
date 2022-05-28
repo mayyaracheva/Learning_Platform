@@ -6,7 +6,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Poodle.API.Mappers;
+using Poodle.API.Services;
 using Poodle.Data;
+using Poodle.Repositories;
+using Poodle.Repositories.Contracts;
+using Poodle.Services.Contracts;
 
 namespace Poodle.API
 {
@@ -32,6 +37,13 @@ namespace Poodle.API
 			{
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Poodle.API", Version = "v1" });
 			});
+
+
+			services.AddScoped<IUsersService, UsersService>();
+			services.AddTransient<UserMapper>();
+
+
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
