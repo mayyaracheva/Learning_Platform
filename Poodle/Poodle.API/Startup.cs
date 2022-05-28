@@ -51,7 +51,7 @@ namespace Poodle.API
 
 			app.UseEndpoints(endpoints =>
 			{
-				endpoints.MapControllers();
+				endpoints.MapDefaultControllerRoute();
 			});
 		}
 	}
