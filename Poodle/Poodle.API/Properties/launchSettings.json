@@ -1,7 +1,5 @@
 ﻿{
-  "profiles": 
-  {
-    "Poodle": {
+    "Poodle.API": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
@@ -11,5 +9,4 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     }
-  }
 }

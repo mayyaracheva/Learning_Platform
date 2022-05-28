@@ -2,7 +2,7 @@
 
 namespace Poodle.Data.EntityModels
 {
-	public class Course
+	public class Course : Entity
 	{
 		public int Id { get; set; } 
 		public string Title { get; set; }
