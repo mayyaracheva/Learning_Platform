@@ -10,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Poodle.Repositories
 {
-	public class CourseRepository : ICourseRepository
+	public class CoursesRepository : ICoursesRepository
 	{
 		private readonly ApplicationContext context;
-		public CourseRepository(ApplicationContext context)
+		public CoursesRepository(ApplicationContext context)
 		{
 			this.context = context;
 		}
