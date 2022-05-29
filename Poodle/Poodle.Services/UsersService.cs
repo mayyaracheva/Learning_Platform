@@ -68,12 +68,7 @@ namespace Poodle.API.Services
 
 			}
 
-		}
-
-		public Role GetRole(string email, string password)
-        {
-			return this.repository.GetAuthorization(email, password).FirstOrDefault().Role;
-        }
+		}		
 		
 		public Task<User> Create(User user, int roleId, string imageUrl)
         {
@@ -106,9 +101,16 @@ namespace Poodle.API.Services
 
 		private void CheckAuthorization(string requesterEmail, string requesterPassword)
         {
-			Role requesterRole = this.GetRole(requesterEmail, requesterPassword);
+		
+			var requester = this.repository.Get().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefault();
 
-			if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
+            if (requester == null)
+            {
+				throw new EntityNotFoundException($"Invalid credentials");
+			}
+						
+
+			if (requester.Role.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
 			{
 				throw new UnauthorizedOperationException("You do not have required access for this operation");
 			}

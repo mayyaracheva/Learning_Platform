@@ -34,12 +34,7 @@ namespace Poodle.Repositories
         public IQueryable<User> Get(string email)
         {
             return this.Get().Where(u => u.Email == email);
-        }
-
-        public IQueryable<User> GetAuthorization(string email, string password)
-        {
-            return this.Get().Where(u => u.Email == email & u.Password == password);
-        }
+        }       
         
 
         public async Task<User> Create(User user, int roleId, string imageUrl)
