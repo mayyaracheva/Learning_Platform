@@ -10,8 +10,13 @@ using Poodle.Data;
 namespace Poodle.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+    [Migration("20220529143246_Next29.05")]
+    partial class Next2905
+========
     [Migration("20220528133038_Initial")]
     partial class Initial
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -719,140 +724,220 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(8401),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(375),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Ragnar.Lodbrock@abv.com",
                             FirstName = "Ragnar",
                             ImageId = 1,
                             IsDeleted = false,
                             LastName = "Lodbrock",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(8833),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1200),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "adminADMIN123?",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9197),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1918),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Jack.Richmond@yahoo.com",
                             FirstName = "Jack",
                             ImageId = 2,
                             IsDeleted = false,
                             LastName = "Richmond",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9199),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1923),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "johnJOHN123!",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 3,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9203),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1929),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Jonathan.Davis@gmail.com",
                             FirstName = "Jonathan",
                             ImageId = 3,
                             IsDeleted = false,
                             LastName = "Davis",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9205),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1931),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "jondav123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 4,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9208),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1935),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Ignatio.Italiano@gmail.com",
                             FirstName = "Ignatio",
                             ImageId = 4,
                             IsDeleted = false,
                             LastName = "Italiano",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9209),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1936),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "ignitalo123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 5,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9212),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1940),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Reginald.Hargreeves@gmail.com",
                             FirstName = "Reginald",
                             ImageId = 5,
                             IsDeleted = false,
                             LastName = "Hargreeves",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9213),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1942),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "jamesonN123*",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 6,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9222),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1952),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "John.Hanes@gmail.com",
                             FirstName = "John",
                             ImageId = 6,
                             IsDeleted = false,
                             LastName = "Hanes",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9223),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1954),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "johnsonN123*",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 7,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9226),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1957),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Horatio.Spanish@gmail.com",
                             FirstName = "Horatio",
                             ImageId = 7,
                             IsDeleted = false,
                             LastName = "Spanish",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9227),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1959),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "horspanP123*",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 8,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9230),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1963),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Herbert.Spencer@gmail.com",
                             FirstName = "Herbert",
                             ImageId = 8,
                             IsDeleted = false,
                             LastName = "Spencer",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9232),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1965),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "hurspenM456!",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 9,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9234),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1968),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Harriet.Dark@gmail.com",
                             FirstName = "Harriet",
                             ImageId = 9,
                             IsDeleted = false,
                             LastName = "Dark",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9236),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1970),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "hardiR789*",
                             RoleId = 3
                         },
                         new
                         {
                             Id = 10,
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9240),
+========
                             CreatedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1976),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "Mario.Caruso@gmail.com",
                             FirstName = "Mario",
                             ImageId = 10,
                             IsDeleted = false,
                             LastName = "Caruso",
+<<<<<<<< HEAD:Poodle/Poodle.Database/Migrations/20220529143246_Next29.05.Designer.cs
+                            ModifiedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9242),
+========
                             ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1977),
+>>>>>>>> 20063dd2a5fd4417a7f85373cd964d5c1b660ddd:Poodle/Poodle.Database/Migrations/20220528133038_Initial.Designer.cs
                             Password = "marrob123!",
                             RoleId = 3
                         });

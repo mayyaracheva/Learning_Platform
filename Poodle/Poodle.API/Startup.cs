@@ -38,12 +38,15 @@ namespace Poodle.API
 				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Poodle.API", Version = "v1" });
 			});
 
-			services.AddScoped<IUsersRepository, UsersRepository>();
-			services.AddScoped<IUsersService, UsersService>();
+			//helpers 
 			services.AddTransient<UserMapper>();
 
+			//repositories
+			services.AddScoped<ICoursesRepository, CoursesRepository>();
+			services.AddScoped<IUsersRepository, UsersRepository>();
 
-
+			//services
+			services.AddScoped<IUsersService, UsersService>();
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -674,7 +674,7 @@ namespace Poodle.Data.Migrations
                             ImageId = 1,
                             IsDeleted = false,
                             LastName = "Lodbrock",
-                            ModifiedOn = new DateTime(2022, 5, 30, 12, 32, 36, 756, DateTimeKind.Utc).AddTicks(9821),
+                            ModifiedOn = new DateTime(2022, 5, 28, 13, 30, 37, 654, DateTimeKind.Utc).AddTicks(1200),
                             Password = "adminADMIN123?",
                             RoleId = 1
                         },
@@ -785,6 +785,8 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 10,
+                            CreatedOn = new DateTime(2022, 5, 29, 14, 32, 45, 294, DateTimeKind.Utc).AddTicks(9240),
+                            DeletedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             CreatedOn = new DateTime(2022, 5, 30, 12, 32, 36, 757, DateTimeKind.Utc).AddTicks(1719),
                             Email = "Mario.Caruso@gmail.com",
                             FirstName = "Mario",
