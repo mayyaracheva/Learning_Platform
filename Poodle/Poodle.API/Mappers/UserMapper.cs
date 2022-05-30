@@ -8,7 +8,6 @@ namespace Poodle.API.Mappers
     public class UserMapper
     {
      
-
         public UserResponseDto ConvertToDto(User userModel)
         {
             UserResponseDto userToPresent = new UserResponseDto();
@@ -17,6 +16,17 @@ namespace Poodle.API.Mappers
             userToPresent.Email = userModel.Email;
             userToPresent.Role = userModel.Role.Name;
             return userToPresent;
+        }
+
+        public User ConvertToModel(UserCreateDto userModel, int roleId)
+        {
+            User newUser = new User();
+            newUser.FirstName = userModel.FirstName;
+            newUser.LastName = userModel.LastName;
+            newUser.Email = userModel.Email;
+            newUser.Password = userModel.Password;           
+            newUser.RoleId = roleId;
+            return newUser;
         }
 
 

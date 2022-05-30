@@ -2,6 +2,7 @@
 using Poodle.Data.EntityModels;
 using Poodle.Data.EntityModels.Contracts;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Poodle.Data
@@ -49,6 +50,13 @@ namespace Poodle.Data
 			return base.SaveChanges();
 		}
 
+		public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+		{
+			ChangeTracker.DetectChanges();
+			OnBeforeSaving();
+			return base.SaveChangesAsync();
+		}
+
 		private void OnBeforeSaving()
 		{
 			foreach (var entry in ChangeTracker.Entries<IIsDeleted>())
@@ -56,7 +64,7 @@ namespace Poodle.Data
 				switch (entry.State)
 				{
 					case EntityState.Added:
-						entry.CurrentValues["IsDeleted"] = false;
+						entry.CurrentValues["IsDeleted"] = false;						
 						break;
 
 					case EntityState.Deleted:

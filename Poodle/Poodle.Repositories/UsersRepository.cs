@@ -34,16 +34,21 @@ namespace Poodle.Repositories
         public IQueryable<User> GetByEmail(string email)
         {
             return this.GetAll().Where(u => u.Email == email);
-        }       
+        }
         
-
-        public async Task<User> Create(User user, int roleId, string imageUrl)
+        public IQueryable<Role> GetRoles()
+        {
+            return this.context.Roles;
+        }
+        
+    
+        public async Task<User> Create(User user, string imageUrl)
         {
             user.CreatedOn = DateTime.UtcNow;
             user.ModifiedOn = DateTime.UtcNow;
-            user.RoleId = roleId;
+            user.RoleId = user.RoleId;
 
-            var image = this.AddNewImage(imageUrl);
+            var image = this.AddNewImage(imageUrl).Result;
             user.ImageId = image.Id;
             var createdUser = await this.context.Users.AddAsync(user);
             await this.context.SaveChangesAsync();
@@ -62,19 +67,20 @@ namespace Poodle.Repositories
             throw new NotImplementedException();
         }
 
-        public void Delete(User userToDelete)
+        public async Task<int> Delete(User userToDelete)
         {            
             this.context.Users.Remove(userToDelete);
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
+            return userToDelete.Id;
         }
 
       
-        private Image AddNewImage(string imageUrl)
+        private async Task<Image> AddNewImage(string imageUrl)
         {
             var newImage = new Image();
             newImage.ImageUrl = imageUrl;
-            this.context.Images.Add(newImage);
-            this.context.SaveChanges();
+            await this.context.Images.AddAsync(newImage);
+            await this.context.SaveChangesAsync();
 
             return newImage;
         }

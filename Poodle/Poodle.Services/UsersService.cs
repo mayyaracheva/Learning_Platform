@@ -11,7 +11,7 @@ namespace Poodle.API.Services
 {
 	public class UsersService : IUsersService
 	{
-		private static string defaultImageUrl = "/Images/DefaultImage.jpg";
+		public static string defaultImageUrl = "/Images/DefaultImage.jpg";
 		private readonly IUsersRepository repository;
 
 		public UsersService(IUsersRepository repository)
@@ -56,6 +56,18 @@ namespace Poodle.API.Services
 			}
 		}
 
+		public int GetRoleId(string roleName)
+        {
+			Role role = this.repository.GetRoles().Where(r => r.Name.ToLower() == roleName.ToLower()).FirstOrDefault();
+
+            if (role == null)
+            {
+				throw new EntityNotFoundException($"The Api supports the following roles: {string.Join(",",this.repository.GetRoles().Select(r => r.Name).ToList())}");
+            }
+
+			return role.Id;
+        }
+
 		public List<User> Get(UserQueryParameters filterParameters)
 		{
 			if (filterParameters.NoQueryParameters)
@@ -69,21 +81,22 @@ namespace Poodle.API.Services
 			}
 
 		}		
-		
-		public Task<User> Create(User user, int roleId, string imageUrl)
+
+		public User Create(User user, string imageUrl)
         {
 			var userExists = this.repository.GetAll().Any(u => u.Email == user.Email);
+
 			if (userExists)
 			{
-				throw new Exceptions.DuplicateEntityException("User with this email already registered");
+				throw new Exceptions.DuplicateEntityException("User with this email already exists");
 			}
 
-            if (imageUrl == null)
+            if (imageUrl == null | imageUrl == "string")
             {
 				imageUrl = defaultImageUrl;
             }
 			
-			return this.repository.Create(user, roleId, imageUrl);
+			return this.repository.Create(user, imageUrl).Result;
 
 		}
 		public User Update(int id, User user)

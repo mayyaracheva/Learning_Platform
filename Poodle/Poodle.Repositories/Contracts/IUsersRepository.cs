@@ -8,12 +8,12 @@ namespace Poodle.Repositories.Contracts
     {
 		IQueryable<User> GetAll();		
 		IQueryable<User> GetById(int id);
-		IQueryable<User> GetByEmail(string email);	
-		
-		Task<User> Create(User user, int roleId, string imageUrl);	
+		IQueryable<User> GetByEmail(string email);
+		IQueryable<Role> GetRoles();
+		Task<User> Create(User user, string imageUrl);		
 		User Update(int id, User user);
 		User Update(int id, User user, string imageUrl);
-		void Delete(User userToDelete);
+		Task<int> Delete(User userToDelete);
 
 
 

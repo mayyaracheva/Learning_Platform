@@ -90,6 +90,25 @@ namespace Poodle.API.Controllers
 
 		}
 
+		[HttpPost("")]
+		public IActionResult Create([FromBody] UserCreateDto userCreateDto, [FromQuery] string role)
+        { 
+			try
+			{
+				int roleId = this.usersService.GetRoleId(role);
+				var newUser = this.userMapper.ConvertToModel(userCreateDto, roleId);
+				var createdUser = this.usersService.Create(newUser, userCreateDto.ImageUrl);
 
+				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+			catch (DuplicateEntityException e)
+			{
+				return this.StatusCode(StatusCodes.Status406NotAcceptable, e.Message);
+			}
+		}
 	}
 }
