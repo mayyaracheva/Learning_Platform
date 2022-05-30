@@ -18,7 +18,7 @@ namespace Poodle.Repositories
             this.context = context;
         }
 
-        public IQueryable<User> Get()
+        public IQueryable<User> GetAll()
         {
             return context.Users
                 .Include(u => u.Role)
@@ -26,14 +26,14 @@ namespace Poodle.Repositories
                 .Include(u => u.Courses);
         }
 
-        public IQueryable<User> Get(int id)
+        public IQueryable<User> GetById(int id)
         {
-            return this.Get().Where(u => u.Id == id);
+            return this.GetAll().Where(u => u.Id == id);
         }
 
-        public IQueryable<User> Get(string email)
+        public IQueryable<User> GetByEmail(string email)
         {
-            return this.Get().Where(u => u.Email == email);
+            return this.GetAll().Where(u => u.Email == email);
         }       
         
 
@@ -62,11 +62,13 @@ namespace Poodle.Repositories
             throw new NotImplementedException();
         }
 
-        public User Delete(int id, bool isDeleted)
-        {
-            throw new NotImplementedException();
+        public void Delete(User userToDelete)
+        {            
+            this.context.Users.Remove(userToDelete);
+            this.context.SaveChanges();
         }
 
+      
         private Image AddNewImage(string imageUrl)
         {
             var newImage = new Image();

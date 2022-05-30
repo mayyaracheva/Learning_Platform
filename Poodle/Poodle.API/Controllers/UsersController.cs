@@ -17,31 +17,30 @@ namespace Poodle.API.Controllers
     public class UsersController : ControllerBase
     {
         
-        private readonly UserMapper usermapper;
-        private readonly IUsersService userservice;
+        private readonly UserMapper userMapper;
+        private readonly IUsersService usersService;
 
-        public UsersController(UserMapper usermapper, IUsersService userservice)
+        public UsersController(UserMapper userMapper, IUsersService usersService)
         {            
-            this.usermapper = usermapper;
-            this.userservice = userservice;
+            this.userMapper = userMapper;
+            this.usersService = usersService;
         }
 
 		[HttpGet("")]
 		public IActionResult Get([FromHeader] string email, [FromHeader] string password)
 		{
-
 			try
 			{				
-				List<UserResponseDto> users = this.userservice.Get(email, password).Select(u =>  usermapper.ConvertToDto(u)).ToList();
+				List<UserResponseDto> users = this.usersService.GetAll(email, password).Select(u =>  userMapper.ConvertToDto(u)).ToList();
 				return this.StatusCode(StatusCodes.Status200OK, users);
+			}			
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
 			catch (UnauthorizedOperationException e)
 			{
 				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-			}
-			catch (EntityNotFoundException e)
-			{
-				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
 		}
 
@@ -50,10 +49,35 @@ namespace Poodle.API.Controllers
 		{
 			try
 			{				
-				var user = this.userservice.Get(id, email, password);
-				var userToDisplay = this.usermapper.ConvertToDto(user);
+				var user = this.usersService.GetById(id, email, password);
+				var userToDisplay = this.userMapper.ConvertToDto(user);
 
 				return this.StatusCode(StatusCodes.Status200OK, userToDisplay);
+			}
+			
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+		}
+
+		[HttpDelete("{id}")]
+		public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		{			
+
+			if (id < 1)
+			{
+				return this.StatusCode(StatusCodes.Status400BadRequest, "Invalid Id");
+			}
+
+            try
+            {
+				this.usersService.Delete(id, email, password);
+				return this.StatusCode(StatusCodes.Status200OK, "User deleted");
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -63,10 +87,9 @@ namespace Poodle.API.Controllers
 			{
 				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
+
 		}
 
-		
 
-		
 	}
 }

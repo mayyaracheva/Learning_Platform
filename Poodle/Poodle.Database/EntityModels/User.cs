@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using Poodle.Data.EntityModels.Contracts;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Data.EntityModels
 {
-	public class User : Entity
+	public class User : Entity, IIsDeleted
 	{
 		public int Id { get; set; }
 
@@ -14,6 +15,7 @@ namespace Poodle.Data.EntityModels
 		public string Password { get; set; }
 
 		public string Email { get; set; }
+		public bool IsDeleted { get; set; }
 
 		//Navigation properties
 		//foreign key, user can have one role

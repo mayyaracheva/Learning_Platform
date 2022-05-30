@@ -19,18 +19,18 @@ namespace Poodle.API.Services
 			this.repository = repository;
 		}
 
-		public List<User> Get(string requesterEmail, string requesterPassword)
+		public List<User> GetAll(string requesterEmail, string requesterPassword)
 		{
 			CheckAuthorization(requesterEmail, requesterPassword);
-			return this.repository.Get().ToList();
+			return this.repository.GetAll().Where(u => u.IsDeleted == false).ToList();
 		}
 
-		public User Get(int id, string requesterEmail, string requesterPassword)
+		public User GetById(int id, string requesterEmail, string requesterPassword)
 		{
 			CheckAuthorization(requesterEmail, requesterPassword);	
-			var user = this.repository.Get(id).FirstOrDefault();
+			var user = this.repository.GetById(id).FirstOrDefault();
 
-			if (user != null)
+			if (user != null | user.IsDeleted == false)
 			{
 				return user;
 			}
@@ -41,12 +41,12 @@ namespace Poodle.API.Services
 						 
 		}
 
-		public User Get(string email, string requesterEmail, string requesterPassword)
+		public User GetByEmail(string email, string requesterEmail, string requesterPassword)
 		{
 			CheckAuthorization(requesterEmail, requesterPassword);   
-			var user = this.repository.Get(email).FirstOrDefault();
+			var user = this.repository.GetByEmail(email).FirstOrDefault();
 
-			if (user != null)
+			if (user != null | user.IsDeleted == false)
 			{
 				return user;
 			}
@@ -60,7 +60,7 @@ namespace Poodle.API.Services
 		{
 			if (filterParameters.NoQueryParameters)
 			{
-				return this.repository.Get().ToList();
+				return this.repository.GetAll().ToList();
 			}
 			else
 			{
@@ -72,7 +72,7 @@ namespace Poodle.API.Services
 		
 		public Task<User> Create(User user, int roleId, string imageUrl)
         {
-			var userExists = this.repository.Get().Any(u => u.Email == user.Email);
+			var userExists = this.repository.GetAll().Any(u => u.Email == user.Email);
 			if (userExists)
 			{
 				throw new Exceptions.DuplicateEntityException("User with this email already registered");
@@ -94,17 +94,18 @@ namespace Poodle.API.Services
         {
 			throw new NotImplementedException();
 		}
-		public User Delete(int id, bool isDeleted, string requesterEmail, string requesterPassword)
+		public void Delete(int id, string requesterEmail, string requesterPassword)
         {
-			throw new NotImplementedException();
+			var userToDelete = this.GetById(id, requesterEmail, requesterPassword);
+			this.repository.Delete(userToDelete);
 		}
 
-		private void CheckAuthorization(string requesterEmail, string requesterPassword)
+		public void CheckAuthorization(string requesterEmail, string requesterPassword)
         {
 		
-			var requester = this.repository.Get().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefault();
+			var requester = this.repository.GetAll().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefault();
 
-            if (requester == null)
+            if (requester == null | requester.IsDeleted == true)
             {
 				throw new EntityNotFoundException($"Invalid credentials");
 			}
