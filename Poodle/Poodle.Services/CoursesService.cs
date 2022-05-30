@@ -1,47 +1,61 @@
-﻿using Poodle.Data.EntityModels;
+﻿using Poodle.API.Exceptions;
+using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Poodle.Services
 {
 	public class CoursesService : ICoursesService
 	{
-		private readonly ICoursesRepository repository;
+		private readonly ICoursesRepository coursesRepository;
 
 		public CoursesService(ICoursesRepository repository)
 		{
-			this.repository = repository;
+			this.coursesRepository = repository;
 		}
 
 		public Task<IEnumerable<Course>> GetAllAsync()
 		{
-			return this.repository.GetAllAsync();
+			return this.coursesRepository.GetAllAsync();
 		}
 		public Course GetById(int id)
 		{
-			return this.repository.GetById(id);
+			return this.coursesRepository.GetById(id)
+				?? throw new EntityNotFoundException($"There is no course with id: {id}");
 		}
-		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
+		public Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			throw new NotImplementedException();
 		}
-		public Task<Course> Create(Course course)
+		public async Task<Course> CreateAsync(Course course)
 		{
-			throw new NotImplementedException();
+			var duplicateCourse = this.coursesRepository
+				.GetAllAsync()
+				.Result
+				.FirstOrDefault(x => x.Title == course.Title);
+
+			if (duplicateCourse != null)
+			{
+				throw new DuplicateEntityException("This course already exists");
+			}
+
+			course.CreatedOn = DateTime.UtcNow;
+			Course createdCourse = await this.coursesRepository.CreateAsync(course);
+
+			return createdCourse;
 		}
-		public Task<Course> Update(int id, Course course)
+		public async Task<Course> UpdateAsync(int id, Course course)
 		{
-			throw new NotImplementedException();
+			return await this.coursesRepository.UpdateAsync(id, course);
 		}
 
-		public Task<Course> DeleteAsync(int id)
+		public async Task<Course> DeleteAsync(int id)
 		{
-			throw new NotImplementedException();
+			return await this.coursesRepository.DeleteAsync(id);
 		}
 	}
 }

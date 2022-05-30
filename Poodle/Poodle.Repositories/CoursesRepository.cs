@@ -20,7 +20,6 @@ namespace Poodle.Repositories
 		public async Task<IEnumerable<Course>> GetAllAsync()
 		{
 			var result = await this.GetCourses()
-								.Where(x => !x.IsDeleted)
 								.ToListAsync();
 			return result;
 		}
@@ -40,14 +39,14 @@ namespace Poodle.Repositories
 				.FirstOrDefault();
 			return result;
 		}
-		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
+		public async Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;
 			string category = !string.IsNullOrEmpty(filterParameters.Category) ? filterParameters.Category.ToLowerInvariant() : string.Empty;
 			string sortCriteria = !string.IsNullOrEmpty(filterParameters.SortBy) ? filterParameters.SortBy.ToLowerInvariant() : string.Empty;
 			string sortOrder = !string.IsNullOrEmpty(filterParameters.SortOrder) ? filterParameters.SortOrder.ToLowerInvariant() : string.Empty;
 
-			var courses = (IQueryable < Course >)this.GetAllAsync();
+			var courses = (IQueryable<Course>) await this.GetAllAsync();
 
 			courses = FilterByTitle(courses, title);
 			courses = FilterByCategory(courses, category);
@@ -69,14 +68,17 @@ namespace Poodle.Repositories
 
 		public async Task<Course> UpdateAsync(int id, Course course)
 		{
-			Course existingCourse = this.GetById(id);
+			Course courseToUpdate = this.GetById(id);
 
-			existingCourse.Title = course.Title != null ? course.Title : existingCourse.Title;
-			existingCourse.Description = course.Description != null ? course.Description : existingCourse.Description;
+			courseToUpdate.Title = course.Title != null ? course.Title : courseToUpdate.Title;
+			courseToUpdate.Description = course.Description != null ? course.Description : courseToUpdate.Description;
+			courseToUpdate.Category.Name = course.Category.Name != null ? course.Category.Name : courseToUpdate.Category.Name;
+
+			courseToUpdate.ModifiedOn = DateTime.UtcNow;
 
 			await this.context.SaveChangesAsync();
 
-			return existingCourse;
+			return courseToUpdate;
 		}
 
 		public async Task<Course> DeleteAsync(int id)
@@ -123,7 +125,7 @@ namespace Poodle.Repositories
 
 		private IQueryable<Course> GetCourses()
 		{
-			return this.context.Courses
+			return this.context.Courses.Where(x => !x.IsDeleted)
 					.Include(course => course.Sections)
 						.ThenInclude(section => section.Title)
 					.Include(course => course.Users)

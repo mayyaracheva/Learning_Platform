@@ -11,9 +11,9 @@ namespace Poodle.Services.Contracts
 	{
 		Task<IEnumerable<Course>> GetAllAsync();
 		Course GetById(int id);
-		IQueryable<Course> Get(CourseQueryParameters filterParameters);
-		Task<Course> Create(Course course);
-		Task<Course> Update(int id, Course course);
+		Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters);
+		Task<Course> CreateAsync(Course course);
+		Task<Course> UpdateAsync(int id, Course course);
 		Task<Course> DeleteAsync(int id);
 
 	}
