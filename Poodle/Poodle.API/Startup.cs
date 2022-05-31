@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
+using Poodle.API.Helpers;
 using Poodle.API.Mappers;
 using Poodle.API.Services;
 using Poodle.Data;
@@ -40,6 +41,7 @@ namespace Poodle.API
 
 			//helpers 
 			services.AddTransient<UserMapper>();
+			services.AddTransient<AuthenticationHelper>();
 
 			//repositories
 			services.AddScoped<ICoursesRepository, CoursesRepository>();

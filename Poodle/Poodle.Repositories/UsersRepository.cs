@@ -57,14 +57,23 @@ namespace Poodle.Repositories
             await this.context.SaveChangesAsync();
             return createdUser.Entity;
         }
-        public User Update(int id, User user)
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public User Update(int id, User user, string imageUrl)
+        public async Task<User> Update(int id, string firstname, string lastname, string password, string email, string imageUrl)
         {
-            throw new NotImplementedException();
+            var userToUpdate = await this.GetById(id).FirstOrDefaultAsync();
+
+            userToUpdate.FirstName = firstname != "string" ? firstname : userToUpdate.FirstName;
+            userToUpdate.LastName = lastname != "string" ? lastname : userToUpdate.LastName;
+            userToUpdate.Email = email != "user@example.com" ? email : userToUpdate.Email;
+            userToUpdate.Password = password != "string" ? password : userToUpdate.Password;
+            userToUpdate.Image.ImageUrl = imageUrl != "string" ? imageUrl : userToUpdate.Image.ImageUrl;
+
+            userToUpdate.ModifiedOn = DateTime.Now;
+            await this.context.SaveChangesAsync();
+
+            return userToUpdate;
+
         }
 
         public async Task<int> Delete(User userToDelete)
