@@ -1,4 +1,4 @@
-﻿using Poodle.Services.Exceptions
+﻿using Poodle.Services.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Poodle.Services.Constants;
 using Microsoft.EntityFrameworkCore;
+
 namespace Poodle.Services
 {
 	public class CoursesService : ICoursesService
