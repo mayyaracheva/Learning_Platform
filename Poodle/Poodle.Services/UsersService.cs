@@ -21,7 +21,7 @@ namespace Poodle.API.Services
 
         public List<User> GetAll()
         {
-            return this.repository.GetAll().Where(u => u.IsDeleted == false).ToList();
+            return this.repository.GetAll().ToList();
         }
 
         public User GetById(int id)
@@ -71,13 +71,8 @@ namespace Poodle.API.Services
 
         }
 
-        public User GetByEmail(string email, string requesterEmail, string requesterPassword)
+        public User GetByEmail(string email)
         {
-            Role requesterRole = CheckAuthorization(requesterEmail, requesterPassword);
-            if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
-            {
-                throw new UnauthorizedOperationException("You do not have required access for this operation");
-            }
 
             var user = this.repository.GetByEmail(email).FirstOrDefault();
 
@@ -91,17 +86,17 @@ namespace Poodle.API.Services
             }
         }
 
-        public int GetRoleId(string roleName)
-        {
-            Role role = this.repository.GetRoles().Where(r => r.Name.ToLower() == roleName.ToLower()).FirstOrDefault();
+        //public int GetRoleId(string roleName)
+        //{
+        //    Role role = this.repository.GetRoles().Where(r => r.Name.ToLower() == roleName.ToLower()).FirstOrDefault();
 
-            if (role == null)
-            {
-                throw new EntityNotFoundException($"The Api supports the following roles: {string.Join(",", this.repository.GetRoles().Select(r => r.Name).ToList())}");
-            }
+        //    if (role == null)
+        //    {
+        //        throw new EntityNotFoundException($"The Api supports the following roles: {string.Join(",", this.repository.GetRoles().Select(r => r.Name).ToList())}");
+        //    }
 
-            return role.Id;
-        }
+        //    return role.Id;
+        //}
 
         public List<User> Get(UserQueryParameters filterParameters)
         {
@@ -131,7 +126,7 @@ namespace Poodle.API.Services
                 imageUrl = defaultImageUrl;
             }
 
-            return this.repository.Create(user, imageUrl).Result;
+            return this.repository.Create(user, imageUrl);
 
         }
 
@@ -150,7 +145,7 @@ namespace Poodle.API.Services
                 throw new Exceptions.DuplicateEntityException("User with this email already exists");
             }
 
-            return this.repository.Update(id, firstname, lastname, password, email, imageUrl).Result;
+            return this.repository.Update(id, firstname, lastname, password, email, imageUrl);
             
         }
 
@@ -160,7 +155,7 @@ namespace Poodle.API.Services
 
             Role requesterRole = CheckAuthorization(requesterEmail, requesterPassword);
 
-            if (!requesterRole.Name.Equals("admin", StringComparison.CurrentCultureIgnoreCase))
+            if (!requesterRole.Name.Equals("teacher", StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }

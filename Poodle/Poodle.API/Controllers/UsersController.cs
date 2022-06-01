@@ -32,7 +32,7 @@ namespace Poodle.API.Controllers
 		[HttpGet("")]
 		public IActionResult Get([FromHeader] string email, [FromHeader] string password)
 		{
-			//only admin/teacher set to be authorized to get all users
+			//only teacher set to be authorized to get all users
 			//authorization checked in services
 			try
 			{
@@ -54,7 +54,7 @@ namespace Poodle.API.Controllers
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id, [FromHeader] string email, [FromHeader] string password)
 		{
-			//only admin/teacher set to be authorized to get all user by id
+			//only teacher set to be authorized to get all user by id
 			//authorization checked in services
 			try
 			{
@@ -78,7 +78,7 @@ namespace Poodle.API.Controllers
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
 		{       
-			//only admin set to be authorized to delete users
+			//only teacher set to be authorized to delete users
 			//authorization checked in services	
 
 			if (id < 1)
@@ -104,13 +104,12 @@ namespace Poodle.API.Controllers
 		}
 
 		[HttpPost("")]
-		public IActionResult Create([FromBody] UserCreateDto userCreateDto, [FromHeader] string role)
+		public IActionResult Create([FromBody] UserCreateDto userCreateDto)
         { 
-			//currently Api allows all roles to be created
+			//all newly created users are students by default
 			try
-			{
-				int roleId = this.usersService.GetRoleId(role);
-				var newUser = this.userMapper.ConvertToModel(userCreateDto, roleId);
+			{				
+				var newUser = this.userMapper.ConvertToModel(userCreateDto);
 				var createdUser = this.usersService.Create(newUser, userCreateDto.ImageUrl);
 
 				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");

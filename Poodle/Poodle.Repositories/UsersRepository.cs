@@ -42,26 +42,26 @@ namespace Poodle.Repositories
         }
         
     
-        public async Task<User> Create(User user, string imageUrl)
+        public User Create(User user, string imageUrl)
         {
             user.CreatedOn = DateTime.UtcNow;
             user.ModifiedOn = DateTime.UtcNow;
             user.RoleId = user.RoleId;
 
-            var image = this.AddNewImage(imageUrl).Result;
+            var image = this.AddNewImage(imageUrl);
             user.ImageId = image.Id;
-            var createdUser = await this.context.Users.AddAsync(user);
-            await this.context.SaveChangesAsync();
+            var createdUser = this.context.Users.Add(user);
+            this.context.SaveChanges();
 
             image.UserId = createdUser.Entity.Id;
-            await this.context.SaveChangesAsync();
+            this.context.SaveChanges();
             return createdUser.Entity;
         }
         
 
-        public async Task<User> Update(int id, string firstname, string lastname, string password, string email, string imageUrl)
+        public User Update(int id, string firstname, string lastname, string password, string email, string imageUrl)
         {
-            var userToUpdate = await this.GetById(id).FirstOrDefaultAsync();
+            var userToUpdate = this.GetById(id).FirstOrDefault();
 
             userToUpdate.FirstName = firstname != "string" ? firstname : userToUpdate.FirstName;
             userToUpdate.LastName = lastname != "string" ? lastname : userToUpdate.LastName;
@@ -70,26 +70,26 @@ namespace Poodle.Repositories
             userToUpdate.Image.ImageUrl = imageUrl != "string" ? imageUrl : userToUpdate.Image.ImageUrl;
 
             userToUpdate.ModifiedOn = DateTime.Now;
-            await this.context.SaveChangesAsync();
+            this.context.SaveChanges();
 
             return userToUpdate;
 
         }
 
-        public async Task<int> Delete(User userToDelete)
+        public int Delete(User userToDelete)
         {            
             this.context.Users.Remove(userToDelete);
-            await this.context.SaveChangesAsync();
+            this.context.SaveChanges();
             return userToDelete.Id;
         }
 
       
-        private async Task<Image> AddNewImage(string imageUrl)
+        private Image AddNewImage(string imageUrl)
         {
             var newImage = new Image();
             newImage.ImageUrl = imageUrl;
-            await this.context.Images.AddAsync(newImage);
-            await this.context.SaveChangesAsync();
+            this.context.Images.Add(newImage);
+            this.context.SaveChanges();
 
             return newImage;
         }

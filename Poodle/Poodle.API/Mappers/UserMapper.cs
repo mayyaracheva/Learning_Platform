@@ -18,14 +18,14 @@ namespace Poodle.API.Mappers
             return userToPresent;
         }
 
-        public User ConvertToModel(UserCreateDto userModel, int roleId)
+        public User ConvertToModel(UserCreateDto userModel)
         {
             User newUser = new User();
             newUser.FirstName = userModel.FirstName;
             newUser.LastName = userModel.LastName;
             newUser.Email = userModel.Email;
             newUser.Password = userModel.Password;           
-            newUser.RoleId = roleId;
+            newUser.RoleId = 2;
             return newUser;
         }
 

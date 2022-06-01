@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Poodle.Data.Migrations
 {
-    public partial class New : Migration
+    public partial class Initial1June : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -111,6 +111,7 @@ namespace Poodle.Data.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     CourseId = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -183,9 +184,8 @@ namespace Poodle.Data.Migrations
                 columns: new[] { "Id", "Name" },
                 values: new object[,]
                 {
-                    { 1, "Admin" },
-                    { 2, "Teacher" },
-                    { 3, "Student" }
+                    { 1, "Teacher" },
+                    { 2, "Student" }
                 });
 
             migrationBuilder.InsertData(
@@ -210,53 +210,53 @@ namespace Poodle.Data.Migrations
                 columns: new[] { "Id", "CreatedOn", "Email", "FirstName", "ImageId", "IsDeleted", "LastName", "ModifiedOn", "Password", "RoleId" },
                 values: new object[,]
                 {
-                    { 9, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7586), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7588), "hardiR789*", 3 },
-                    { 1, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(6151), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(6665), "adminADMIN123?", 1 },
-                    { 2, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7542), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7546), "johnJOHN123!", 2 },
-                    { 3, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7550), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7551), "jondav123*", 2 },
-                    { 4, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7555), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7556), "ignitalo123*", 2 },
-                    { 5, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7559), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7560), "jamesonN123*", 3 },
-                    { 6, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7575), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7576), "johnsonN123*", 3 },
-                    { 7, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7578), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7580), "horspanP123*", 3 },
-                    { 8, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7582), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7583), "hurspenM456!", 3 },
-                    { 10, new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7592), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 5, 30, 16, 33, 32, 856, DateTimeKind.Utc).AddTicks(7593), "marrob123!", 3 }
+                    { 9, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4658), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4660), "hardiR789*", 2 },
+                    { 1, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(1698), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(2681), "adminADMIN123?", 1 },
+                    { 2, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4591), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4597), "johnJOHN123!", 1 },
+                    { 3, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4603), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4605), "jondav123*", 2 },
+                    { 4, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4610), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4612), "ignitalo123*", 2 },
+                    { 5, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4616), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4618), "jamesonN123*", 2 },
+                    { 6, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4639), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4641), "johnsonN123*", 2 },
+                    { 7, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4645), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4648), "horspanP123*", 2 },
+                    { 8, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4652), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4654), "hurspenM456!", 2 },
+                    { 10, new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4668), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4670), "marrob123!", 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Sections",
-                columns: new[] { "Id", "CourseId", "CreatedOn", "IsDeleted", "ModifiedOn", "Title" },
+                columns: new[] { "Id", "Content", "CourseId", "CreatedOn", "IsDeleted", "ModifiedOn", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Exploring the Functions of Networking" },
-                    { 22, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing DNA Architecture" },
-                    { 21, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SOC Analyst tools" },
-                    { 20, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Defining the Security Operations Center" },
-                    { 19, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Identifying Security Concepts" },
-                    { 18, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Defining Action Orchestrator User Management and Security Considerations" },
-                    { 17, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "CloudCenter Suite Architecture" },
-                    { 16, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing CloudCenter Suite Action Orchestrator" },
-                    { 15, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nexus 9000 NX-OS Features" },
-                    { 14, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Nexus 9000 Series Hardware" },
-                    { 13, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Data Center Trends" },
-                    { 12, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Understanding of networking protocols, routing, and switching" },
-                    { 11, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Data center architecture" },
-                    { 10, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ethernet switching products" },
-                    { 30, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Identify the components of GitHub Actions" },
-                    { 29, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "How does GitHub Actions automate development tasks?" },
-                    { 28, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introduction" },
-                    { 27, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decide when to use Azure Virtual Machines" },
-                    { 26, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Overview of Azure compute services" },
-                    { 25, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introduction" },
-                    { 9, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Cisco UCS Policies for Service Profiles" },
-                    { 8, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Implementing External Authentication Providers" },
-                    { 7, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Implementing Cisco UCS Storage Area Network (SAN)" },
-                    { 6, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Advanced REST API Integration" },
-                    { 5, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Designing for Serviceability" },
-                    { 4, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Designing for Maintainability" },
-                    { 3, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operating Cisco IOS Software" },
-                    { 2, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing the Host-to-Host Communications Model" },
-                    { 23, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deploy Wired Fabric Networks with DNA Center" },
-                    { 24, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deploy Brownfield and Fabric Wireless Network with DNA Center" }
+                    { 1, null, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Exploring the Functions of Networking" },
+                    { 22, null, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing DNA Architecture" },
+                    { 21, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "SOC Analyst tools" },
+                    { 20, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Defining the Security Operations Center" },
+                    { 19, null, 7, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Identifying Security Concepts" },
+                    { 18, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Defining Action Orchestrator User Management and Security Considerations" },
+                    { 17, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "CloudCenter Suite Architecture" },
+                    { 16, null, 6, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing CloudCenter Suite Action Orchestrator" },
+                    { 15, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Nexus 9000 NX-OS Features" },
+                    { 14, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Nexus 9000 Series Hardware" },
+                    { 13, null, 5, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Data Center Trends" },
+                    { 12, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Understanding of networking protocols, routing, and switching" },
+                    { 11, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Data center architecture" },
+                    { 10, null, 4, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Ethernet switching products" },
+                    { 30, null, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Identify the components of GitHub Actions" },
+                    { 29, null, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "How does GitHub Actions automate development tasks?" },
+                    { 28, null, 10, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introduction" },
+                    { 27, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Decide when to use Azure Virtual Machines" },
+                    { 26, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Overview of Azure compute services" },
+                    { 25, null, 9, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introduction" },
+                    { 9, null, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Cisco UCS Policies for Service Profiles" },
+                    { 8, null, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Implementing External Authentication Providers" },
+                    { 7, null, 3, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Implementing Cisco UCS Storage Area Network (SAN)" },
+                    { 6, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Describing Advanced REST API Integration" },
+                    { 5, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Designing for Serviceability" },
+                    { 4, null, 2, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Designing for Maintainability" },
+                    { 3, null, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Operating Cisco IOS Software" },
+                    { 2, null, 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Introducing the Host-to-Host Communications Model" },
+                    { 23, null, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deploy Wired Fabric Networks with DNA Center" },
+                    { 24, null, 8, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "Deploy Brownfield and Fabric Wireless Network with DNA Center" }
                 });
 
             migrationBuilder.CreateIndex(

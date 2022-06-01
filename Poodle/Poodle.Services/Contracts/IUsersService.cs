@@ -10,9 +10,9 @@ namespace Poodle.Services.Contracts
 		User GetById(int id);
 		List<User> GetAll(string requesterEmail, string requesterPassword);
 		User GetById(int id, string requesterEmail, string requesterPassword);
-		User GetByEmail(string email, string requesterEmail, string requesterPassword);
+		User GetByEmail(string email);
 		List<User> Get(UserQueryParameters filterParameters);
-		int GetRoleId(string roleName);		
+		//int GetRoleId(string roleName);		
 		User Create(User user, string imageUrl);		
 		User Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword);
 		void Delete(int id, string requesterEmail, string requesterPassword);

@@ -122,7 +122,7 @@ namespace Poodle.Data
 				FirstName = "Jack",
 				LastName = "Richmond",
 				Email = "Jack.Richmond@yahoo.com",
-				RoleId = 2,
+				RoleId = 1,
 				ImageId = 2,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -161,7 +161,7 @@ namespace Poodle.Data
 				FirstName = "Reginald",
 				LastName = "Hargreeves",
 				Email = "Reginald.Hargreeves@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 5,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -174,7 +174,7 @@ namespace Poodle.Data
 				FirstName = "John",
 				LastName = "Hanes",
 				Email = "John.Hanes@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 6,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -187,7 +187,7 @@ namespace Poodle.Data
 				FirstName = "Horatio",
 				LastName = "Spanish",
 				Email = "Horatio.Spanish@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 7,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -200,7 +200,7 @@ namespace Poodle.Data
 				FirstName = "Herbert",
 				LastName = "Spencer",
 				Email = "Herbert.Spencer@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 8,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -213,7 +213,7 @@ namespace Poodle.Data
 				FirstName = "Harriet",
 				LastName = "Dark",
 				Email = "Harriet.Dark@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 9,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -226,7 +226,7 @@ namespace Poodle.Data
 				FirstName = "Mario",
 				LastName = "Caruso",
 				Email = "Mario.Caruso@gmail.com",
-				RoleId = 3,
+				RoleId = 2,
 				ImageId = 10,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
@@ -542,19 +542,15 @@ namespace Poodle.Data
 		public static List<Role> GetRoles()
 		{
 			var roles = new List<Role>();
+			
 			roles.Add(new Role
 			{
 				Id = 1,
-				Name = "Admin"
-			});
-			roles.Add(new Role
-			{
-				Id = 2,
 				Name = "Teacher"
 			});
 			roles.Add(new Role
 			{
-				Id = 3,
+				Id = 2,
 				Name = "Student"
 			});
 			return roles;
