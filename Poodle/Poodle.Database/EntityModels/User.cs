@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Data.EntityModels
 {
-	public class User : Entity, IIsDeleted
+	public class User : Entity, IDeletable
 	{
 		public int Id { get; set; }
 

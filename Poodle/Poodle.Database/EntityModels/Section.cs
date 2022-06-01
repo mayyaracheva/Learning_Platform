@@ -2,7 +2,7 @@
 
 namespace Poodle.Data.EntityModels
 {
-	public class Section : Entity, IIsDeleted
+	public class Section : Entity, IDeletable
 	{
 		public int Id { get; set; }
 		public string Title { get; set; }

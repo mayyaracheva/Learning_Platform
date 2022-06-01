@@ -14,11 +14,11 @@ namespace Poodle.Data.EntityModels
 		//search for students currently not enrolled in the current private course
 		public Course Course { get; set; }
 
-		public bool NoQueryParameters
+		public bool HasQueryParameters
 		{
 			get
 			{
-				return FirstName is null & Email is null & LastName is null & Course is null;
+				return FirstName is not null & Email is not null & LastName is not null & Course is not null;
 			}
 		}
 	}

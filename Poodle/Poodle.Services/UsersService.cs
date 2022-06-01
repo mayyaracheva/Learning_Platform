@@ -28,7 +28,7 @@ namespace Poodle.API.Services
         {
             var user = this.repository.GetById(id).FirstOrDefault();
 
-            if (user != null & user.IsDeleted == false)
+            if (user != null)
             {
                 return user;
             }
@@ -47,7 +47,7 @@ namespace Poodle.API.Services
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }
 
-            return this.repository.GetAll().Where(u => u.IsDeleted == false).ToList();
+            return this.repository.GetAll().ToList();
         }
 
         public User GetById(int id, string requesterEmail, string requesterPassword)
@@ -60,7 +60,7 @@ namespace Poodle.API.Services
             }
             var user = this.repository.GetById(id).FirstOrDefault();
 
-            if (user != null & user.IsDeleted == false)
+            if (user != null)
             {
                 return user;
             }
@@ -81,7 +81,7 @@ namespace Poodle.API.Services
 
             var user = this.repository.GetByEmail(email).FirstOrDefault();
 
-            if (user != null & user.IsDeleted == false)
+            if (user != null)
             {
                 return user;
             }
@@ -105,7 +105,7 @@ namespace Poodle.API.Services
 
         public List<User> Get(UserQueryParameters filterParameters)
         {
-            if (filterParameters.NoQueryParameters)
+            if (filterParameters.HasQueryParameters)
             {
                 return this.repository.GetAll().ToList();
             }

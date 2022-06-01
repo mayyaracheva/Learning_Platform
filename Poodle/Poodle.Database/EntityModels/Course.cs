@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Poodle.Data.EntityModels
 {
-	public class Course : Entity, IIsDeleted
+	public class Course : Entity, IDeletable
 	{
 		public int Id { get; set; } 
 		public string Title { get; set; }

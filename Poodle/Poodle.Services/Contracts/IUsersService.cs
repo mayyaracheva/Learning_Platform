@@ -17,5 +17,6 @@ namespace Poodle.Services.Contracts
 		User Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword);
 		void Delete(int id, string requesterEmail, string requesterPassword);
 		Role CheckAuthorization(string requesterEmail, string requesterPassword);
+		
 	}
 }
