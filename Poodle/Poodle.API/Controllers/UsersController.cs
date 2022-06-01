@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Poodle.API.Helpers;
 
 namespace Poodle.API.Controllers
 {
@@ -18,56 +19,67 @@ namespace Poodle.API.Controllers
     {
         
         private readonly UserMapper userMapper;
-        private readonly IUsersService usersService;
+		private readonly AuthenticationHelper authenticationHelper;
+		private readonly IUsersService usersService;
 
-        public UsersController(UserMapper userMapper, IUsersService usersService)
+        public UsersController(UserMapper userMapper, AuthenticationHelper authenticationHelper, IUsersService usersService)
         {            
             this.userMapper = userMapper;
             this.usersService = usersService;
+			this.authenticationHelper = authenticationHelper;
         }
 
 		[HttpGet("")]
 		public IActionResult Get([FromHeader] string email, [FromHeader] string password)
 		{
+			//only admin/teacher set to be authorized to get all users
+			//authorization checked in services
 			try
-			{				
+			{
+				this.authenticationHelper.TryGetUser(email, password);
 				List<UserResponseDto> users = this.usersService.GetAll(email, password).Select(u =>  userMapper.ConvertToDto(u)).ToList();
 				return this.StatusCode(StatusCodes.Status200OK, users);
-			}			
-			catch (EntityNotFoundException e)
-			{
-				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
 			catch (UnauthorizedOperationException e)
 			{
 				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
 			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+			
 		}
 
 		[HttpGet("{id}")]
 		public IActionResult GetById(int id, [FromHeader] string email, [FromHeader] string password)
 		{
+			//only admin/teacher set to be authorized to get all user by id
+			//authorization checked in services
 			try
-			{				
+			{
+				this.authenticationHelper.TryGetUser(email, password);
 				var user = this.usersService.GetById(id, email, password);
 				var userToDisplay = this.userMapper.ConvertToDto(user);
 
 				return this.StatusCode(StatusCodes.Status200OK, userToDisplay);
 			}
-			
-			catch (EntityNotFoundException e)
-			{
-				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-			}
 			catch (UnauthorizedOperationException e)
 			{
 				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
 			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+			
 		}
 
 		[HttpDelete("{id}")]
 		public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
-		{			
+		{       
+			//only admin set to be authorized to delete users
+			//authorization checked in services	
 
 			if (id < 1)
 			{
@@ -76,6 +88,7 @@ namespace Poodle.API.Controllers
 
             try
             {
+				this.authenticationHelper.TryGetUser(email, password);
 				this.usersService.Delete(id, email, password);
 				return this.StatusCode(StatusCodes.Status200OK, "User deleted");
 			}
@@ -91,8 +104,9 @@ namespace Poodle.API.Controllers
 		}
 
 		[HttpPost("")]
-		public IActionResult Create([FromBody] UserCreateDto userCreateDto, [FromQuery] string role)
+		public IActionResult Create([FromBody] UserCreateDto userCreateDto, [FromHeader] string role)
         { 
+			//currently Api allows all roles to be created
 			try
 			{
 				int roleId = this.usersService.GetRoleId(role);
@@ -108,6 +122,31 @@ namespace Poodle.API.Controllers
 			catch (DuplicateEntityException e)
 			{
 				return this.StatusCode(StatusCodes.Status406NotAcceptable, e.Message);
+			}
+		}
+
+		[HttpPut("{id}")]
+		public IActionResult Update(int id, [FromBody] UserUpdateDto userUpdateDto, [FromHeader] string email, [FromHeader] string password)
+        {
+			//authentication check in Api, if user trying to make the update exists
+			//authorization check (if user trying to make the update is same one, in services)
+            try
+            {
+				this.authenticationHelper.TryGetUser(email, password);               
+				this.usersService.Update(id, userUpdateDto.FirstName, userUpdateDto.LastName, userUpdateDto.Password, userUpdateDto.Email, userUpdateDto.ImageUrl, email, password);
+				return this.StatusCode(StatusCodes.Status200OK, "User has been updated");
+			}			
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+			catch (DuplicateEntityException e)
+			{
+				return this.StatusCode(StatusCodes.Status409Conflict, e.Message);
 			}
 		}
 	}
