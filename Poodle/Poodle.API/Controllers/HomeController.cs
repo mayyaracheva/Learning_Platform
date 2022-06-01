@@ -31,4 +31,3 @@ namespace Poodle.API.Controllers
 	}
 
 }
-}

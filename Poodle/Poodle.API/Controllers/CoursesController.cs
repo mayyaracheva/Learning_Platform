@@ -45,26 +45,6 @@ namespace Poodle.API.Controllers
 			}
 		}
 
-		[HttpGet("{id}")]
-		public IActionResult GetById(int id, [FromHeader] string email, [FromHeader] string password)
-		{
-			try
-			{
-				this.authorizationhelper.TryGetUser(email, password);
-				var post = this.postsService.Get(id);
-				var postToDisplay = this.postMapper.ConvertToDto(post);
-				return this.StatusCode(StatusCodes.Status200OK, postToDisplay);
-			}
-			catch (UnauthorizedOperationException e)
-			{
-				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-			}
-			catch (EntityNotFoundException e)
-			{
-				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-			}
-
-		}
 
 
 	}
