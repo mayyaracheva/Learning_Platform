@@ -19,8 +19,7 @@ namespace Poodle.Repositories
 
 		public async Task<IEnumerable<Course>> GetAllAsync()
 		{
-			var result = await this.GetCourses()
-								.ToListAsync();
+			var result = await this.GetCourses().ToListAsync();
 			return result;
 		}
 

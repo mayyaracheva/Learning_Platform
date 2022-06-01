@@ -18,18 +18,20 @@ namespace Poodle.Services
 			this.coursesRepository = repository;
 		}
 
-		public Task<IEnumerable<Course>> GetAllAsync()
+		public async Task<IEnumerable<Course>> GetAllAsync()
 		{
-			return this.coursesRepository.GetAllAsync();
+			return await this.coursesRepository.GetAllAsync();
 		}
 		public Course GetById(int id)
 		{
 			return this.coursesRepository.GetById(id)
 				?? throw new EntityNotFoundException($"There is no course with id: {id}");
 		}
-		public Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
+		public async Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
 		{
-			throw new NotImplementedException();
+			var courses = await this.coursesRepository.Get(filterParameters);
+
+			return courses;
 		}
 		public async Task<Course> CreateAsync(Course course)
 		{
