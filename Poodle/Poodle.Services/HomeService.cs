@@ -1,4 +1,5 @@
-﻿using Poodle.Data.EntityModels;
+﻿using Microsoft.EntityFrameworkCore;
+using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
 using System;
@@ -18,10 +19,12 @@ namespace Poodle.Services
             this.coursesRepository = coursesRepository;
         }
 
-        public async Task<IEnumerable<Course>> GetAllPublicCoursrses()
+        public async Task<IEnumerable<Course>> GetPublicCoursrsesAsync()
         {
-            var allPublicCourses = await this.coursesRepository.GetAllAsync();
-            var result = allPublicCourses.Where(x => x.Category.Name == "Public");
+            var allPublicCourses = this.coursesRepository.Get();
+            var result = await allPublicCourses
+                .Where(x => x.Category.Name == "Public")
+                .ToListAsync();
             return result;
         }
 

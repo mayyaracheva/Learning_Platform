@@ -1,4 +1,5 @@
-﻿using Poodle.API.Exceptions;
+﻿using Microsoft.EntityFrameworkCore;
+using Poodle.API.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Poodle.Services.Constants;
 
 namespace Poodle.Services
 {
@@ -18,31 +20,32 @@ namespace Poodle.Services
 			this.coursesRepository = repository;
 		}
 
-		public async Task<IEnumerable<Course>> GetAllAsync()
+		public async Task<IEnumerable<Course>> GetAsync()
 		{
-			return await this.coursesRepository.GetAllAsync();
+			return await this.coursesRepository.Get().ToListAsync();
 		}
 		public Course GetById(int id)
 		{
 			return this.coursesRepository.GetById(id)
-				?? throw new EntityNotFoundException($"There is no course with id: {id}");
+				?? throw new EntityNotFoundException(string.Format(ConstantsContainer.COURSE_NOT_FOUND, id));
 		}
-		public async Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
+		public async Task<IEnumerable<Course>> Get(CourseQueryParameters filterParameters)
 		{
-			var courses = await this.coursesRepository.Get(filterParameters);
+			var courses = await this.coursesRepository
+				.Get(filterParameters)
+				.ToListAsync();
 
 			return courses;
 		}
 		public async Task<Course> CreateAsync(Course course)
 		{
 			var duplicateCourse = this.coursesRepository
-				.GetAllAsync()
-				.Result
+				.Get()
 				.FirstOrDefault(x => x.Title == course.Title);
 
 			if (duplicateCourse != null)
 			{
-				throw new DuplicateEntityException("This course already exists");
+				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
 			}
 
 			course.CreatedOn = DateTime.UtcNow;

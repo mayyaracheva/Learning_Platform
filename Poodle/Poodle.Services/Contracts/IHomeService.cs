@@ -6,6 +6,6 @@ namespace Poodle.Services.Contracts
 {
 	public interface IHomeService
 	{
-		Task<IEnumerable<Course>> GetAllPublicCoursrses();
+		Task<IEnumerable<Course>> GetPublicCoursrsesAsync();
 	}
 }

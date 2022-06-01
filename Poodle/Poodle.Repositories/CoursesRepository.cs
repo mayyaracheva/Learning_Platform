@@ -3,7 +3,6 @@ using Poodle.Data;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -17,9 +16,9 @@ namespace Poodle.Repositories
 			this.context = context;
 		}
 
-		public async Task<IEnumerable<Course>> GetAllAsync()
+		public IQueryable<Course> Get()
 		{
-			var result = await this.GetCourses().ToListAsync();
+			var result = this.GetCourses();
 			return result;
 		}
 
@@ -38,14 +37,14 @@ namespace Poodle.Repositories
 				.FirstOrDefault();
 			return result;
 		}
-		public async Task<IQueryable<Course>> Get(CourseQueryParameters filterParameters)
+		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;
 			string category = !string.IsNullOrEmpty(filterParameters.Category) ? filterParameters.Category.ToLowerInvariant() : string.Empty;
 			string sortCriteria = !string.IsNullOrEmpty(filterParameters.SortBy) ? filterParameters.SortBy.ToLowerInvariant() : string.Empty;
 			string sortOrder = !string.IsNullOrEmpty(filterParameters.SortOrder) ? filterParameters.SortOrder.ToLowerInvariant() : string.Empty;
 
-			var courses = (IQueryable<Course>) await this.GetAllAsync();
+			var courses = this.Get();
 
 			courses = FilterByTitle(courses, title);
 			courses = FilterByCategory(courses, category);
@@ -84,9 +83,6 @@ namespace Poodle.Repositories
 		{
 			var courseToDelete = await this.context.Courses
 						   .FirstOrDefaultAsync(p => p.Id == id);
-
-			courseToDelete.IsDeleted = true;
-			//courseToDelete.DeletedOn = DateTime.UtcNow;
 
 			await this.context.SaveChangesAsync();
 
