@@ -1,6 +1,6 @@
 ﻿
 
-namespace Poodle.API.Dtos
+namespace Poodle.Services.Dtos
 {
     public class UserResponseDto
     {

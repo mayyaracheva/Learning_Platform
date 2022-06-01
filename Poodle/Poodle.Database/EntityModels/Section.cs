@@ -1,4 +1,5 @@
 ﻿using Poodle.Data.EntityModels.Contracts;
+using System;
 
 namespace Poodle.Data.EntityModels
 {
@@ -8,8 +9,10 @@ namespace Poodle.Data.EntityModels
 		public string Title { get; set; }
 		public string Content { get; set; }
 		public bool IsDeleted { get; set; }
+		public bool IsRestricted { get; set; }
 
-		//public int Rank { get; set; }
+		public int Rank { get; set; }
+		
 		//public DateTime AvailableBy {get; set;}
 
 		public int CourseId { get; set; }

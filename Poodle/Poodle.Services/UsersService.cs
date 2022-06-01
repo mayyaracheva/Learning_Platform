@@ -1,13 +1,13 @@
-﻿using Poodle.API.Exceptions;
+﻿using Poodle.Services.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
-namespace Poodle.API.Services
+
+namespace Poodle.Services.Services
 {
     public class UsersService : IUsersService
     {

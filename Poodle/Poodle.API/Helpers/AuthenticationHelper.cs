@@ -1,4 +1,4 @@
-﻿using Poodle.API.Exceptions;
+﻿using Poodle.Services.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
 using System;
@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poodle.API.Helpers
+namespace Poodle.Services.Helpers
 {
     public class AuthenticationHelper
     {

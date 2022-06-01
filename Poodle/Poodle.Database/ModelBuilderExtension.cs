@@ -328,120 +328,154 @@ namespace Poodle.Data
 			sections.Add(new Section
 			{
 				Id = 1,
-				Title = "Exploring the Functions of Networking",				
+				Title = "Exploring the Functions of Networking",	
+				Content = "",
 				CourseId = 1,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 2,
 				Title = "Introducing the Host-to-Host Communications Model",
 				CourseId = 1,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 3,
 				Title = "Operating Cisco IOS Software",
 				CourseId = 1,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 4,
 				Title = "Designing for Maintainability",
 				CourseId = 2,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 5,
 				Title = "Designing for Serviceability",
 				CourseId = 2,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 6,
 				Title = "Describing Advanced REST API Integration",
 				CourseId = 2,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 7,
 				Title = "Implementing Cisco UCS Storage Area Network (SAN)",
 				CourseId = 3,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 8,
 				Title = "Implementing External Authentication Providers",
 				CourseId = 3,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 9,
 				Title = "Describing Cisco UCS Policies for Service Profiles",
 				CourseId = 3,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 10,
 				Title = "Ethernet switching products",
 				CourseId = 4,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 11,
 				Title = "Data center architecture",
 				CourseId = 4,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 12,
 				Title = "Understanding of networking protocols, routing, and switching",
 				CourseId = 4,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 13,
 				Title = "Data Center Trends",
 				CourseId = 5,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 14,
 				Title = "Describing Nexus 9000 Series Hardware",
 				CourseId = 5,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 15,
 				Title = "Nexus 9000 NX-OS Features",
 				CourseId = 5,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 16,
 				Title = "Introducing CloudCenter Suite Action Orchestrator",
 				CourseId = 6,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 17,
 				Title = "CloudCenter Suite Architecture",
 				CourseId = 6,
+				Rank = 2,
 				IsDeleted = false
 			});
 			sections.Add(new Section
@@ -449,91 +483,117 @@ namespace Poodle.Data
 				Id = 18,
 				Title = "Defining Action Orchestrator User Management and Security Considerations",
 				CourseId = 6,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 19,
 				Title = "Identifying Security Concepts",
 				CourseId = 7,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 20,
 				Title = "Defining the Security Operations Center",
 				CourseId = 7,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			}); 
 			sections.Add(new Section
 			{
 				Id = 21,
 				Title = "SOC Analyst tools",
 				CourseId = 7,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			}); 
 			sections.Add(new Section
 			{
 				Id = 22,
 				Title = "Introducing DNA Architecture",
 				CourseId = 8,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 23,
 				Title = "Deploy Wired Fabric Networks with DNA Center",
 				CourseId = 8,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 24,
 				Title = "Deploy Brownfield and Fabric Wireless Network with DNA Center",
 				CourseId = 8,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 25,
 				Title = "Introduction",
 				CourseId = 9,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 26,
 				Title = "Overview of Azure compute services",
 				CourseId = 9,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 27,
 				Title = "Decide when to use Azure Virtual Machines",
 				CourseId = 9,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 28,
 				Title = "Introduction",
 				CourseId = 10,
-				IsDeleted = false
+				Rank = 1,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 29,
 				Title = "How does GitHub Actions automate development tasks?",
 				CourseId = 10,
-				IsDeleted = false
+				Rank = 2,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 			sections.Add(new Section
 			{
 				Id = 30,
 				Title = "Identify the components of GitHub Actions",
 				CourseId = 10,
-				IsDeleted = false
+				Rank = 3,
+				IsDeleted = false,
+				IsRestricted = false
 			});
 
 			return sections;
