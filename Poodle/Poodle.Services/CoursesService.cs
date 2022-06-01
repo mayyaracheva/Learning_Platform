@@ -1,4 +1,4 @@
-﻿using Poodle.API.Exceptions;
+﻿using Poodle.Services.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;

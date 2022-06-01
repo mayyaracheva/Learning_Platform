@@ -1,6 +1,6 @@
 ﻿using Poodle.Data.EntityModels;
 
-namespace Poodle.API.Dtos
+namespace Poodle.Services.Dtos
 {
 	public class CourseResponseDTO
 	{

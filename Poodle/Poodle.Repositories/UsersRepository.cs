@@ -4,7 +4,7 @@ using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using System;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Poodle.Repositories
 {
@@ -73,7 +73,6 @@ namespace Poodle.Repositories
             this.context.SaveChanges();
 
             return userToUpdate;
-
         }
 
         public int Delete(User userToDelete)

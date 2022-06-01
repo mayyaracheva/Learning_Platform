@@ -1,7 +1,7 @@
-﻿using Poodle.API.Dtos;
+﻿using Poodle.Services.Dtos;
 using Poodle.Data.EntityModels;
 
-namespace Poodle.API.Mappers
+namespace Poodle.Services.Mappers
 {
 	public class CourseMapper
 	{

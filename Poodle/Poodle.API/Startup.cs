@@ -6,15 +6,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
-using Poodle.API.Helpers;
-using Poodle.API.Mappers;
-using Poodle.API.Services;
+using Poodle.Services.Helpers;
+using Poodle.Services.Mappers;
+using Poodle.Services.Services;
 using Poodle.Data;
 using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
+using Poodle.Services;
 using Poodle.Services.Contracts;
 
-namespace Poodle.API
+namespace Poodle.Services
 {
 	public class Startup
 	{
@@ -46,9 +47,12 @@ namespace Poodle.API
 			//repositories
 			services.AddScoped<ICoursesRepository, CoursesRepository>();
 			services.AddScoped<IUsersRepository, UsersRepository>();
+			services.AddScoped<ISectionRepository, SectionRepository>();
 
 			//services
 			services.AddScoped<IUsersService, UsersService>();
+			services.AddScoped<ISectionService, SectionService>();
+			
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +66,7 @@ namespace Poodle.API
 			}
 
 			app.UseRouting();
+			
 			//app.UseAuthentication();
 
 			app.UseAuthorization();

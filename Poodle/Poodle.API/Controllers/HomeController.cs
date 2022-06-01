@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Poodle.API.Dtos;
+using Poodle.Services.Dtos;
 using Poodle.Services.Contracts;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poodle.API.Controllers
+namespace Poodle.Services.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Poodle.API.Exceptions
+namespace Poodle.Services.Exceptions
 {
     public class UnauthorizedOperationException : ApplicationException
     {
