@@ -59,7 +59,7 @@ namespace Poodle.Data
 
 		private void OnBeforeSaving()
 		{
-			foreach (var entry in ChangeTracker.Entries<IIsDeleted>())
+			foreach (var entry in ChangeTracker.Entries<IDeletable>())
 			{
 				switch (entry.State)
 				{

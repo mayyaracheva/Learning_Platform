@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Poodle.Data.EntityModels.Contracts
 {
-    public interface IIsDeleted
+    public interface IDeletable
     {
         bool IsDeleted { get; set; }
     }
