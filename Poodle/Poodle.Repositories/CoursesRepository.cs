@@ -16,7 +16,7 @@ namespace Poodle.Repositories
 			this.context = context;
 		}
 
-		public IQueryable<Course> Get()
+		public IQueryable<Course> GetAll()
 		{
 			var result = this.GetCourses();
 			return result;
@@ -44,7 +44,7 @@ namespace Poodle.Repositories
 			string sortCriteria = !string.IsNullOrEmpty(filterParameters.SortBy) ? filterParameters.SortBy.ToLowerInvariant() : string.Empty;
 			string sortOrder = !string.IsNullOrEmpty(filterParameters.SortOrder) ? filterParameters.SortOrder.ToLowerInvariant() : string.Empty;
 
-			var courses = this.Get();
+			var courses = this.GetAll();
 
 			courses = FilterByTitle(courses, title);
 			courses = FilterByCategory(courses, category);

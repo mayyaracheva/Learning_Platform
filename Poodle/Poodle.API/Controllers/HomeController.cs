@@ -1,9 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Poodle.Services.Dtos;
 using Poodle.Services.Contracts;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Poodle.Services.Controllers
@@ -19,15 +16,14 @@ namespace Poodle.Services.Controllers
 			this.homeservice = homeservice;
 		}
 
-		/*[HttpGet("")]
+		[HttpGet("")]
 		public async Task<IActionResult> PublicCourses()
 		{
-			/*var courses = await this.homeservice
-				.GetAllPublicCoursrses().Result.
-				/*.Select(p => new CourseResponseDTO(p))
-			;
+			var courses = await this.homeservice
+				.GetPublicCoursrsesAsync();
 
-			return this.StatusCode(StatusCodes.Status200OK, courses); */
+			return this.StatusCode(StatusCodes.Status200OK, courses);
+		}
 	}
 
 }

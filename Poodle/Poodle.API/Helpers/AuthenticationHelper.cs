@@ -1,10 +1,9 @@
 ﻿using Poodle.Services.Exceptions;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Poodle.Services.Constants;
 
 namespace Poodle.Services.Helpers
 {
@@ -26,7 +25,7 @@ namespace Poodle.Services.Helpers
 
             if (user == null)
             {
-                throw new UnauthorizedOperationException("Invalid credentials or not existing user");
+                throw new UnauthorizedOperationException(ConstantsContainer.INVALID_CREDENTIALS);
             }            
 
             return user;

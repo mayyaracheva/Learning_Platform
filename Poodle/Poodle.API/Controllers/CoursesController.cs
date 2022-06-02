@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
 using Poodle.Services.Mappers;
-using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -31,23 +30,26 @@ namespace Poodle.Services.Controllers
         }
 
 		[HttpGet("")]
-		public async Task<IActionResult> GetAllCourses([FromHeader] string email, [FromHeader] string password, [FromQuery] CourseQueryParameters filterParameters)
+		public async Task<IActionResult> GetAsync([FromHeader] string email, [FromHeader] string password)
 		{
 			try
 			{
-				this.usersService.CheckAuthorization(email, password);
-				/*List<CourseResponseDTO>*/ var courses = await this.coursesService.Get(filterParameters);
+				await this.authenticationHelper.TryGetUser(email, password);
+				var courses = await this.coursesService
+					.GetAsync();
+
 				return this.StatusCode(StatusCodes.Status200OK, courses);
+			}		
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
 			}
+
 			catch (EntityNotFoundException e)
 			{
 				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
 
-			catch (UnauthorizedOperationException e)
-			{
-				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-			}
 		}
 
 		[HttpGet("{id}/sections")]

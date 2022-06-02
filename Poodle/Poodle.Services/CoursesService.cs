@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Poodle.Services.Constants;
 using Microsoft.EntityFrameworkCore;
+using Poodle.Services.Dtos;
 
 namespace Poodle.Services
 {
@@ -20,9 +21,12 @@ namespace Poodle.Services
 			this.coursesRepository = repository;
 		}
 
-		public async Task<IEnumerable<Course>> GetAsync()
+		public async Task<List<CourseResponseDTO>> GetAsync()
 		{
-			return await this.coursesRepository.Get().ToListAsync();
+			return await this.coursesRepository
+				.GetAll()
+				.Select(p => new CourseResponseDTO(p))
+				.ToListAsync();
 		}
 		public Course GetById(int id)
 		{
@@ -40,7 +44,7 @@ namespace Poodle.Services
 		public async Task<Course> CreateAsync(Course course)
 		{
 			var duplicateCourse = this.coursesRepository
-				.Get()
+				.GetAll()
 				.FirstOrDefault(x => x.Title == course.Title);
 
 			if (duplicateCourse != null)
