@@ -7,7 +7,7 @@ namespace Poodle.Repositories.Contracts
 	public interface ICoursesRepository
 	{
 		IQueryable<Course> GetAll();
-		Course GetById(int id);
+		Course Get(int id);
 		Course GetByTitle(string title);
 		IQueryable<Course> Get(CourseQueryParameters filterParameters);
 		Task<Course> CreateAsync(Course course);

@@ -329,7 +329,7 @@ namespace Poodle.Data
 			{
 				Id = 1,
 				Title = "Exploring the Functions of Networking",	
-				Content = "",
+				Content = "testTest",
 				CourseId = 1,
 				Rank = 1,
 				IsDeleted = false,
@@ -339,6 +339,7 @@ namespace Poodle.Data
 			{
 				Id = 2,
 				Title = "Introducing the Host-to-Host Communications Model",
+				Content = "testTest",
 				CourseId = 1,
 				Rank = 2,
 				IsDeleted = false,
@@ -348,6 +349,7 @@ namespace Poodle.Data
 			{
 				Id = 3,
 				Title = "Operating Cisco IOS Software",
+				Content = "testTest",
 				CourseId = 1,
 				Rank = 3,
 				IsDeleted = false,
@@ -357,6 +359,7 @@ namespace Poodle.Data
 			{
 				Id = 4,
 				Title = "Designing for Maintainability",
+				Content = "testTest",
 				CourseId = 2,
 				Rank = 1,
 				IsDeleted = false,
@@ -366,6 +369,7 @@ namespace Poodle.Data
 			{
 				Id = 5,
 				Title = "Designing for Serviceability",
+				Content = "testTest",
 				CourseId = 2,
 				Rank = 2,
 				IsDeleted = false,
@@ -375,6 +379,7 @@ namespace Poodle.Data
 			{
 				Id = 6,
 				Title = "Describing Advanced REST API Integration",
+				Content = "testTest",
 				CourseId = 2,
 				Rank = 3,
 				IsDeleted = false,
@@ -384,6 +389,7 @@ namespace Poodle.Data
 			{
 				Id = 7,
 				Title = "Implementing Cisco UCS Storage Area Network (SAN)",
+				Content = "testTest",
 				CourseId = 3,
 				Rank = 1,
 				IsDeleted = false,
@@ -393,6 +399,7 @@ namespace Poodle.Data
 			{
 				Id = 8,
 				Title = "Implementing External Authentication Providers",
+				Content = "testTest",
 				CourseId = 3,
 				Rank = 2,
 				IsDeleted = false,
@@ -402,6 +409,7 @@ namespace Poodle.Data
 			{
 				Id = 9,
 				Title = "Describing Cisco UCS Policies for Service Profiles",
+				Content = "testTest",
 				CourseId = 3,
 				Rank = 3,
 				IsDeleted = false,
@@ -411,6 +419,7 @@ namespace Poodle.Data
 			{
 				Id = 10,
 				Title = "Ethernet switching products",
+				Content = "testTest",
 				CourseId = 4,
 				Rank = 1,
 				IsDeleted = false,
@@ -420,6 +429,7 @@ namespace Poodle.Data
 			{
 				Id = 11,
 				Title = "Data center architecture",
+				Content = "testTest",
 				CourseId = 4,
 				Rank = 2,
 				IsDeleted = false,
@@ -429,6 +439,7 @@ namespace Poodle.Data
 			{
 				Id = 12,
 				Title = "Understanding of networking protocols, routing, and switching",
+				Content = "testTest",
 				CourseId = 4,
 				Rank = 3,
 				IsDeleted = false,
@@ -438,6 +449,7 @@ namespace Poodle.Data
 			{
 				Id = 13,
 				Title = "Data Center Trends",
+				Content = "testTest",
 				CourseId = 5,
 				Rank = 1,
 				IsDeleted = false,
@@ -447,6 +459,7 @@ namespace Poodle.Data
 			{
 				Id = 14,
 				Title = "Describing Nexus 9000 Series Hardware",
+				Content = "testTest",
 				CourseId = 5,
 				Rank = 2,
 				IsDeleted = false,
@@ -456,6 +469,7 @@ namespace Poodle.Data
 			{
 				Id = 15,
 				Title = "Nexus 9000 NX-OS Features",
+				Content = "testTest",
 				CourseId = 5,
 				Rank = 3,
 				IsDeleted = false,
@@ -465,6 +479,7 @@ namespace Poodle.Data
 			{
 				Id = 16,
 				Title = "Introducing CloudCenter Suite Action Orchestrator",
+				Content = "testTest",
 				CourseId = 6,
 				Rank = 1,
 				IsDeleted = false,
@@ -474,6 +489,7 @@ namespace Poodle.Data
 			{
 				Id = 17,
 				Title = "CloudCenter Suite Architecture",
+				Content = "testTest",
 				CourseId = 6,
 				Rank = 2,
 				IsDeleted = false
@@ -482,6 +498,7 @@ namespace Poodle.Data
 			{
 				Id = 18,
 				Title = "Defining Action Orchestrator User Management and Security Considerations",
+				Content = "testTest",
 				CourseId = 6,
 				Rank = 3,
 				IsDeleted = false,
@@ -491,6 +508,7 @@ namespace Poodle.Data
 			{
 				Id = 19,
 				Title = "Identifying Security Concepts",
+				Content = "testTest",
 				CourseId = 7,
 				Rank = 1,
 				IsDeleted = false,
@@ -500,6 +518,7 @@ namespace Poodle.Data
 			{
 				Id = 20,
 				Title = "Defining the Security Operations Center",
+				Content = "testTest",
 				CourseId = 7,
 				Rank = 2,
 				IsDeleted = false,
@@ -509,6 +528,7 @@ namespace Poodle.Data
 			{
 				Id = 21,
 				Title = "SOC Analyst tools",
+				Content = "testTest",
 				CourseId = 7,
 				Rank = 3,
 				IsDeleted = false,
@@ -518,6 +538,7 @@ namespace Poodle.Data
 			{
 				Id = 22,
 				Title = "Introducing DNA Architecture",
+				Content = "testTest",
 				CourseId = 8,
 				Rank = 1,
 				IsDeleted = false,
@@ -527,6 +548,7 @@ namespace Poodle.Data
 			{
 				Id = 23,
 				Title = "Deploy Wired Fabric Networks with DNA Center",
+				Content = "testTest",
 				CourseId = 8,
 				Rank = 2,
 				IsDeleted = false,
@@ -536,6 +558,7 @@ namespace Poodle.Data
 			{
 				Id = 24,
 				Title = "Deploy Brownfield and Fabric Wireless Network with DNA Center",
+				Content = "testTest",
 				CourseId = 8,
 				Rank = 3,
 				IsDeleted = false,
@@ -545,6 +568,7 @@ namespace Poodle.Data
 			{
 				Id = 25,
 				Title = "Introduction",
+				Content = "testTest",
 				CourseId = 9,
 				Rank = 1,
 				IsDeleted = false,
@@ -554,6 +578,7 @@ namespace Poodle.Data
 			{
 				Id = 26,
 				Title = "Overview of Azure compute services",
+				Content = "testTest",
 				CourseId = 9,
 				Rank = 2,
 				IsDeleted = false,
@@ -563,6 +588,7 @@ namespace Poodle.Data
 			{
 				Id = 27,
 				Title = "Decide when to use Azure Virtual Machines",
+				Content = "testTest",
 				CourseId = 9,
 				Rank = 3,
 				IsDeleted = false,
@@ -572,6 +598,7 @@ namespace Poodle.Data
 			{
 				Id = 28,
 				Title = "Introduction",
+				Content = "testTest",
 				CourseId = 10,
 				Rank = 1,
 				IsDeleted = false,
@@ -581,6 +608,7 @@ namespace Poodle.Data
 			{
 				Id = 29,
 				Title = "How does GitHub Actions automate development tasks?",
+				Content = "testTest",
 				CourseId = 10,
 				Rank = 2,
 				IsDeleted = false,
@@ -590,6 +618,7 @@ namespace Poodle.Data
 			{
 				Id = 30,
 				Title = "Identify the components of GitHub Actions",
+				Content = "testTest",
 				CourseId = 10,
 				Rank = 3,
 				IsDeleted = false,

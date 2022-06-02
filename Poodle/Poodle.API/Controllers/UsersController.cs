@@ -101,26 +101,26 @@ namespace Poodle.Services.Controllers
 
 		}
 
-		[HttpPost("")]
-		public async Task<IActionResult> Create([FromBody] UserCreateDto userCreateDto)
-        { 
-			//all newly created users are students by default
-			try
-			{				
-				var newUser = this.userMapper.ConvertToModel(userCreateDto);
-				var createdUser = await this.usersService.Create(newUser, userCreateDto.ImageUrl);
+		//[HttpPost("")]
+		//public async Task<IActionResult> Create([FromBody] UserCreateDto userCreateDto)
+  //      { 
+		//	//all newly created users are students by default
+		//	try
+		//	{				
+		//		var newUser = this.userMapper.ConvertToModel(userCreateDto);
+		//		var createdUser = await this.usersService.Create(newUser, userCreateDto.ImageUrl);
 
-				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
-			}
-			catch (EntityNotFoundException e)
-			{
-				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-			}
-			catch (DuplicateEntityException e)
-			{
-				return this.StatusCode(StatusCodes.Status406NotAcceptable, e.Message);
-			}
-		}
+		//		return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
+		//	}
+		//	catch (EntityNotFoundException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+		//	}
+		//	catch (DuplicateEntityException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status406NotAcceptable, e.Message);
+		//	}
+		//}
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto userUpdateDto, [FromHeader] string email, [FromHeader] string password)

@@ -17,26 +17,17 @@ namespace Poodle.Repositories
 		}
 
 		public IQueryable<Course> GetAll()
-		{
-			var result = this.GetCourses();
-			return result;
-		}
+			=> this.GetCourses();
 
-		public Course GetById(int id)
-		{
-			var result = this.GetCourses()
-				.Where(x => x.Id == id)
-				.FirstOrDefault();
-			return result;
-		}
+		public Course Get(int id)
+			=>	this.GetCourses()
+					.Where(x => x.Id == id)
+					.FirstOrDefault();
 
 		public Course GetByTitle(string title)
-		{
-			var result = this.GetCourses()
-				.Where(x => x.Title == title)
-				.FirstOrDefault();
-			return result;
-		}
+			=>	this.GetCourses()
+					.Where(x => x.Title == title)
+					.FirstOrDefault();
 		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;
@@ -66,7 +57,7 @@ namespace Poodle.Repositories
 
 		public async Task<Course> UpdateAsync(int id, Course course)
 		{
-			Course courseToUpdate = this.GetById(id);
+			Course courseToUpdate = this.Get(id);
 
 			courseToUpdate.Title = course.Title != null ? course.Title : courseToUpdate.Title;
 			courseToUpdate.Description = course.Description != null ? course.Description : courseToUpdate.Description;
@@ -122,11 +113,7 @@ namespace Poodle.Repositories
 		{
 			return this.context.Courses.Where(x => !x.IsDeleted)
 					.Include(course => course.Sections)
-						.ThenInclude(section => section.Title)
-					.Include(course => course.Users)
-						.ThenInclude(user => user.FirstName)
-						.Include(course => course.Users)
-						.ThenInclude(user => user.LastName);
+					.Include(course => course.Users);
 		}
 	}
 }

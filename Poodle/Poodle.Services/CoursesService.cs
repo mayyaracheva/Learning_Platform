@@ -9,31 +9,46 @@ using System.Threading.Tasks;
 using Poodle.Services.Constants;
 using Microsoft.EntityFrameworkCore;
 using Poodle.Services.Dtos;
+using Poodle.Services.Mappers;
+using Poodle.Services.Helpers;
 
 namespace Poodle.Services
 {
 	public class CoursesService : ICoursesService
 	{
 		private readonly ICoursesRepository coursesRepository;
+		private readonly CourseMapper courseMapper;
+		private readonly AuthorizationHelper authorizationHelper;
 
-		public CoursesService(ICoursesRepository repository)
+		public CoursesService(ICoursesRepository repository, 
+								CourseMapper courseMapper,
+								AuthorizationHelper authorizationHelper)
 		{
+			this.courseMapper = courseMapper;
 			this.coursesRepository = repository;
+			this.authorizationHelper = authorizationHelper;
 		}
 
-		public async Task<List<CourseResponseDTO>> GetAsync()
+		//TODO - check the user - student or teacher - diff access level
+		public async Task<List<Course>> GetAsync()
 		{
 			return await this.coursesRepository
 				.GetAll()
-				.Select(p => new CourseResponseDTO(p))
 				.ToListAsync();
 		}
-		public Course GetById(int id)
+
+		//TODO - check the user - student or teacher - diff access level
+		public CourseResponseDTO Get(int id)
 		{
-			return this.coursesRepository.GetById(id)
-				?? throw new EntityNotFoundException(string.Format(ConstantsContainer.COURSE_NOT_FOUND, id));
+			var course = this.coursesRepository.Get(id);
+			if (course == null)
+			{
+				throw new EntityNotFoundException(string.Format(ConstantsContainer.COURSE_NOT_FOUND, id));
+			}
+
+			return this.courseMapper.ConvertToDTO(course);
 		}
-		public async Task<IEnumerable<Course>> Get(CourseQueryParameters filterParameters)
+		public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			var courses = await this.coursesRepository
 				.Get(filterParameters)
@@ -41,21 +56,24 @@ namespace Poodle.Services
 
 			return courses;
 		}
-		public async Task<Course> CreateAsync(Course course)
+		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
 		{
+			if (!this.authorizationHelper.IsTeacher(user))
+			{
+				throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+			}
 			var duplicateCourse = this.coursesRepository
 				.GetAll()
-				.FirstOrDefault(x => x.Title == course.Title);
+				.FirstOrDefault(x => x.Title == dto.Title);
 
 			if (duplicateCourse != null)
 			{
 				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
 			}
+			var newCourse = this.courseMapper.Convert(dto);
+			await this.coursesRepository.CreateAsync(newCourse);
 
-			course.CreatedOn = DateTime.UtcNow;
-			Course createdCourse = await this.coursesRepository.CreateAsync(course);
-
-			return createdCourse;
+			return newCourse;
 		}
 		public async Task<Course> UpdateAsync(int id, Course course)
 		{

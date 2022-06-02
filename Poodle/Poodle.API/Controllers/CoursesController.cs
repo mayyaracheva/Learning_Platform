@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
-using Poodle.Services.Mappers;
 using Poodle.Services.Contracts;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
+using Poodle.Data.EntityModels;
+using Poodle.Services.Dtos;
 
 namespace Poodle.Services.Controllers
 {
@@ -14,23 +13,21 @@ namespace Poodle.Services.Controllers
 	[Route("api/[controller]")]
 	public class CoursesController :ControllerBase
 	{
-		private readonly CourseMapper userMapper;
 		private readonly ICoursesService coursesService;
-		private readonly IUsersService usersService;
 		private readonly ISectionService sectionService;
 		private readonly AuthenticationHelper authenticationHelper;
 
-		public CoursesController(CourseMapper courseMapper, ICoursesService coursesService, IUsersService usersService, ISectionService sectionService, AuthenticationHelper authenticationHelper)
+		public CoursesController(ICoursesService coursesService, 
+								 ISectionService sectionService, 
+								 AuthenticationHelper authenticationHelper)
 		{
-			this.userMapper = courseMapper;
 			this.coursesService = coursesService;
-			this.usersService = usersService;
             this.sectionService = sectionService;
             this.authenticationHelper = authenticationHelper;
         }
 
 		[HttpGet("")]
-		public async Task<IActionResult> GetAsync([FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
 		{
 			try
 			{
@@ -44,13 +41,72 @@ namespace Poodle.Services.Controllers
 			{
 				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
 			}
+		}
 
+		[HttpGet("{id}")]
+		public async Task<IActionResult> GetById(int id, [FromHeader] string email, [FromHeader] string password)
+		{
+			try
+			{
+				await this.authenticationHelper.TryGetUser(email, password);
+				var course = this.coursesService.Get(id);
+				return this.StatusCode(StatusCodes.Status200OK, course);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
 			catch (EntityNotFoundException e)
 			{
 				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
+		}
+
+		//authenticated users must be able to view posts /their or of other users/ with an option to filter and sort them
+		//[HttpGet("filter")]
+		//public IActionResult FilterPosts([FromQuery] PostQueryParameters filterParameters, [FromHeader] string email, [FromHeader] string password)
+		//{
+		//	try
+		//	{
+		//		this.authorizationhelper.TryGetUser(email, password);				
+		//		List<PostResponseDto> posts = this.postsService.Get(filterParameters).Select(p => new PostResponseDto(p)).ToList();
+		//		return this.StatusCode(StatusCodes.Status200OK, posts);
+		//	}
+		//	catch (UnauthorizedOperationException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+		//	}
+		//	catch (Exception e)
+		//	{
+
+		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+		//	}
+		//}
+
+		// authenticated users must be able to create a new post with at least a title and content.
+		[HttpPost("")]
+		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
+		{
+			try
+			{
+				var user = await this.authenticationHelper.TryGetUser(email, password); 
+				var newCourse = await this.coursesService.CreateAsync(course, user);
+
+				return this.StatusCode(StatusCodes.Status201Created, new { Title = newCourse.Title, Content = newCourse.Description });
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (DuplicateEntityException e)
+			{
+				return this.StatusCode(StatusCodes.Status409Conflict, e.Message);
+			}
 
 		}
+
+		
+
 
 		[HttpGet("{id}/sections")]
 		public async Task<IActionResult> GetSections(int id, [FromHeader] string email, [FromHeader] string password)
@@ -74,24 +130,22 @@ namespace Poodle.Services.Controllers
 
 		}
 
-		[HttpPost("{id}/sections")]
+		//[HttpPost("{id}/sections")]
 
-		public async Task<IActionResult> CreateSection(int id, [FromBody] string title, [FromBody] string content, [FromHeader] string email, [FromHeader] string password)
-		{
-			//only teacher set to be authorized to create sections
-			//authorization checked in services			
-			try
-			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.Create(id, title, content, email, password);
-				return this.StatusCode(StatusCodes.Status201Created);
-			}
-			catch (UnauthorizedOperationException e)
-			{
-				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-			}
-
-		}
-
+		//public async Task<IActionResult> CreateSection(int id, [FromBody] string title, [FromBody] string content, [FromHeader] string email, [FromHeader] string password)
+		//{
+		//	//only teacher set to be authorized to create sections
+		//	//authorization checked in services			
+		//	try
+		//	{
+		//		await this.authenticationHelper.TryGetUser(email, password);
+		//		var sectionId = await this.sectionService.Create(id, title, content, email, password);
+		//		return this.StatusCode(StatusCodes.Status201Created);
+		//	}
+		//	catch (UnauthorizedOperationException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+		//	}
+		//}
 	}
 }
