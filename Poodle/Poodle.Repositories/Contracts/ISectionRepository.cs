@@ -11,7 +11,7 @@ namespace Poodle.Repositories.Contracts
     {
         IQueryable<Section> GetAll();
         IQueryable<Section> GetByCourseId(int id);
-        Section Create(Section sectionModel);
+        Task<int> Create(Section sectionModel);
         void EnrollSingleStudent(int studentId, int courseId);
         void EnrollMultipleStudents(List<int> studentIds, int courseId);
 

@@ -5,7 +5,10 @@ using Poodle.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Poodle.Services.Dtos;
+using Poodle.Services.Mappers;
 
 namespace Poodle.Services.Services
 {
@@ -13,20 +16,31 @@ namespace Poodle.Services.Services
     {
         public static string defaultImageUrl = "/Images/DefaultImage.jpg";
         private readonly IUsersRepository repository;
+        private readonly UserMapper userMapper;
 
-        public UsersService(IUsersRepository repository)
+        public UsersService(IUsersRepository repository, UserMapper userMapper)
         {
             this.repository = repository;
+            this.userMapper = userMapper;
         }
 
-        public List<User> GetAll()
+        public async Task<List<User>> GetAll()
         {
-            return this.repository.GetAll().ToList();
-        }
-
-        public User GetById(int id)
+            return await this.repository.GetAll()
+             .Include(u => u.Role)
+             .Include(u => u.Image)
+             .Include(u => u.Courses)
+             .ToListAsync();
+        }       
+               
+         
+        public async Task<User> GetById(int id)
         {
-            var user = this.repository.GetById(id).FirstOrDefault();
+            var user = await this.repository.GetById(id)
+                .Include(u => u.Role)
+                .Include(u => u.Image)
+                .Include(u => u.Courses)
+                .FirstOrDefaultAsync();
 
             if (user != null)
             {
@@ -38,31 +52,38 @@ namespace Poodle.Services.Services
             }
         }
 
-        public List<User> GetAll(string requesterEmail, string requesterPassword)
+        public async Task<List<UserResponseDto>> GetAll(string requesterEmail, string requesterPassword)
         {
-            Role requesterRole = CheckAuthorization(requesterEmail, requesterPassword);
+            Role requesterRole = await CheckAuthorization (requesterEmail, requesterPassword);
 
             if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }
 
-            return this.repository.GetAll().ToList();
+            var users = await this.repository.GetAll()
+                .Include(u => u.Role)
+                .ToListAsync();
+            var userResponseDtos = users.Select(u => userMapper.ConvertToDto(u)).ToList();
+            return userResponseDtos;
         }
 
-        public User GetById(int id, string requesterEmail, string requesterPassword)
+        public async Task<UserResponseDto> GetById(int id, string requesterEmail, string requesterPassword)
         {
-            Role requesterRole = CheckAuthorization(requesterEmail, requesterPassword);
+            Role requesterRole = await CheckAuthorization (requesterEmail, requesterPassword);
 
             if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }
-            var user = this.repository.GetById(id).FirstOrDefault();
+
+            var user = await this.repository.GetById(id)
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync();
 
             if (user != null)
             {
-                return user;
+                return this.userMapper.ConvertToDto(user);
             }
             else
             {
@@ -71,10 +92,10 @@ namespace Poodle.Services.Services
 
         }
 
-        public User GetByEmail(string email)
+        public async Task<User> GetByEmail(string email)
         {
 
-            var user = this.repository.GetByEmail(email).FirstOrDefault();
+            var user = await this.repository.GetByEmail(email).FirstOrDefaultAsync();
 
             if (user != null)
             {
@@ -98,11 +119,11 @@ namespace Poodle.Services.Services
         //    return role.Id;
         //}
 
-        public List<User> Get(UserQueryParameters filterParameters)
+        public async Task<List<User>> Get(UserQueryParameters filterParameters)
         {
             if (filterParameters.HasQueryParameters)
             {
-                return this.repository.GetAll().ToList();
+                return await this.repository.GetAll().ToListAsync();
             }
             else
             {
@@ -112,9 +133,9 @@ namespace Poodle.Services.Services
 
         }
 
-        public User Create(User user, string imageUrl)
+        public async Task<User> Create(User user, string imageUrl)
         {
-            var userExists = this.repository.GetAll().Any(u => u.Email == user.Email);
+            var userExists = await this.repository.GetAll().AnyAsync(u => u.Email == user.Email);
 
             if (userExists)
             {
@@ -126,14 +147,14 @@ namespace Poodle.Services.Services
                 imageUrl = defaultImageUrl;
             }
 
-            return this.repository.Create(user, imageUrl);
+            return await this.repository.Create(user, imageUrl);
 
         }
 
 
-        public User Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword)
+        public async Task<User> Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword)
         {
-            var userToBeUpdated = this.GetById(id);
+            var userToBeUpdated = await this.GetById(id);
 
             if (userToBeUpdated.Email != requesterEmail | userToBeUpdated.Password != requesterPassword)
             {
@@ -149,23 +170,23 @@ namespace Poodle.Services.Services
             
         }
 
-        public void Delete(int id, string requesterEmail, string requesterPassword)
+        public async Task<int> Delete(int id, string requesterEmail, string requesterPassword)
         {
-            var userToDelete = this.GetById(id);
+            var userToDelete = await this.GetById(id);
 
-            Role requesterRole = CheckAuthorization(requesterEmail, requesterPassword);
+            Role requesterRole = await CheckAuthorization(requesterEmail, requesterPassword);
 
             if (!requesterRole.Name.Equals("teacher", StringComparison.CurrentCultureIgnoreCase))
             {
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }
-            this.repository.Delete(userToDelete);
+            return await this.repository.Delete(userToDelete);
         }
 
-        public Role CheckAuthorization(string requesterEmail, string requesterPassword)
+        public async Task<Role> CheckAuthorization(string requesterEmail, string requesterPassword)
         {
 
-            var requester = this.repository.GetAll().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefault();           
+            var requester = await this.repository.GetAll().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefaultAsync();           
 
             return requester.Role;
         }

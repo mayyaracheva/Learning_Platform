@@ -20,19 +20,16 @@ namespace Poodle.Repositories
         }
 
         public IQueryable<Section> GetAll()
-        {
-            return context.Sections
-                .Include(s => s.Course);
-                
-        }
-        public IQueryable<Section> GetByCourseId(int id)
-        {
-            return this.GetAll().Where(s => s.CourseId == id);
-        }
-
-        public Section Create(Section sectionModel)
-        {
-            throw new NotImplementedException();
+            => context.Sections;
+                        
+        public IQueryable<Section> GetByCourseId(int id)        
+            => this.GetAll().Where(s => s.CourseId == id);
+        
+        public async Task<int> Create(Section sectionModel)
+        {     
+            var createdSection = await this.context.Sections.AddAsync(sectionModel);
+            await this.context.SaveChangesAsync();
+            return createdSection.Entity.Id;
         }
 
         public void EnrollMultipleStudents(List<int> studentIds, int courseId)

@@ -17,10 +17,11 @@ namespace Poodle.Services.Helpers
             this.usersService = usersService;
         }
 
-        public User TryGetUser(string email, string password)
+        public async Task<User> TryGetUser(string email, string password)
         {
-
-            User user = this.usersService.GetAll().Where(u => u.Email == email & u.Password == password).FirstOrDefault();
+            var users = await this.usersService.GetAll();
+            User user = users.Where(u => u.Email == email & u.Password == password).FirstOrDefault();
+           
             //deleted users are excluded in GetAll method so such user will be returned as null
 
             if (user == null)

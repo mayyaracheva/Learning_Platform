@@ -1,13 +1,11 @@
-﻿using Poodle.Services.Dtos;
-using Poodle.Data.EntityModels;
-
+﻿using Poodle.Data.EntityModels;
+using Poodle.Services.Dtos;
 
 
 namespace Poodle.Services.Mappers
 {
     public class UserMapper
     {
-     
         public UserResponseDto ConvertToDto(User userModel)
         {
             UserResponseDto userToPresent = new UserResponseDto();
@@ -24,11 +22,10 @@ namespace Poodle.Services.Mappers
             newUser.FirstName = userModel.FirstName;
             newUser.LastName = userModel.LastName;
             newUser.Email = userModel.Email;
-            newUser.Password = userModel.Password;           
+            newUser.Password = userModel.Password;
             newUser.RoleId = 2;
             return newUser;
         }
-
 
     }
 }

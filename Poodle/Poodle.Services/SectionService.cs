@@ -5,6 +5,9 @@ using Poodle.Services.Contracts;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Poodle.Services.Dtos;
 
 namespace Poodle.Services
 {
@@ -12,18 +15,36 @@ namespace Poodle.Services
     {
         private readonly ISectionRepository sectionRepository;
         private readonly IUsersService usersService;
+        
 
         public SectionService(ISectionRepository sectionRepository, IUsersService usersService)
         {
             this.sectionRepository = sectionRepository;
-            this.usersService = usersService;
+            this.usersService = usersService;            
         }
 
+        public async Task<List<Section>> GetAll()
+            => await this.sectionRepository.GetAll()
+            .Include(s => s.Course)
+            .ToListAsync();
 
-        public List<Section> GetByCourseId(int id, string requesterEmail, string requesterPassword)
+        public async Task<List<Section>> GetByCourseId(int id)
+           => await this.sectionRepository.GetAll()
+           .Include(s => s.Course)
+           .ToListAsync();
+
+        //sorted by Rank asc
+        //the course page displays only the title which incl link to the section page
+        //if section currently restricted, displays no link to page but restricted message instead
+        //restricted not excl as we need to replace their title with restricted message
+
+        public async Task<List<SectionResponseDto>> GetByCourseId(int id, string requesterEmail, string requesterPassword)
         {
-            var sections =  this.sectionRepository.GetByCourseId(id).OrderBy(s => s.Rank).ToList();
-            var requesterRole = this.usersService.CheckAuthorization(requesterEmail, requesterPassword);
+            var sections =  await this.sectionRepository.GetByCourseId(id)
+                .Include(s => s.Course)
+                .ToListAsync();
+
+            var requesterRole = await this.usersService.CheckAuthorization(requesterEmail, requesterPassword);
 
             if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
             {
@@ -32,47 +53,85 @@ namespace Poodle.Services
 
             if (sections.Count > 0)
             {
-                return sections;
+                List<SectionResponseDto> nonRestrictedSections = sections
+                .Where(s => s.IsRestricted == false)
+                .Select(s => new SectionResponseDto { Title = s.Title, Content = s.Content })
+                .ToList();
+
+                List<SectionResponseDto> restrictedSections = sections
+                    .Where(s => s.IsRestricted == true)
+                    .Select(s => new SectionResponseDto { Title = s.Title, Content = "Restricted section" })
+                    .ToList();
+
+                restrictedSections.AddRange(nonRestrictedSections);
+                var sortedSections = restrictedSections.OrderBy(s => s.Rank);
+                return sortedSections.ToList();
             }
             else
             {
                 throw new EntityNotFoundException("The course contains no sections");
             }
-
             
-            //sorted by Rank asc
-            //the course page displays only the title which incl link to the section page
-            //if section currently restricted, displays no link to page but restricted message instead
-            //restricted not excl as we need to replace their title with restricted message
+            
         }
 
-        public Section Create(Section sectionModel)
+        //set title (unique, check and throw dupl exc) and content, check for null OK
+        //set rank to be == last section rank in the course + 1 OK
+        //set isrestricted = false;OK
+
+        //option to change the rank to any int not used by current section in the course
+        //restriction option - by date, by user (only enrolled in current course), no restriction by default
+        //configure as new page(by default) or embedded
+
+        public async Task<int> Create(int id, string title, string content, string requesterEmail, string requesterPassword)
         {
-            //set title (unique, check and throw dupl exc) and content
-            //set rank to be == last section rank in the course + 1
-            //set isrestricted = false;
+            Section sectionDto = new Section();
+            var allSections = await this.GetAll();
 
-            //option to change the rank to any int not used by current section in the course
-            //restriction option - by date, by user (only enrolled in current course), no restriction by default
-            //configure as new page(by default) or embedded
-            
-            throw new NotImplementedException();
+            if (allSections.Any(s => s.Title == title))
+            {
+                throw new DuplicateEntityException($"Section with title {title} already exists");
+            }
+            if (sectionDto.Title is null)
+            {
+                throw new NullReferenceExceptions("Title can not be null");
+            }
+            sectionDto.Title = title;
+
+            if (sectionDto.Content is null)
+            {
+                throw new NullReferenceExceptions("Content can not be null");
+            }
+
+            sectionDto.Content = content;
+            sectionDto.CourseId = id;
+            sectionDto.IsRestricted = false;            
+            sectionDto.CreatedOn = DateTime.UtcNow;
+            sectionDto.ModifiedOn = DateTime.UtcNow;            
+
+            var sectionsInCourse = await this.GetByCourseId(id);
+            var highestRank = sectionsInCourse.Select(s => s.Rank).Max();
+            sectionDto.Rank = highestRank + 1;            
+
+            return await this.sectionRepository.Create(sectionDto);
         }
 
+        //check: option only available for private courses
+        //check: student must not be enrolled yet
+        //check: option available to teachers only
         public void EnrollSingleStudent(int studentId, int courseId)
         {
-            //check: option only available for private courses
-            //check: student must not be enrolled yet
-            //check: option available to teachers only
-            //
+            
+            
             throw new NotImplementedException();
         }
 
+        //check: option only available for private courses
+        //check: students must not be enrolled yet
+        //check: option available to teachers only
         public void EnrollMultipleStudents(List<int> studentIds, int courseId)
         {
-            //check: option only available for private courses
-            //check: students must not be enrolled yet
-            //check: option available to teachers only
+           
             
             throw new NotImplementedException();
         }

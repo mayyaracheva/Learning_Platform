@@ -18,26 +18,25 @@ namespace Poodle.Services.Controllers
     public class UsersController : ControllerBase
     {
         
-        private readonly UserMapper userMapper;
+        
 		private readonly AuthenticationHelper authenticationHelper;
 		private readonly IUsersService usersService;
 
-        public UsersController(UserMapper userMapper, AuthenticationHelper authenticationHelper, IUsersService usersService)
-        {            
-            this.userMapper = userMapper;
+        public UsersController(AuthenticationHelper authenticationHelper, IUsersService usersService)
+        {  
             this.usersService = usersService;
 			this.authenticationHelper = authenticationHelper;
         }
 
 		[HttpGet("")]
-		public IActionResult Get([FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to get all users
 			//authorization checked in services
 			try
 			{
-				this.authenticationHelper.TryGetUser(email, password);
-				List<UserResponseDto> users = this.usersService.GetAll(email, password).Select(u =>  userMapper.ConvertToDto(u)).ToList();
+				await this.authenticationHelper.TryGetUser(email, password);
+				var users = await this.usersService.GetAll(email, password);				
 				return this.StatusCode(StatusCodes.Status200OK, users);
 			}
 			catch (UnauthorizedOperationException e)
@@ -52,17 +51,16 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpGet("{id}")]
-		public IActionResult GetById(int id, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> GetById(int id, [FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to get all user by id
 			//authorization checked in services
 			try
 			{
-				this.authenticationHelper.TryGetUser(email, password);
-				var user = this.usersService.GetById(id, email, password);
-				var userToDisplay = this.userMapper.ConvertToDto(user);
+				await this.authenticationHelper.TryGetUser(email, password);
+				var user = await this.usersService.GetById(id, email, password);				
 
-				return this.StatusCode(StatusCodes.Status200OK, userToDisplay);
+				return this.StatusCode(StatusCodes.Status200OK, user);
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -76,7 +74,7 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpDelete("{id}")]
-		public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> Delete(int id, [FromHeader] string email, [FromHeader] string password)
 		{       
 			//only teacher set to be authorized to delete users
 			//authorization checked in services	
@@ -88,9 +86,9 @@ namespace Poodle.Services.Controllers
 
             try
             {
-				this.authenticationHelper.TryGetUser(email, password);
-				this.usersService.Delete(id, email, password);
-				return this.StatusCode(StatusCodes.Status200OK, "User deleted");
+				await this.authenticationHelper.TryGetUser(email, password);
+				await this.usersService.Delete(id, email, password);
+				return this.StatusCode(StatusCodes.Status200OK, $"User with id {id} deleted");
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -104,13 +102,13 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpPost("")]
-		public IActionResult Create([FromBody] UserCreateDto userCreateDto)
+		public async Task<IActionResult> Create([FromBody] UserCreateDto userCreateDto)
         { 
 			//all newly created users are students by default
 			try
 			{				
 				var newUser = this.userMapper.ConvertToModel(userCreateDto);
-				var createdUser = this.usersService.Create(newUser, userCreateDto.ImageUrl);
+				var createdUser = await this.usersService.Create(newUser, userCreateDto.ImageUrl);
 
 				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
 			}
@@ -125,14 +123,14 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public IActionResult Update(int id, [FromBody] UserUpdateDto userUpdateDto, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> Update(int id, [FromBody] UserUpdateDto userUpdateDto, [FromHeader] string email, [FromHeader] string password)
         {
 			//authentication check in Api, if user trying to make the update exists
 			//authorization check (if user trying to make the update is same one, in services)
             try
             {
-				this.authenticationHelper.TryGetUser(email, password);               
-				this.usersService.Update(id, userUpdateDto.FirstName, userUpdateDto.LastName, userUpdateDto.Password, userUpdateDto.Email, userUpdateDto.ImageUrl, email, password);
+				await this.authenticationHelper.TryGetUser(email, password);               
+				await this.usersService.Update(id, userUpdateDto.FirstName, userUpdateDto.LastName, userUpdateDto.Password, userUpdateDto.Email, userUpdateDto.ImageUrl, email, password);
 				return this.StatusCode(StatusCodes.Status200OK, "User has been updated");
 			}			
 			catch (UnauthorizedOperationException e)
