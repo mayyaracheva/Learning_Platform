@@ -126,27 +126,6 @@ namespace Poodle.Services.Controllers
 			}
 		}
 
-		//// authenticated and not blocked user must be able to delete only personal posts.
-		//[HttpDelete("{id}")]
-		//public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
-		//{
-		//	try
-		//	{
-		//		var user = this.authorizationhelper.CheckIfAdmin(email, password);
-		//		this.postsService.Delete(id, user.Id);
-		//		return this.StatusCode(StatusCodes.Status200OK, "Post was removed");
-		//	}
-		//	catch (UnauthorizedOperationException e)
-		//	{
-		//		return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-		//	}
-		//	catch (EntityNotFoundException e)
-		//	{
-		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-		//	}
-		//}
-
-
 		[HttpGet("{id}/sections")]
 		public async Task<IActionResult> GetSections(int id, [FromHeader] string email, [FromHeader] string password)
 		{
@@ -169,22 +148,22 @@ namespace Poodle.Services.Controllers
 
 		}
 
-		//[HttpPost("{id}/sections")]
+		[HttpPost("{id}/sections")]
 
-		//public async Task<IActionResult> CreateSection(int id, [FromBody] string title, [FromBody] string content, [FromHeader] string email, [FromHeader] string password)
-		//{
-		//	//only teacher set to be authorized to create sections
-		//	//authorization checked in services			
-		//	try
-		//	{
-		//		await this.authenticationHelper.TryGetUser(email, password);
-		//		var sectionId = await this.sectionService.Create(id, title, content, email, password);
-		//		return this.StatusCode(StatusCodes.Status201Created);
-		//	}
-		//	catch (UnauthorizedOperationException e)
-		//	{
-		//		return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
-		//	}
-		//}
+		public async Task<IActionResult> CreateSection(int id, [FromBody] string title, [FromBody] string content, [FromHeader] string email, [FromHeader] string password)
+		{
+			//only teacher set to be authorized to create sections
+			//authorization checked in services			
+			try
+			{
+				await this.authenticationHelper.TryGetUser(email, password);
+				var sectionId = await this.sectionService.Create(id, title, content, email, password);
+				return this.StatusCode(StatusCodes.Status201Created);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+		}
 	}
 }

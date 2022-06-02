@@ -45,7 +45,7 @@ namespace Poodle.Services
 
 			return this.courseMapper.ConvertToDTO(course);
 		}
-		//TODO - have to decide if we implement this 
+		//TODO - have to decide if we implement this functionality
 		/*public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			var courses = await this.coursesRepository
