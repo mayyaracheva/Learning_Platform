@@ -85,14 +85,14 @@ namespace Poodle.Services.Controllers
 
 		// authenticated users must be able to create a new post with at least a title and content.
 		[HttpPost("")]
-		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
+		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
 		{
 			try
 			{
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
 				var newCourse = await this.coursesService.CreateAsync(course, user);
 
-				return this.StatusCode(StatusCodes.Status201Created, new { Title = newCourse.Title, Content = newCourse.Description });
+				return this.StatusCode(StatusCodes.Status201Created, new { Title = newCourse.Title, Content = newCourse.Description, Access = newCourse.Category.Name });
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -105,7 +105,46 @@ namespace Poodle.Services.Controllers
 
 		}
 
-		
+		[HttpPut("{id}")]
+		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
+		{
+			try
+			{
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+
+				var courseToUpdate = await this.coursesService.UpdateAsync(id, user, dto);
+				
+				return this.StatusCode(StatusCodes.Status200OK, new { Title = courseToUpdate.Title, Content = courseToUpdate.Description, Access = courseToUpdate.Category.Name });
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+		}
+
+		//// authenticated and not blocked user must be able to delete only personal posts.
+		//[HttpDelete("{id}")]
+		//public IActionResult Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		//{
+		//	try
+		//	{
+		//		var user = this.authorizationhelper.CheckIfAdmin(email, password);
+		//		this.postsService.Delete(id, user.Id);
+		//		return this.StatusCode(StatusCodes.Status200OK, "Post was removed");
+		//	}
+		//	catch (UnauthorizedOperationException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+		//	}
+		//	catch (EntityNotFoundException e)
+		//	{
+		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+		//	}
+		//}
 
 
 		[HttpGet("{id}/sections")]

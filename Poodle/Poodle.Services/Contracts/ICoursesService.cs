@@ -9,9 +9,10 @@ namespace Poodle.Services.Contracts
 	{
 		Task<List<Course>> GetAsync();
 		CourseResponseDTO Get(int id);
-		Task<List<Course>> Get(CourseQueryParameters filterParameters);
-		Task<Course> CreateAsync(CourseCreateDTO course, User user);
-		Task<Course> UpdateAsync(int id, Course course);
+
+		//Task<List<Course>> Get(CourseQueryParameters filterParameters);
+		Task<Course> CreateAsync(CourseDTO course, User user);
+		Task<Course> UpdateAsync(int id, User user, CourseDTO dto);
 		Task<Course> DeleteAsync(int id);
 
 	}

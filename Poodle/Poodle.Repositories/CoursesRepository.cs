@@ -20,9 +20,10 @@ namespace Poodle.Repositories
 			=> this.GetCourses();
 
 		public Course Get(int id)
-			=>	this.GetCourses()
-					.Where(x => x.Id == id)
-					.FirstOrDefault();
+			=> this.GetCourses()
+			.Where(x => x.Id == id)
+			.FirstOrDefault();
+					
 
 		public Course GetByTitle(string title)
 			=>	this.GetCourses()
@@ -55,10 +56,8 @@ namespace Poodle.Repositories
 			return createdCourse.Entity;
 		}
 
-		public async Task<Course> UpdateAsync(int id, Course course)
+		public async Task<Course> UpdateAsync(Course courseToUpdate, Course course)
 		{
-			Course courseToUpdate = this.Get(id);
-
 			courseToUpdate.Title = course.Title != null ? course.Title : courseToUpdate.Title;
 			courseToUpdate.Description = course.Description != null ? course.Description : courseToUpdate.Description;
 			courseToUpdate.Category.Name = course.Category.Name != null ? course.Category.Name : courseToUpdate.Category.Name;

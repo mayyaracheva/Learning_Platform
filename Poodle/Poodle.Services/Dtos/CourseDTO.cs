@@ -1,7 +1,7 @@
 ﻿
 namespace Poodle.Services.Dtos
 {
-	public class CourseCreateDTO
+	public class CourseDTO
 	{
 		public string Title { get; set; }
 		public string Description { get; set; }

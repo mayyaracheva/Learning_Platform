@@ -6,7 +6,7 @@ namespace Poodle.Services.Mappers
 {
 	public class CourseMapper
 	{
-		public Course Convert(CourseCreateDTO dto)
+		public Course Convert(CourseDTO dto)
 		{
 			var course = new Course();
 			course.Title = dto.Title;

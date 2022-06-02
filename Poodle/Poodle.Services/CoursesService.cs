@@ -40,44 +40,50 @@ namespace Poodle.Services
 		//TODO - check the user - student or teacher - diff access level
 		public CourseResponseDTO Get(int id)
 		{
-			var course = this.coursesRepository.Get(id);
-			if (course == null)
-			{
-				throw new EntityNotFoundException(string.Format(ConstantsContainer.COURSE_NOT_FOUND, id));
-			}
+			var course = this.coursesRepository.Get(id)
+				??throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 
 			return this.courseMapper.ConvertToDTO(course);
 		}
-		public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
+		//TODO - have to decide if we implement this 
+		/*public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			var courses = await this.coursesRepository
 				.Get(filterParameters)
 				.ToListAsync();
 
 			return courses;
-		}
-		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
+		}*/
+		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
 			if (!this.authorizationHelper.IsTeacher(user))
 			{
 				throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
 			}
-			var duplicateCourse = this.coursesRepository
-				.GetAll()
-				.FirstOrDefault(x => x.Title == dto.Title);
 
-			if (duplicateCourse != null)
-			{
-				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
-			}
 			var newCourse = this.courseMapper.Convert(dto);
+			var duplicateCourse = this.coursesRepository
+				.GetByTitle(newCourse.Title)
+					?? throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
+
+			
 			await this.coursesRepository.CreateAsync(newCourse);
 
 			return newCourse;
 		}
-		public async Task<Course> UpdateAsync(int id, Course course)
+		public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
 		{
-			return await this.coursesRepository.UpdateAsync(id, course);
+			if (!this.authorizationHelper.IsTeacher(user))
+			{
+				throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+			}
+
+			var courseToUpdate = this.coursesRepository.Get(id)
+				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+			
+			var course = this.courseMapper.Convert(dto);
+
+			return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
 		}
 
 		public async Task<Course> DeleteAsync(int id)
