@@ -7,8 +7,8 @@ namespace Poodle.Services.Contracts
 {
 	public interface ICoursesService
 	{
-		Task<List<Course>> GetAsync();
-		CourseResponseDTO Get(int id);
+		Task<dynamic> GetAsync(User user);
+		CourseResponseDTO Get(int id, User user);
 
 		//Task<List<Course>> Get(CourseQueryParameters filterParameters);
 		Task<Course> CreateAsync(CourseDTO course, User user);

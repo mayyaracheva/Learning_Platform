@@ -69,11 +69,9 @@ namespace Poodle.Repositories
 			return courseToUpdate;
 		}
 
-		public async Task<Course> DeleteAsync(int id)
+		public async Task<Course> DeleteAsync(int id, Course courseToDelete)
 		{
-			var courseToDelete = await this.context.Courses
-						   .FirstOrDefaultAsync(p => p.Id == id);
-			courseToDelete.IsDeleted = true;
+			this.context.Courses.Remove(courseToDelete);
 
 			await this.context.SaveChangesAsync();
 

@@ -12,6 +12,6 @@ namespace Poodle.Repositories.Contracts
 		IQueryable<Course> Get(CourseQueryParameters filterParameters);
 		Task<Course> CreateAsync(Course course);
 		Task<Course> UpdateAsync(Course courseToUpdate, Course course);
-		Task<Course> DeleteAsync(int id);
+		Task<Course> DeleteAsync(int id, Course course);
 	}
 }

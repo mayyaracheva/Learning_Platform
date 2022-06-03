@@ -31,9 +31,8 @@ namespace Poodle.Services.Controllers
 		{
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var courses = await this.coursesService
-					.GetAsync();
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+				var courses = await this.coursesService.GetAsync(user);
 
 				return this.StatusCode(StatusCodes.Status200OK, courses);
 			}		
@@ -48,8 +47,8 @@ namespace Poodle.Services.Controllers
 		{
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var course = this.coursesService.Get(id);
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+				var course = this.coursesService.Get(id, user);
 				return this.StatusCode(StatusCodes.Status200OK, course);
 			}
 			catch (UnauthorizedOperationException e)

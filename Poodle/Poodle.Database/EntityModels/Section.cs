@@ -1,6 +1,4 @@
 ﻿using Poodle.Data.EntityModels.Contracts;
-using System;
-using System.Collections.Generic;
 
 namespace Poodle.Data.EntityModels
 {

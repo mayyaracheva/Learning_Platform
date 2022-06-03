@@ -17,31 +17,44 @@ namespace Poodle.Services
 	public class CoursesService : ICoursesService
 	{
 		private readonly ICoursesRepository coursesRepository;
+		private readonly IHomeService homeService;
 		private readonly CourseMapper courseMapper;
 
-		public CoursesService(ICoursesRepository repository, 
-								CourseMapper courseMapper)
+		public CoursesService(ICoursesRepository repository,
+								CourseMapper courseMapper,
+								IHomeService homeService)
 		{
 			this.courseMapper = courseMapper;
 			this.coursesRepository = repository;
+			this.homeService = homeService;
 		}
 
-		//TODO - check the user - student or teacher - diff access level
-		public async Task<List<Course>> GetAsync()
+		//user type check - diff access level
+		public async Task<dynamic> GetAsync(User user)
 		{
-			return await this.coursesRepository
-				.GetAll()
-				.ToListAsync();
+			if (AuthorizationHelper.IsStudent(user))
+			{
+				return await this.homeService.GetPublicCoursrsesAsync();
+			}
+			return await this.coursesRepository.GetAll().ToListAsync();
 		}
 
-		//TODO - check the user - student or teacher - diff access level
-		public CourseResponseDTO Get(int id)
+
+		//user type check - diff access level
+		public CourseResponseDTO Get(int id, User user)
 		{
 			var course = this.coursesRepository.Get(id)
-				??throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+
+			if (AuthorizationHelper.IsStudent(user) 
+				&& (course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course)))
+			{
+				throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+			}
 
 			return this.courseMapper.ConvertToDTO(course);
 		}
+
 		//TODO - have to decide if we implement this functionality
 		/*public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{
@@ -68,7 +81,7 @@ namespace Poodle.Services
 
 			var courseToUpdate = this.coursesRepository.Get(id)
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
-			
+
 			var course = this.courseMapper.Convert(dto);
 
 			return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
@@ -77,17 +90,19 @@ namespace Poodle.Services
 		public async Task<Course> DeleteAsync(int id, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
-			CheckIfCourseExists(id);
+			var courseToDelete = CheckIfCourseExists(id);
 
-			return await this.coursesRepository.DeleteAsync(id);
+			return await this.coursesRepository.DeleteAsync(id, courseToDelete);
 		}
 
-		private void CheckIfCourseExists(int id)
+		private Course CheckIfCourseExists(int id)
 		{
-			if (this.coursesRepository.Get(id) == null)
+			var course = this.coursesRepository.Get(id);
+			if (course == null)
 			{
 				throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 			}
+			return course;
 		}
 
 		private void DuplicateCourseCheck(CourseDTO dto)
