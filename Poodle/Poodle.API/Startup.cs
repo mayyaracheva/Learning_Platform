@@ -43,6 +43,7 @@ namespace Poodle.Services
 			//helpers 
 			services.AddTransient<UserMapper>();
 			services.AddTransient<CourseMapper>();
+			services.AddTransient<SectionMapper>();
 			services.AddTransient<AuthenticationHelper>();
 			services.AddTransient<AuthorizationHelper>();
 
@@ -50,6 +51,7 @@ namespace Poodle.Services
 			services.AddScoped<ICoursesRepository, CoursesRepository>();
 			services.AddScoped<IUsersRepository, UsersRepository>();
 			services.AddScoped<ISectionRepository, SectionRepository>();
+			
 
 			//services
 			services.AddScoped<IUsersService, UsersService>();

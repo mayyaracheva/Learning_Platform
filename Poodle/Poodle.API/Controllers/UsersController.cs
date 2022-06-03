@@ -2,12 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
-using Poodle.Services.Mappers;
 using Poodle.Services.Contracts;
-using Poodle.Services;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
 

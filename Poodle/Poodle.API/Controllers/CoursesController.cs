@@ -4,7 +4,6 @@ using Poodle.Services.Exceptions;
 using Poodle.Services.Contracts;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
-using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
 
 namespace Poodle.Services.Controllers

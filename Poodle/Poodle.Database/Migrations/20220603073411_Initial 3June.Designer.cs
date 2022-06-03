@@ -10,8 +10,8 @@ using Poodle.Data;
 namespace Poodle.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220601081719_Initial 1June")]
-    partial class Initial1June
+    [Migration("20220603073411_Initial 3June")]
+    partial class Initial3June
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -332,8 +332,14 @@ namespace Poodle.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<bool>("IsRestricted")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("ModifiedOn")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Rank")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .HasColumnType("nvarchar(max)");
@@ -348,271 +354,361 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 1,
+                            Content = "testTest",
                             CourseId = 1,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Exploring the Functions of Networking"
                         },
                         new
                         {
                             Id = 2,
+                            Content = "testTest",
                             CourseId = 1,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Introducing the Host-to-Host Communications Model"
                         },
                         new
                         {
                             Id = 3,
+                            Content = "testTest",
                             CourseId = 1,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Operating Cisco IOS Software"
                         },
                         new
                         {
                             Id = 4,
+                            Content = "testTest",
                             CourseId = 2,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Designing for Maintainability"
                         },
                         new
                         {
                             Id = 5,
+                            Content = "testTest",
                             CourseId = 2,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Designing for Serviceability"
                         },
                         new
                         {
                             Id = 6,
+                            Content = "testTest",
                             CourseId = 2,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Describing Advanced REST API Integration"
                         },
                         new
                         {
                             Id = 7,
+                            Content = "testTest",
                             CourseId = 3,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Implementing Cisco UCS Storage Area Network (SAN)"
                         },
                         new
                         {
                             Id = 8,
+                            Content = "testTest",
                             CourseId = 3,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Implementing External Authentication Providers"
                         },
                         new
                         {
                             Id = 9,
+                            Content = "testTest",
                             CourseId = 3,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Describing Cisco UCS Policies for Service Profiles"
                         },
                         new
                         {
                             Id = 10,
+                            Content = "testTest",
                             CourseId = 4,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Ethernet switching products"
                         },
                         new
                         {
                             Id = 11,
+                            Content = "testTest",
                             CourseId = 4,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Data center architecture"
                         },
                         new
                         {
                             Id = 12,
+                            Content = "testTest",
                             CourseId = 4,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Understanding of networking protocols, routing, and switching"
                         },
                         new
                         {
                             Id = 13,
+                            Content = "testTest",
                             CourseId = 5,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Data Center Trends"
                         },
                         new
                         {
                             Id = 14,
+                            Content = "testTest",
                             CourseId = 5,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Describing Nexus 9000 Series Hardware"
                         },
                         new
                         {
                             Id = 15,
+                            Content = "testTest",
                             CourseId = 5,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Nexus 9000 NX-OS Features"
                         },
                         new
                         {
                             Id = 16,
+                            Content = "testTest",
                             CourseId = 6,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Introducing CloudCenter Suite Action Orchestrator"
                         },
                         new
                         {
                             Id = 17,
+                            Content = "testTest",
                             CourseId = 6,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "CloudCenter Suite Architecture"
                         },
                         new
                         {
                             Id = 18,
+                            Content = "testTest",
                             CourseId = 6,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Defining Action Orchestrator User Management and Security Considerations"
                         },
                         new
                         {
                             Id = 19,
+                            Content = "testTest",
                             CourseId = 7,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Identifying Security Concepts"
                         },
                         new
                         {
                             Id = 20,
+                            Content = "testTest",
                             CourseId = 7,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Defining the Security Operations Center"
                         },
                         new
                         {
                             Id = 21,
+                            Content = "testTest",
                             CourseId = 7,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "SOC Analyst tools"
                         },
                         new
                         {
                             Id = 22,
+                            Content = "testTest",
                             CourseId = 8,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Introducing DNA Architecture"
                         },
                         new
                         {
                             Id = 23,
+                            Content = "testTest",
                             CourseId = 8,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Deploy Wired Fabric Networks with DNA Center"
                         },
                         new
                         {
                             Id = 24,
+                            Content = "testTest",
                             CourseId = 8,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Deploy Brownfield and Fabric Wireless Network with DNA Center"
                         },
                         new
                         {
                             Id = 25,
+                            Content = "testTest",
                             CourseId = 9,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Introduction"
                         },
                         new
                         {
                             Id = 26,
+                            Content = "testTest",
                             CourseId = 9,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "Overview of Azure compute services"
                         },
                         new
                         {
                             Id = 27,
+                            Content = "testTest",
                             CourseId = 9,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Decide when to use Azure Virtual Machines"
                         },
                         new
                         {
                             Id = 28,
+                            Content = "testTest",
                             CourseId = 10,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 1,
                             Title = "Introduction"
                         },
                         new
                         {
                             Id = 29,
+                            Content = "testTest",
                             CourseId = 10,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 2,
                             Title = "How does GitHub Actions automate development tasks?"
                         },
                         new
                         {
                             Id = 30,
+                            Content = "testTest",
                             CourseId = 10,
                             CreatedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             IsDeleted = false,
+                            IsRestricted = false,
                             ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Rank = 3,
                             Title = "Identify the components of GitHub Actions"
                         });
                 });
@@ -668,130 +764,130 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(1698),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(6629),
                             Email = "Ragnar.Lodbrock@abv.com",
                             FirstName = "Ragnar",
                             ImageId = 1,
                             IsDeleted = false,
                             LastName = "Lodbrock",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(2681),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(7096),
                             Password = "adminADMIN123?",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4591),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8021),
                             Email = "Jack.Richmond@yahoo.com",
                             FirstName = "Jack",
                             ImageId = 2,
                             IsDeleted = false,
                             LastName = "Richmond",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4597),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8025),
                             Password = "johnJOHN123!",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4603),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8029),
                             Email = "Jonathan.Davis@gmail.com",
                             FirstName = "Jonathan",
                             ImageId = 3,
                             IsDeleted = false,
                             LastName = "Davis",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4605),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8030),
                             Password = "jondav123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4610),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8033),
                             Email = "Ignatio.Italiano@gmail.com",
                             FirstName = "Ignatio",
                             ImageId = 4,
                             IsDeleted = false,
                             LastName = "Italiano",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4612),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8034),
                             Password = "ignitalo123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4616),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8036),
                             Email = "Reginald.Hargreeves@gmail.com",
                             FirstName = "Reginald",
                             ImageId = 5,
                             IsDeleted = false,
                             LastName = "Hargreeves",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4618),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8038),
                             Password = "jamesonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4639),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8047),
                             Email = "John.Hanes@gmail.com",
                             FirstName = "John",
                             ImageId = 6,
                             IsDeleted = false,
                             LastName = "Hanes",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4641),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8049),
                             Password = "johnsonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4645),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8051),
                             Email = "Horatio.Spanish@gmail.com",
                             FirstName = "Horatio",
                             ImageId = 7,
                             IsDeleted = false,
                             LastName = "Spanish",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4648),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8052),
                             Password = "horspanP123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4652),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8054),
                             Email = "Herbert.Spencer@gmail.com",
                             FirstName = "Herbert",
                             ImageId = 8,
                             IsDeleted = false,
                             LastName = "Spencer",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4654),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8056),
                             Password = "hurspenM456!",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4658),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8058),
                             Email = "Harriet.Dark@gmail.com",
                             FirstName = "Harriet",
                             ImageId = 9,
                             IsDeleted = false,
                             LastName = "Dark",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4660),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8060),
                             Password = "hardiR789*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4668),
+                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8064),
                             Email = "Mario.Caruso@gmail.com",
                             FirstName = "Mario",
                             ImageId = 10,
                             IsDeleted = false,
                             LastName = "Caruso",
-                            ModifiedOn = new DateTime(2022, 6, 1, 8, 17, 18, 513, DateTimeKind.Utc).AddTicks(4670),
+                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8065),
                             Password = "marrob123!",
                             RoleId = 2
                         });
