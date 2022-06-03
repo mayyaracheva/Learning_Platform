@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Poodle.Services.Dtos;
+using Poodle.Services.Mappers;
 
 namespace Poodle.Services
 {
@@ -15,12 +16,14 @@ namespace Poodle.Services
     {
         private readonly ISectionRepository sectionRepository;
         private readonly IUsersService usersService;
+        private readonly SectionMapper sectionMapper;
         
 
-        public SectionService(ISectionRepository sectionRepository, IUsersService usersService)
+        public SectionService(ISectionRepository sectionRepository, IUsersService usersService, SectionMapper sectionMapper)
         {
             this.sectionRepository = sectionRepository;
-            this.usersService = usersService;            
+            this.usersService = usersService;
+            this.sectionMapper = sectionMapper;
         }
 
         public async Task<List<Section>> GetAll()
@@ -38,7 +41,7 @@ namespace Poodle.Services
         //if section currently restricted, displays no link to page but restricted message instead
         //restricted not excl as we need to replace their title with restricted message
 
-        public async Task<List<SectionResponseDto>> GetByCourseId(int id, string requesterEmail, string requesterPassword)
+        public async Task<List<SectionDto>> GetByCourseId(int id, string requesterEmail, string requesterPassword)
         {
             var sections =  await this.sectionRepository.GetByCourseId(id)
                 .Include(s => s.Course)
@@ -53,14 +56,14 @@ namespace Poodle.Services
 
             if (sections.Count > 0)
             {
-                List<SectionResponseDto> nonRestrictedSections = sections
+                List<SectionDto> nonRestrictedSections = sections
                 .Where(s => s.IsRestricted == false)
-                .Select(s => new SectionResponseDto { Title = s.Title, Content = s.Content })
+                .Select(s => new SectionDto { Title = s.Title, Content = s.Content })
                 .ToList();
 
-                List<SectionResponseDto> restrictedSections = sections
+                List<SectionDto> restrictedSections = sections
                     .Where(s => s.IsRestricted == true)
-                    .Select(s => new SectionResponseDto { Title = s.Title, Content = "Restricted section" })
+                    .Select(s => new SectionDto { Title = s.Title, Content = "Restricted section" })
                     .ToList();
 
                 restrictedSections.AddRange(nonRestrictedSections);
@@ -83,37 +86,29 @@ namespace Poodle.Services
         //restriction option - by date, by user (only enrolled in current course), no restriction by default
         //configure as new page(by default) or embedded
 
-        public async Task<int> Create(int id, string title, string content, string requesterEmail, string requesterPassword)
+        public async Task<SectionDto> Create(int id, SectionDto sectionDto, string requesterEmail, string requesterPassword)
         {
-            Section sectionDto = new Section();
+            
             var allSections = await this.GetAll();
 
-            if (allSections.Any(s => s.Title == title))
+            if (allSections.Any(s => s.Title == sectionDto.Title))
             {
-                throw new DuplicateEntityException($"Section with title {title} already exists");
-            }
-            if (sectionDto.Title is null)
-            {
-                throw new NullReferenceExceptions("Title can not be null");
-            }
-            sectionDto.Title = title;
-
-            if (sectionDto.Content is null)
-            {
-                throw new NullReferenceExceptions("Content can not be null");
+                throw new DuplicateEntityException($"Section with title {sectionDto.Title} already exists");
             }
 
-            sectionDto.Content = content;
-            sectionDto.CourseId = id;
-            sectionDto.IsRestricted = false;            
-            sectionDto.CreatedOn = DateTime.UtcNow;
-            sectionDto.ModifiedOn = DateTime.UtcNow;            
+            Section newSection = this.sectionMapper.ConvertToModel(sectionDto);
+
+            newSection.CourseId = id;
+            newSection.IsRestricted = false;            
+            newSection.CreatedOn = DateTime.UtcNow;
+            newSection.ModifiedOn = DateTime.UtcNow;            
 
             var sectionsInCourse = await this.GetByCourseId(id);
             var highestRank = sectionsInCourse.Select(s => s.Rank).Max();
             sectionDto.Rank = highestRank + 1;            
 
-            return await this.sectionRepository.Create(sectionDto);
+            var createdSection = await this.sectionRepository.Create(newSection);
+            return this.sectionMapper.ConvertToDto(createdSection);
         }
 
         //check: option only available for private courses

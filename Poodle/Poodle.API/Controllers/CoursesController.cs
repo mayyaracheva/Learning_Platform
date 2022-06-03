@@ -150,14 +150,14 @@ namespace Poodle.Services.Controllers
 
 		[HttpPost("{id}/sections")]
 
-		public async Task<IActionResult> CreateSection(int id, [FromBody] string title, [FromBody] string content, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> CreateSection(int id, [FromBody] SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
 			try
 			{
 				await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.Create(id, title, content, email, password);
+				var sectionId = await this.sectionService.Create(id, sectionDto, email, password);
 				return this.StatusCode(StatusCodes.Status201Created);
 			}
 			catch (UnauthorizedOperationException e)

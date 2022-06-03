@@ -107,8 +107,8 @@ namespace Poodle.Services.Controllers
 			//all newly created users are students by default
 			try
 			{
-				var newUser = this.userMapper.ConvertToModel(userCreateDto);
-				var createdUser = await this.usersService.Create(newUser, userCreateDto.ImageUrl);
+				
+				var createdUser = await this.usersService.Create(userCreateDto, userCreateDto.ImageUrl);
 
 				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
 			}
@@ -130,7 +130,7 @@ namespace Poodle.Services.Controllers
             try
             {
 				await this.authenticationHelper.TryGetUser(email, password);               
-				await this.usersService.Update(id, userUpdateDto.FirstName, userUpdateDto.LastName, userUpdateDto.Password, userUpdateDto.Email, userUpdateDto.ImageUrl, email, password);
+				await this.usersService.Update(id, userUpdateDto, email, password);
 				return this.StatusCode(StatusCodes.Status200OK, "User has been updated");
 			}			
 			catch (UnauthorizedOperationException e)

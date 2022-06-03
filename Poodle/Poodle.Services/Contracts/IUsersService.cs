@@ -14,8 +14,8 @@ namespace Poodle.Services.Contracts
 		Task<User> GetByEmail(string email);
 		Task<List<User>> Get(UserQueryParameters filterParameters);
 		//int GetRoleId(string roleName);		
-		Task<User> Create(User user, string imageUrl);		
-		Task<User> Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword);
+		Task<User> Create(UserCreateDto user, string imageUrl);		
+		Task<User> Update(int id, UserUpdateDto userUpdateDto, string requesterEmail, string requesterPassword);
 		Task<int> Delete(int id, string requesterEmail, string requesterPassword);
 		Task<Role> CheckAuthorization(string requesterEmail, string requesterPassword);
 		

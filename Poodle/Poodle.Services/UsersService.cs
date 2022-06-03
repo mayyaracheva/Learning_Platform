@@ -133,8 +133,9 @@ namespace Poodle.Services.Services
 
         }
 
-        public async Task<User> Create(User user, string imageUrl)
+        public async Task<User> Create(UserCreateDto userDto, string imageUrl)
         {
+            var user = this.userMapper.ConvertToModel(userDto);
             var userExists = await this.repository.GetAll().AnyAsync(u => u.Email == user.Email);
 
             if (userExists)
@@ -152,7 +153,7 @@ namespace Poodle.Services.Services
         }
 
 
-        public async Task<User> Update(int id, string firstname, string lastname, string password, string email, string imageUrl, string requesterEmail, string requesterPassword)
+        public async Task<User> Update(int id, UserUpdateDto userUpdateDto, string requesterEmail, string requesterPassword)
         {
             var userToBeUpdated = await this.GetById(id);
 
@@ -161,12 +162,12 @@ namespace Poodle.Services.Services
                 throw new UnauthorizedOperationException("You do not have required access for this operation");
             }
 
-            if (userToBeUpdated.Email == email)
+            if (userToBeUpdated.Email == userUpdateDto.Email)
             {
                 throw new Exceptions.DuplicateEntityException("User with this email already exists");
             }
 
-            return this.repository.Update(id, firstname, lastname, password, email, imageUrl);
+            return this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
             
         }
 

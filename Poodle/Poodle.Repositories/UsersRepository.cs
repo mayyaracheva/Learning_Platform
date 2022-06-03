@@ -52,14 +52,14 @@ namespace Poodle.Repositories
         }
         
 
-        public User Update(int id, string firstname, string lastname, string password, string email, string imageUrl)
+        public User Update(int id, User user, string imageUrl)
         {
             var userToUpdate = this.GetById(id).FirstOrDefault();
 
-            userToUpdate.FirstName = firstname != "string" ? firstname : userToUpdate.FirstName;
-            userToUpdate.LastName = lastname != "string" ? lastname : userToUpdate.LastName;
-            userToUpdate.Email = email != "user@example.com" ? email : userToUpdate.Email;
-            userToUpdate.Password = password != "string" ? password : userToUpdate.Password;
+            userToUpdate.FirstName = user.FirstName != "string" ? user.FirstName : userToUpdate.FirstName;
+            userToUpdate.LastName = user.LastName != "string" ? user.LastName : userToUpdate.LastName;
+            userToUpdate.Email = user.Email != "user@example.com" ? user.Email : userToUpdate.Email;
+            userToUpdate.Password = user.Password != "string" ? user.Password : userToUpdate.Password;
             userToUpdate.Image.ImageUrl = imageUrl != "string" ? imageUrl : userToUpdate.Image.ImageUrl;
 
             userToUpdate.ModifiedOn = DateTime.Now;
