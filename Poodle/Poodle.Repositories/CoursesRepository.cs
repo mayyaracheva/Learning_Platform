@@ -110,6 +110,7 @@ namespace Poodle.Repositories
 		private IQueryable<Course> GetCourses()
 		{
 			return this.context.Courses.Where(x => !x.IsDeleted)
+					.Include(course => course.Category)
 					.Include(course => course.Sections)
 					.Include(course => course.Users);
 		}
