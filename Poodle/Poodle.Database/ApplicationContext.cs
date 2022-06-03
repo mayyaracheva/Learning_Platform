@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Poodle.Data.EntityModels;
 using Poodle.Data.EntityModels.Contracts;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 

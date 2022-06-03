@@ -5,6 +5,7 @@ using Poodle.Services.Contracts;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
 using Poodle.Services.Dtos;
+using Poodle.Services.Constants;
 
 namespace Poodle.Services.Controllers
 {
@@ -61,28 +62,7 @@ namespace Poodle.Services.Controllers
 			}
 		}
 
-		//authenticated users must be able to view posts /their or of other users/ with an option to filter and sort them
-		//[HttpGet("filter")]
-		//public IActionResult FilterPosts([FromQuery] PostQueryParameters filterParameters, [FromHeader] string email, [FromHeader] string password)
-		//{
-		//	try
-		//	{
-		//		this.authorizationhelper.TryGetUser(email, password);				
-		//		List<PostResponseDto> posts = this.postsService.Get(filterParameters).Select(p => new PostResponseDto(p)).ToList();
-		//		return this.StatusCode(StatusCodes.Status200OK, posts);
-		//	}
-		//	catch (UnauthorizedOperationException e)
-		//	{
-		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-		//	}
-		//	catch (Exception e)
-		//	{
 
-		//		return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
-		//	}
-		//}
-
-		// authenticated users must be able to create a new post with at least a title and content.
 		[HttpPost("")]
 		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
 		{
@@ -91,7 +71,7 @@ namespace Poodle.Services.Controllers
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
 				var newCourse = await this.coursesService.CreateAsync(course, user);
 
-				return this.StatusCode(StatusCodes.Status201Created, new { Title = newCourse.Title, Content = newCourse.Description, Access = newCourse.Category.Name });
+				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -113,7 +93,28 @@ namespace Poodle.Services.Controllers
 
 				var courseToUpdate = await this.coursesService.UpdateAsync(id, user, dto);
 				
-				return this.StatusCode(StatusCodes.Status200OK, new { Title = courseToUpdate.Title, Content = courseToUpdate.Description, Access = courseToUpdate.Category.Name });
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+		}
+
+		[HttpDelete("{id}")]
+		public async Task<IActionResult> Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		{
+			try
+			{
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+
+				var courseToDelete = await this.coursesService.DeleteAsync(id, user);
+
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
 			}
 			catch (UnauthorizedOperationException e)
 			{

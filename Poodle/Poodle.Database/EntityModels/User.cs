@@ -28,11 +28,5 @@ namespace Poodle.Data.EntityModels
 		public Image Image { get; set; }
 
 		public ICollection<Course> Courses { get; set; }
-
-		public ICollection<Section> Sections { get; set; }
-
-
-
-
 	}
 }

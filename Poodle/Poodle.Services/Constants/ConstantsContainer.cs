@@ -6,6 +6,8 @@ namespace Poodle.Services.Constants
 		//Course
 		public const string COURSE_NOT_FOUND = "Course was not found";
 		public const string COURSE_EXISTS = "This course already exists";
+		public const string COURSE_CREATED = "Course has been created";
+		public const string COURSE_UPDATED = "Course has been updated";
 
 		//User
 		public const string USER_EXISTS = "This user already exists";
