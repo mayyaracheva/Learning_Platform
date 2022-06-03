@@ -31,16 +31,15 @@ namespace Poodle.Repositories
             return createdSection.Entity;
         }
 
-        public void EnrollMultipleStudents(List<int> studentIds, int courseId)
+        public async Task<int> Delete(Section sectionToDelete)
         {
-            throw new NotImplementedException();
+            this.context.Sections.Remove(sectionToDelete);
+            await this.context.SaveChangesAsync();
+            return sectionToDelete.Id;
         }
 
-        public void EnrollSingleStudent(int studentId, int courseId)
-        {
-            throw new NotImplementedException();
-        }
 
-        
+
+
     }
 }

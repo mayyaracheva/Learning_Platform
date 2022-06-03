@@ -165,5 +165,24 @@ namespace Poodle.Services.Controllers
 				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
 			}
 		}
+				
+		[HttpDelete("sections/{id}")]
+		public async Task<IActionResult> DeleteSection(int id, [FromHeader] string email, [FromHeader] string password)
+		{
+			try
+			{
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				await this.sectionService.Delete(id, requester);
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.SECTIONS_DELETED);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+		}
 	}
 }

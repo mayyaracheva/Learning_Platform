@@ -20,6 +20,7 @@ namespace Poodle.Services.Constants
 		public const string SECTION_EXISTS = "Section with such title already exists";
 		public const string RESTRICTED_SECTION_TITLE = "Restricted section";
 		public const string SECTIONS_NOT_FOUND = "The course contains no sections";
+		public const string SECTIONS_DELETED = "The section was removed";
 
 		//Categories
 		public const string PUBLIC_CATEGORY = "Public";
