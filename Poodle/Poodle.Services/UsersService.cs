@@ -9,12 +9,14 @@ using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Poodle.Services.Dtos;
 using Poodle.Services.Mappers;
+using Poodle.Services.Constants;
+using Poodle.Services.Helpers;
 
 namespace Poodle.Services.Services
 {
     public class UsersService : IUsersService
     {
-        public static string defaultImageUrl = "/Images/DefaultImage.jpg";
+        
         private readonly IUsersRepository repository;
         private readonly UserMapper userMapper;
 
@@ -48,48 +50,8 @@ namespace Poodle.Services.Services
             }
             else
             {
-                throw new EntityNotFoundException($"There is no user with id: {id}");
+                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
             }
-        }
-
-        public async Task<List<UserResponseDto>> GetAll(string requesterEmail, string requesterPassword)
-        {
-            Role requesterRole = await CheckAuthorization (requesterEmail, requesterPassword);
-
-            if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
-            {
-                throw new UnauthorizedOperationException("You do not have required access for this operation");
-            }
-
-            var users = await this.repository.GetAll()
-                .Include(u => u.Role)
-                .ToListAsync();
-            var userResponseDtos = users.Select(u => userMapper.ConvertToDto(u)).ToList();
-            return userResponseDtos;
-        }
-
-        public async Task<UserResponseDto> GetById(int id, string requesterEmail, string requesterPassword)
-        {
-            Role requesterRole = await CheckAuthorization (requesterEmail, requesterPassword);
-
-            if (requesterRole.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase))
-            {
-                throw new UnauthorizedOperationException("You do not have required access for this operation");
-            }
-
-            var user = await this.repository.GetById(id)
-                .Include(u => u.Role)
-                .FirstOrDefaultAsync();
-
-            if (user != null)
-            {
-                return this.userMapper.ConvertToDto(user);
-            }
-            else
-            {
-                throw new EntityNotFoundException($"There is no user with id: {id}");
-            }
-
         }
 
         public async Task<User> GetByEmail(string email)
@@ -103,21 +65,42 @@ namespace Poodle.Services.Services
             }
             else
             {
-                throw new EntityNotFoundException($"There is no user with email: {email}");
+                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
             }
         }
 
-        //public int GetRoleId(string roleName)
-        //{
-        //    Role role = this.repository.GetRoles().Where(r => r.Name.ToLower() == roleName.ToLower()).FirstOrDefault();
+        public async Task<List<UserResponseDto>> GetAll(User requester)
+        {
+            
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
 
-        //    if (role == null)
-        //    {
-        //        throw new EntityNotFoundException($"The Api supports the following roles: {string.Join(",", this.repository.GetRoles().Select(r => r.Name).ToList())}");
-        //    }
+            var users = await this.repository.GetAll()
+                .Include(u => u.Role)
+                .ToListAsync();
+            var userResponseDtos = users.Select(u => userMapper.ConvertToDto(u)).ToList();
+            return userResponseDtos;
+        }
 
-        //    return role.Id;
-        //}
+        public async Task<UserResponseDto> GetById(int id, User requester)
+        {
+            
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+
+            var user = await this.repository.GetById(id)
+                .Include(u => u.Role)
+                .FirstOrDefaultAsync();
+
+            if (user != null)
+            {
+                return this.userMapper.ConvertToDto(user);
+            }
+            else
+            {
+                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
+            }
+
+        }
+             
 
         public async Task<List<User>> Get(UserQueryParameters filterParameters)
         {
@@ -140,12 +123,12 @@ namespace Poodle.Services.Services
 
             if (userExists)
             {
-                throw new Exceptions.DuplicateEntityException("User with this email already exists");
+                throw new Exceptions.DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
             if (imageUrl == null | imageUrl == "string")
             {
-                imageUrl = defaultImageUrl;
+                imageUrl = ConstantsContainer.DEFAULT_IMAGEURL;
             }
 
             return await this.repository.Create(user, imageUrl);
@@ -153,43 +136,31 @@ namespace Poodle.Services.Services
         }
 
 
-        public async Task<User> Update(int id, UserUpdateDto userUpdateDto, string requesterEmail, string requesterPassword)
+        public async Task<User> Update(int id, UserUpdateDto userUpdateDto, User requester)
         {
             var userToBeUpdated = await this.GetById(id);
 
-            if (userToBeUpdated.Email != requesterEmail | userToBeUpdated.Password != requesterPassword)
+            if (userToBeUpdated.Email != requester.Email | userToBeUpdated.Password != requester.Password)
             {
-                throw new UnauthorizedOperationException("You do not have required access for this operation");
+                throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
             }
 
             if (userToBeUpdated.Email == userUpdateDto.Email)
             {
-                throw new Exceptions.DuplicateEntityException("User with this email already exists");
+                throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
             return this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
             
         }
 
-        public async Task<int> Delete(int id, string requesterEmail, string requesterPassword)
+        public async Task<int> Delete(int id, User requester)
         {
-            var userToDelete = await this.GetById(id);
-
-            Role requesterRole = await CheckAuthorization(requesterEmail, requesterPassword);
-
-            if (!requesterRole.Name.Equals("teacher", StringComparison.CurrentCultureIgnoreCase))
-            {
-                throw new UnauthorizedOperationException("You do not have required access for this operation");
-            }
+            var userToDelete = await this.GetById(id);       
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
             return await this.repository.Delete(userToDelete);
         }
 
-        public async Task<Role> CheckAuthorization(string requesterEmail, string requesterPassword)
-        {
-
-            var requester = await this.repository.GetAll().Where(u => u.Email == requesterEmail & u.Password == requesterPassword).FirstOrDefaultAsync();           
-
-            return requester.Role;
-        }
+        
     }
 }

@@ -5,6 +5,7 @@ using Poodle.Services.Exceptions;
 using Poodle.Services.Contracts;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
+using Poodle.Services.Constants;
 
 namespace Poodle.Services.Controllers
 {
@@ -30,8 +31,8 @@ namespace Poodle.Services.Controllers
 			//authorization checked in services
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var users = await this.usersService.GetAll(email, password);				
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				var users = await this.usersService.GetAll(requester);				
 				return this.StatusCode(StatusCodes.Status200OK, users);
 			}
 			catch (UnauthorizedOperationException e)
@@ -52,8 +53,8 @@ namespace Poodle.Services.Controllers
 			//authorization checked in services
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var user = await this.usersService.GetById(id, email, password);				
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				var user = await this.usersService.GetById(id, requester);				
 
 				return this.StatusCode(StatusCodes.Status200OK, user);
 			}
@@ -76,14 +77,14 @@ namespace Poodle.Services.Controllers
 
 			if (id < 1)
 			{
-				return this.StatusCode(StatusCodes.Status400BadRequest, "Invalid Id");
+				return this.StatusCode(StatusCodes.Status400BadRequest, ConstantsContainer.USER_NOT_FOUND);
 			}
 
             try
             {
-				await this.authenticationHelper.TryGetUser(email, password);
-				await this.usersService.Delete(id, email, password);
-				return this.StatusCode(StatusCodes.Status200OK, $"User with id {id} deleted");
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				await this.usersService.Delete(id, requester);
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.USER_DELETED);
 			}
 			catch (UnauthorizedOperationException e)
 			{
@@ -105,7 +106,7 @@ namespace Poodle.Services.Controllers
 				
 				var createdUser = await this.usersService.Create(userCreateDto, userCreateDto.ImageUrl);
 
-				return this.StatusCode(StatusCodes.Status201Created, $"{createdUser.Role.Name} with id {createdUser.Id} created.");
+				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.USER_CREATED);
 			}
 			catch (EntityNotFoundException e)
 			{
@@ -124,9 +125,9 @@ namespace Poodle.Services.Controllers
 			//authorization check (if user trying to make the update is same one, in services)
             try
             {
-				await this.authenticationHelper.TryGetUser(email, password);               
-				await this.usersService.Update(id, userUpdateDto, email, password);
-				return this.StatusCode(StatusCodes.Status200OK, "User has been updated");
+				var requester = await this.authenticationHelper.TryGetUser(email, password);               
+				await this.usersService.Update(id, userUpdateDto, requester);
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.USER_UPDATED);
 			}			
 			catch (UnauthorizedOperationException e)
 			{

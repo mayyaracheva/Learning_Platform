@@ -132,8 +132,8 @@ namespace Poodle.Services.Controllers
 			//authorization checked in services
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var sections = await this.sectionService.GetByCourseId(id, email, password);
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				var sections = await this.sectionService.GetByCourseId(id, requester);
 				return this.StatusCode(StatusCodes.Status200OK, sections);
 			}
 			catch (UnauthorizedOperationException e)
@@ -155,8 +155,8 @@ namespace Poodle.Services.Controllers
 			//authorization checked in services			
 			try
 			{
-				await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.Create(id, sectionDto, email, password);
+				var requester = await this.authenticationHelper.TryGetUser(email, password);
+				var sectionId = await this.sectionService.Create(id, sectionDto, requester);
 				return this.StatusCode(StatusCodes.Status201Created);
 			}
 			catch (UnauthorizedOperationException e)

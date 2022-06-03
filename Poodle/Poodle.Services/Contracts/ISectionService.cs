@@ -11,12 +11,7 @@ namespace Poodle.Services.Contracts
     {
         Task<List<Section>> GetAll();
         Task<List<Section>> GetByCourseId(int id);
-        Task<List<SectionDto>> GetByCourseId(int id, string email, string password);
-        Task<SectionDto> Create(int id, SectionDto sectionDto, string email, string password);
-        void EnrollSingleStudent(int studentId, int courseId);
-
-        void EnrollMultipleStudents(List<int> studentIds, int courseId);
-        
-
+        Task<List<SectionDto>> GetByCourseId(int id, User requester);
+        Task<SectionDto> Create(int id, SectionDto sectionDto, User requester); 
     }
 }

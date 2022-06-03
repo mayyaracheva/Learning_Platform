@@ -1,17 +1,20 @@
 ﻿
 using Poodle.Data.EntityModels;
+using Poodle.Services.Constants;
+using Poodle.Services.Exceptions;
+using System;
 
 namespace Poodle.Services.Helpers
 {
-	public class AuthorizationHelper
+	public static class AuthorizationHelper
 	{
-        public bool IsTeacher(User user)
+        public static void ValidateAccess(string requesterRole)
         {
-            if (user.RoleId != 1)
+
+            if (!requesterRole.Equals("teacher", StringComparison.CurrentCultureIgnoreCase))
             {
-                return false;
+                throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
             }
-            return true;
         }
     }
 }

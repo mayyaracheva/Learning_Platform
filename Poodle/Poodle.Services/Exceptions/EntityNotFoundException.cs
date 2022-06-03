@@ -12,5 +12,7 @@ namespace Poodle.Services.Exceptions
 			: base(message)
 		{
 		}
+
+		
 	}
 }

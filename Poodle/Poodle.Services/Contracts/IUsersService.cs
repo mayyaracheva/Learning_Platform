@@ -9,15 +9,15 @@ namespace Poodle.Services.Contracts
     {
 		Task<List<User>> GetAll();
 		Task<User> GetById(int id);
-		Task<List<UserResponseDto>> GetAll(string requesterEmail, string requesterPassword);
-		Task<UserResponseDto> GetById(int id, string requesterEmail, string requesterPassword);
+		Task<List<UserResponseDto>> GetAll(User requester);
+		Task<UserResponseDto> GetById(int id, User requester);
 		Task<User> GetByEmail(string email);
 		Task<List<User>> Get(UserQueryParameters filterParameters);
 		//int GetRoleId(string roleName);		
 		Task<User> Create(UserCreateDto user, string imageUrl);		
-		Task<User> Update(int id, UserUpdateDto userUpdateDto, string requesterEmail, string requesterPassword);
-		Task<int> Delete(int id, string requesterEmail, string requesterPassword);
-		Task<Role> CheckAuthorization(string requesterEmail, string requesterPassword);
+		Task<User> Update(int id, UserUpdateDto userUpdateDto, User requester);
+		Task<int> Delete(int id, User requester);
+		
 		
 	}
 }
