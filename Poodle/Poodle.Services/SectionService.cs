@@ -32,14 +32,12 @@ namespace Poodle.Services
 
         public async Task<List<Section>> GetAll()
             => await this.sectionRepository.GetAll()
-            .Include(s => s.Course)
-            .ThenInclude(c => c.Category)
+            .Include(s => s.Course)            
             .ToListAsync();
 
         public async Task<List<Section>> GetByCourseId(int id)
            => await this.sectionRepository.GetAll()
-           .Include(s => s.Course)
-           .ThenInclude(c => c.Category)
+           .Include(s => s.Course)         
            .ToListAsync();
 
         //sorted by Rank asc
@@ -81,9 +79,7 @@ namespace Poodle.Services
             
         }
 
-        //set title (unique, check and throw dupl exc) and content, check for null OK
-        //set rank to be == last section rank in the course + 1 OK
-        //set isrestricted = false;OK
+        
 
         //option to change the rank to any int not used by current section in the course
         //restriction option - by date, by user (only enrolled in current course), no restriction by default
@@ -123,17 +119,21 @@ namespace Poodle.Services
             return this.sectionMapper.ConvertToDto(createdSection);
         }
 
-  
-        //delete and update methods
-
-       
-       
-
-
-
+        public async Task<int> Delete(int sectionId, User requester)
+        {
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            var sectionToDelete = (await this.GetAll()).Where(s => s.Id == sectionId).FirstOrDefault();
+            return await this.sectionRepository.Delete(sectionToDelete);
+        }   
 
 
 
 
-    }
+
+
+
+
+
+
+        }
 }

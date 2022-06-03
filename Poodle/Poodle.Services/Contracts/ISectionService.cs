@@ -12,6 +12,7 @@ namespace Poodle.Services.Contracts
         Task<List<Section>> GetAll();
         Task<List<Section>> GetByCourseId(int id);
         Task<List<SectionDto>> GetByCourseId(int id, User requester);
-        Task<SectionDto> Create(int id, SectionDto sectionDto, User requester); 
+        Task<SectionDto> Create(int id, SectionDto sectionDto, User requester);
+        Task<int> Delete(int sectionId, User requester);
     }
 }

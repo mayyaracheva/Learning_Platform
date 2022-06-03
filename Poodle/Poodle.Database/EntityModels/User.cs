@@ -29,10 +29,7 @@ namespace Poodle.Data.EntityModels
 
 		public ICollection<Course> Courses { get; set; }
 
-		public ICollection<Section> Sections { get; set; }
-
-
-
+		
 
 	}
 }
