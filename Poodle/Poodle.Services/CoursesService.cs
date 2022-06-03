@@ -18,14 +18,12 @@ namespace Poodle.Services
 	{
 		private readonly ICoursesRepository coursesRepository;
 		private readonly CourseMapper courseMapper;
-		//private readonly AuthorizationHelper authorizationHelper;
 
 		public CoursesService(ICoursesRepository repository, 
 								CourseMapper courseMapper)
 		{
 			this.courseMapper = courseMapper;
 			this.coursesRepository = repository;
-			//this.authorizationHelper = authorizationHelper;
 		}
 
 		//TODO - check the user - student or teacher - diff access level
@@ -56,28 +54,17 @@ namespace Poodle.Services
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
-			//if (!this.authorizationHelper.IsTeacher(user))
-			//{
-			//	throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
-			//}
+			DuplicateCourseCheck(dto);
 
 			var newCourse = this.courseMapper.Convert(dto);
-			var duplicateCourse = this.coursesRepository
-				.GetByTitle(newCourse.Title)
-					?? throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
-
-			
 			await this.coursesRepository.CreateAsync(newCourse);
 
 			return newCourse;
 		}
+
 		public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
-			//if (!this.authorizationHelper.IsTeacher(user))
-			//{
-			//	throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
-			//}
 
 			var courseToUpdate = this.coursesRepository.Get(id)
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
@@ -87,9 +74,28 @@ namespace Poodle.Services
 			return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
 		}
 
-		public async Task<Course> DeleteAsync(int id)
+		public async Task<Course> DeleteAsync(int id, User user)
 		{
+			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			CheckIfCourseExists(id);
+
 			return await this.coursesRepository.DeleteAsync(id);
+		}
+
+		private void CheckIfCourseExists(int id)
+		{
+			if (this.coursesRepository.Get(id) == null)
+			{
+				throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+			}
+		}
+
+		private void DuplicateCourseCheck(CourseDTO dto)
+		{
+			if (this.coursesRepository.GetByTitle(dto.Title) != null)
+			{
+				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
+			}
 		}
 	}
 }

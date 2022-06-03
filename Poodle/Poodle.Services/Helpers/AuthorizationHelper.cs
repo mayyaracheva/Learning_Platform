@@ -1,5 +1,4 @@
 ﻿
-using Poodle.Data.EntityModels;
 using Poodle.Services.Constants;
 using Poodle.Services.Exceptions;
 using System;
