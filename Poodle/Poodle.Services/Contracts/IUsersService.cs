@@ -12,7 +12,7 @@ namespace Poodle.Services.Contracts
 		Task<List<UserResponseDto>> GetAll(User requester);
 		Task<UserResponseDto> GetById(int id, User requester);
 		Task<User> GetByEmail(string email);
-		Task<List<User>> Get(UserQueryParameters filterParameters);
+		//Task<List<User>> Get(UserQueryParameters filterParameters);
 		//int GetRoleId(string roleName);		
 		Task<User> Create(UserCreateDto user, string imageUrl);		
 		Task<User> Update(int id, UserUpdateDto userUpdateDto, User requester);

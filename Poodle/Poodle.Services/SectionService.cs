@@ -16,17 +16,13 @@ namespace Poodle.Services
 {
     public class SectionService : ISectionService
     {
-        private readonly ISectionRepository sectionRepository;
-        private readonly IUsersService usersService;
-        private readonly ICoursesService coursesService;
+        private readonly ISectionRepository sectionRepository; 
         private readonly SectionMapper sectionMapper;
         
 
-        public SectionService(ISectionRepository sectionRepository, IUsersService usersService, ICoursesService coursesService, SectionMapper sectionMapper)
+        public SectionService(ISectionRepository sectionRepository, SectionMapper sectionMapper)
         {
-            this.sectionRepository = sectionRepository;
-            this.usersService = usersService;
-            this.coursesService = coursesService;
+            this.sectionRepository = sectionRepository;            
             this.sectionMapper = sectionMapper;
         }
 
@@ -124,16 +120,44 @@ namespace Poodle.Services
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
             var sectionToDelete = (await this.GetAll()).Where(s => s.Id == sectionId).FirstOrDefault();
             return await this.sectionRepository.Delete(sectionToDelete);
-        }   
-
-
-
-
-
-
-
-
-
-
         }
+
+        public async Task<SectionDto> Update(int courseId, int sectionId, SectionDto sectionDto, User requester)
+        {
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            var sectionsInCourse = (await this.GetByCourseId(courseId)).OrderBy(s => s.Rank).ToList();
+
+            //if (sectionDto.Rank != 0)
+            //{
+            //    //rearrange all ranks
+            //    int highestRank = sectionsInCourse.Select(s => s.Rank).Max();
+            //    int newRank = sectionDto.Rank;
+
+            //    for (int i = 0; i < sectionsInCourse.Count; i++)
+            //    {
+            //        if (sectionsInCourse[i].Rank != sectionDto.Rank)
+            //        {
+            //            continue;
+            //        }
+            //        else
+            //        {
+
+            //        }
+            //    }
+            //}
+
+            var section = this.sectionMapper.ConvertToModel(sectionDto);
+            return this.sectionMapper.ConvertToDto(await this.sectionRepository.Update(sectionId, section));
+        }
+
+
+
+
+
+
+
+
+
+
+    }
 }

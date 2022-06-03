@@ -52,7 +52,7 @@ namespace Poodle.Repositories
         }
         
 
-        public User Update(int id, User user, string imageUrl)
+        public async Task<User> Update(int id, User user, string imageUrl)
         {
             var userToUpdate = this.GetById(id).FirstOrDefault();
 
@@ -63,7 +63,7 @@ namespace Poodle.Repositories
             userToUpdate.Image.ImageUrl = imageUrl != "string" ? imageUrl : userToUpdate.Image.ImageUrl;
 
             userToUpdate.ModifiedOn = DateTime.Now;
-            this.context.SaveChanges();
+            await this.context.SaveChangesAsync();
 
             return userToUpdate;
         }

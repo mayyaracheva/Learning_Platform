@@ -70,8 +70,7 @@ namespace Poodle.Services.Services
         }
 
         public async Task<List<UserResponseDto>> GetAll(User requester)
-        {
-            
+        {            
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
 
             var users = await this.repository.GetAll()
@@ -102,19 +101,19 @@ namespace Poodle.Services.Services
         }
              
 
-        public async Task<List<User>> Get(UserQueryParameters filterParameters)
-        {
-            if (filterParameters.HasQueryParameters)
-            {
-                return await this.repository.GetAll().ToListAsync();
-            }
-            else
-            {
-                throw new NotImplementedException();
+        //public async Task<List<User>> Get(UserQueryParameters filterParameters)
+        //{
+        //    if (filterParameters.HasQueryParameters)
+        //    {
+        //        return await this.repository.GetAll().ToListAsync();
+        //    }
+        //    else
+        //    {
+        //        throw new NotImplementedException();
 
-            }
+        //    }
 
-        }
+        //}
 
         public async Task<User> Create(UserCreateDto userDto, string imageUrl)
         {
@@ -150,7 +149,7 @@ namespace Poodle.Services.Services
                 throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
-            return this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
+            return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
             
         }
 

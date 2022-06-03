@@ -13,6 +13,7 @@ namespace Poodle.Repositories.Contracts
         IQueryable<Section> GetByCourseId(int id);
         Task<Section> Create(Section sectionModel);
         Task<int> Delete(Section sectionToDelete);
+        Task<Section> Update(int id, Section sectionDto);
 
     }
 }

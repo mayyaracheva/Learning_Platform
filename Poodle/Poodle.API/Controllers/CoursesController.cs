@@ -184,5 +184,26 @@ namespace Poodle.Services.Controllers
 				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
 			}
 		}
+
+		
+		[HttpPut("{courseId}/sections/{sectionId}")]
+		public async Task<IActionResult> UpdateSection(int courseId, int sectionId, [FromBody] SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
+		{
+			try
+			{
+				var requester = await this.authenticationHelper.TryGetUser(email, password);				
+				var result = await this.sectionService.Update(courseId, sectionId, sectionDto, requester);
+
+				return this.StatusCode(StatusCodes.Status200OK, result);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized, e.Message);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+			}
+		}
 	}
 }
