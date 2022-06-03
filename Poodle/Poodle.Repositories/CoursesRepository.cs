@@ -74,6 +74,7 @@ namespace Poodle.Repositories
 			var courseToDelete = await this.context.Courses
 						   .FirstOrDefaultAsync(p => p.Id == id);
 			courseToDelete.IsDeleted = true;
+
 			await this.context.SaveChangesAsync();
 
 			return courseToDelete;

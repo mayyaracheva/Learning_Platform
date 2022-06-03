@@ -114,7 +114,7 @@ namespace Poodle.Services.Controllers
 
 				var courseToDelete = await this.coursesService.DeleteAsync(id, user);
 
-				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
+				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_DELETED);
 			}
 			catch (UnauthorizedOperationException e)
 			{

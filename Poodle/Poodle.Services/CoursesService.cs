@@ -84,7 +84,7 @@ namespace Poodle.Services
 
 		private void CheckIfCourseExists(int id)
 		{
-			if (this.coursesRepository.Get(id) != null)
+			if (this.coursesRepository.Get(id) == null)
 			{
 				throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 			}
