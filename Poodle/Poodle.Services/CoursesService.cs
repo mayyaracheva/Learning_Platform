@@ -2,15 +2,14 @@
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Poodle.Services.Constants;
 using Microsoft.EntityFrameworkCore;
 using Poodle.Services.Dtos;
 using Poodle.Services.Mappers;
 using Poodle.Services.Helpers;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Poodle.Services
 {
@@ -18,15 +17,18 @@ namespace Poodle.Services
 	{
 		private readonly ICoursesRepository coursesRepository;
 		private readonly IHomeService homeService;
+		private readonly IUsersRepository usersRepository;
 		private readonly CourseMapper courseMapper;
 
 		public CoursesService(ICoursesRepository repository,
 								CourseMapper courseMapper,
-								IHomeService homeService)
+								IHomeService homeService,
+								IUsersRepository usersRepository)
 		{
 			this.courseMapper = courseMapper;
 			this.coursesRepository = repository;
 			this.homeService = homeService;
+			this.usersRepository = usersRepository;
 		}
 
 		//user type check - diff access level
@@ -40,21 +42,35 @@ namespace Poodle.Services
 		}
 
 
-		//user type check - diff access level
+		/* - user type check - diff access level */
 		public CourseResponseDTO Get(int id, User user)
 		{
 			var course = this.coursesRepository.Get(id)
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 
-			if (AuthorizationHelper.IsStudent(user) 
-				&& (course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course)))
+			if (AuthorizationHelper.IsStudent(user))
 			{
-				throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+				if (course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
+				{
+					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+				}
+				user.Courses.Add(course);
 			}
-
 			return this.courseMapper.ConvertToDTO(course);
 		}
 
+		public void EnrollInPrivateCourse(int id, User user)
+		{
+			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			GetUsersNotEnroled(id);
+		}
+
+		private List<User> GetUsersNotEnroled(int id)
+		{
+			var course = this.coursesRepository.Get(id);
+			var usersNotInCourse =  this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToList();
+			return usersNotInCourse;
+		}
 		//TODO - have to decide if we implement this functionality
 		/*public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{

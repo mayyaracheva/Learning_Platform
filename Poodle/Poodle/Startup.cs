@@ -8,6 +8,9 @@ using Newtonsoft.Json;
 using Poodle.Data;
 using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
+using Poodle.Services;
+using Poodle.Services.Contracts;
+using Poodle.Services.Services;
 
 namespace Poodle.Web
 {
@@ -36,10 +39,18 @@ namespace Poodle.Web
                 options.Cookie.IsEssential = true;
             });
 
-           
 
             //repositories
             services.AddScoped<ICoursesRepository, CoursesRepository>();
+            //services.AddScoped<IUsersRepository, UsersRepository>();
+            //services.AddScoped<ISectionRepository, SectionRepository>();
+
+
+            //services
+            //services.AddScoped<IUsersService, UsersService>();
+            //services.AddScoped<ISectionService, SectionService>();
+            //services.AddScoped<ICoursesService, CoursesService>();
+            services.AddScoped<IHomeService, HomeService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
