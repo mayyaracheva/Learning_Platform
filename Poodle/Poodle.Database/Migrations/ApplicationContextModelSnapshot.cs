@@ -762,130 +762,130 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(6629),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(3039),
                             Email = "Ragnar.Lodbrock@abv.com",
                             FirstName = "Ragnar",
                             ImageId = 1,
                             IsDeleted = false,
                             LastName = "Lodbrock",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(7096),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(3410),
                             Password = "adminADMIN123?",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8021),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4078),
                             Email = "Jack.Richmond@yahoo.com",
                             FirstName = "Jack",
                             ImageId = 2,
                             IsDeleted = false,
                             LastName = "Richmond",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8025),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4079),
                             Password = "johnJOHN123!",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8029),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4081),
                             Email = "Jonathan.Davis@gmail.com",
                             FirstName = "Jonathan",
                             ImageId = 3,
                             IsDeleted = false,
                             LastName = "Davis",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8030),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4082),
                             Password = "jondav123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8033),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4083),
                             Email = "Ignatio.Italiano@gmail.com",
                             FirstName = "Ignatio",
                             ImageId = 4,
                             IsDeleted = false,
                             LastName = "Italiano",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8034),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4084),
                             Password = "ignitalo123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8036),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4085),
                             Email = "Reginald.Hargreeves@gmail.com",
                             FirstName = "Reginald",
                             ImageId = 5,
                             IsDeleted = false,
                             LastName = "Hargreeves",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8038),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4086),
                             Password = "jamesonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8047),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4090),
                             Email = "John.Hanes@gmail.com",
                             FirstName = "John",
                             ImageId = 6,
                             IsDeleted = false,
                             LastName = "Hanes",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8049),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4090),
                             Password = "johnsonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8051),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4092),
                             Email = "Horatio.Spanish@gmail.com",
                             FirstName = "Horatio",
                             ImageId = 7,
                             IsDeleted = false,
                             LastName = "Spanish",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8052),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4093),
                             Password = "horspanP123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8054),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4094),
                             Email = "Herbert.Spencer@gmail.com",
                             FirstName = "Herbert",
                             ImageId = 8,
                             IsDeleted = false,
                             LastName = "Spencer",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8056),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4095),
                             Password = "hurspenM456!",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8058),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4098),
                             Email = "Harriet.Dark@gmail.com",
                             FirstName = "Harriet",
                             ImageId = 9,
                             IsDeleted = false,
                             LastName = "Dark",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8060),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4098),
                             Password = "hardiR789*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8064),
+                            CreatedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4101),
                             Email = "Mario.Caruso@gmail.com",
                             FirstName = "Mario",
                             ImageId = 10,
                             IsDeleted = false,
                             LastName = "Caruso",
-                            ModifiedOn = new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8065),
+                            ModifiedOn = new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4101),
                             Password = "marrob123!",
                             RoleId = 2
                         });

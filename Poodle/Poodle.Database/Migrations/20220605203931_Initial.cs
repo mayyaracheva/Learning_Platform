@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Poodle.Data.Migrations
 {
-    public partial class Initial3June : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -212,16 +212,16 @@ namespace Poodle.Data.Migrations
                 columns: new[] { "Id", "CreatedOn", "Email", "FirstName", "ImageId", "IsDeleted", "LastName", "ModifiedOn", "Password", "RoleId" },
                 values: new object[,]
                 {
-                    { 9, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8058), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8060), "hardiR789*", 2 },
-                    { 1, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(6629), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(7096), "adminADMIN123?", 1 },
-                    { 2, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8021), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8025), "johnJOHN123!", 1 },
-                    { 3, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8029), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8030), "jondav123*", 2 },
-                    { 4, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8033), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8034), "ignitalo123*", 2 },
-                    { 5, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8036), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8038), "jamesonN123*", 2 },
-                    { 6, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8047), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8049), "johnsonN123*", 2 },
-                    { 7, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8051), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8052), "horspanP123*", 2 },
-                    { 8, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8054), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8056), "hurspenM456!", 2 },
-                    { 10, new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8064), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 6, 3, 7, 34, 10, 632, DateTimeKind.Utc).AddTicks(8065), "marrob123!", 2 }
+                    { 9, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4098), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4098), "hardiR789*", 2 },
+                    { 1, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(3039), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(3410), "adminADMIN123?", 1 },
+                    { 2, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4078), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4079), "johnJOHN123!", 1 },
+                    { 3, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4081), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4082), "jondav123*", 2 },
+                    { 4, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4083), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4084), "ignitalo123*", 2 },
+                    { 5, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4085), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4086), "jamesonN123*", 2 },
+                    { 6, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4090), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4090), "johnsonN123*", 2 },
+                    { 7, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4092), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4093), "horspanP123*", 2 },
+                    { 8, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4094), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4095), "hurspenM456!", 2 },
+                    { 10, new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4101), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 6, 5, 20, 39, 30, 895, DateTimeKind.Utc).AddTicks(4101), "marrob123!", 2 }
                 });
 
             migrationBuilder.InsertData(

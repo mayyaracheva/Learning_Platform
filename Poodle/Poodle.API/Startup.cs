@@ -14,6 +14,7 @@ using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
 using Poodle.Services;
 using Poodle.Services.Contracts;
+using Poodle.API;
 
 namespace Poodle.Services
 {
@@ -26,7 +27,7 @@ namespace Poodle.Services
 
 		public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
+		// add services to the DI container
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddDbContext<ApplicationContext>(options =>
@@ -44,15 +45,16 @@ namespace Poodle.Services
 			services.AddTransient<UserMapper>();
 			services.AddTransient<CourseMapper>();
 			services.AddTransient<SectionMapper>();
-			services.AddTransient<AuthenticationHelper>();			
+			services.AddTransient<AuthenticationHelper>();
+			services.AddTransient<ExceptionHandlingMiddleware>();//error handling step 2
 
 			//repositories
 			services.AddScoped<ICoursesRepository, CoursesRepository>();
 			services.AddScoped<IUsersRepository, UsersRepository>();
 			services.AddScoped<ISectionRepository, SectionRepository>();
-			
 
-			//services
+
+			// configure DI for application services
 			services.AddScoped<IUsersService, UsersService>();
 			services.AddScoped<ISectionService, SectionService>();
 			services.AddScoped<ICoursesService, CoursesService>();
@@ -61,17 +63,22 @@ namespace Poodle.Services
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ApplicationContext context)
 		{
 			if (env.IsDevelopment())
 			{
 				app.UseDeveloperExceptionPage();
+				// generated swagger json and swagger ui middleware
 				app.UseSwagger();
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Poodle.API v1"));
 			}
+			// migrate database changes on startup (includes initial db creation)
+			context.Database.Migrate();
 
 			app.UseRouting();
-			
+
+			// global error handler
+			app.UseMiddleware<ExceptionHandlingMiddleware>();
 			//app.UseAuthentication();
 
 			app.UseAuthorization();
