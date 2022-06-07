@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Poodle.Services.Exceptions;
 using Poodle.Services.Contracts;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
@@ -48,7 +47,7 @@ namespace Poodle.Services.Controllers
 		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
-				var newCourse = await this.coursesService.CreateAsync(course, user);
+				await this.coursesService.CreateAsync(course, user);
 
 				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
 		}

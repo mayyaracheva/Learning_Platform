@@ -43,9 +43,9 @@ namespace Poodle.Services
 
 
 		/* - user type check - diff access level */
-		public CourseResponseDTO Get(int id, User user)
+		public async Task<CourseResponseDTO> Get(int id, User user)
 		{
-			var course = this.coursesRepository.Get(id)
+			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 
 			if (AuthorizationHelper.IsStudent(user))
@@ -65,10 +65,10 @@ namespace Poodle.Services
 			GetUsersNotEnroled(id);
 		}
 
-		private List<User> GetUsersNotEnroled(int id)
+		private async Task<List<User>> GetUsersNotEnroled(int id)
 		{
-			var course = this.coursesRepository.Get(id);
-			var usersNotInCourse =  this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToList();
+			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync();
+			var usersNotInCourse =  await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
 			return usersNotInCourse;
 		}
 		//TODO - have to decide if we implement this functionality

@@ -19,16 +19,12 @@ namespace Poodle.Repositories
 		public IQueryable<Course> GetAll()
 			=> this.GetCourses();
 
-		public Course Get(int id)
-			=> this.GetCourses()
-			.Where(x => x.Id == id)
-			.FirstOrDefault();
+		public IQueryable<Course> Get(int id)
+			=> this.GetCourses().Where(x => x.Id == id);
 					
 
-		public Course GetByTitle(string title)
-			=>	this.GetCourses()
-					.Where(x => x.Title == title)
-					.FirstOrDefault();
+		public IQueryable<Course> GetByTitle(string title)
+			=>	this.GetCourses().Where(x => x.Title == title);
 		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;
