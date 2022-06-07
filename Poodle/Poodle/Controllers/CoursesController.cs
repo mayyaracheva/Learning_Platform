@@ -34,12 +34,12 @@ namespace Poodle.Web.Controllers
 			return View(indexCourseViewModel);
         }
 
-        public IActionResult Details(int id)
+        public async Task<IActionResult> Details(int id)
         {
             try
             {
-
-                var publicCourseViewModel = new PublicCourseViewModel(this.coursesService.Get(id));
+				User user = new User();
+                var publicCourseViewModel = new PublicCourseViewModel(await this.coursesService.Get(id, user));
 
                 return this.View(model: publicCourseViewModel);
             }
