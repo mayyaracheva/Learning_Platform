@@ -59,15 +59,15 @@ namespace Poodle.Services
 			return this.courseMapper.ConvertToDTO(course);
 		}
 
-		//public void EnrollInPrivateCourse(int id, User user)
-		//{
-		//	AuthorizationHelper.ValidateAccess(user.Role.Name);
-		//	GetUsersNotEnroled(id);
-		//}
+        public async void EnrollInPrivateCourse(int id, User user)
+        {
+            AuthorizationHelper.ValidateAccess(user.Role.Name);
+            await GetUsersNotEnroled(id);
+        }
 
-		private async Task<List<User>> GetUsersNotEnroled(int id)
+        private async Task<List<User>> GetUsersNotEnroled(int id)
 		{
-			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync();
+			var course = await CheckIfCourseExists(id);
 			var usersNotInCourse =  await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
 			return usersNotInCourse;
 		}
@@ -91,37 +91,33 @@ namespace Poodle.Services
 			return newCourse;
 		}
 
-		//public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
-		//{
-		//	AuthorizationHelper.ValidateAccess(user.Role.Name);
+        public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
+        {
+            AuthorizationHelper.ValidateAccess(user.Role.Name);
 
-		//	var courseToUpdate = this.coursesRepository.Get(id)
-		//		?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+			var courseToUpdate = await CheckIfCourseExists(id); 
+                
 
-		//	var course = this.courseMapper.Convert(dto);
+            var course = this.courseMapper.Convert(dto);
 
-		//	return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
-		//}
+            return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
+        }
 
-		//public async Task<Course> DeleteAsync(int id, User user)
-		//{
-		//	AuthorizationHelper.ValidateAccess(user.Role.Name);
-		//	var courseToDelete = CheckIfCourseExists(id);
+        public async Task<Course> DeleteAsync(int id, User user)
+        {
+            AuthorizationHelper.ValidateAccess(user.Role.Name);
+            var courseToDelete = await CheckIfCourseExists(id);
 
-		//	return await this.coursesRepository.DeleteAsync(id, courseToDelete);
-		//}
+            return await this.coursesRepository.DeleteAsync(id, courseToDelete);
+        }
 
-		//private Course CheckIfCourseExists(int id)
-		//{
-		//	var course = this.coursesRepository.Get(id);
-		//	if (course == null)
-		//	{
-		//		throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
-		//	}
-		//	return course;
-		//}
+        private async Task<Course> CheckIfCourseExists(int id)
+        {
+            var course = await CheckIfCourseExists(id);
+			return course;
+        }
 
-		private void DuplicateCourseCheck(CourseDTO dto)
+        private void DuplicateCourseCheck(CourseDTO dto)
 		{
 			if (this.coursesRepository.GetByTitle(dto.Title) != null)
 			{
