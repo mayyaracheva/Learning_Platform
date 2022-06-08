@@ -25,6 +25,38 @@ namespace Poodle.Web.Controllers
             this.webHostEnvironment = webHostEnvironment;
         }
 
+        //GET: /auth/login
+        public IActionResult Login()
+        {
+            var userLoginModel = new LoginDto();
+
+            return this.View(userLoginModel);
+        }
+
+        //POST: /auth/login
+        [HttpPost]
+        public async Task<IActionResult> Login([Bind("Email, Password")] LoginDto userLoginModel)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(userLoginModel);
+            }
+
+            try
+            {
+                var user = await this.authHelper.TryGetUser(userLoginModel.Email, userLoginModel.Password);
+                this.HttpContext.Session.SetString("CurrentUserEmail", user.Email);
+                this.HttpContext.Session.SetString("CurrentRole", user.Role.Name);
+                this.HttpContext.Session.SetString("CurrentImage", user.Image.ImageUrl);
+                return this.RedirectToAction("Index", "Home", user);
+            }
+            catch (UnauthorizedOperationException e)
+            {
+                this.ModelState.AddModelError("Email", e.Message);
+                return this.View(userLoginModel);
+            }
+        }
+
         public IActionResult Register()
         {
             var userRegisterModel = new UserCreateDto();
@@ -69,40 +101,10 @@ namespace Poodle.Web.Controllers
                 return this.View(userRegisterModel);
             }
 
-         return this.RedirectToAction("Login");
+            return this.RedirectToAction("Login");
+
         }
-        //GET: /auth/login
-        public IActionResult Login()
-        {
-            var userLoginModel = new LoginDto();
-
-            return this.View(userLoginModel);
-        }
-
-        //POST: /auth/login
-        [HttpPost]
-        public async Task <IActionResult> Login([Bind("Email, Password")] LoginDto userLoginModel)
-        {
-            if (!this.ModelState.IsValid)
-            {
-                return this.View(userLoginModel);
-            }
-
-            try
-            {
-                var user = await this.authHelper.TryGetUser(userLoginModel.Email, userLoginModel.Password);
-                this.HttpContext.Session.SetString("CurrentUserEmail", user.Email);               
-                this.HttpContext.Session.SetString("CurrentRole", user.Role.Name);
-                this.HttpContext.Session.SetString("CurrentImage", user.Image.ImageUrl);
-                return this.RedirectToAction("Index", "Home", user);
-            }
-            catch (UnauthorizedOperationException e)
-            {
-                this.ModelState.AddModelError("Email", e.Message);
-                return this.View(userLoginModel);
-            }
-        }
-
+       
 
         public IActionResult Logout()
         {

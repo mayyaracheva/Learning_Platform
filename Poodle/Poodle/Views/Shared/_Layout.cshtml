@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@{ this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -97,23 +99,43 @@
                             <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
                                 <span class="navbar-toggler-icon"></span>
                             </button>
-                            <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                <div class="navbar-nav py-0">
-                                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                                    <a href="about.html" class="nav-item nav-link">About</a>
-                                    <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                                    <a href="teacher.html" class="nav-item nav-link">Teachers</a>
-                                    <div class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
-                                        <div class="dropdown-menu rounded-0 m-0">
-                                            <a href="blog.html" class="dropdown-item">Blog List</a>
-                                            <a href="single.html" class="dropdown-item">Blog Detail</a>
+                            @{
+
+                                if ((bool)this.ViewData["IsAuthenticated"])
+                                {
+                                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                        <div class="navbar-nav py-0">
+                                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                                            <a href="about.html" class="nav-item nav-link">About</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
+
+                                            <div class="nav-item dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
+                                                <div class="dropdown-menu rounded-0 m-0">
+                                                    <a href="blog.html" class="dropdown-item">Profile</a>
+                                                    <a href="single.html" class="dropdown-item">Logout</a>
+                                                </div>
+                                            </div>
+
+                                            <a href="contact.html" class="nav-item nav-link">Contact</a>
                                         </div>
+                                        @*<a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">Join Now</a>*@
                                     </div>
-                                    <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                </div>
-                                <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="">Join Now</a>
-                            </div>
+                                }
+                                else
+                                {
+                                    <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
+                                        <div class="navbar-nav py-0">
+                                            <a href="index.html" class="nav-item nav-link active">Home</a>
+                                            <a href="about.html" class="nav-item nav-link">About</a>                                            
+                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@   
+                                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                        </div>
+                                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" asp-controller="Auth" asp-action="Login">Join Now</a>
+                                    </div>
+                                }
+                            }
                         </nav>
                     </div>
                 </div>

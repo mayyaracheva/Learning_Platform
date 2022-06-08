@@ -44,6 +44,7 @@ namespace Poodle.Web
             //helpers 
             services.AddTransient<UserMapper>();
             services.AddTransient<CourseMapper>();
+            services.AddTransient<AuthHelper>();
 
             //repositories
             services.AddScoped<ICoursesRepository, CoursesRepository>();
@@ -75,6 +76,7 @@ namespace Poodle.Web
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseSession();
 
             //app.UseAuthentication();
 
