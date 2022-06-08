@@ -6,7 +6,18 @@ namespace Poodle.Services.Mappers
 {
 	public class CourseMapper
 	{
-		public Course Convert(CourseDTO dto)
+		public Course Convert(CourseCreateDTO dto)
+		{
+			var course = new Course();
+			course.Title = dto.Title;
+			course.Description = dto.Description;
+			course.CategoryId = dto.CategoryId;
+			course.PhotoURL = dto.PhotoURL;
+			course.CreatedOn = DateTime.Now;
+
+			return course;
+		}
+		public Course Convert(CourseUpdateDTO dto)
 		{
 			var course = new Course();
 			course.Title = dto.Title;
@@ -16,7 +27,7 @@ namespace Poodle.Services.Mappers
 
 			return course;
 		}
-		public Course ConvertToModel(CourseResponseDTO dto)
+		public Course Convert(CourseResponseDTO dto)
 		{
 			var course = new Course();
 			course.Title = dto.Title;

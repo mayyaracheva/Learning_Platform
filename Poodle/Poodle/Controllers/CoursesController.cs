@@ -26,10 +26,7 @@ namespace Poodle.Web.Controllers
 		}
 		public async Task<IActionResult> Index()
         {
-			var indexCourseViewModel = new IndexCourseViewModel
-			{
-				PublicCourses = await this.homeService.GetPublicCoursrsesAsync()
-			};
+			var indexCourseViewModel = new CourseViewModel();
 
 			return View(indexCourseViewModel);
         }
@@ -53,12 +50,12 @@ namespace Poodle.Web.Controllers
 
 		public IActionResult Create()
 		{
-			CourseDTO viewModel = new CourseDTO();
+			CourseUpdateDTO viewModel = new CourseUpdateDTO();
 			return this.View(viewModel);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(CourseDTO viewModel)
+		public async Task<IActionResult> Create(CourseCreateDTO viewModel)
 		{
 			if (!this.ModelState.IsValid)
 			{
@@ -70,7 +67,6 @@ namespace Poodle.Web.Controllers
 
 			return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
 		}
-
 
 		private async Task<User> GetUser()
         {
