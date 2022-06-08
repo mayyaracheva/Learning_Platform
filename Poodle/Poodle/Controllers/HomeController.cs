@@ -26,6 +26,10 @@ namespace Poodle.Web.Controllers
             return View(indexCourseViewModel);
         }
 
+        public IActionResult About()
+        {
+            return this.View();
+        }
         public IActionResult Privacy()
         {
             return View();
