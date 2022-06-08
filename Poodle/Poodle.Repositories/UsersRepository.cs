@@ -56,11 +56,11 @@ namespace Poodle.Repositories
         {
             var userToUpdate = this.GetById(id).FirstOrDefault();
 
-            userToUpdate.FirstName = user.FirstName != "string" ? user.FirstName : userToUpdate.FirstName;
-            userToUpdate.LastName = user.LastName != "string" ? user.LastName : userToUpdate.LastName;
-            userToUpdate.Email = user.Email != "user@example.com" ? user.Email : userToUpdate.Email;
-            userToUpdate.Password = user.Password != "string" ? user.Password : userToUpdate.Password;
-            userToUpdate.Image.ImageUrl = imageUrl != "string" ? imageUrl : userToUpdate.Image.ImageUrl;
+            userToUpdate.FirstName = user.FirstName != null ? user.FirstName : userToUpdate.FirstName;
+            userToUpdate.LastName = user.LastName != null ? user.LastName : userToUpdate.LastName;
+            userToUpdate.Email = user.Email != null ? user.Email : userToUpdate.Email;
+            userToUpdate.Password = user.Password != null ? user.Password : userToUpdate.Password;
+            userToUpdate.Image.ImageUrl = imageUrl != null ? imageUrl : userToUpdate.Image.ImageUrl;
 
             userToUpdate.ModifiedOn = DateTime.Now;
             await this.context.SaveChangesAsync();

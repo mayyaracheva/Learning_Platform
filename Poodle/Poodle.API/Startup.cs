@@ -73,7 +73,7 @@ namespace Poodle.Services
 				app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Poodle.API v1"));
 			}
 			// migrate database changes on startup (includes initial db creation)
-			context.Database.Migrate();
+			//context.Database.Migrate();
 
 			app.UseRouting();
 

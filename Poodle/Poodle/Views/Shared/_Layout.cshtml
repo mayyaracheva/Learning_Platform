@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
     <!-- Favicon -->
-    <link href="img/favicon.ico" rel="icon">
+    <link href="~/img/favicon.ico" rel="icon">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -20,10 +20,10 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
 
     <!-- Libraries Stylesheet -->
-    <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/style.css" rel="stylesheet">
+    <link href="~/css/style.css" rel="stylesheet">
 </head>
 <body>
     <header>
@@ -126,9 +126,9 @@
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                                         <div class="navbar-nav py-0">
-                                            <a href="index.html" class="nav-item nav-link active">Home</a>
-                                            <a href="about.html" class="nav-item nav-link">About</a>                                            
-                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@   
+                                            <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
                                             <a href="contact.html" class="nav-item nav-link">Contact</a>
                                         </div>
                                         <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" asp-controller="Auth" asp-action="Login">Join Now</a>
