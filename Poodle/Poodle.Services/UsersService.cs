@@ -18,7 +18,7 @@ namespace Poodle.Services.Services
     {
         
         private readonly IUsersRepository repository;
-        private readonly UserMapper userMapper;
+        private readonly UserMapper userMapper;       
 
         public UsersService(IUsersRepository repository, UserMapper userMapper)
         {

@@ -31,7 +31,7 @@ namespace Poodle.Services.Constants
 		public const string RESTRICTED_ACCESS = "You are not authorized to perform this action";
 
 		//Image
-		public const string DEFAULT_IMAGEURL = "/Images/DefaultImage.jpg";
+		public const string DEFAULT_IMAGEURL = "/img/DefaultImage.jpg";
 
 		
 
