@@ -11,6 +11,7 @@ using Poodle.Repositories.Contracts;
 using Poodle.Services;
 using Poodle.Services.Contracts;
 using Poodle.Services.Services;
+using Poodle.Web.Helpers;
 
 namespace Poodle.Web
 {
@@ -39,18 +40,22 @@ namespace Poodle.Web
                 options.Cookie.IsEssential = true;
             });
 
+            //helpers
+            services.AddTransient<AuthHelper>();
 
             //repositories
             services.AddScoped<ICoursesRepository, CoursesRepository>();
-            //services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
             //services.AddScoped<ISectionRepository, SectionRepository>();
 
 
             //services
-            //services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IUsersService, UsersService>();
             //services.AddScoped<ISectionService, SectionService>();
             //services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IHomeService, HomeService>();
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
