@@ -101,7 +101,7 @@
                                 <div class="navbar-nav py-0">
                                     <a href="index.html" class="nav-item nav-link active">Home</a>
                                     <a href="about.html" class="nav-item nav-link">About</a>
-                                    <a href="course.html" class="nav-item nav-link">Courses</a>
+                                    <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
                                     <a href="teacher.html" class="nav-item nav-link">Teachers</a>
                                     <div class="nav-item dropdown">
                                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Blog</a>
@@ -142,9 +142,9 @@
     </header>
 
     <div class="container">
-        <main role="main" class="pb-3">
+       <!-- <main role="main" class="pb-3"> -->
             @RenderBody()
-        </main>
+        <!-- </main> -->
     </div>
 
     <footer class="border-top footer text-muted">
@@ -195,7 +195,7 @@
             <div class="row">
                 <div class="col-lg-6 text-center text-md-left mb-3 mb-md-0">
                     <p class="m-0 text-white">
-                        &copy; <a href="#">Domain Name</a>. All Rights Reserved. Designed by <a href="https://htmlcodex.com">HTML Codex</a>
+                        &copy; Copyright Poodle eLearning Platform</a>. @DateTime.Now.Year </a>
                     </p>
                 </div>
                 <div class="col-lg-6 text-center text-md-right">

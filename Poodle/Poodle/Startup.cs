@@ -10,6 +10,7 @@ using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
 using Poodle.Services;
 using Poodle.Services.Contracts;
+using Poodle.Services.Mappers;
 using Poodle.Services.Services;
 using Poodle.Web.Helpers;
 
@@ -40,8 +41,9 @@ namespace Poodle.Web
                 options.Cookie.IsEssential = true;
             });
 
-            //helpers
-            services.AddTransient<AuthHelper>();
+            //helpers 
+            services.AddTransient<UserMapper>();
+            services.AddTransient<CourseMapper>();
 
             //repositories
             services.AddScoped<ICoursesRepository, CoursesRepository>();
@@ -52,7 +54,7 @@ namespace Poodle.Web
             //services
             services.AddScoped<IUsersService, UsersService>();
             //services.AddScoped<ISectionService, SectionService>();
-            //services.AddScoped<ICoursesService, CoursesService>();
+            services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IHomeService, HomeService>();
 
 
