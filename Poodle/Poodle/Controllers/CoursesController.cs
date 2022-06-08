@@ -38,7 +38,7 @@ namespace Poodle.Web.Controllers
         {
             try
             {
-				User user = new User();
+				var user = await GetUser(); 
                 var publicCourseViewModel = new PublicCourseViewModel(await this.coursesService.Get(id, user));
 
                 return this.View(model: publicCourseViewModel);
@@ -71,92 +71,6 @@ namespace Poodle.Web.Controllers
 			return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
 		}
 
-		//public IActionResult Edit(int id)
-		//{
-		//    try
-		//    {
-		//        var postToEdit = this.postsService.Get(id);
-		//        var viewModel = this.postMapper.ConvertToModel(postToEdit);
-		//        return this.View(viewModel);
-		//    }
-		//    catch (EntityNotFoundException)
-		//    {
-		//        this.Response.StatusCode = StatusCodes.Status404NotFound;
-		//        this.ViewData["Error"] = $"Post with id {id} does not exist.";
-		//        return this.View("Error");
-		//    }
-
-		//}
-		//[HttpPost]
-		//public IActionResult Edit(int id, PostViewModel post)
-		//{
-		//    if (!this.ModelState.IsValid)
-		//    {
-		//        return this.View(post);
-		//    }
-
-		//    try
-		//    {
-		//        var postToEdit = this.postsService.Get(id);
-		//        var postUpdateDto = this.postMapper.ConvertToDto(post);
-		//        var user = GetUser();
-		//        this.postsService.Update(user, postToEdit, postUpdateDto);
-		//    }
-		//    catch (EntityNotFoundException)
-		//    {
-		//        this.Response.StatusCode = StatusCodes.Status404NotFound;
-		//        this.ViewData["ErrorMessage"] = $"Post with id {id} does not exist.";
-		//        return this.View(viewName: "Error");
-		//    }
-		//    catch (UnauthorizedOperationException)
-		//    {
-		//        this.Response.StatusCode = StatusCodes.Status401Unauthorized;
-		//        this.ViewData["ErrorMessage"] = "You are allowed to edit only personal posts";
-		//        return this.View(viewName: "Error");
-		//    }
-
-		//    return this.RedirectToAction(actionName: "Index", controllerName: "Post");
-		//}
-
-
-		//public IActionResult Delete(int id)
-		//{
-		//    try
-		//    {
-		//        var postToDelete = this.postsService.Get(id);
-		//        return this.View(postToDelete);
-		//    }
-		//    catch (EntityNotFoundException)
-		//    {
-		//        this.Response.StatusCode = StatusCodes.Status404NotFound;
-		//        this.ViewData["Error"] = $"Post with id {id} does not exist.";
-		//        return this.View("Error");
-		//    }
-
-		//}
-		//[HttpPost]
-		//public IActionResult DeletePost(int id)
-		//{
-		//    if (!this.ModelState.IsValid)
-		//    {
-		//        return this.View();
-		//    }
-
-		//    try
-		//    {
-		//        var postToDelete = this.postsService.Get(id);
-		//        var user = GetUser();
-		//        this.postsService.Delete(id, user.Id);
-		//    }
-		//    catch (EntityNotFoundException)
-		//    {
-		//        this.Response.StatusCode = StatusCodes.Status404NotFound;
-		//        this.ViewData["error"] = $"Post with id {id} does not exist.";
-		//        return this.View("Error");
-		//    }
-
-		//    return this.RedirectToAction(actionName: "Index", controllerName: "Post");
-		//}
 
 		private async Task<User> GetUser()
         {

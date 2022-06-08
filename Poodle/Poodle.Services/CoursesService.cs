@@ -45,8 +45,7 @@ namespace Poodle.Services
 		/* - user type check - diff access level */
 		public async Task<CourseResponseDTO> Get(int id, User user)
 		{
-			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
-				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+			var course = await ExistingCourseCheck(id);
 
 			if (AuthorizationHelper.IsStudent(user))
 			{
@@ -62,12 +61,12 @@ namespace Poodle.Services
         public async void EnrollInPrivateCourse(int id, User user)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
-            await GetUsersNotEnroled(id);
+            var users = await GetUsersNotEnroled(id);
         }
 
         private async Task<List<User>> GetUsersNotEnroled(int id)
 		{
-			var course = await CheckIfCourseExists(id);
+			var course = await ExistingCourseCheck(id);
 			var usersNotInCourse =  await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
 			return usersNotInCourse;
 		}
@@ -95,9 +94,8 @@ namespace Poodle.Services
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
 
-			var courseToUpdate = await CheckIfCourseExists(id); 
+			var courseToUpdate = await ExistingCourseCheck(id); 
                 
-
             var course = this.courseMapper.Convert(dto);
 
             return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
@@ -106,14 +104,16 @@ namespace Poodle.Services
         public async Task<Course> DeleteAsync(int id, User user)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
-            var courseToDelete = await CheckIfCourseExists(id);
+            var courseToDelete = await ExistingCourseCheck(id);
 
             return await this.coursesRepository.DeleteAsync(id, courseToDelete);
         }
 
-        private async Task<Course> CheckIfCourseExists(int id)
+        private async Task<Course> ExistingCourseCheck(int id)
         {
-            var course = await CheckIfCourseExists(id);
+			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
+				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+
 			return course;
         }
 
