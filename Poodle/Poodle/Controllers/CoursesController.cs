@@ -26,18 +26,17 @@ namespace Poodle.Web.Controllers
 			this.homeService = homeService;
 			this.usersService = usersService;
 		}
-		public async Task<IActionResult> Index()
+		public async Task<IActionResult> Index([FromQuery] CourseQueryParameters filterParams)
         {
 			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
 			{
 				return this.RedirectToAction("Login", "Auth");
 			}
+			this.ViewData["SortOrder"] = string.IsNullOrEmpty(filterParams.SortOrder) ? "desc" : "";
+			var user = await GetUser();
 
-			var publicCourses = await this.homeService
-				.GetPublicCoursrsesAsync()
-				.Select(course => new CourseViewModel(course))
-				.ToListAsync();
-
+			var publicCourses = await this.coursesService
+				.GetAsync(user);
 			return View(publicCourses);
         }
 

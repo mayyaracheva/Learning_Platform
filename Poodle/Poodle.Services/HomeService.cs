@@ -1,12 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Poodle.Data.EntityModels;
+﻿using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
-using Poodle.Services.Dtos;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace Poodle.Services
 {
@@ -21,10 +17,10 @@ namespace Poodle.Services
 
         public IQueryable<Course> GetPublicCoursrsesAsync()
         {
-            var allPublicCourses = this.coursesRepository.GetAll();
-            var result = allPublicCourses
+            var allPublicCourses = this.coursesRepository.GetAll()
                 .Where(x => x.Category.Name == ConstantsContainer.PUBLIC_CATEGORY);
-            return result;
+
+            return allPublicCourses;
         }
 
 
