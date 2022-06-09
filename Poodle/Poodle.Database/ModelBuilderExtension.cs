@@ -279,7 +279,7 @@ namespace Poodle.Data
 				Id = 4,
 				Title = "Implementing Application Centric Infrastructure (DCACI)",
 				Description = "The course shows you how to deploy and manage the  Nexus® 9000 Series Switches in Cisco Application Centric Infrastructure (Cisco ACI®) mode. You will learn how to configure and manage Cisco Nexus 9000 Series Switches in ACI mode, how to connect the Cisco ACI fabric to external networks and services, and the fundamentals of Virtual Machine Manager (VMM) integration. You will gain hands-on practice implementing key capabilities such as fabric discovery, policies, connectivity, VMM integration, and more.",
-				CategoryId = 2,
+				CategoryId = 1,
 				PhotoURL = "img/course-4.jpg",
 				IsDeleted = false,
 				CreatedOn = DateTime.UtcNow,
