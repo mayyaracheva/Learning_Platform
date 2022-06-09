@@ -78,7 +78,7 @@ namespace Poodle.Services
 			app.UseRouting();
 
 			// global error handler
-			app.UseMiddleware<ExceptionHandlingMiddleware>();
+			app.UseMiddleware<ExceptionHandlingMiddleware>(); //error handling step 3
 			//app.UseAuthentication();
 
 			app.UseAuthorization();

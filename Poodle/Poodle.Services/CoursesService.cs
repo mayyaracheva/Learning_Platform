@@ -46,7 +46,7 @@ namespace Poodle.Services
 
 
 		/* - user type check - diff access level */
-		public async Task<CourseResponseDTO> Get(int id, User user)
+		public async Task<Course> Get(int id, User user)
 		{
 			var course = await ExistingCourseCheck(id);
 
@@ -58,7 +58,7 @@ namespace Poodle.Services
 				}
 				user.Courses.Add(course);
 			}
-			return this.courseMapper.ConvertToDTO(course);
+			return course;
 		}
 
         public async void EnrollInPrivateCourse(int id, User user)

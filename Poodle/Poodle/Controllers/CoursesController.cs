@@ -42,12 +42,16 @@ namespace Poodle.Web.Controllers
 
         public async Task<IActionResult> Details(int id)
         {
-            try
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
+			{
+				return this.RedirectToAction("Login", "Auth");
+			}
+			try
             {
 				var user = await GetUser(); 
-                var publicCourseViewModel = new PublicCourseViewModel(await this.coursesService.Get(id, user));
+                var course = await this.coursesService.Get(id, user);
 
-                return this.View(model: publicCourseViewModel);
+                return this.View(model: course);
             }
             catch (EntityNotFoundException)
             {
