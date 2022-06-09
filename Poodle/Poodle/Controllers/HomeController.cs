@@ -13,16 +13,16 @@ namespace Poodle.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IHomeService homeservice;
+        private readonly IHomeService homeService;
         public HomeController(ILogger<HomeController> logger, IHomeService homeservice)
 		{
 			_logger = logger;
-			this.homeservice = homeservice;
+			this.homeService = homeservice;
 		}
 
 		public async Task<IActionResult> Index()
         {
-            var publicCourses = await this.homeservice
+            var publicCourses = await this.homeService
                 .GetPublicCoursrsesAsync()
                 .Select(course => new CourseViewModel(course))
                 .ToListAsync();

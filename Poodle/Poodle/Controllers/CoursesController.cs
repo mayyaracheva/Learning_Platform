@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
 using Poodle.Web.Models;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
@@ -26,9 +28,17 @@ namespace Poodle.Web.Controllers
 		}
 		public async Task<IActionResult> Index()
         {
-			var indexCourseViewModel = new CourseViewModel();
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUser"))
+			{
+				return this.RedirectToAction("Login", "Auth");
+			}
 
-			return View(indexCourseViewModel);
+			var publicCourses = await this.homeService
+				.GetPublicCoursrsesAsync()
+				.Select(course => new CourseViewModel(course))
+				.ToListAsync();
+
+			return View(publicCourses);
         }
 
         public async Task<IActionResult> Details(int id)
