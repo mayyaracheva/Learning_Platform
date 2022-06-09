@@ -1,5 +1,6 @@
-﻿@{ this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");}
-
+﻿@{ this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");
+   this.ViewData["CurrentImage"] = this.Context.Session.GetString("CurrentImage");
+   this.ViewData["CurrentUserName"] = this.Context.Session.GetString("CurrentUserName");
  }
 
 <!DOCTYPE html>
@@ -106,22 +107,22 @@
                                 if ((bool)this.ViewData["IsAuthenticated"])
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                                                    <div class="navbar-nav py-0">
-                                                                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                                                                        @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
+                                        <div class="navbar-nav py-0">
+                                            <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>                                           
 
-                                                                        <div class="nav-item dropdown">
-                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
-                                                                            <div class="dropdown-menu rounded-0 m-0">
-                                                                                <a href="blog.html" class="dropdown-item">Profile</a>
-                                                                                <a href="single.html" class="dropdown-item">Logout</a>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                                                    </div>
+                                            <div class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@this.ViewData["CurrentUserName"]</a>
+                                                <div class="dropdown-menu rounded-0 m-0">
+                                                    <a asp-controller="Profile" asp-action="Index" class="dropdown-item">My Profile</a>
+                                                    <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">Logout</a>
+                                                </div>
+                                            </div>
+                                            <div>
+                                                <img class="rounded-circle z-depth-0" alt="Profile Photo" src="@this.ViewData["CurrentImage"]" height="65" />
+                                            </div>                                            
+                                        </div>
                                     </div>
                                 }
                                 else

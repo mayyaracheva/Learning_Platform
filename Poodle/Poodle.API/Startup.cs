@@ -56,7 +56,7 @@ namespace Poodle.Services
 
 			// configure DI for application services
 			services.AddScoped<IUsersService, UsersService>();
-			services.AddScoped<ISectionService, SectionService>();
+			services.AddScoped<ITeacherService, TeacherService>();
 			services.AddScoped<ICoursesService, CoursesService>();
 			services.AddScoped<IHomeService, HomeService>();
 			

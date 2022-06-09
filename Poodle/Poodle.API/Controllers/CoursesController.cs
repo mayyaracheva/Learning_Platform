@@ -13,11 +13,11 @@ namespace Poodle.Services.Controllers
 	public class CoursesController :ControllerBase
 	{
 		private readonly ICoursesService coursesService;
-		private readonly ISectionService sectionService;
+		private readonly ITeacherService sectionService;
 		private readonly AuthenticationHelper authenticationHelper;
 
 		public CoursesController(ICoursesService coursesService, 
-								 ISectionService sectionService, 
+								 ITeacherService sectionService, 
 								 AuthenticationHelper authenticationHelper)
 		{
 			this.coursesService = coursesService;
@@ -89,7 +89,7 @@ namespace Poodle.Services.Controllers
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
 				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.Create(id, sectionDto, requester);
+				var sectionId = await this.sectionService.CreateSection(id, sectionDto, requester);
 				return this.StatusCode(StatusCodes.Status201Created);
 		}
 				
@@ -97,7 +97,7 @@ namespace Poodle.Services.Controllers
 		public async Task<IActionResult> DeleteSection(int id, [FromHeader] string email, [FromHeader] string password)
 		{
 				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				await this.sectionService.Delete(id, requester);
+				await this.sectionService.DeleteSection(id, requester);
 				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.SECTIONS_DELETED);
 		}
 
@@ -106,7 +106,7 @@ namespace Poodle.Services.Controllers
 		public async Task<IActionResult> UpdateSection(int courseId, int sectionId, [FromBody] SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
 		{
 				var requester = await this.authenticationHelper.TryGetUser(email, password);				
-				var result = await this.sectionService.Update(courseId, sectionId, sectionDto, requester);
+				var result = await this.sectionService.UpdateSection(courseId, sectionId, sectionDto, requester);
 
 				return this.StatusCode(StatusCodes.Status200OK, result);
 		}

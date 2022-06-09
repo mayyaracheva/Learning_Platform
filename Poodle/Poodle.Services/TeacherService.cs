@@ -14,13 +14,13 @@ using Poodle.Services.Helpers;
 
 namespace Poodle.Services
 {
-    public class SectionService : ISectionService
+    public class TeacherService : ITeacherService
     {
         private readonly ISectionRepository sectionRepository; 
         private readonly SectionMapper sectionMapper;
         
 
-        public SectionService(ISectionRepository sectionRepository, SectionMapper sectionMapper)
+        public TeacherService(ISectionRepository sectionRepository, SectionMapper sectionMapper)
         {
             this.sectionRepository = sectionRepository;            
             this.sectionMapper = sectionMapper;
@@ -71,8 +71,7 @@ namespace Poodle.Services
             {
                 throw new EntityNotFoundException(ConstantsContainer.SECTIONS_NOT_FOUND);
             }
-            
-            
+                        
         }
 
         
@@ -81,7 +80,7 @@ namespace Poodle.Services
         //restriction option - by date, by user (only enrolled in current course), no restriction by default
         //configure as new page(by default) or embedded
 
-        public async Task<SectionDto> Create(int id, SectionDto sectionDto, User requester)
+        public async Task<SectionDto> CreateSection(int id, SectionDto sectionDto, User requester)
         {            
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
 
@@ -115,14 +114,14 @@ namespace Poodle.Services
             return this.sectionMapper.ConvertToDto(createdSection);
         }
 
-        public async Task<int> Delete(int sectionId, User requester)
+        public async Task<int> DeleteSection(int sectionId, User requester)
         {
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
             var sectionToDelete = (await this.GetAll()).Where(s => s.Id == sectionId).FirstOrDefault();
             return await this.sectionRepository.Delete(sectionToDelete);
         }
 
-        public async Task<SectionDto> Update(int courseId, int sectionId, SectionDto sectionDto, User requester)
+        public async Task<SectionDto> UpdateSection(int courseId, int sectionId, SectionDto sectionDto, User requester)
         {
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
             var sectionsInCourse = (await this.GetByCourseId(courseId)).OrderBy(s => s.Rank).ToList();
