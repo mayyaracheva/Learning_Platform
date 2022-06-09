@@ -45,16 +45,17 @@ namespace Poodle.Web
             services.AddTransient<UserMapper>();
             services.AddTransient<CourseMapper>();
             services.AddTransient<AuthHelper>();
+            services.AddTransient<SectionMapper>();
 
             //repositories
             services.AddScoped<ICoursesRepository, CoursesRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
-            //services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<ISectionRepository, SectionRepository>();
 
 
             //services
             services.AddScoped<IUsersService, UsersService>();
-            //services.AddScoped<ISectionService, SectionService>();
+            services.AddScoped<ITeacherService, TeacherService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IHomeService, HomeService>();
 
