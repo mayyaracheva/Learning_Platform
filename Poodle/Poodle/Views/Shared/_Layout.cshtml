@@ -1,4 +1,6 @@
-﻿@{ this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");}
+﻿@{
+    this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");
+}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -104,22 +106,22 @@
                                 if ((bool)this.ViewData["IsAuthenticated"])
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                                                    <div class="navbar-nav py-0">
-                                                                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                                                                        @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
+                                        <div class="navbar-nav py-0">
+                                            <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
 
-                                                                        <div class="nav-item dropdown">
-                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
-                                                                            <div class="dropdown-menu rounded-0 m-0">
-                                                                                <a href="blog.html" class="dropdown-item">Profile</a>
-                                                                                <a href="single.html" class="dropdown-item">Logout</a>
-                                                                            </div>
-                                                                        </div>
+                                            <div class="nav-item dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
+                                                <div class="dropdown-menu rounded-0 m-0">
+                                                    <a href="blog.html" class="dropdown-item">Profile</a>
+                                                    <a href="single.html" class="dropdown-item">Logout</a>
+                                                </div>
+                                            </div>
 
-                                                                        <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                                                    </div>
+                                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                        </div>
                                     </div>
                                 }
                                 else
@@ -140,33 +142,12 @@
                 </div>
             </div>
             <!-- Navbar End -->
-            @*        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Poodle</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-            aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-            <ul class="navbar-nav flex-grow-1">
-            <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </li>
-            </ul>
-            </div>
-            </div>
-            </nav>*@
         </div>
     </header>
 
     <div class="container">
-       <main role="main" class="pb-3">
-
+        <main role="main" class="pb-3">
             @RenderBody()
-
         </main>
     </div>
 
@@ -242,8 +223,6 @@
         <!-- Footer End -->
         <!-- Back to Top -->
         <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="fa fa-angle-double-up"></i></a>
-
-        @*&copy; 2022 - Poodle - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>*@
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
