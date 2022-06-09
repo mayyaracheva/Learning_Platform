@@ -28,7 +28,7 @@ namespace Poodle.Web.Controllers
 		}
 		public async Task<IActionResult> Index()
         {
-			if (!this.HttpContext.Session.Keys.Contains("CurrentUser"))
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
 			{
 				return this.RedirectToAction("Login", "Auth");
 			}
