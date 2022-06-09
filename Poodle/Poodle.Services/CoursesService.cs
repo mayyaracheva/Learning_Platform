@@ -10,24 +10,22 @@ using Poodle.Services.Mappers;
 using Poodle.Services.Helpers;
 using System.Collections.Generic;
 using System.Linq;
+using Poodle.Web.Models;
 
 namespace Poodle.Services
 {
 	public class CoursesService : ICoursesService
 	{
 		private readonly ICoursesRepository coursesRepository;
-		private readonly IHomeService homeService;
 		private readonly IUsersRepository usersRepository;
 		private readonly CourseMapper courseMapper;
 
 		public CoursesService(ICoursesRepository repository,
 								CourseMapper courseMapper,
-								IHomeService homeService,
 								IUsersRepository usersRepository)
 		{
 			this.courseMapper = courseMapper;
 			this.coursesRepository = repository;
-			this.homeService = homeService;
 			this.usersRepository = usersRepository;
 		}
 
@@ -36,11 +34,12 @@ namespace Poodle.Services
 		{
 			if (AuthorizationHelper.IsStudent(user))
 			{
-				var courses = await this.homeService
-					.GetPublicCoursrsesAsync()
-					.Select(course => new CourseResponseDTO(course))
+				var courses = await this.coursesRepository.GetAll()
+					.Where(course => (course.Category.Name == ConstantsContainer.PUBLIC_CATEGORY)
+							&& (course.Users.Contains(user)))
+					.Select(course => new CourseViewModel(course))
 					.ToListAsync();
-
+				return courses;
 			}
 			return await this.coursesRepository.GetAll().ToListAsync();
 		}
@@ -74,15 +73,15 @@ namespace Poodle.Services
 			var usersNotInCourse =  await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
 			return usersNotInCourse;
 		}
-		//TODO - have to decide if we implement this functionality
-		/*public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
+		
+		public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
 		{
 			var courses = await this.coursesRepository
 				.Get(filterParameters)
 				.ToListAsync();
 
 			return courses;
-		}*/
+		}
 		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);

@@ -5,13 +5,13 @@ using System.Collections.Generic;
 
 namespace Poodle.Data
 {
-    public static class ModelBuilderExtension
-    {
+	public static class ModelBuilderExtension
+	{
 		private static string defaultImageData = "/img/DefaultImage.jpg";
 
 
 		public static void Seed(this ModelBuilder modelBuilder)
-		{			
+		{
 			List<Image> Images = GetImages();
 			modelBuilder.Entity<Image>().HasData(Images);
 
@@ -328,7 +328,7 @@ namespace Poodle.Data
 				IsDeleted = false,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
-			}); 
+			});
 			courses.Add(new Course
 			{
 				Id = 9,
@@ -339,7 +339,7 @@ namespace Poodle.Data
 				IsDeleted = false,
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
-			}); 
+			});
 			courses.Add(new Course
 			{
 				Id = 10,
@@ -351,9 +351,9 @@ namespace Poodle.Data
 				CreatedOn = DateTime.UtcNow,
 				ModifiedOn = DateTime.UtcNow,
 			});
-			return courses;	
+			return courses;
 		}
-		
+
 		public static List<Section> GetSections()
 		{
 			var sections = new List<Section>();
@@ -361,7 +361,7 @@ namespace Poodle.Data
 			sections.Add(new Section
 			{
 				Id = 1,
-				Title = "Exploring the Functions of Networking",	
+				Title = "Exploring the Functions of Networking",
 				Content = "testTest",
 				CourseId = 1,
 				Rank = 1,
@@ -556,7 +556,7 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false
-			}); 
+			});
 			sections.Add(new Section
 			{
 				Id = 21,
@@ -566,7 +566,7 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false
-			}); 
+			});
 			sections.Add(new Section
 			{
 				Id = 22,
@@ -664,7 +664,7 @@ namespace Poodle.Data
 		public static List<Role> GetRoles()
 		{
 			var roles = new List<Role>();
-			
+
 			roles.Add(new Role
 			{
 				Id = 1,
