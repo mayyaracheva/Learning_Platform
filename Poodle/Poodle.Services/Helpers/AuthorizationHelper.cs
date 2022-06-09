@@ -21,5 +21,7 @@ namespace Poodle.Services.Helpers
         {
             return user.Role.Name.Equals("student", StringComparison.CurrentCultureIgnoreCase);
         }
+
+        
     }
 }

@@ -26,94 +26,43 @@ namespace Poodle.Services.Services
             this.userMapper = userMapper;
         }
 
+       
         public async Task<List<User>> GetAll()
         {
-            return await this.repository.GetAll()
+            return await this.repository.GetAll().Where(user => user.IsDeleted == false)
              .Include(u => u.Role)
              .Include(u => u.Image)
              .Include(u => u.Courses)
              .ToListAsync();
-        }       
-               
-         
+        }
+           
         public async Task<User> GetById(int id)
         {
-            var user = await this.repository.GetById(id)
-                .Include(u => u.Role)
-                .Include(u => u.Image)
-                .Include(u => u.Courses)
-                .FirstOrDefaultAsync();
-
-            if (user != null)
-            {
-                return user;
-            }
-            else
-            {
-                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
-            }
+            var user = (await this.GetAll()).Where(user => user.Id == id).FirstOrDefault();
+            return UserHelper.CheckIfUserExists(user);
         }
 
         public async Task<User> GetByEmail(string email)
         {
-
-            var user = await this.repository.GetByEmail(email).FirstOrDefaultAsync();
-
-            if (user != null)
-            {
-                return user;
-            }
-            else
-            {
-                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
-            }
+            var user = (await this.GetAll()).Where(user => user.Email == email).FirstOrDefault();
+            return UserHelper.CheckIfUserExists(user);
         }
 
         public async Task<List<UserResponseDto>> GetAll(User requester)
         {            
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
-
-            var users = await this.repository.GetAll()
-                .Include(u => u.Role)
-                .ToListAsync();
+            var users = await this.GetAll();
             var userResponseDtos = users.Select(u => userMapper.ConvertToDto(u)).ToList();
             return userResponseDtos;
         }
 
         public async Task<UserResponseDto> GetById(int id, User requester)
-        {
-            
+        {            
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
-
-            var user = await this.repository.GetById(id)
-                .Include(u => u.Role)
-                .FirstOrDefaultAsync();
-
-            if (user != null)
-            {
-                return this.userMapper.ConvertToDto(user);
-            }
-            else
-            {
-                throw new EntityNotFoundException(ConstantsContainer.USER_NOT_FOUND);
-            }
-
+            var user = await this.GetById(id);
+            return this.userMapper.ConvertToDto(user); 
         }
              
-
-        //public async Task<List<User>> Get(UserQueryParameters filterParameters)
-        //{
-        //    if (filterParameters.HasQueryParameters)
-        //    {
-        //        return await this.repository.GetAll().ToListAsync();
-        //    }
-        //    else
-        //    {
-        //        throw new NotImplementedException();
-
-        //    }
-
-        //}
 
         public async Task<User> Create(UserCreateDto userDto, string imageUrl)
         {
@@ -125,7 +74,7 @@ namespace Poodle.Services.Services
                 throw new Exceptions.DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
-            if (imageUrl == null | imageUrl == "string")
+            if (imageUrl == null)
             {
                 imageUrl = ConstantsContainer.DEFAULT_IMAGEURL;
             }
@@ -135,7 +84,7 @@ namespace Poodle.Services.Services
         }
 
 
-        public async Task<User> Update(int id, UserUpdateDto userUpdateDto, User requester)
+        public async Task<User> UpdateApi(int id, UserUpdateDto userUpdateDto, User requester)
         {
             var userToBeUpdated = await this.GetById(id);
 
@@ -149,9 +98,12 @@ namespace Poodle.Services.Services
                 throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
-            return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
-            
+            return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);            
         }
+
+        public async Task<User> UpdateWeb(int id, UserUpdateDto userUpdateDto)         
+         =>   await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
+        
 
         public async Task<int> Delete(int id, User requester)
         {

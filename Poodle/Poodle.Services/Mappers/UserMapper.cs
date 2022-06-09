@@ -16,6 +16,17 @@ namespace Poodle.Services.Mappers
             return userToPresent;
         }
 
+        public UserUpdateDto ConvertToUpdateDto(User userModel)
+        {
+            UserUpdateDto userToPresent = new UserUpdateDto();
+            userToPresent.FirstName = userModel.FirstName;
+            userToPresent.LastName = userModel.LastName;
+            userToPresent.Email = userModel.Email;
+            userToPresent.Password = userModel.Password;
+            userToPresent.ImageUrl = userModel.Image.ImageUrl;
+            return userToPresent;
+        }
+
         public User ConvertToModel(UserCreateDto userModel)
         {
             User newUser = new User();

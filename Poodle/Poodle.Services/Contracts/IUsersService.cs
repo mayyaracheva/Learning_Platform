@@ -15,7 +15,8 @@ namespace Poodle.Services.Contracts
 		//Task<List<User>> Get(UserQueryParameters filterParameters);
 		//int GetRoleId(string roleName);		
 		Task<User> Create(UserCreateDto user, string imageUrl);		
-		Task<User> Update(int id, UserUpdateDto userUpdateDto, User requester);
+		Task<User> UpdateApi(int id, UserUpdateDto userUpdateDto, User requester);
+		Task<User> UpdateWeb(int id, UserUpdateDto userUpdateDto);
 		Task<int> Delete(int id, User requester);
 		
 		

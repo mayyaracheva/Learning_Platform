@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -20,5 +21,8 @@ namespace Poodle.Services.Dtos
         public string Password { get; set; }
 
         public string ImageUrl { get; set; }
+
+        [Display(Name = "Update Profile Photo")]
+        public IFormFile ImageFile { get; set; }
     }
 }
