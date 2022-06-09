@@ -7,7 +7,7 @@ namespace Poodle.Data
 {
     public static class ModelBuilderExtension
     {
-		private static string defaultImageData = "/Images/DefaultImage.jpg";
+		private static string defaultImageData = "/img/DefaultImage.jpg";
 
 
 		public static void Seed(this ModelBuilder modelBuilder)

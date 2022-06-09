@@ -1,6 +1,6 @@
-﻿@{
-    this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");
-}
+﻿@{ this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");}
+
+ }
 
 <!DOCTYPE html>
 <html lang="en">
@@ -106,22 +106,22 @@
                                 if ((bool)this.ViewData["IsAuthenticated"])
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                        <div class="navbar-nav py-0">
-                                            <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                            <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
+                                                                    <div class="navbar-nav py-0">
+                                                                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                                                                        @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
 
-                                            <div class="nav-item dropdown">
-                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
-                                                <div class="dropdown-menu rounded-0 m-0">
-                                                    <a href="blog.html" class="dropdown-item">Profile</a>
-                                                    <a href="single.html" class="dropdown-item">Logout</a>
-                                                </div>
-                                            </div>
+                                                                        <div class="nav-item dropdown">
+                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Profile</a>
+                                                                            <div class="dropdown-menu rounded-0 m-0">
+                                                                                <a href="blog.html" class="dropdown-item">Profile</a>
+                                                                                <a href="single.html" class="dropdown-item">Logout</a>
+                                                                            </div>
+                                                                        </div>
 
-                                            <a href="contact.html" class="nav-item nav-link">Contact</a>
-                                        </div>
+                                                                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                                                    </div>
                                     </div>
                                 }
                                 else
@@ -130,10 +130,10 @@
                                         <div class="navbar-nav py-0">
                                             <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                                             <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                            @*<a href="teacher.html" class="nav-item nav-link">Teachers</a>*@
-                                            <a href="contact.html" class="nav-item nav-link">Contact</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                                            <a class="nav-item nav-link" asp-area="" asp-controller="Auth" asp-action="Login">Login</a>
                                         </div>
-                                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" asp-controller="Auth" asp-action="Login">Join Now</a>
+                                        <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" asp-controller="Auth" asp-action="Register">Sign Up</a>
                                     </div>
                                 }
                             }

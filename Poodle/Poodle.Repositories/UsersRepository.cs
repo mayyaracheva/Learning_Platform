@@ -23,12 +23,8 @@ namespace Poodle.Repositories
                 
 
         public IQueryable<User> GetById(int id)        
-            => this.GetAll().Where(u => u.Id == id);
-        
+            => this.GetAll().Where(u => u.Id == id);        
 
-        public IQueryable<User> GetByEmail(string email)        
-         => this.GetAll().Where(u => u.Email == email);
-        
         
         public IQueryable<Role> GetRoles()      
             =>this.context.Roles;

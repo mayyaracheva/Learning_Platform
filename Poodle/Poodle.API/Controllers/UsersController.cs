@@ -126,7 +126,7 @@ namespace Poodle.Services.Controllers
             try
             {
 				var requester = await this.authenticationHelper.TryGetUser(email, password);               
-				await this.usersService.Update(id, userUpdateDto, requester);
+				await this.usersService.UpdateApi(id, userUpdateDto, requester);
 				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.USER_UPDATED);
 			}			
 			catch (UnauthorizedOperationException e)

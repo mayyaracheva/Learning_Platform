@@ -46,6 +46,7 @@ namespace Poodle.Web.Controllers
             {
                 var user = await this.authHelper.TryGetUser(userLoginModel.Email, userLoginModel.Password);
                 this.HttpContext.Session.SetString("CurrentUserEmail", user.Email);
+                this.HttpContext.Session.SetString("CurrentUserName", user.FirstName);
                 this.HttpContext.Session.SetString("CurrentRole", user.Role.Name);
                 this.HttpContext.Session.SetString("CurrentImage", user.Image.ImageUrl);
                 return this.RedirectToAction("Index", "Home", user);
@@ -84,14 +85,14 @@ namespace Poodle.Web.Controllers
 
                     var createdUser = await this.usersService.Create(userRegisterModel, imageUrl);
 
-                    return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.USER_CREATED);
+                    return this.RedirectToAction("Login");
                 }
                 else
                 {
-                    string imageUrl = "/img/DefaultImage.jpg";
+                    string imageUrl = ConstantsContainer.DEFAULT_IMAGEURL;
                     var createdUser = await this.usersService.Create(userRegisterModel, imageUrl);
 
-                    return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.USER_CREATED);
+                    return this.RedirectToAction("Login"); 
                 }
 
             }
@@ -100,8 +101,7 @@ namespace Poodle.Web.Controllers
 
                 return this.View(userRegisterModel);
             }
-
-            return this.RedirectToAction("Login");
+                       
 
         }
        
