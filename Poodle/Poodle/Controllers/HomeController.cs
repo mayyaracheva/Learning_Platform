@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Poodle.Services.Contracts;
 using Poodle.Web.Models;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
@@ -20,10 +22,12 @@ namespace Poodle.Web.Controllers
 
 		public async Task<IActionResult> Index()
         {
-            var indexCourseViewModel = new IndexCourseViewModel();
-            indexCourseViewModel.PublicCourses = await this.homeservice.GetPublicCoursrsesAsync();
+            var publicCourses = await this.homeservice
+                .GetPublicCoursrsesAsync()
+                .Select(course => new CourseViewModel(course))
+                .ToListAsync();
 
-            return View(indexCourseViewModel);
+            return View(publicCourses);
         }
 
         public IActionResult About()

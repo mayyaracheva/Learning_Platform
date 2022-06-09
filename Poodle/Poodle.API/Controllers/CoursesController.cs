@@ -44,7 +44,7 @@ namespace Poodle.Services.Controllers
 
 
 		[HttpPost("")]
-		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
+		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
 				await this.coursesService.CreateAsync(course, user);
@@ -53,7 +53,7 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
+		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseUpdateDTO dto)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password);
 

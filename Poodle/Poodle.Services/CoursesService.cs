@@ -36,7 +36,11 @@ namespace Poodle.Services
 		{
 			if (AuthorizationHelper.IsStudent(user))
 			{
-				return await this.homeService.GetPublicCoursrsesAsync();
+				var courses = await this.homeService
+					.GetPublicCoursrsesAsync()
+					.Select(course => new CourseResponseDTO(course))
+					.ToListAsync();
+
 			}
 			return await this.coursesRepository.GetAll().ToListAsync();
 		}
@@ -79,7 +83,7 @@ namespace Poodle.Services
 
 			return courses;
 		}*/
-		public async Task<Course> CreateAsync(CourseDTO dto, User user)
+		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
 			DuplicateCourseCheck(dto);
@@ -90,7 +94,7 @@ namespace Poodle.Services
 			return newCourse;
 		}
 
-        public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
+        public async Task<Course> UpdateAsync(int id, User user, CourseUpdateDTO dto)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
 
@@ -117,7 +121,7 @@ namespace Poodle.Services
 			return course;
         }
 
-        private void DuplicateCourseCheck(CourseDTO dto)
+        private void DuplicateCourseCheck(CourseCreateDTO dto)
 		{
 			if (this.coursesRepository.GetByTitle(dto.Title) != null)
 			{

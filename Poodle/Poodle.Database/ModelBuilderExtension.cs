@@ -245,6 +245,7 @@ namespace Poodle.Data
 				Title = "Implementing and Administering Solutions(CCNA)",
 				Description = "The course gives you a broad range of fundamental knowledge for all IT careers. Through a combination of lecture, hands-on labs, and self-study, you will learn how to install, operate, configure, and verify basic IPv4 and IPv6 networks. The course covers configuring network components such as switches, routers, and wireless LAN controllers; managing network devices; and identifying basic security threats. The course also gives you a foundation in network programmability, automation, and software-defined networking.",
 				CategoryId = 1,
+				PhotoURL = "img/course-1.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -253,6 +254,7 @@ namespace Poodle.Data
 				Title = "Developing Applications Using Core Platforms and APIs (DEVCOR)",
 				Description = "The course helps you prepare for DevNet Professional certification and for professional-level network automation engineer roles. You will learn how to implement network applications using Cisco® platforms as a base, from initial software design to diverse system integration, as well as testing and deployment automation. The course gives you hands-on experience solving real world problems using Cisco Application Programming Interfaces (APIs) and modern development tools.",
 				CategoryId = 1,
+				PhotoURL = "img/course-2.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -261,6 +263,7 @@ namespace Poodle.Data
 				Title = "Configuring Unified Computing System (DCCUCS)",
 				Description = "The course shows you how to deploy, secure, operate, and maintain Unified Computing System™ (Cisco UCS®) B-series blade servers, Cisco UCS C-Series, and S-Series rack servers for use in data centers. You will learn how to implement management and orchestration software for Cisco UCS. You will gain hands-on practice: configuring key features of Cisco UCS, Cisco UCS Director, and Cisco UCS Manager; implementing UCS management software including Cisco UCS Manager and Cisco Intersight™; and more.",
 				CategoryId = 1,
+				PhotoURL = "img/course-3.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -269,6 +272,7 @@ namespace Poodle.Data
 				Title = "Implementing Application Centric Infrastructure (DCACI)",
 				Description = "The course shows you how to deploy and manage the  Nexus® 9000 Series Switches in Cisco Application Centric Infrastructure (Cisco ACI®) mode. You will learn how to configure and manage Cisco Nexus 9000 Series Switches in ACI mode, how to connect the Cisco ACI fabric to external networks and services, and the fundamentals of Virtual Machine Manager (VMM) integration. You will gain hands-on practice implementing key capabilities such as fabric discovery, policies, connectivity, VMM integration, and more.",
 				CategoryId = 2,
+				PhotoURL = "img/course-4.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -277,6 +281,7 @@ namespace Poodle.Data
 				Title = "Nexus 9000 Switches in NX-OS Mode",
 				Description = "The course shows you how to implement, manage, and troubleshoot  Nexus® 9000 Series Switches in Cisco® NX-OS mode. Through expert instruction and extensive hands-on learning, you will learn how to deploy capabilities including Virtual Extensible LAN (VXLAN), Multiprotocol Label Switching (MPLS), high availability features, Intelligent Traffic Director, troubleshooting tools and techniques, NX-OS programmability features, and open interface technologies.",
 				CategoryId = 2,
+				PhotoURL = "img/course-5.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -285,6 +290,7 @@ namespace Poodle.Data
 				Title = "Multicloud Automation and Orchestration with CloudCenter Suite (CLDAO) 1.0",
 				Description = "The course, Mulitcloud Automation and Orchestration with  CloudCenter Suite (CLDAO) v1.0 teaches you how to configure simplified orchestration and workflow automation that provides seamless integration within the Cisco® CloudCenter suite. Through lessons and hands-on experiences, you will learn to use the tools of the CloudCenter Suite to streamline business processes, automate tasks, and increase efficiency in business processes.",
 				CategoryId = 2,
+				PhotoURL = "img/course-6.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -293,6 +299,7 @@ namespace Poodle.Data
 				Title = "Guided Study Group - CyberOps (GSG-CBROPS) 1.0",
 				Description = "A Guided Study Group offers you a 180-day journey of certification preparation. This approach offers a best-of-all-worlds path toward certification, with the flexibility and convenience of e-learning plus the motivation and accountability of working with a live coach. A mix of participants from various backgrounds and skill levels encourages collaboration.",
 				CategoryId = 2,
+				PhotoURL = "img/course-7.jpg",
 				IsDeleted = false
 			});
 			courses.Add(new Course
@@ -301,6 +308,7 @@ namespace Poodle.Data
 				Title = "Transforming to a Intent Based Network (IBNTRN) 1.0",
 				Description = "Through a combination of lessons and hands-on learning, you will practice operating, managing, and integrating Cisco DNA Center, programmable network infrastructure, and Cisco SD-Access fundamentals. You will learn how Cisco delivers intent-based networking across the campus, branch, WAN, and extended enterprise and ensures that your network is operating as intended.",
 				CategoryId = 2,
+				PhotoURL = "img/course-8.jpg",
 				IsDeleted = false
 			}); courses.Add(new Course
 			{
@@ -308,6 +316,7 @@ namespace Poodle.Data
 				Title = "Microsoft Azure Fundamentals: Describe core Azure services",
 				Description = "In this module, you'll learn how to take advantage of several virtualization services in Azure compute, which can help your applications scale out quickly and efficiently to meet increasing demands.",
 				CategoryId = 1,
+				PhotoURL = "img/course-9.jpg",
 				IsDeleted = false
 			}); courses.Add(new Course
 			{
@@ -315,6 +324,7 @@ namespace Poodle.Data
 				Title = "Automate development tasks by using GitHub Actions",
 				Description = "Create a basic GitHub Action and use that action in a workflow.",
 				CategoryId = 1,
+				PhotoURL = "img/course-10.jpg",
 				IsDeleted = false
 			});
 			return courses;	
