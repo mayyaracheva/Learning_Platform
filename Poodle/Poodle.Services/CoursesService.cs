@@ -44,7 +44,6 @@ namespace Poodle.Services
 			return await this.coursesRepository.GetAll().ToListAsync();
 		}
 
-
 		/* - user type check - diff access level */
 		public async Task<Course> Get(int id, User user)
 		{
