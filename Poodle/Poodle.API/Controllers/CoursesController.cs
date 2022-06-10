@@ -90,7 +90,7 @@ namespace Poodle.Services.Controllers
 			//authorization checked in services			
 				var requester = await this.authenticationHelper.TryGetUser(email, password);
 				var sectionId = await this.sectionService.CreateSection(id, sectionDto, requester);
-				return this.StatusCode(StatusCodes.Status201Created);
+				return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
 		}
 				
 		[HttpDelete("sections/{id}")]

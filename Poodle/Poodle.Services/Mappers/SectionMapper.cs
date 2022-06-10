@@ -14,8 +14,7 @@ namespace Poodle.Services.Mappers
         {
             Section section = new Section();
             section.Content = sectionDto.Content;
-            section.Title = sectionDto.Title;
-            section.Rank = sectionDto.Rank;
+            section.Title = sectionDto.Title;            
             return section;
         }
 
@@ -23,8 +22,7 @@ namespace Poodle.Services.Mappers
         {
             SectionDto section = new SectionDto();
             sectionModel.Content = section.Content;
-            sectionModel.Title = section.Title;
-            sectionModel.Rank = section.Rank;
+            sectionModel.Title = section.Title;            
             return section;
         }
     }

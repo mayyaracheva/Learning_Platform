@@ -27,60 +27,62 @@ namespace Poodle.Services
         }
 
         public async Task<List<Section>> GetAll()
-            => await this.sectionRepository.GetAll()
-            .Include(s => s.Course)            
+            => await this.sectionRepository.GetAll().Where(section => section.IsDeleted == false)
+            .Include(s => s.Course)  
+            .ThenInclude(course => course.Category)
             .ToListAsync();
 
         public async Task<List<Section>> GetByCourseId(int id)
-           => await this.sectionRepository.GetAll()
-           .Include(s => s.Course)         
-           .ToListAsync();
+           => (await this.GetAll()).Where(Section => Section.CourseId == id).ToList();
 
         //sorted by Rank asc
         //the course page displays only the title which incl link to the section page
         //if section currently restricted, displays no link to page but restricted message instead
         //restricted not excl from DB pull as we need to replace their title with restricted message
 
-        public async Task<List<SectionDto>> GetByCourseId(int id, User requester)
+        public async Task<List<SectionDto>> GetByCourseId(int courseId, User requester)
         {
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
 
-            var sections =  await this.sectionRepository.GetByCourseId(id)
-                .Include(s => s.Course)
-                .ThenInclude(c => c.Category)
-                .ToListAsync();           
-            
+            var sections = await this.GetByCourseId(courseId);
+             
 
-            if (sections.Count > 0)
-            {
-                List<SectionDto> nonRestrictedSections = sections
-                .Where(s => s.IsRestricted == false)
-                .Select(s => new SectionDto { Title = s.Title, Content = s.Content })
-                .ToList();
-
-                List<SectionDto> restrictedSections = sections
-                    .Where(s => s.IsRestricted == true)
-                    .Select(s => new SectionDto { Title = s.Title, Content = ConstantsContainer.RESTRICTED_SECTION_TITLE })
-                    .ToList();
-
-                restrictedSections.AddRange(nonRestrictedSections);
-                var sortedSections = restrictedSections.OrderBy(s => s.Rank);
-                return sortedSections.ToList();
-            }
-            else
+            if (sections.Count == 0)
             {
                 throw new EntityNotFoundException(ConstantsContainer.SECTIONS_NOT_FOUND);
             }
-                        
-        }
 
-        
+            List<SectionDto> nonRestrictedSections = sections
+               .Where(s => s.IsRestricted == false).Select(s => new SectionDto { Title = s.Title, Content = s.Content})               
+               .ToList();
+
+            List<SectionDto> restrictedSections = new List<SectionDto>();
+            if (requester.Role.Name.Equals("Teacher", StringComparison.InvariantCultureIgnoreCase))
+            {
+                restrictedSections = sections
+                .Where(s => s.IsRestricted == true)
+                .Select(s => new SectionDto { Title = s.Title + " " + ConstantsContainer.RESTRICTED_SECTION_TITLE, Content = s.Content })
+                .ToList();
+            }
+            else
+            {
+                restrictedSections = sections
+                .Where(s => s.IsRestricted == true)
+                .Select(s => new SectionDto { Title = s.Title + ConstantsContainer.RESTRICTED_SECTION_TITLE })
+                .ToList();
+            }
+
+            restrictedSections.AddRange(nonRestrictedSections);
+            
+            return restrictedSections.ToList();
+
+        }
+                
 
         //option to change the rank to any int not used by current section in the course
         //restriction option - by date, by user (only enrolled in current course), no restriction by default
         //configure as new page(by default) or embedded
 
-        public async Task<SectionDto> CreateSection(int id, SectionDto sectionDto, User requester)
+        public async Task<SectionDto> CreateSection(int courseId, SectionDto sectionDto, User requester)
         {            
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
 
@@ -93,22 +95,14 @@ namespace Poodle.Services
 
             Section newSection = this.sectionMapper.ConvertToModel(sectionDto);
 
-            newSection.CourseId = id;
+            newSection.CourseId = courseId;
             newSection.IsRestricted = false;            
             newSection.CreatedOn = DateTime.UtcNow;
             newSection.ModifiedOn = DateTime.UtcNow;            
 
-            var sectionsInCourse = await this.GetByCourseId(id);
-
-            if (sectionDto.Rank == 0)
-            {
-                var highestRank = sectionsInCourse.Select(s => s.Rank).Max();
-                sectionDto.Rank = highestRank + 1;
-            }
-            else
-            {
-                newSection.Rank = sectionDto.Rank;
-            }                  
+            var sectionsInCourse = await this.GetByCourseId(courseId);                       
+            var highestRank = sectionsInCourse.Select(s => s.Rank).Max();
+            newSection.Rank = highestRank + 1;                        
 
             var createdSection = await this.sectionRepository.Create(newSection);
             return this.sectionMapper.ConvertToDto(createdSection);
@@ -125,30 +119,12 @@ namespace Poodle.Services
         {
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
             var sectionsInCourse = (await this.GetByCourseId(courseId)).OrderBy(s => s.Rank).ToList();
-
-            //if (sectionDto.Rank != 0)
-            //{
-            //    //rearrange all ranks
-            //    int highestRank = sectionsInCourse.Select(s => s.Rank).Max();
-            //    int newRank = sectionDto.Rank;
-
-            //    for (int i = 0; i < sectionsInCourse.Count; i++)
-            //    {
-            //        if (sectionsInCourse[i].Rank != sectionDto.Rank)
-            //        {
-            //            continue;
-            //        }
-            //        else
-            //        {
-
-            //        }
-            //    }
-            //}
-
+           
             var section = this.sectionMapper.ConvertToModel(sectionDto);
             return this.sectionMapper.ConvertToDto(await this.sectionRepository.Update(sectionId, section));
         }
 
+        
 
 
 

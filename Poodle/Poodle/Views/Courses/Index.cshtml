@@ -6,11 +6,11 @@
 @{
     if (this.ViewData["CurrentRole"].ToString().ToLower() == "student")
     {
-        <partial name="_StudentForm" />
+        <partial name="_StudentCourses" />
     }
     else
     {
-        <partial name="_TeacherForm" />
+        <partial name="_TeacherCourses" />
     }
 }
 

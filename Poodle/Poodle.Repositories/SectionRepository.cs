@@ -20,10 +20,7 @@ namespace Poodle.Repositories
 
         public IQueryable<Section> GetAll()
             => context.Sections;
-                        
-        public IQueryable<Section> GetByCourseId(int id)        
-            => this.GetAll().Where(s => s.CourseId == id);
-        
+         
         public async Task<Section> Create(Section sectionModel)
         {     
             var createdSection = await this.context.Sections.AddAsync(sectionModel);
