@@ -7,16 +7,17 @@
 
 
 <h2>@this.Model.Title</h2>
-<p class="margin12">Category: @this.Model.Category</p>
+<p class="margin12">Category: @this.Model.Category.Name</p>
 <br />
-<p class="margin12">Content: @this.Model.Description</p>
+<p class="margin12">Description: @this.Model.Description</p>
 
 <h4>Sections</h4>
 @{
     foreach (var item in this.Model.Sections)
     {
         <dl>
-            <dt>@item.Title</dt>            
+            <dt>@item.Title</dt>
+            @*<dd>- @item.Content</dd>*@
         </dl>
     }
 }
