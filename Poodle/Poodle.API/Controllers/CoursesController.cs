@@ -13,11 +13,11 @@ namespace Poodle.Services.Controllers
 	public class CoursesController :ControllerBase
 	{
 		private readonly ICoursesService coursesService;
-		private readonly ITeacherService sectionService;
+		private readonly ISectionService sectionService;
 		private readonly AuthenticationHelper authenticationHelper;
 
 		public CoursesController(ICoursesService coursesService, 
-								 ITeacherService sectionService, 
+								 ISectionService sectionService, 
 								 AuthenticationHelper authenticationHelper)
 		{
 			this.coursesService = coursesService;

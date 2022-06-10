@@ -1,0 +1,16 @@
+﻿
+@{    
+    this.ViewData["Title"] = "Section";
+    this.ViewData["CurrentRole"] = this.Context.Session.GetString("CurrentRole");
+}
+
+@{
+    if (this.ViewData["CurrentRole"].ToString().ToLower() == "student")
+    {
+        <partial name="_StudentView" />
+    }
+    else
+    {
+        <partial name="_TeacherView" />
+    }
+}
