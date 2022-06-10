@@ -5,7 +5,7 @@ using System.Net;
 using System.Text.Json;
 using Poodle.Services.Exceptions;
 
-namespace Poodle.API
+namespace Poodle.Services.Helpers
 {
 	//Error handling step 1
 	public class ExceptionHandlingMiddleware : IMiddleware

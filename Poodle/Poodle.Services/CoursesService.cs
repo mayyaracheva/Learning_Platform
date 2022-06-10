@@ -73,13 +73,20 @@ namespace Poodle.Services
 			return usersNotInCourse;
 		}
 		
-		public async Task<List<Course>> Get(CourseQueryParameters filterParameters)
+		public async Task<dynamic> Get(CourseQueryParameters filterParameters, User user)
 		{
-			var courses = await this.coursesRepository
+			if (!filterParameters.NoQueryParameters)
+			{
+				var courses = await this.coursesRepository
 				.Get(filterParameters)
 				.ToListAsync();
 
-			return courses;
+				return courses;
+			}
+			else
+			{
+				return await this.GetAsync(user);
+			}
 		}
 		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
 		{

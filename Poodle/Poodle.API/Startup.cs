@@ -12,9 +12,7 @@ using Poodle.Services.Services;
 using Poodle.Data;
 using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
-using Poodle.Services;
 using Poodle.Services.Contracts;
-using Poodle.API;
 
 namespace Poodle.Services
 {
