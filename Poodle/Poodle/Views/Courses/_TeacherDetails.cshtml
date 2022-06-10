@@ -5,7 +5,6 @@
 @model Course
 
 
-
 <h2>@this.Model.Title</h2>
 <p class="margin12">Category: @this.Model.Category.Name</p>
 <br />
@@ -15,14 +14,15 @@
 @{
     foreach (var item in this.Model.Sections)
     {
-        <dl>
-            <dt>@item.Title</dt>
-            @*<dd>- @item.Content</dd>*@
-        </dl>
+    <dl>
+        <a asp-controller="Section" asp-action="Index" asp-route-id="@item.Id">@item.Title</a>
+        @*<dt>@item.Title</dt>*@
+        @*<dd>- @item.Content</dd>*@
+    </dl>
     }
 }
 <p>
-    <a class="btn btn-primary float-right" asp-controller="Teacher" asp-action="CreateSection" asp-route-id="@Model.Id">Add new Section</a>
+    <a class="btn btn-primary float-right" asp-controller="Section" asp-action="CreateSection" asp-route-id="@Model.Id">Add new Section</a>
 </p>
 
 <h4>Users</h4>

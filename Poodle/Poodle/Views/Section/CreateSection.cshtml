@@ -1,0 +1,45 @@
+﻿@{ this.ViewData["Title"] = "Section";}
+@model SectionCreateView
+
+<script src="~/js/ckeditor/ckeditor.js"></script>
+<p>
+    <h4>Create Section</h4>
+</p>
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <div class="panel-body">
+                <div class="form">
+                    <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label asp-for="Title"></label>
+                            <input type="text" asp-for="Title" class="form-control" />
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Content"></label>
+                            <textarea asp-for="Content" name="Content" id="Content" class="ckeditor"></textarea>
+                            <span asp-validation-for="Content" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Rank"></label>
+                            <input type="number" asp-for="Rank" class="form-control" />
+                            <span asp-validation-for="Rank" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <br />
+                            <button type="submit" asp-controller="Section" asp-action="CreateSection" asp-route-id="@this.ViewData["CurrentCourse"]"class="btn-primary">Create</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+   
+</div>
+<script>
+    CKEDITOR.replace('Content');
+</script>
+
+
