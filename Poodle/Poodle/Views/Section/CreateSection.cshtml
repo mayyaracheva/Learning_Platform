@@ -23,13 +23,34 @@
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Rank"></label>
-                            <input type="number" asp-for="Rank" class="form-control" />
-                            <span asp-validation-for="Rank" class="text-danger"></span>
+                            <label asp-for="Restriction">Restrict View</label>
+                            <span asp-validation-for="Restriction" class="text-danger"></span>
+                            <select asp-for="@Model.Restriction" name="restriction">
+                                <option value=""></option>
+                                <option value="false">Publish</option>
+                                <option value="true">Hide</option>
+                            </select>                            
                         </div>
                         <div class="form-group">
+                            <label>Select Rank</label>
+                            <span asp-validation-for="Rank" class="text-danger"></span>                          
+                            <select asp-for="@Model.Rank" name="selectedRank" class="custom-select">
+                               
+                                @{                                   
+                                    int count = this.ViewBag.SectionsCount;
+
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        <option value="@this.ViewBag.Sections[i]">@this.ViewBag.Sections[i]</option>
+                                    }
+                                }
+
+                            </select>
+                        </div>
+ 
+                        <div class="form-group">
                             <br />
-                            <button type="submit" asp-controller="Section" asp-action="CreateSection" asp-route-id="@this.ViewData["CurrentCourse"]"class="btn-primary">Create</button>
+                            <button type="submit" asp-controller="Section" asp-action="CreateSection" class="btn-primary">Create</button>
                         </div>
                     </form>
                 </div>

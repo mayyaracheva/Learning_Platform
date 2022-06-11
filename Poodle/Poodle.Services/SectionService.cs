@@ -11,6 +11,7 @@ using Poodle.Services.Dtos;
 using Poodle.Services.Mappers;
 using Poodle.Services.Constants;
 using Poodle.Services.Helpers;
+using Poodle.Web.Models;
 
 namespace Poodle.Services
 {
@@ -107,7 +108,54 @@ namespace Poodle.Services
             var highestRank = sectionsInCourse.Select(s => s.Rank).Max();
             newSection.Rank = highestRank + 1;                        
 
-            var createdSection = await this.sectionRepository.Create(newSection);
+            var createdSection = await this.sectionRepository.Create(newSection, courseId);
+            return this.sectionMapper.ConvertToDto(createdSection);
+        }
+
+        public async Task<SectionDto> CreateSection(SectionCreateView sectionDto, int courseId)
+        {
+            var allSections = (this.sectionRepository.GetAll()).Where(section => section.IsDeleted == false).ToList();
+            var allSectionsInCourse = allSections.Where(s => s.CourseId == courseId);
+
+            if (allSections.Any(s => s.Title == sectionDto.Title))
+            {
+                throw new DuplicateEntityException(ConstantsContainer.SECTION_EXISTS);
+            }
+
+            Section newSection = this.sectionMapper.ConvertToModel(sectionDto);
+
+            newSection.CourseId = courseId;            
+            newSection.CreatedOn = DateTime.UtcNow;
+            newSection.ModifiedOn = DateTime.UtcNow;
+
+            if (sectionDto.Rank.Equals("last", StringComparison.InvariantCultureIgnoreCase))
+            {
+                newSection.Rank = await this.GetLastRank(courseId);
+            }
+            else if (sectionDto.Rank.Equals("first", StringComparison.InvariantCultureIgnoreCase))
+            {
+                newSection.Rank = 1;
+                //change all ranks +1
+                for (int i = 0; i < allSections.Count; i++)
+                {
+                    allSections[i].Rank += 1;
+                }
+            }
+            else
+            {
+                //take the rank of selected section and assign it to new section; all sections from this one after, rank + 1;
+                string sectionTitle = sectionDto.Rank.Replace("before ", null);
+                Section section = allSectionsInCourse.Where(s => s.Title == sectionTitle).FirstOrDefault();
+                newSection.Rank = section.Rank;
+                var sectionsToChange = allSectionsInCourse.Where(s => s.Rank >= newSection.Rank).ToList();
+                for (int i = 0; i < sectionsToChange.Count; i++)
+                {
+                    sectionsToChange[i].Rank += 1;
+                }
+
+            }
+
+            var createdSection = await this.sectionRepository.Create(newSection, courseId);
             return this.sectionMapper.ConvertToDto(createdSection);
         }
 
@@ -116,6 +164,7 @@ namespace Poodle.Services
             AuthorizationHelper.ValidateAccess(requester.Role.Name);
             var sectionToDelete = (await this.GetAll()).Where(s => s.Id == sectionId).FirstOrDefault();
             return await this.sectionRepository.Delete(sectionToDelete);
+            //rearrange ranks
         }
 
         public async Task<SectionDto> UpdateSection(int courseId, int sectionId, SectionDto sectionDto, User requester)
@@ -127,15 +176,14 @@ namespace Poodle.Services
             return this.sectionMapper.ConvertToDto(await this.sectionRepository.Update(sectionId, section));
         }
 
-        
+        public async Task<int> GetLastRank(int courseId)
+        {
+            var sectionsInCourse = await this.GetByCourseId(courseId);
+            var highestRank = sectionsInCourse.Select(s => s.Rank).Max() + 1;
+            return highestRank;
+        }
 
-
-
-
-
-
-
-
+      
 
     }
 }

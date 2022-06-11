@@ -1,29 +1,20 @@
-﻿using System;
+﻿
+using Poodle.Services.Dtos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-
-namespace Poodle.Services.Dtos
+namespace Poodle.Web.Models
 {
-    public class SectionCreateView
-    {
-        [Required]
-        public string Title { get; set; }
-                
-        public string Content { get; set; }
+    public class SectionCreateView : SectionDto
+    {       
+        public string Rank { get; set; }
 
-        public int Rank { get; set; }
+        [Display(Name = "Restrict View")]
+        public string Restriction { get; set; }
 
-        public bool IsRestricted { get; set; }
-
-
-
-
-
-
-
+        
     }
 }

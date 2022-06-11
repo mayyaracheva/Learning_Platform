@@ -1,20 +1,35 @@
 ﻿using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Poodle.Web.Models;
 
 namespace Poodle.Services.Mappers
 {
     public class SectionMapper
-    {
+
+    {       
+
         public Section ConvertToModel(SectionDto sectionDto)
         {
             Section section = new Section();
             section.Content = sectionDto.Content;
             section.Title = sectionDto.Title;            
+            return section;
+        }
+
+        public Section ConvertToModel(SectionCreateView sectionDto)
+        {
+            Section section = new Section();
+            section.Content = sectionDto.Content;
+            section.Title = sectionDto.Title;
+            if (sectionDto.Restriction == "true")
+            {
+                section.IsRestricted = true;
+            }
+            else
+            {
+                section.IsRestricted = false;
+            }
+            
             return section;
         }
 
@@ -25,5 +40,7 @@ namespace Poodle.Services.Mappers
             sectionModel.Title = section.Title;            
             return section;
         }
+
+        
     }
 }
