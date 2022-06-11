@@ -12,11 +12,14 @@ namespace Poodle.Web.Models
 		}
 		public CourseViewModel(Course course)
 		{
+			this.CourseId = course.Id;
 			this.Title = course.Title;
 			this.Description = course.Description;
 			this.UsersCount = course.Users.Count;
 			this.PhotoURL = course.PhotoURL;
 		}
+
+		public int CourseId { get; set; }
 		public string Title { get; set; }
 		public string Description { get; set; }
 

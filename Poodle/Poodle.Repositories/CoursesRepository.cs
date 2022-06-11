@@ -25,6 +25,12 @@ namespace Poodle.Repositories
 
 		public IQueryable<Course> GetByTitle(string title)
 			=>	this.GetCourses().Where(x => x.Title == title);
+
+		public async Task EnrollInPublicCourse(User user, Course course)
+		{
+			course.Users.Add(user);
+			await this.context.SaveChangesAsync();
+		}
 		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;
