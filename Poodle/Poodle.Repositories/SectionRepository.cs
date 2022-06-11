@@ -3,7 +3,6 @@ using Poodle.Data;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,13 +19,15 @@ namespace Poodle.Repositories
 
         public IQueryable<Section> GetAll()
             => context.Sections;
-         
-        public async Task<Section> Create(Section sectionModel)
+              
+
+        public async Task<Section> Create(Section sectionModel, int courseId)
         {     
-            var createdSection = await this.context.Sections.AddAsync(sectionModel);
+            var createdSection = await this.context.Sections.AddAsync(sectionModel);            
             await this.context.SaveChangesAsync();
             return createdSection.Entity;
         }
+                
 
         public async Task<int> Delete(Section sectionToDelete)
         {
@@ -49,7 +50,7 @@ namespace Poodle.Repositories
             return sectionToUpdate;
         }
 
-
+        
 
 
     }

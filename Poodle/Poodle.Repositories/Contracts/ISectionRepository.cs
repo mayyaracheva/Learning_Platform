@@ -10,7 +10,7 @@ namespace Poodle.Repositories.Contracts
     public interface ISectionRepository
     {
         IQueryable<Section> GetAll();       
-        Task<Section> Create(Section sectionModel);
+        Task<Section> Create(Section sectionModel, int courseId);
         Task<int> Delete(Section sectionToDelete);
         Task<Section> Update(int id, Section sectionDto);
 
