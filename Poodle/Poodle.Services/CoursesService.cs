@@ -51,16 +51,21 @@ namespace Poodle.Services
 
 			if (AuthorizationHelper.IsStudent(user))
 			{
-				if (course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
+				if (!course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
 				{
 					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
 				}
-				user.Courses.Add(course);
+				EnrollInPublicCourse(user, course);
 			}
 			return course;
 		}
 
-        public async void EnrollInPrivateCourse(int id, User user)
+		public void EnrollInPublicCourse(User user, Course course)
+		{
+			this.coursesRepository.EnrollInPublicCourse(user, course);
+		}
+
+		public async void EnrollInPrivateCourse(int id, User user)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
             var users = await GetUsersNotEnroled(id);

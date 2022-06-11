@@ -13,5 +13,7 @@ namespace Poodle.Repositories.Contracts
 		Task<Course> CreateAsync(Course course);
 		Task<Course> UpdateAsync(Course courseToUpdate, Course course);
 		Task<Course> DeleteAsync(int id, Course course);
+
+		Task EnrollInPublicCourse(User user, Course course);
 	}
 }
