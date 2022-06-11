@@ -10,6 +10,11 @@
 <p class="margin12"><h6>Description:</h6> @this.Model.Description</p>
 
 <h4>Sections</h4>
+
+<p>
+    <a class="btn btn-primary float-right" asp-controller="Section" asp-action="CreateSection" asp-route-id="@Model.Id">Add new Section</a>
+</p>
+
 @{
     foreach (var item in this.Model.Sections)
     {
@@ -20,11 +25,13 @@
     </dl>
     }
 }
+
+<h4>Students</h4>
+
 <p>
-    <a class="btn btn-primary float-right" asp-controller="Section" asp-action="CreateSection" asp-route-id="@Model.Id">Add new Section</a>
+    <a class="btn bg-dark text-white float-right" asp-controller="Courses" asp-action="EnrollStudents" asp-route-id="@Model.Id">Enroll Students</a>
 </p>
 
-<h4>Users</h4>
 
 <ul>
     @{

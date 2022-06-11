@@ -15,7 +15,7 @@ namespace Poodle.Data.EntityModels
 
 		//a course can have many sections and many users
 		public ICollection<Section> Sections { get; set; }
-		public ICollection<User> Users { get; set; }
+		public List<User> Users { get; set; }
         public bool IsDeleted { get ; set ; }
     }
 }
