@@ -25,8 +25,7 @@
                         <div class="form-group">
                             <label asp-for="Restriction">Restrict View</label>
                             <span asp-validation-for="Restriction" class="text-danger"></span>
-                            <select asp-for="@Model.Restriction" name="restriction">
-                                <option value=""></option>
+                            <select asp-for="@Model.Restriction" name="restriction">                                
                                 <option value="false">Publish</option>
                                 <option value="true">Hide</option>
                             </select>                            

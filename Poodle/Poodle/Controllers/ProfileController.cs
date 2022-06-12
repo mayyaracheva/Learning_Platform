@@ -67,6 +67,7 @@ namespace Poodle.Web.Controllers
 
                 //update user in Context
                 this.ResetContext(updatedUser);
+                this.ViewData["SuccessMessage"] = "You updated your profile successfully";
                 return this.View(viewName: "Success");
             }
             else
@@ -74,6 +75,7 @@ namespace Poodle.Web.Controllers
                 var updatedUser = await this.usersService.UpdateWeb(loggedUser.Id, userModel);
                 //update user in Context
                 this.ResetContext(updatedUser);
+                this.ViewData["SuccessMessage"] = "You updated your profile successfully";
                 return this.View(viewName: "Success");               
             }
 

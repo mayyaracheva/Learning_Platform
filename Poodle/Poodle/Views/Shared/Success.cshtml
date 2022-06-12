@@ -1,11 +1,12 @@
 ﻿@{ this.ViewData["Title"] = "Success";
+
 }
 
 
 <div class="body-content">
     <br/>
     <br/>
-    <h6>Your update was successful!</h6>
+    <h6>@this.ViewData["SuccessMessage"]</h6>
     <br/>
     <p>
         <a asp-controller="Home" asp-action="Index" class="nav">Go Back</a>
