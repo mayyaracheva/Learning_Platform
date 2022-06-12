@@ -219,22 +219,23 @@
                                 if ((bool)this.ViewData["IsAuthenticated"])
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                                        <div class="navbar-nav py-0">
-                                            <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                                            <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                                            <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                                                                    <div class="navbar-nav py-0">
+                                                                        <a class="nav-item nav-link active" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+                                                                        <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
 
-                                            <div class="nav-item dropdown">
-                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@this.ViewData["CurrentUserName"]</a>
-                                                <div class="dropdown-menu rounded-0 m-0">
-                                                    <a asp-controller="Profile" asp-action="Index" class="dropdown-item">My Profile</a>
-                                                    <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">Logout</a>
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <img class="rounded-circle z-depth-0" alt="Profile Photo" src="@this.ViewData["CurrentImage"]" height="65" />
-                                            </div>
-                                        </div>
+                                                                        <div class="nav-item dropdown">
+                                                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@this.ViewData["CurrentUserName"]</a>
+                                                                            <div class="dropdown-menu rounded-0 m-0">
+                                                                                <a asp-controller="Profile" asp-action="Index" class="dropdown-item">My Profile</a>
+                                                                                <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">Logout</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div>
+                                                                            <img class="rounded-circle z-depth-0" alt="Profile Photo" src="@this.ViewData["CurrentImage"]" height="65" />
+                                                                        </div>
+                                                                    </div>
                                     </div>
                                 }
                                 else
@@ -313,14 +314,16 @@
                 </div>
                 <div class="col-lg-5 col-md-12 mb-5">
                     <h5 class="text-primary text-uppercase mb-4" style="letter-spacing: 5px;">Newsletter</h5>
-                    <p>Rebum labore lorem dolores kasd est, et ipsum amet et at kasd, ipsum sea tempor magna tempor. Accu kasd sed ea duo ipsum. Dolor duo eirmod sea justo no lorem est diam</p>
+                    <p>Sign Up for our weekly newsletter to get latest news on our new Course offerings</p>
                     <div class="w-100">
-                        <div class="input-group">
-                            <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary px-4">Sign Up</button>
+                        <form asp-controller="Newsletter" asp-action="SignUp" method="post" enctype="multipart/form-data">
+                            <div class="input-group">
+                                <input type="text" name="email" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-primary px-4">Sign Up</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
                     </div>
                 </div>
             </div>

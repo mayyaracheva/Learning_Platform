@@ -33,7 +33,10 @@ namespace Poodle.Services.Constants
 		//Image
 		public const string DEFAULT_IMAGEURL = "/img/DefaultImage.jpg";
 
-		
+		//FileLogger
+		public const string FILELOGGER_FILE = "filelogger.txt";
+
+
 
 	}
 }
