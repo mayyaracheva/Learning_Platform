@@ -72,13 +72,6 @@ namespace Poodle.Services
 
 
         }
-
-        private async Task<List<User>> GetUsersNotEnroled(int id)
-		{
-			var course = await ExistingCourseCheck(id);
-			var usersNotInCourse =  await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
-			return usersNotInCourse;
-		}
 		
 		public async Task<dynamic> Get(CourseQueryParameters filterParameters, User user)
 		{
@@ -95,10 +88,10 @@ namespace Poodle.Services
 				return await this.GetAsync(user);
 			}
 		}
-		public async Task<Course> CreateAsync(CourseCreateDTO dto, User user)
+		public async Task<Course> CreateAsync(CourseViewModel dto, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
-			DuplicateCourseCheck(dto);
+			await this.DuplicateCourseCheck(dto);
 
 			var newCourse = this.courseMapper.Convert(dto);
 			await this.coursesRepository.CreateAsync(newCourse);
@@ -125,7 +118,14 @@ namespace Poodle.Services
             return await this.coursesRepository.DeleteAsync(courseToDelete);
         }
 
-        private async Task<Course> ExistingCourseCheck(int id)
+		private async Task<List<User>> GetUsersNotEnroled(int id)
+		{
+			var course = await ExistingCourseCheck(id);
+			var usersNotInCourse = await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
+			return usersNotInCourse;
+		}
+
+		private async Task<Course> ExistingCourseCheck(int id)
         {
 			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
@@ -133,9 +133,10 @@ namespace Poodle.Services
 			return course;
         }
 
-        private void DuplicateCourseCheck(CourseCreateDTO dto)
+        private async Task DuplicateCourseCheck(CourseViewModel dto)
 		{
-			if (this.coursesRepository.GetByTitle(dto.Title) != null)
+			var course = await this.coursesRepository.GetByTitle(dto.Title).FirstAsync();
+			if ( course != null)
 			{
 				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
 			}
