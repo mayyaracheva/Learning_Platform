@@ -11,7 +11,6 @@ using Poodle.Services.Dtos;
 using Poodle.Services.Mappers;
 using Poodle.Services.Constants;
 using Poodle.Services.Helpers;
-using Poodle.Web.Models;
 
 namespace Poodle.Services
 {

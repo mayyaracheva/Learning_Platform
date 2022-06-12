@@ -2,7 +2,6 @@
 
 using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
-using Poodle.Web.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

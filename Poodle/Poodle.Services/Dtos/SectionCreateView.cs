@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Poodle.Web.Models
+namespace Poodle.Services.Dtos
 {
     public class SectionCreateView : SectionDto
     {       
@@ -14,6 +14,8 @@ namespace Poodle.Web.Models
 
         [Display(Name = "Restrict View")]
         public string Restriction { get; set; }
+
+
 
         
     }

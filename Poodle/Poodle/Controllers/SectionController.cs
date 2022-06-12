@@ -50,6 +50,7 @@ namespace Poodle.Web.Controllers
             {
                 return this.RedirectToAction("Login", "Auth");
             }
+            
 
             var sections = (await this.sectionService.GetByCourseId(id)).OrderBy(s => s.Rank).Select(section => section.Title = "before" + " " + section.Title).ToList();
             sections.Insert(0, "Last");
@@ -68,11 +69,11 @@ namespace Poodle.Web.Controllers
             {
                 this.RedirectToAction("CreateSection", "Section");
             }
-
+                        
             sectionModel.Rank = selectedRank;
             sectionModel.Restriction = restriction;
             await this.sectionService.CreateSection(sectionModel, courseId);
-            return RedirectToAction("Index", "Courses");            
+            return RedirectToAction("Index", "Courses");           
 
         }
 
