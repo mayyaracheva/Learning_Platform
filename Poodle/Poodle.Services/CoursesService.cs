@@ -55,20 +55,22 @@ namespace Poodle.Services
 				{
 					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
 				}
-				EnrollInPublicCourse(user, course);
+				EnrollInPublicCourse(new List<User> {user}, course);
 			}
 			return course;
 		}
 
-		public void EnrollInPublicCourse(User user, Course course)
+		public void EnrollInPublicCourse(List<User> users, Course course)
 		{
-			this.coursesRepository.EnrollInPublicCourse(user, course);
+			this.coursesRepository.EnrollInCourse(users, course);
 		}
 
 		public async void EnrollInPrivateCourse(int id, User user)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
             var users = await GetUsersNotEnroled(id);
+
+
         }
 
         private async Task<List<User>> GetUsersNotEnroled(int id)
@@ -120,7 +122,7 @@ namespace Poodle.Services
             AuthorizationHelper.ValidateAccess(user.Role.Name);
             var courseToDelete = await ExistingCourseCheck(id);
 
-            return await this.coursesRepository.DeleteAsync(id, courseToDelete);
+            return await this.coursesRepository.DeleteAsync(courseToDelete);
         }
 
         private async Task<Course> ExistingCourseCheck(int id)

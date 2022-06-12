@@ -3,6 +3,7 @@ using Poodle.Data;
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -26,9 +27,9 @@ namespace Poodle.Repositories
 		public IQueryable<Course> GetByTitle(string title)
 			=>	this.GetCourses().Where(x => x.Title == title);
 
-		public async Task EnrollInPublicCourse(User user, Course course)
+		public async Task EnrollInCourse(List<User> user, Course course)
 		{
-			course.Users.Add(user);
+			course.Users.AddRange(user);
 			await this.context.SaveChangesAsync();
 		}
 		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
@@ -71,7 +72,7 @@ namespace Poodle.Repositories
 			return courseToUpdate;
 		}
 
-		public async Task<Course> DeleteAsync(int id, Course courseToDelete)
+		public async Task<Course> DeleteAsync(Course courseToDelete)
 		{
 			this.context.Courses.Remove(courseToDelete);
 
