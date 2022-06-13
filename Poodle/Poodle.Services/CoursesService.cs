@@ -88,10 +88,10 @@ namespace Poodle.Services
 				return await this.GetAsync(user);
 			}
 		}
-		public async Task<Course> CreateAsync(CourseViewModel dto, User user)
+		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
 			AuthorizationHelper.ValidateAccess(user.Role.Name);
-			await this.DuplicateCourseCheck(dto);
+			await this.DuplicateCourseCheck(dto.Title);
 
 			var newCourse = this.courseMapper.Convert(dto);
 			await this.coursesRepository.CreateAsync(newCourse);
@@ -99,7 +99,7 @@ namespace Poodle.Services
 			return newCourse;
 		}
 
-        public async Task<Course> UpdateAsync(int id, User user, CourseUpdateDTO dto)
+        public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
 
@@ -125,7 +125,7 @@ namespace Poodle.Services
 			return usersNotInCourse;
 		}
 
-		private async Task<Course> ExistingCourseCheck(int id)
+		public async Task<Course> ExistingCourseCheck(int id)
         {
 			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
@@ -133,9 +133,9 @@ namespace Poodle.Services
 			return course;
         }
 
-        private async Task DuplicateCourseCheck(CourseViewModel dto)
+        private async Task DuplicateCourseCheck(string title)
 		{
-			var course = await this.coursesRepository.GetByTitle(dto.Title).FirstAsync();
+			var course = await this.coursesRepository.GetByTitle(title).FirstOrDefaultAsync();
 			if ( course != null)
 			{
 				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);

@@ -3,7 +3,7 @@ using Poodle.Services.Dtos;
 
 namespace Poodle.Web.Models
 {
-	public class CourseViewModel : CourseCreateDTO
+	public class CourseViewModel : CourseDTO
 	{
 		public CourseViewModel()
 		{

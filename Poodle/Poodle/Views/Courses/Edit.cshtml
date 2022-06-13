@@ -1,38 +1,15 @@
 ﻿@{
     this.ViewData["Title"] = "Edit";
+    this.ViewData["Action"] = "Edit";
+	this.ViewData["SubmitButton"] = "Save";
+	this.ViewData["BeerFormVisibility"] = "none";
 }
 
-@model CourseUpdateDTO
+@model CourseDTO
 
 
+<h2>Edit Course: @this.Model.Title</h2>
 
-<h2>Edit @this.Model.Title</h2>
-
- <form asp-controller="Courses" asp-action="Edit" method="post">
-        <div style="display: block">
-            <label asp-for="Title" class="form-label"></label>
-            <br />
-            <input asp-for="Title" type="text" class="form-input" />
-            <br />
-            <span asp-validation-for="Title" class="form-error"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="Description" class="form-label"></label>
-            <br />
-            <input asp-for="Description" type="text" class="form-input" />
-            <br />
-            <span asp-validation-for="Description" class="form-error"></span>
-        </div>
-        <div class="mb-3">
-            <label asp-for="CategoryId" class="form-label"></label>
-            <br />
-            <input asp-for="CategoryId" type="" class="form-input" />
-            <br />
-            <span asp-validation-for="CategoryId" class="form-error"></span>
-        </div>
-        <div>
-            <input type="submit" value="Save" class="btn-primary" />
-        </div>
-    </form>
+ <partial name="_CourseForm" />
 
 <a href="/courses/index" class="nav">Go Back</a>

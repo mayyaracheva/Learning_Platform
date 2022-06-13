@@ -52,8 +52,8 @@ namespace Poodle.Repositories
 
 		public async Task<Course> CreateAsync(Course course)
 		{
+			course.CreatedOn = DateTime.Now;
 			var createdCourse = await this.context.Courses.AddAsync(course);
-
 			await this.context.SaveChangesAsync();
 
 			return createdCourse.Entity;
@@ -63,7 +63,8 @@ namespace Poodle.Repositories
 		{
 			courseToUpdate.Title = course.Title != null ? course.Title : courseToUpdate.Title;
 			courseToUpdate.Description = course.Description != null ? course.Description : courseToUpdate.Description;
-			courseToUpdate.Category.Name = course.Category.Name != null ? course.Category.Name : courseToUpdate.Category.Name;
+			courseToUpdate.CategoryId = course.CategoryId == 0 ? course.CategoryId : courseToUpdate.CategoryId;
+			courseToUpdate.PhotoURL = course.PhotoURL != null ? course.PhotoURL : courseToUpdate.PhotoURL;
 
 			courseToUpdate.ModifiedOn = DateTime.UtcNow;
 

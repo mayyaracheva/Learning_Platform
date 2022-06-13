@@ -63,22 +63,22 @@ namespace Poodle.Web.Controllers
 
 		public  IActionResult Create()
 		{
-			var viewModel = new CourseViewModel();
-			return this.View(viewModel);
+			var model = new CourseDTO();
+			return this.View(model);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(CourseViewModel viewModel)
+		public async Task<IActionResult> Create(CourseDTO model)
 		{
 			
 			if (!this.ModelState.IsValid)
 			{
-				return this.View(viewModel);
+				return this.View(model);
 			}
 			try
 			{
 				var user = await GetUser();
-				await this.coursesService.CreateAsync(viewModel, user);
+				await this.coursesService.CreateAsync(model, user);
 
 				return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
 			}
@@ -90,6 +90,44 @@ namespace Poodle.Web.Controllers
 			{
 				return this.DuplicateEntity(e);
 			}
+		}
+
+		public async Task<IActionResult> Edit(int id)
+		{
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
+			{
+				return this.RedirectToAction("Login", "Auth");
+			}
+			try
+			{
+				var courseToEdit = await this.coursesService.ExistingCourseCheck(id);
+				return this.View(new CourseDTO(courseToEdit));
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Edit(int id, CourseDTO model)
+		{
+			if (!this.ModelState.IsValid)
+			{
+				return this.View(model);
+			}
+
+			try
+			{
+				var user =await GetUser();		
+				await this.coursesService.UpdateAsync(id, user, model);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.Unautorized(e);
+			}
+
+			return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
 		}
 
 		[HttpPost]

@@ -44,7 +44,7 @@ namespace Poodle.Services.Controllers
 
 
 		[HttpPost("")]
-		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
+		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
 				await this.coursesService.CreateAsync(course, user);
@@ -53,11 +53,11 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseUpdateDTO dto)
+		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password);
 
-				var courseToUpdate = await this.coursesService.UpdateAsync(id, user, dto);
+				await this.coursesService.UpdateAsync(id, user, dto);
 				
 				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
 		}
@@ -67,7 +67,7 @@ namespace Poodle.Services.Controllers
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password);
 
-				var courseToDelete = await this.coursesService.DeleteAsync(id, user);
+				await this.coursesService.DeleteAsync(id, user);
 
 				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_DELETED);
 		}
