@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace Poodle.Services.Dtos
 {
-    public class SectionCreateView : SectionDto
+    public class SectionViewModel : SectionDto
     {       
         public string Rank { get; set; }
 
         [Display(Name = "Restrict View")]
         public string Restriction { get; set; }
 
-
+        public int CourseId { get; set; }
 
         
     }

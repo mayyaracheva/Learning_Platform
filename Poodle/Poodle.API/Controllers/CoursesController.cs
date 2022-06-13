@@ -89,7 +89,7 @@ namespace Poodle.Services.Controllers
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
 				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.CreateSection(id, sectionDto, requester);
+				var sectionId = await this.sectionService.CreateSection(sectionDto, id, requester);
 				return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
 		}
 				

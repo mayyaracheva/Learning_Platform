@@ -32,5 +32,15 @@ namespace Poodle.Web.Helpers
 
             return user;
         }
+
+        public async Task<User> TryGetUser(string email)
+        {
+            var users = await this.usersService.GetAll();
+            User user = users.Where(u => u.Email == email).FirstOrDefault();
+
+            //deleted users are excluded in GetAll method so such user will be returned as null
+            
+            return user;
+        }
     }
 }
