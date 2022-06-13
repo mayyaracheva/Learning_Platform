@@ -13,6 +13,7 @@ namespace Poodle.Repositories.Contracts
         Task<Section> Create(Section sectionModel, int courseId);
         Task<int> Delete(Section sectionToDelete);
         Task<Section> Update(int id, Section sectionDto);
+        Task<Section> RestrictSection(int id, bool isRestricted);
 
     }
 }

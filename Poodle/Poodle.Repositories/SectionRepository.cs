@@ -51,7 +51,14 @@ namespace Poodle.Repositories
         }
 
         
-
+        public async Task<Section> RestrictSection(int id, bool isRestricted)
+        {
+            var sectionToUpdate = this.GetAll().Where(s => s.Id == id).FirstOrDefault();
+            sectionToUpdate.IsRestricted = isRestricted;
+            sectionToUpdate.ModifiedOn = DateTime.Now;
+            await this.context.SaveChangesAsync();
+            return sectionToUpdate;
+        }
 
     }
 }

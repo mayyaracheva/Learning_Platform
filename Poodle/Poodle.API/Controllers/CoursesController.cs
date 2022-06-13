@@ -49,8 +49,8 @@ namespace Poodle.Services.Controllers
 				var user = await this.authenticationHelper.TryGetUser(email, password); 
 				await this.coursesService.CreateAsync(course, user);
 
-				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
-		}
+            return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
+        }
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
@@ -89,7 +89,7 @@ namespace Poodle.Services.Controllers
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
 				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.CreateSection(id, sectionDto, requester);
+				var sectionId = await this.sectionService.CreateSection(sectionDto, id, requester);
 				return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
 		}
 				

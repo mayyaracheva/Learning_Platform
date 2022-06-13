@@ -16,7 +16,7 @@ namespace Poodle.Services.Mappers
             return section;
         }
 
-        public Section ConvertToModel(SectionCreateView sectionDto)
+        public Section ConvertToModel(SectionViewModel sectionDto)
         {
             Section section = new Section();
             section.Content = sectionDto.Content;
@@ -41,6 +41,22 @@ namespace Poodle.Services.Mappers
             return section;
         }
 
-        
+        public SectionViewModel ConvertToViewModel(Section sectionModel)
+        {
+            SectionViewModel section = new SectionViewModel();
+            section.Content = sectionModel.Content;
+            section.Title = sectionModel.Title;
+            if (sectionModel.IsRestricted)
+            {
+                section.Restriction = "true";
+            }
+            else
+            {
+                section.Restriction = "false";
+            }            
+
+            return section;
+        }
+
     }
 }

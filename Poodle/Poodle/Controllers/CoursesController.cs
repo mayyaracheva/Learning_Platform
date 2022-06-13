@@ -18,6 +18,7 @@ namespace Poodle.Web.Controllers
 		private readonly ICoursesService coursesService;
 		private readonly IHomeService homeService;
 		private readonly IUsersService usersService;
+		public static int courseId;
 
 
 		public CoursesController(ICoursesService coursesService,
@@ -52,7 +53,7 @@ namespace Poodle.Web.Controllers
 			{
 				var user = await GetUser();
 				var course = await this.coursesService.Get(id, user);
-
+				courseId = course.Id;
 				return this.View(model: course);
 			}
 			catch (EntityNotFoundException e)
