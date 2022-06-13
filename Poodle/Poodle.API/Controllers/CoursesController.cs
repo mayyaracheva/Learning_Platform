@@ -43,16 +43,16 @@ namespace Poodle.Services.Controllers
 		}
 
 
-		[HttpPost("")]
-		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
-		{
-				var user = await this.authenticationHelper.TryGetUser(email, password); 
-				await this.coursesService.CreateAsync(course, user);
+        [HttpPost("")]
+        public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseCreateDTO course)
+        {
+            var user = await this.authenticationHelper.TryGetUser(email, password);
+            await this.coursesService.CreateAsync(course, user);
 
-				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
-		}
+            return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
+        }
 
-		[HttpPut("{id}")]
+        [HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseUpdateDTO dto)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password);

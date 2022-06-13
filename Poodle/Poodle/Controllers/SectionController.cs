@@ -20,6 +20,7 @@ namespace Poodle.Web.Controllers
         private readonly ISectionService sectionService;
         private readonly SectionMapper sectionMapper;
         private readonly AuthHelper authHelper;
+        public static int currentSectionId;
       
 
         public SectionController(ISectionService sectionService, SectionMapper sectionMapper, AuthHelper authHelper)
@@ -29,7 +30,8 @@ namespace Poodle.Web.Controllers
             this.authHelper = authHelper;
         }
 
-        public async Task<IActionResult> Index(int id)
+        
+        public async Task<IActionResult> Details(int id)
         {
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
             {
@@ -52,7 +54,7 @@ namespace Poodle.Web.Controllers
 
         public async Task<IActionResult> CreateSection(int id)
         {
-            //we get course ID form Course page when CreateSection button is clicked
+            //we get course ID fроm Course page when CreateSection button is clicked
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
             {
                 return this.RedirectToAction("Login", "Auth");
@@ -77,16 +79,26 @@ namespace Poodle.Web.Controllers
             {
                 this.RedirectToAction("CreateSection", "Section");
             }
+            try
+            {
+                var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
+                sectionModel.Rank = selectedRank;
+                sectionModel.Restriction = restriction;
+                int courseId = CoursesController.courseId;
+                await this.sectionService.CreateSection(sectionModel, courseId, requester);
+                return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
+            }           
+            catch (DuplicateEntityException)
+            {
+                this.Response.StatusCode = StatusCodes.Status400BadRequest;
+                this.ViewData["ErrorMessage"] = $"Section with this name already exists.";
 
-            var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
-            sectionModel.Rank = selectedRank;
-            sectionModel.Restriction = restriction;
-            int courseId = CoursesController.courseId;
-            await this.sectionService.CreateSection(sectionModel, courseId, requester);
-            return RedirectToAction("Index", "Courses");           
-
+                return this.View(viewName: "Error");
+            }
+            
         }
-
+            
+           
         public async Task<IActionResult> Edit(int id)
         {
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
@@ -100,11 +112,39 @@ namespace Poodle.Web.Controllers
                 this.ViewData["ErrorMessage"] = $"You are not authorized to access this page.";
             }
             
-            var section = await this.sectionService.GetById(id);           
+            var section = await this.sectionService.GetById(id);
+            this.ViewData["SectionTitle"] = section.Title;
             await this.SectionsInCourse(section.CourseId);
             SectionViewModel sectionToBeUpdated = this.sectionMapper.ConvertToViewModel(section);
             //sectionToBeUpdated.CourseId = section.CourseId;
             return this.View(sectionToBeUpdated);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, SectionViewModel viewModel, string selectedRank)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                this.RedirectToAction("Edit", "Section");
+            }
+
+            var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
+            viewModel.Rank = selectedRank;            
+            int courseId = CoursesController.courseId;
+            await this.sectionService.UpdateSection(courseId, id, viewModel, requester);
+            return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
+
+        }
+
+        public IActionResult HideSection(int id)
+        {           
+            this.sectionService.RestrictSection(id, true);
+            return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
+        }
+        public IActionResult ShowSection(int id)
+        {
+            this.sectionService.RestrictSection(id, false);
+            return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
 
         private async Task<List<string>> SectionsInCourse(int courseId)

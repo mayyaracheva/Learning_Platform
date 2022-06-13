@@ -147,7 +147,21 @@ namespace Poodle.Services
            
             var section = this.sectionMapper.ConvertToModel(sectionDto);
             return this.sectionMapper.ConvertToDto(await this.sectionRepository.Update(sectionId, section));
-        }     
+        }
+
+        public async Task<SectionDto> UpdateSection(int courseId, int sectionId, SectionViewModel sectionDto, User requester)
+        {
+            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            var sectionsInCourse = (await this.GetByCourseId(courseId)).OrderBy(s => s.Rank).ToList();
+
+            var section = this.sectionMapper.ConvertToModel(sectionDto);
+            return this.sectionMapper.ConvertToDto(await this.sectionRepository.Update(sectionId, section));
+        }
+
+        public async Task<Section> RestrictSection(int id, bool isRestricted)
+        {
+            return await this.sectionRepository.RestrictSection(id, isRestricted);
+        }
 
         private void UpdateRanks(string newRank, Section newSection, List<Section> allSections, List<Section> allSectionsInCourse)
         {

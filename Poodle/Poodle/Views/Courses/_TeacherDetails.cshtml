@@ -21,11 +21,21 @@
         <dl>
             <p>
                 <div align="left">
-                    <span>
-                        <a asp-controller="Section" asp-action="Index" asp-route-id="@item.Id">@item.Title</a>
-                        <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                        <a style="color: black" asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-                    </span>
+                    <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                    <p>
+                        <span>
+                            <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a style="color: black" asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            @if (item.IsRestricted)
+                            {
+                                <a style="color: black" asp-controller="Section" asp-action="ShowSection" asp-route-id="@item.Id" class="badge rounded-pill bg-info">Publish Section</a>
+                            }
+                            else
+                            {
+                                <a style="color: black" asp-controller="Section" asp-action="HideSection" asp-route-id="@item.Id" class="badge rounded-pill bg-primary">Hide Section</a>
+                            }
+                        </span>
+                    </p>
                 </div>
             </p>
 
