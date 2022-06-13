@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
@@ -61,15 +62,16 @@ namespace Poodle.Web.Controllers
 			}
 		}
 
-		public IActionResult Create()
+		public  IActionResult Create()
 		{
-			CourseCreateDTO viewModel = new CourseCreateDTO();
+			var viewModel = new CourseViewModel();
 			return this.View(viewModel);
 		}
 
 		[HttpPost]
-		public async Task<IActionResult> Create(CourseCreateDTO viewModel)
+		public async Task<IActionResult> Create(CourseViewModel viewModel)
 		{
+			
 			if (!this.ModelState.IsValid)
 			{
 				return this.View(viewModel);

@@ -1,10 +1,9 @@
 ﻿using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
-using System.Collections.Generic;
 
 namespace Poodle.Web.Models
 {
-	public class CourseViewModel
+	public class CourseViewModel : CourseCreateDTO
 	{
 		public CourseViewModel()
 		{
@@ -17,17 +16,15 @@ namespace Poodle.Web.Models
 			this.Description = course.Description;
 			this.UsersCount = course.Users.Count;
 			this.PhotoURL = course.PhotoURL;
+			this.CategoryId = course.CategoryId;
 		}
 
 		public int CourseId { get; set; }
-		public string Title { get; set; }
-		public string Description { get; set; }
-
 		public string ShortDescription 
 			=> this.Description?.Length > 80
 			? this.Description?.Substring(0,80) + "..."
 			: this.Description;
-		public string PhotoURL { get; set; }
 		public int UsersCount { get; set; }
+
 	}
 }
