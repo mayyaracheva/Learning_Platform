@@ -35,7 +35,7 @@
                                 <a asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.Title</a>
                             </td>
                             <td>
-                                <p>@course.Description</p>
+                                <p>@Html.Raw(course.SanitizedContent)</p>
                             </td>
                             <td>
                                 <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.Id">Edit</a>

@@ -1,4 +1,5 @@
-﻿using Poodle.Data.EntityModels.Contracts;
+﻿using Ganss.XSS;
+using Poodle.Data.EntityModels.Contracts;
 using System.Collections.Generic;
 
 namespace Poodle.Data.EntityModels
@@ -8,6 +9,8 @@ namespace Poodle.Data.EntityModels
 		public int Id { get; set; } 
 		public string Title { get; set; }
 		public string Description { get; set; }
+
+		public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Description);
 
 		public string PhotoURL { get; set; }
 		public int CategoryId { get; set; }
