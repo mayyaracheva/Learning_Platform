@@ -134,7 +134,7 @@ namespace Poodle.Web.Controllers
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
 
-        [HttpDelete]
+       
         public async Task<IActionResult> Delete(int id)
         {
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
