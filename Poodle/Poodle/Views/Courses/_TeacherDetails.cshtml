@@ -25,7 +25,7 @@
                     <p>
                         <span>
                             <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a style="color: black" asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            <a style="color: black" asp-controller="Section" asp-action="Delete" method="delete"asp-route-id="@item.Id">Delete</a>
                             @if (item.IsRestricted)
                             {
                                 <a style="color: black" asp-controller="Section" asp-action="ShowSection" asp-route-id="@item.Id" class="badge rounded-pill bg-info">Publish Section</a>

@@ -81,11 +81,11 @@ namespace Poodle.Web.Controllers
             }
             try
             {
-                var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
+                
                 sectionModel.Rank = selectedRank;
                 sectionModel.Restriction = restriction;
                 int courseId = CoursesController.courseId;
-                await this.sectionService.CreateSection(sectionModel, courseId, requester);
+                await this.sectionService.CreateSection(sectionModel, courseId);
                 return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
             }           
             catch (DuplicateEntityException)
@@ -113,10 +113,10 @@ namespace Poodle.Web.Controllers
             }
             
             var section = await this.sectionService.GetById(id);
-            this.ViewData["SectionTitle"] = section.Title;
-            await this.SectionsInCourse(section.CourseId);
             SectionViewModel sectionToBeUpdated = this.sectionMapper.ConvertToViewModel(section);
-            //sectionToBeUpdated.CourseId = section.CourseId;
+           
+            await this.SectionsInCourse(section.CourseId);         
+           
             return this.View(sectionToBeUpdated);
         }
 
@@ -127,15 +127,31 @@ namespace Poodle.Web.Controllers
             {
                 this.RedirectToAction("Edit", "Section");
             }
-
-            var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
+                        
             viewModel.Rank = selectedRank;            
             int courseId = CoursesController.courseId;
-            await this.sectionService.UpdateSection(courseId, id, viewModel, requester);
+            await this.sectionService.UpdateSection(courseId, id, viewModel);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
-
         }
 
+        [HttpDelete]
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
+            {
+                return this.RedirectToAction("Login", "Auth");
+            }
+
+            if (!this.HttpContext.Session.GetString("CurrentRole").Equals("teacher", StringComparison.InvariantCultureIgnoreCase))
+            {
+                this.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                this.ViewData["ErrorMessage"] = $"You are not authorized to access this page.";
+            }
+
+            var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
+            await this.sectionService.DeleteSection(id, requester);
+            return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
+        }
         public IActionResult HideSection(int id)
         {           
             this.sectionService.RestrictSection(id, true);

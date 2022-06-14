@@ -1,16 +1,14 @@
 ﻿
-@{    
+@{
     this.ViewData["Title"] = "Section";
     this.ViewData["CurrentRole"] = this.Context.Session.GetString("CurrentRole");
 }
+@model Section
 
-@{
-    if (this.ViewData["CurrentRole"].ToString().ToLower() == "student")
-    {
-        <partial name="_StudentView" />
-    }
-    else
-    {
-        <partial name="_TeacherView" />
-    }
-}
+<h2>@this.Model.Title</h2>
+<br />
+<p class="margin12">@Html.Raw(this.Model.Content)</p>
+
+
+
+

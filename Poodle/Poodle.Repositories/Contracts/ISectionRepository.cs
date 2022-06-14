@@ -12,7 +12,8 @@ namespace Poodle.Repositories.Contracts
         IQueryable<Section> GetAll();       
         Task<Section> Create(Section sectionModel, int courseId);
         Task<int> Delete(Section sectionToDelete);
-        Task<Section> Update(int id, Section sectionDto);
+        Task<Section> UpdateFromApi(Section sectionToUpdate);
+        Task<Section> UpdateFromView(Section sectionToUpdate);
         Task<Section> RestrictSection(int id, bool isRestricted);
 
     }

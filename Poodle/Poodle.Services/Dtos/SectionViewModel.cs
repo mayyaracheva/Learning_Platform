@@ -15,7 +15,7 @@ namespace Poodle.Services.Dtos
         [Display(Name = "Restrict View")]
         public string Restriction { get; set; }
 
-        public int CourseId { get; set; }
+       
 
         
     }

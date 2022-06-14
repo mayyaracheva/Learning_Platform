@@ -36,21 +36,19 @@ namespace Poodle.Repositories
             return sectionToDelete.Id;
         }
 
-        public async Task<Section> Update(int id, Section sectionDto)
+        public async Task<Section> UpdateFromApi(Section sectionToUpdate)
         {
-            var sectionToUpdate = this.GetAll().Where(s => s.Id == id).FirstOrDefault();
-
-            sectionToUpdate.Content = !string.IsNullOrEmpty(sectionDto.Content) ? sectionDto.Content : sectionToUpdate.Content;
-            sectionToUpdate.Title = !string.IsNullOrEmpty(sectionDto.Title) ? sectionDto.Title : sectionToUpdate.Title;
-            //sectionToUpdate.Rank = !string.IsNullOrEmpty(sectionDto.Rank) ? sectionDto.Rank : sectionToUpdate.Rank;
-            sectionToUpdate.ModifiedOn = DateTime.Now;
-
             await this.context.SaveChangesAsync();
-
             return sectionToUpdate;
         }
 
-        
+        public async Task<Section> UpdateFromView(Section sectionToUpdate)
+        {            
+            await this.context.SaveChangesAsync();
+            return sectionToUpdate;
+        }
+
+
         public async Task<Section> RestrictSection(int id, bool isRestricted)
         {
             var sectionToUpdate = this.GetAll().Where(s => s.Id == id).FirstOrDefault();

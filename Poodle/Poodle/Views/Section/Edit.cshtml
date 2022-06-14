@@ -14,7 +14,7 @@
                     <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
                         <div class="form-group">
                             <label asp-for="@Model.Title"></label>
-                            <input type="text" asp-for="@this.ViewData["SectionTitle"]" class="form-control" />
+                            <input type="text" asp-for="@Model.Title" class="form-control" />
                             <span asp-validation-for="@Model.Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
@@ -26,6 +26,7 @@
                             <label>Set New Rank</label>
                             <span asp-validation-for="Rank" class="text-danger"></span>
                             <select asp-for="@Model.Rank" name="selectedRank" class="custom-select">
+                            <option value="NoChange">No Change</option>
 
                                 @{
                                     int count = this.ViewBag.SectionsCount;
@@ -41,7 +42,7 @@
 
                         <div class="form-group">
                             <br />
-                            <button type="submit" asp-controller="Section" asp-action="Edit" class="btn-primary">Update</button>
+                            <button type="submit" asp-controller="Section" asp-action="Edit" method="post"class="btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
