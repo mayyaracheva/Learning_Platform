@@ -21,6 +21,17 @@
     <None Include="wwwroot\lib\owlcarousel\LICENSE" />
     <None Include="wwwroot\lib\owlcarousel\owl.carousel.js" />
     <None Include="wwwroot\lib\owlcarousel\owl.carousel.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\code\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\image\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\link\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\media\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\paste\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\plugins\table\plugin.min.js" />
+    <None Include="wwwroot\lib\tinymce\skins\content\default\content.min.css" />
+    <None Include="wwwroot\lib\tinymce\skins\ui\oxide\content.min.css" />
+    <None Include="wwwroot\lib\tinymce\skins\ui\oxide\skin.min.css" />
+    <None Include="wwwroot\lib\tinymce\themes\silver\theme.min.js" />
+    <None Include="wwwroot\lib\tinymce\tinymce.min.js" />
     <None Include="wwwroot\scss\bootstrap\scss\bootstrap-grid.scss" />
     <None Include="wwwroot\scss\bootstrap\scss\bootstrap-reboot.scss" />
     <None Include="wwwroot\scss\bootstrap\scss\bootstrap.scss" />
