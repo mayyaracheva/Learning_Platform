@@ -115,7 +115,7 @@ namespace Poodle.Repositories
 		{
 			return this.context.Courses.Where(x => !x.IsDeleted)
 					.Include(course => course.Category)
-					.Include(course => course.Sections)
+					.Include(course => course.Sections.Where(x => !x.IsDeleted))
 					.Include(course => course.Users);
 		}
 	}
