@@ -1,5 +1,5 @@
 ﻿
-@model List<CourseViewModel>
+@model List<Course>
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -15,13 +15,13 @@
                             <img class="img-fluid" src="~/@course.PhotoURL" alt="">
                             <div class="bg-secondary p-4">
                                 <div class="d-flex justify-content-between mb-3">
-                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>@course.UsersCount</small>
+                                    <small class="m-0"><i class="fa fa-users text-primary mr-2"></i>@course.Users.Count</small>
                                     <small class="m-0"><i class="far fa-clock text-primary mr-2"></i>01h 30m</small>
                                 </div>
-                                <a class="h5" asp-controller="Courses" asp-action="Details" asp-route-id="@course.CourseId">@course.Title</a>
+                                <a class="h5" asp-controller="Courses" asp-action="Details" asp-route-id="@course.Id">@course.Title</a>
                                 <div class="border-top mt-4 pt-4">
                                     <div class="d-flex justify-content-between">
-                                        <a class="h6">@course.ShortDescription</a>
+                                        <a class="h6">@course.Description.Substring(0,80) + "..."</a>
                                     </div>
                                 </div>
                             </div>

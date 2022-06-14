@@ -73,20 +73,25 @@ namespace Poodle.Services
 
         }
 		
-		public async Task<dynamic> Get(CourseQueryParameters filterParameters, User user)
+		public async Task<List<Course>> Get(CourseQueryParameters filterParameters, User user)
 		{
-			if (!filterParameters.NoQueryParameters)
-			{
-				var courses = await this.coursesRepository
+			var courses = await this.coursesRepository
 				.Get(filterParameters)
 				.ToListAsync();
 
-				return courses;
-			}
-			else
-			{
-				return await this.GetAsync(user);
-			}
+			return courses;
+			//if (!filterParameters.NoQueryParameters)
+			//{
+			//	var courses = await this.coursesRepository
+			//	.Get(filterParameters)
+			//	.ToListAsync();
+
+			//	return courses;
+			//}
+			//else
+			//{
+			//	return await this.GetAsync(user);
+			//}
 		}
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
@@ -118,20 +123,19 @@ namespace Poodle.Services
             return await this.coursesRepository.DeleteAsync(courseToDelete);
         }
 
+		public async Task<Course> ExistingCourseCheck(int id)
+		{
+			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
+				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+
+			return course;
+		}
 		private async Task<List<User>> GetUsersNotEnroled(int id)
 		{
 			var course = await ExistingCourseCheck(id);
 			var usersNotInCourse = await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
 			return usersNotInCourse;
 		}
-
-		public async Task<Course> ExistingCourseCheck(int id)
-        {
-			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
-				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
-
-			return course;
-        }
 
         private async Task DuplicateCourseCheck(string title)
 		{

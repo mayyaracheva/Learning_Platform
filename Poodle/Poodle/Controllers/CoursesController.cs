@@ -9,6 +9,7 @@ using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
 using Poodle.Web.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -30,7 +31,7 @@ namespace Poodle.Web.Controllers
 			this.homeService = homeService;
 			this.usersService = usersService;
 		}
-		public async Task<IActionResult> Index([FromQuery] CourseQueryParameters filterParams)
+		public async Task<IActionResult> Index(CourseQueryParameters filterParams)
 		{
 			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
 			{
@@ -38,7 +39,7 @@ namespace Poodle.Web.Controllers
 			}
 			this.ViewData["SortOrder"] = string.IsNullOrEmpty(filterParams.SortOrder) ? "desc" : "";
 			var user = await GetUser();
-
+			
 			var publicCourses = await this.coursesService.Get(filterParams, user);
 			return View(publicCourses);
 		}
