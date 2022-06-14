@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -62,8 +63,13 @@ namespace Poodle.Web.Controllers
 			}
 		}
 
+		
 		public  IActionResult Create()
 		{
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
+			{
+				return this.RedirectToAction("Login", "Auth");
+			}
 			var model = new CourseDTO();
 			return this.View(model);
 		}

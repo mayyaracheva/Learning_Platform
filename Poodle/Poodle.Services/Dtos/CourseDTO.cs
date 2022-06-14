@@ -1,5 +1,6 @@
 ﻿
 using Poodle.Data.EntityModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace Poodle.Services.Dtos
 {
@@ -17,9 +18,12 @@ namespace Poodle.Services.Dtos
 			this.CategoryId = course.CategoryId;
 		}
 
+		[Required]
 		public string Title { get; set; }
+		[Required]
 		public string Description { get; set; }
 		public int CategoryId { get; set; }
+		[Required]
 		public string PhotoURL { get; set; }
 	}
 }

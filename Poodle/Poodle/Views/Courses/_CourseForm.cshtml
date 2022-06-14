@@ -17,13 +17,13 @@
         <label asp-for="Title"></label>
         <br />
         <input asp-for="Title" type="text" class="form-control" />
-        <span asp-validation-for="Title" class="form-error"></span>
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="Description"></label>
         <br />
         <textarea asp-for="Description" class="form-control" rows="10" id="comment"></textarea>
-        <span asp-validation-for="Description" class="form-error"></span>
+        <span asp-validation-for="Description" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="CategoryId"></label>
@@ -32,13 +32,13 @@
             <option value="1">Public</option>
             <option value="2">Private</option>
         </select>
-        <span asp-validation-for="CategoryId" class="form-error"></span>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
     </div>
     <div class="form-group" style="display: @this.ViewData["BeerFormVisibility"]">
         <label asp-for="PhotoURL"></label>
         <br />
         <input asp-for="PhotoURL" type="text" class="form-control" />
-        <span asp-validation-for="PhotoURL" class="form-error"></span>
+        <span asp-validation-for="PhotoURL" class="text-danger"></span>
     </div>
     <div>
         <input type="submit" value="@this.ViewData["SubmitButton"]" class="btn-primary" />
