@@ -11,6 +11,7 @@ using Poodle.Services.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using Poodle.Web.Models;
+using System;
 
 namespace Poodle.Services
 {
@@ -29,7 +30,7 @@ namespace Poodle.Services
 			this.usersRepository = usersRepository;
 		}
 
-		//user type check - diff access level
+		//user role check - diff Courses access level, returns diff type
 		public async Task<dynamic> GetAsync(User user)
 		{
 			if (AuthorizationHelper.IsStudent(user))
@@ -37,7 +38,7 @@ namespace Poodle.Services
 				var courses = await this.coursesRepository.GetAll()
 					.Where(course => (course.Category.Name == ConstantsContainer.PUBLIC_CATEGORY)
 							&& (course.Users.Contains(user)))
-					.Select(course => new CourseViewModel(course))
+					.Select(course => new StudentCourseViewModel(course))
 					.ToListAsync();
 				return courses;
 			}
@@ -49,7 +50,7 @@ namespace Poodle.Services
 		{
 			var course = await ExistingCourseCheck(id);
 
-			EnrollInPublicCourse(user, course);
+			StudentEnrollInPublicCourse(user, course);
 			return course;
 		}
 
@@ -60,21 +61,40 @@ namespace Poodle.Services
 
 
         }
+
+		//public List<T> GetCourses<T>(User user) where T : CourseViewModel,new()
+  //      {
+		//	if(AuthorizationHelper.IsStudent(user))
+  //          {
+		//		var courses = this.coursesRepository.GetAll()
+		//			.Where(course => (course.Category.Name == ConstantsContainer.PUBLIC_CATEGORY)
+		//					&& (course.Users.Contains(user)))
+		//			.Select(course => new CourseViewModel(course))
+		//			.ToList();
+		//		return courses.OfType<T>();
+		//	}
+
+		//	throw new NotImplementedException();
+  //      }			
 		
-		public async Task<dynamic> Get(CourseQueryParameters filterParameters, User user)
+		public async Task<List<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user)
 		{
-			if (!filterParameters.NoQueryParameters)
-			{
 				var courses = await this.coursesRepository
 				.Get(filterParameters)
+				.Where(course => course.Users.Contains(user))
+				.Select(course => new StudentCourseViewModel(course))
 				.ToListAsync();
 
 				return courses;
-			}
-			else
-			{
-				return await this.GetAsync(user);
-			}
+		}
+		public async Task<List<TeacherCourseViewModel>> TeacherGetCourses(CourseQueryParameters filterParameters, User user)
+		{
+			var courses = await this.coursesRepository
+			.Get(filterParameters)
+			.Select(course => new TeacherCourseViewModel(course))
+			.ToListAsync();
+
+			return courses;
 		}
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
@@ -114,7 +134,7 @@ namespace Poodle.Services
 			return course;
 		}
 
-		private void EnrollInPublicCourse(User user, Course course)
+		private void StudentEnrollInPublicCourse(User user, Course course)
 		{
 			if (AuthorizationHelper.IsStudent(user))
 			{

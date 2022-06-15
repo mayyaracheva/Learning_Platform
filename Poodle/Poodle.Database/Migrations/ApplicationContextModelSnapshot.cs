@@ -109,10 +109,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 1,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3924),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6151),
                             Description = "The course gives you a broad range of fundamental knowledge for all IT careers. Through a combination of lecture, hands-on labs, and self-study, you will learn how to install, operate, configure, and verify basic IPv4 and IPv6 networks. The course covers configuring network components such as switches, routers, and wireless LAN controllers; managing network devices; and identifying basic security threats. The course also gives you a foundation in network programmability, automation, and software-defined networking.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3930),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6163),
                             PhotoURL = "img/course-1.jpg",
                             Title = "Implementing and Administering Solutions(CCNA)"
                         },
@@ -120,10 +120,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 2,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3969),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6180),
                             Description = "The course helps you prepare for DevNet Professional certification and for professional-level network automation engineer roles. You will learn how to implement network applications using Cisco® platforms as a base, from initial software design to diverse system integration, as well as testing and deployment automation. The course gives you hands-on experience solving real world problems using Cisco Application Programming Interfaces (APIs) and modern development tools.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3971),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6181),
                             PhotoURL = "img/course-2.jpg",
                             Title = "Developing Applications Using Core Platforms and APIs (DEVCOR)"
                         },
@@ -131,10 +131,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 3,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3974),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6182),
                             Description = "The course shows you how to deploy, secure, operate, and maintain Unified Computing System™ (Cisco UCS®) B-series blade servers, Cisco UCS C-Series, and S-Series rack servers for use in data centers. You will learn how to implement management and orchestration software for Cisco UCS. You will gain hands-on practice: configuring key features of Cisco UCS, Cisco UCS Director, and Cisco UCS Manager; implementing UCS management software including Cisco UCS Manager and Cisco Intersight™; and more.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3976),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6183),
                             PhotoURL = "img/course-3.jpg",
                             Title = "Configuring Unified Computing System (DCCUCS)"
                         },
@@ -142,10 +142,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 4,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3979),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6184),
                             Description = "The course shows you how to deploy and manage the  Nexus® 9000 Series Switches in Cisco Application Centric Infrastructure (Cisco ACI®) mode. You will learn how to configure and manage Cisco Nexus 9000 Series Switches in ACI mode, how to connect the Cisco ACI fabric to external networks and services, and the fundamentals of Virtual Machine Manager (VMM) integration. You will gain hands-on practice implementing key capabilities such as fabric discovery, policies, connectivity, VMM integration, and more.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3980),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6185),
                             PhotoURL = "img/course-4.jpg",
                             Title = "Implementing Application Centric Infrastructure (DCACI)"
                         },
@@ -153,10 +153,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 5,
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3983),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6186),
                             Description = "The course shows you how to implement, manage, and troubleshoot  Nexus® 9000 Series Switches in Cisco® NX-OS mode. Through expert instruction and extensive hands-on learning, you will learn how to deploy capabilities including Virtual Extensible LAN (VXLAN), Multiprotocol Label Switching (MPLS), high availability features, Intelligent Traffic Director, troubleshooting tools and techniques, NX-OS programmability features, and open interface technologies.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3984),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6187),
                             PhotoURL = "img/course-5.jpg",
                             Title = "Nexus 9000 Switches in NX-OS Mode"
                         },
@@ -164,10 +164,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 6,
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3991),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6192),
                             Description = "The course, Mulitcloud Automation and Orchestration with  CloudCenter Suite (CLDAO) v1.0 teaches you how to configure simplified orchestration and workflow automation that provides seamless integration within the Cisco® CloudCenter suite. Through lessons and hands-on experiences, you will learn to use the tools of the CloudCenter Suite to streamline business processes, automate tasks, and increase efficiency in business processes.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3993),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6193),
                             PhotoURL = "img/course-6.jpg",
                             Title = "Multicloud Automation and Orchestration with CloudCenter Suite (CLDAO) 1.0"
                         },
@@ -175,10 +175,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 7,
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3996),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6194),
                             Description = "A Guided Study Group offers you a 180-day journey of certification preparation. This approach offers a best-of-all-worlds path toward certification, with the flexibility and convenience of e-learning plus the motivation and accountability of working with a live coach. A mix of participants from various backgrounds and skill levels encourages collaboration.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(3997),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6195),
                             PhotoURL = "img/course-7.jpg",
                             Title = "Guided Study Group - CyberOps (GSG-CBROPS) 1.0"
                         },
@@ -186,10 +186,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 8,
                             CategoryId = 2,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4000),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6196),
                             Description = "Through a combination of lessons and hands-on learning, you will practice operating, managing, and integrating Cisco DNA Center, programmable network infrastructure, and Cisco SD-Access fundamentals. You will learn how Cisco delivers intent-based networking across the campus, branch, WAN, and extended enterprise and ensures that your network is operating as intended.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4001),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6197),
                             PhotoURL = "img/course-8.jpg",
                             Title = "Transforming to a Intent Based Network (IBNTRN) 1.0"
                         },
@@ -197,10 +197,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 9,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4004),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6198),
                             Description = "In this module, you'll learn how to take advantage of several virtualization services in Azure compute, which can help your applications scale out quickly and efficiently to meet increasing demands.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4005),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6199),
                             PhotoURL = "img/course-9.jpg",
                             Title = "Microsoft Azure Fundamentals: Describe core Azure services"
                         },
@@ -208,10 +208,10 @@ namespace Poodle.Data.Migrations
                         {
                             Id = 10,
                             CategoryId = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4010),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6201),
                             Description = "Create a basic GitHub Action and use that action in a workflow.",
                             IsDeleted = false,
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 580, DateTimeKind.Utc).AddTicks(4012),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 659, DateTimeKind.Utc).AddTicks(6202),
                             PhotoURL = "img/course-10.jpg",
                             Title = "Automate development tasks by using GitHub Actions"
                         });
@@ -808,130 +808,130 @@ namespace Poodle.Data.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(7167),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3249),
                             Email = "Ragnar.Lodbrock@abv.com",
                             FirstName = "Ragnar",
                             ImageId = 1,
                             IsDeleted = false,
                             LastName = "Lodbrock",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(7690),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3471),
                             Password = "adminADMIN123?",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 2,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8814),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3858),
                             Email = "Jack.Richmond@yahoo.com",
                             FirstName = "Jack",
                             ImageId = 2,
                             IsDeleted = false,
                             LastName = "Richmond",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8819),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3860),
                             Password = "johnJOHN123!",
                             RoleId = 1
                         },
                         new
                         {
                             Id = 3,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8823),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3862),
                             Email = "Jonathan.Davis@gmail.com",
                             FirstName = "Jonathan",
                             ImageId = 3,
                             IsDeleted = false,
                             LastName = "Davis",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8824),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3862),
                             Password = "jondav123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 4,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8828),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3864),
                             Email = "Ignatio.Italiano@gmail.com",
                             FirstName = "Ignatio",
                             ImageId = 4,
                             IsDeleted = false,
                             LastName = "Italiano",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8830),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3865),
                             Password = "ignitalo123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 5,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8832),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3866),
                             Email = "Reginald.Hargreeves@gmail.com",
                             FirstName = "Reginald",
                             ImageId = 5,
                             IsDeleted = false,
                             LastName = "Hargreeves",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8834),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3867),
                             Password = "jamesonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 6,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8844),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3871),
                             Email = "John.Hanes@gmail.com",
                             FirstName = "John",
                             ImageId = 6,
                             IsDeleted = false,
                             LastName = "Hanes",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8845),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3872),
                             Password = "johnsonN123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 7,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8848),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3873),
                             Email = "Horatio.Spanish@gmail.com",
                             FirstName = "Horatio",
                             ImageId = 7,
                             IsDeleted = false,
                             LastName = "Spanish",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8849),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3874),
                             Password = "horspanP123*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 8,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8852),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3875),
                             Email = "Herbert.Spencer@gmail.com",
                             FirstName = "Herbert",
                             ImageId = 8,
                             IsDeleted = false,
                             LastName = "Spencer",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8854),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3876),
                             Password = "hurspenM456!",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 9,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8857),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3877),
                             Email = "Harriet.Dark@gmail.com",
                             FirstName = "Harriet",
                             ImageId = 9,
                             IsDeleted = false,
                             LastName = "Dark",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8858),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3878),
                             Password = "hardiR789*",
                             RoleId = 2
                         },
                         new
                         {
                             Id = 10,
-                            CreatedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8863),
+                            CreatedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3880),
                             Email = "Mario.Caruso@gmail.com",
                             FirstName = "Mario",
                             ImageId = 10,
                             IsDeleted = false,
                             LastName = "Caruso",
-                            ModifiedOn = new DateTime(2022, 6, 15, 6, 28, 56, 578, DateTimeKind.Utc).AddTicks(8864),
+                            ModifiedOn = new DateTime(2022, 6, 15, 8, 41, 14, 658, DateTimeKind.Utc).AddTicks(3881),
                             Password = "marrob123!",
                             RoleId = 2
                         });

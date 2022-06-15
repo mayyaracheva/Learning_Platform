@@ -2,9 +2,7 @@
     this.ViewData["Title"] = "Details";
 }
 
-@model Course
-
-
+@model StudentCourseViewModel
 
 <h2>@this.Model.Title</h2>
 <br />
@@ -12,13 +10,12 @@
 
 <h4>Sections</h4>
 @{
-    foreach (var item in this.Model.Sections.OrderBy(s => s.Rank))
+    foreach (var item in this.Model.Sections)
     {
     <dl>
         @if (item.IsRestricted)
         {
             <dt>@item.Title <span class="badge bg-secondary">Restricted</span></dt>
-
         }
         else
         {
@@ -33,10 +30,7 @@
                     <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
                 </dt>
             }
-
         }
-
-
     </dl>
     }
 }

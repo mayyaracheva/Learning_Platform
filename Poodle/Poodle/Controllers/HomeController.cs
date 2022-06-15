@@ -29,7 +29,7 @@ namespace Poodle.Web.Controllers
         {
             var publicCourses = await this.homeService
                 .GetPublicCoursrsesAsync()
-                .Select(course => new CourseViewModel(course))
+                .Select(course => new StudentCourseViewModel(course))
                 .ToListAsync();
 
             return View(publicCourses);

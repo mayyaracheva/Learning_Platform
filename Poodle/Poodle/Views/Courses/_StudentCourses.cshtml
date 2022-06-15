@@ -1,5 +1,5 @@
 ﻿
-@model List<CourseViewModel>
+@model List<StudentCourseViewModel>
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -21,7 +21,7 @@
                                 <a class="h5" asp-controller="Courses" asp-action="Details" asp-route-id="@course.CourseId">@course.Title</a>
                                 <div class="border-top mt-4 pt-4">
                                     <div class="d-flex justify-content-between">
-                                        <a class="h6">@course.Description.Substring(0,80) + "..."</a>
+                                        <a class="h6">@course.ShortDescription</a>
                                     </div>
                                 </div>
                             </div>

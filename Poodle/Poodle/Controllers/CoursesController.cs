@@ -7,6 +7,7 @@ using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
+using Poodle.Services.Helpers;
 using Poodle.Web.Models;
 using System;
 using System.Collections.Generic;
@@ -39,9 +40,15 @@ namespace Poodle.Web.Controllers
 			}
 			this.ViewData["SortOrder"] = string.IsNullOrEmpty(filterParams.SortOrder) ? "desc" : "";
 			var user = await GetUser();
-			
-			var publicCourses = await this.coursesService.Get(filterParams, user);
-			return View(publicCourses);
+
+			if (AuthorizationHelper.IsStudent(user))
+			{
+				var studentCourses = await this.coursesService.StudentGetCourses(filterParams, user);
+				return View(studentCourses);
+			}
+
+			var teacherCourses = await this.coursesService.TeacherGetCourses(filterParams, user);
+			return View(teacherCourses);
 		}
 
 
@@ -55,8 +62,17 @@ namespace Poodle.Web.Controllers
 			{
 				var user = await GetUser();
 				var course = await this.coursesService.Get(id, user);
-				courseId = course.Id;
-				return this.View(model: course);
+				//courseId = course.Id;
+				if (AuthorizationHelper.IsStudent(user))
+				{
+					var model = new StudentCourseViewModel(course);
+					return View(model);
+				}
+				else
+				{
+					var model = new TeacherCourseViewModel(course);
+					return this.View(model);
+				}
 			}
 			catch (EntityNotFoundException e)
 			{
@@ -64,8 +80,8 @@ namespace Poodle.Web.Controllers
 			}
 		}
 
-		
-		public  IActionResult Create()
+
+		public IActionResult Create()
 		{
 			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
 			{
@@ -78,7 +94,7 @@ namespace Poodle.Web.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Create(CourseDTO model)
 		{
-			
+
 			if (!this.ModelState.IsValid)
 			{
 				return this.View(model);
@@ -127,7 +143,7 @@ namespace Poodle.Web.Controllers
 
 			try
 			{
-				var user =await GetUser();		
+				var user = await GetUser();
 				await this.coursesService.UpdateAsync(id, user, model);
 			}
 			catch (UnauthorizedOperationException e)

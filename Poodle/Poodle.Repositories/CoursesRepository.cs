@@ -115,7 +115,7 @@ namespace Poodle.Repositories
 		{
 			return this.context.Courses.Where(x => !x.IsDeleted).OrderByDescending(x => x.CreatedOn)
 					.Include(course => course.Category)
-					.Include(course => course.Sections.Where(x => !x.IsDeleted))
+					.Include(course => course.Sections.Where(s => !s.IsDeleted).OrderBy(s => s.Rank))
 					.Include(course => course.Users);
 		}
 	}

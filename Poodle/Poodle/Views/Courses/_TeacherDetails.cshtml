@@ -1,21 +1,21 @@
 ﻿@{
     this.ViewData["Title"] = "Details";
 }
-@model Course
+@model TeacherCourseViewModel
 
 
 <h2>@this.Model.Title</h2>
-<p class="margin12"><h6>Category:</h6> @this.Model.Category.Name</p>
+<p class="margin12"><h6>Category:</h6> @this.Model.CategoryName</p>
 <p class="margin12"><h6>Description:</h6> @Html.Raw(this.Model.SanitizedContent)</p>
 
 <h4>Sections</h4>
 
 <p>
-    <a class="btn btn-primary float-right" asp-controller="Section" asp-action="CreateSection" asp-route-id="@Model.Id">Add new Section</a>
+    <a class="btn btn-primary float-right" asp-controller="Section" asp-action="CreateSection" asp-route-id="@Model.CourseId">Add new Section</a>
 </p>
 
 @{
-    foreach (var item in this.Model.Sections.OrderBy(s => s.Rank))
+    foreach (var item in this.Model.Sections)
     {
         <dl align="left">
             <dt>
@@ -71,14 +71,12 @@
 
 <h4>Students</h4>
 
-@if (Model.Category.Name == "Private")
+@if (Model.CategoryName == "Private")
 {
     <p>
-        <a class="btn bg-dark text-white float-right" asp-controller="Courses" asp-action="EnrollStudents" asp-route-id="@Model.Id">Enroll Students</a>
+        <a class="btn bg-dark text-white float-right" asp-controller="Courses" asp-action="EnrollStudents" asp-route-id="@Model.CourseId">Enroll Students</a>
     </p>
 }
-
-
 
 <ul>
     @{
