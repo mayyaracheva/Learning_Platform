@@ -122,6 +122,7 @@ namespace Poodle.Services
 
             Section newSection = this.sectionMapper.ConvertToModel(sectionDto);
             newSection.CourseId = courseId;
+            newSection.IsEmbeded = sectionDto.IsEmbeded;
             newSection.CreatedOn = DateTime.UtcNow;
             newSection.ModifiedOn = DateTime.UtcNow;
             this.UpdateRanksOnCreate(sectionDto.Rank, newSection, allSectionsInCourse);
@@ -161,6 +162,8 @@ namespace Poodle.Services
         {
 
             var sectionToUpdate = await this.GetById(sectionId);
+
+            sectionToUpdate.IsEmbeded = sectionDto.IsEmbeded ? sectionToUpdate.IsEmbeded : sectionDto.IsEmbeded;            
 
             if (!sectionDto.Title.Equals(sectionToUpdate.Title))
             {

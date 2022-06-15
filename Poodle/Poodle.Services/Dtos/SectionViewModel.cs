@@ -15,7 +15,11 @@ namespace Poodle.Services.Dtos
         [Display(Name = "Restrict View")]
         public string Restriction { get; set; }
 
-       
+        [Display(Name = "Unlock on")]
+        [DataType(DataType.Date)]
+        public DateTime? Unlock { get; set; }
+
+        public bool IsEmbeded { get; set; }
 
         
     }

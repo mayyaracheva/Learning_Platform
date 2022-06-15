@@ -366,7 +366,8 @@ namespace Poodle.Data
 				CourseId = 1,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -376,7 +377,8 @@ namespace Poodle.Data
 				CourseId = 1,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -386,7 +388,8 @@ namespace Poodle.Data
 				CourseId = 1,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -396,7 +399,8 @@ namespace Poodle.Data
 				CourseId = 2,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -406,7 +410,8 @@ namespace Poodle.Data
 				CourseId = 2,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -416,7 +421,8 @@ namespace Poodle.Data
 				CourseId = 2,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -426,7 +432,8 @@ namespace Poodle.Data
 				CourseId = 3,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -436,7 +443,8 @@ namespace Poodle.Data
 				CourseId = 3,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -446,7 +454,8 @@ namespace Poodle.Data
 				CourseId = 3,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -456,7 +465,8 @@ namespace Poodle.Data
 				CourseId = 4,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -466,7 +476,8 @@ namespace Poodle.Data
 				CourseId = 4,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -476,7 +487,8 @@ namespace Poodle.Data
 				CourseId = 4,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -486,7 +498,8 @@ namespace Poodle.Data
 				CourseId = 5,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -496,7 +509,8 @@ namespace Poodle.Data
 				CourseId = 5,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -506,7 +520,8 @@ namespace Poodle.Data
 				CourseId = 5,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -516,7 +531,8 @@ namespace Poodle.Data
 				CourseId = 6,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -525,7 +541,8 @@ namespace Poodle.Data
 				Content = "testTest",
 				CourseId = 6,
 				Rank = 2,
-				IsDeleted = false
+				IsDeleted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -535,7 +552,8 @@ namespace Poodle.Data
 				CourseId = 6,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -545,7 +563,8 @@ namespace Poodle.Data
 				CourseId = 7,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -555,7 +574,8 @@ namespace Poodle.Data
 				CourseId = 7,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -565,7 +585,8 @@ namespace Poodle.Data
 				CourseId = 7,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -575,7 +596,8 @@ namespace Poodle.Data
 				CourseId = 8,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -585,7 +607,8 @@ namespace Poodle.Data
 				CourseId = 8,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -595,7 +618,8 @@ namespace Poodle.Data
 				CourseId = 8,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -605,7 +629,8 @@ namespace Poodle.Data
 				CourseId = 9,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -615,7 +640,8 @@ namespace Poodle.Data
 				CourseId = 9,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -625,7 +651,8 @@ namespace Poodle.Data
 				CourseId = 9,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -635,7 +662,8 @@ namespace Poodle.Data
 				CourseId = 10,
 				Rank = 1,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -645,7 +673,8 @@ namespace Poodle.Data
 				CourseId = 10,
 				Rank = 2,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 			sections.Add(new Section
 			{
@@ -655,7 +684,8 @@ namespace Poodle.Data
 				CourseId = 10,
 				Rank = 3,
 				IsDeleted = false,
-				IsRestricted = false
+				IsRestricted = false,
+				IsEmbeded = false
 			});
 
 			return sections;

@@ -11,6 +11,7 @@ namespace Poodle.Data.EntityModels
 		public bool IsRestricted { get; set; }
 
 		public int Rank { get; set; }
+		public bool IsEmbeded { get; set; }
 		
 		//public DateTime AvailableBy {get; set;}
 
