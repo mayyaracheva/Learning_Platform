@@ -1,4 +1,6 @@
 ﻿using Poodle.Data.EntityModels.Contracts;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Poodle.Data.EntityModels
 {
@@ -9,12 +11,11 @@ namespace Poodle.Data.EntityModels
 		public string Content { get; set; }
 		public bool IsDeleted { get; set; }
 		public bool IsRestricted { get; set; }
-
 		public int Rank { get; set; }
 		public bool IsEmbeded { get; set; }
 		
-		//public DateTime AvailableBy {get; set;}
-
+		[DataType(DataType.Date)]
+		public DateTime? UnlockOn { get; set; }
 		public int CourseId { get; set; }
 		public Course Course { get; set; }
 	}

@@ -80,7 +80,7 @@ namespace Poodle.Web.Controllers
                 this.RedirectToAction("CreateSection", "Section");
             }
             try
-            {                
+            {  
                 sectionModel.Rank = selectedRank;
                 sectionModel.Restriction = restriction;
                 int courseId = CoursesController.courseId;
@@ -93,8 +93,7 @@ namespace Poodle.Web.Controllers
                 this.ViewData["ErrorMessage"] = $"Section with this name already exists.";
 
                 return this.View(viewName: "Error");
-            }
-            
+            }            
         }
             
            

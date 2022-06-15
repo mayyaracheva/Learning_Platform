@@ -1,6 +1,7 @@
 ﻿using Ganss.XSS;
 using Poodle.Data.EntityModels.Contracts;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Data.EntityModels
 {
