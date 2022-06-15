@@ -49,20 +49,8 @@ namespace Poodle.Services
 		{
 			var course = await ExistingCourseCheck(id);
 
-			if (AuthorizationHelper.IsStudent(user))
-			{
-				if (!course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
-				{
-					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
-				}
-				EnrollInPublicCourse(new List<User> {user}, course);
-			}
+			EnrollInPublicCourse(user, course);
 			return course;
-		}
-
-		public void EnrollInPublicCourse(List<User> users, Course course)
-		{
-			this.coursesRepository.EnrollInCourse(users, course);
 		}
 
 		public async void EnrollInPrivateCourse(int id, User user)
@@ -73,25 +61,20 @@ namespace Poodle.Services
 
         }
 		
-		public async Task<List<Course>> Get(CourseQueryParameters filterParameters, User user)
+		public async Task<dynamic> Get(CourseQueryParameters filterParameters, User user)
 		{
-			var courses = await this.coursesRepository
+			if (!filterParameters.NoQueryParameters)
+			{
+				var courses = await this.coursesRepository
 				.Get(filterParameters)
 				.ToListAsync();
 
-			return courses;
-			//if (!filterParameters.NoQueryParameters)
-			//{
-			//	var courses = await this.coursesRepository
-			//	.Get(filterParameters)
-			//	.ToListAsync();
-
-			//	return courses;
-			//}
-			//else
-			//{
-			//	return await this.GetAsync(user);
-			//}
+				return courses;
+			}
+			else
+			{
+				return await this.GetAsync(user);
+			}
 		}
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
@@ -129,6 +112,19 @@ namespace Poodle.Services
 				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 
 			return course;
+		}
+
+		private void EnrollInPublicCourse(User user, Course course)
+		{
+			if (AuthorizationHelper.IsStudent(user))
+			{
+				if (!course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
+				{
+					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+				}
+				this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
+			}
+			
 		}
 		private async Task<List<User>> GetUsersNotEnroled(int id)
 		{
