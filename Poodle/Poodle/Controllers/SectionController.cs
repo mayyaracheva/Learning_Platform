@@ -80,8 +80,7 @@ namespace Poodle.Web.Controllers
                 this.RedirectToAction("CreateSection", "Section");
             }
             try
-            {
-                
+            {                
                 sectionModel.Rank = selectedRank;
                 sectionModel.Restriction = restriction;
                 int courseId = CoursesController.courseId;
@@ -163,6 +162,7 @@ namespace Poodle.Web.Controllers
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
 
+        
         private async Task<List<string>> SectionsInCourse(int courseId)
         {
             //exclude current section for edit but not for create

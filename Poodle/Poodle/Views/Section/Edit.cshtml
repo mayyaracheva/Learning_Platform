@@ -21,12 +21,33 @@
                             <label asp-for="@Model.Content"></label>
                             <textarea asp-for="@Model.Content" name="Content" id="Content" class="ckeditor"></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>                        
+                        </div>
+                        <div class="form-group">
+                            @if (Model.IsEmbeded)
+                            {
+                                <span>
+                                    <label for="notembedded" class="radio">Open Content in New Page</label>
+                                    <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" checked />
+                                    <label for="embedded" class="radio">Embed Content in Course Page</label>
+                                    <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
+                                </span>
+                            }
+                            else
+                            {
+                                <span>
+                                    <label for="notembedded" class="radio">Open Content in New Page</label>
+                                    <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
+                                    <label for="embedded" class="radio">Embed Content in Course Page</label>
+                                    <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" checked/>
+                                </span>
+                            }
+
+                        </div>
                         <div class="form-group">
                             <label>Set New Rank</label>
                             <span asp-validation-for="Rank" class="text-danger"></span>
                             <select asp-for="@Model.Rank" name="selectedRank" class="custom-select">
-                            <option value="NoChange">No Change</option>
+                                <option value="NoChange">No Change</option>
 
                                 @{
                                     int count = this.ViewBag.SectionsCount;
@@ -42,7 +63,7 @@
 
                         <div class="form-group">
                             <br />
-                            <button type="submit" asp-controller="Section" asp-action="Edit" method="post"class="btn-primary">Update</button>
+                            <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>
                         </div>
                     </form>
                 </div>
@@ -53,6 +74,22 @@
 </div>
 <script>
     CKEDITOR.replace('Content');
+    var radioState = false;
+    function test(element) {
+        if (radioState == false) {
+            check();
+            radioState = true;
+        } else {
+            uncheck();
+            radioState = false;
+        }
+    }
+    function check() {
+        document.getElementById("radioBtn").checked = true;
+    }
+    function uncheck() {
+        document.getElementById("radioBtn").checked = false;
+    }
 </script>
 
 

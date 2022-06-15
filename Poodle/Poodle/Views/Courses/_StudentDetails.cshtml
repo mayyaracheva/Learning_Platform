@@ -17,16 +17,26 @@
     <dl>
         @if (item.IsRestricted)
         {
-            <dt>@item.Title <span class="badge bg-secondary">Restricted</span></dt>            
+            <dt>@item.Title <span class="badge bg-secondary">Restricted</span></dt>
+
         }
         else
         {
-            <dt>
-                <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
-            </dt>
+            @if (item.IsEmbeded)
+            {
+                <dt>@item.Title</dt>
+                <dd>@Html.Raw(item.Content)</dd>
+            }
+            else
+            {
+                <dt>
+                    <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+                </dt>
+            }
+
         }
 
-        @*<dd>- @item.Content</dd>*@
+
     </dl>
     }
 }
