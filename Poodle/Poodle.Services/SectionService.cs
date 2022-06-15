@@ -125,6 +125,7 @@ namespace Poodle.Services
             newSection.IsEmbeded = sectionDto.IsEmbeded;
             newSection.CreatedOn = DateTime.UtcNow;
             newSection.ModifiedOn = DateTime.UtcNow;
+            newSection.UnlockOn = sectionDto.UnlockOn;
             this.UpdateRanksOnCreate(sectionDto.Rank, newSection, allSectionsInCourse);
 
             var createdSection = await this.sectionRepository.Create(newSection, courseId);
@@ -162,8 +163,11 @@ namespace Poodle.Services
         {
 
             var sectionToUpdate = await this.GetById(sectionId);
-
-            sectionToUpdate.IsEmbeded = sectionDto.IsEmbeded ? sectionToUpdate.IsEmbeded : sectionDto.IsEmbeded;            
+            
+            if (!sectionDto.IsEmbeded.Equals(sectionToUpdate.IsEmbeded))
+            {
+                sectionToUpdate.IsEmbeded = sectionDto.IsEmbeded;
+            }
 
             if (!sectionDto.Title.Equals(sectionToUpdate.Title))
             {

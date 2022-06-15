@@ -1,6 +1,7 @@
 ﻿using Ganss.XSS;
 using Poodle.Data.EntityModels.Contracts;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Poodle.Data.EntityModels
 {
@@ -10,6 +11,7 @@ namespace Poodle.Data.EntityModels
 		public string Title { get; set; }
 		public string Description { get; set; }
 
+		[NotMapped]
 		public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Description);
 
 		public string PhotoURL { get; set; }

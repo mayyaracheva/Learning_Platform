@@ -23,25 +23,12 @@
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            @if (Model.IsEmbeded)
-                            {
-                                <span>
-                                    <label for="notembedded" class="radio">Open Content in New Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" checked />
-                                    <label for="embedded" class="radio">Embed Content in Course Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
-                                </span>
-                            }
-                            else
-                            {
-                                <span>
-                                    <label for="notembedded" class="radio">Open Content in New Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
-                                    <label for="embedded" class="radio">Embed Content in Course Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" checked/>
-                                </span>
-                            }
-
+                            <span>
+                                <label for="notembedded" class="radio">Open Content in New Page</label>
+                                <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
+                                <label for="embedded" class="radio">Embed Content in Course Page</label>
+                                <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
+                            </span>
                         </div>
                         <div class="form-group">
                             <label>Set New Rank</label>

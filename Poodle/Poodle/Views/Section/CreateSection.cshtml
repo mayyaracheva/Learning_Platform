@@ -31,12 +31,17 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <label asp-for="Restriction">Restrict View</label>
+                                <label asp-for="Restriction">Select View</label>
                                 <span asp-validation-for="Restriction" class="text-danger"></span>
                                 <select asp-for="@Model.Restriction" name="restriction">
-                                    <option value="false">Publish</option>
-                                    <option value="true">Hide</option>
+                                    <option value="false">Publish Section</option>
+                                    <option value="true">Hide Section</option>
                                 </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Unlock View on<span>*</span></label>
+                                <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                <i class="fas fa-calendar-alt"></i>
                             </div>
                             <div class="form-group">
                                 <label>Select Rank</label>

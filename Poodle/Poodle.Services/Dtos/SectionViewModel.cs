@@ -1,10 +1,8 @@
 ﻿
-using Poodle.Services.Dtos;
+
 using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace Poodle.Services.Dtos
 {
@@ -17,10 +15,27 @@ namespace Poodle.Services.Dtos
 
         [Display(Name = "Unlock on")]
         [DataType(DataType.Date)]
-        public DateTime? Unlock { get; set; }
+        public DateTime? UnlockOn { get; set; }
 
         public bool IsEmbeded { get; set; }
 
-        
+        public override bool Equals(object obj)
+        {
+            SectionViewModel otherSection = obj as SectionViewModel;
+            if (otherSection != null)
+            {
+                return this.Content == otherSection.Content && this.Title == otherSection.Title && this.IsEmbeded == otherSection.IsEmbeded;
+            }
+            else
+            {
+                return false;
+            }
+           
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }
