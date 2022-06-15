@@ -27,7 +27,7 @@
             <tbody>
                 @{
                     int counter = 1;
-                    foreach (var course in this.Model.OrderByDescending(c => c.CreatedOn))
+                    foreach (var course in this.Model)
                     {
                         <tr>
                             <th scope="row">@counter</th>

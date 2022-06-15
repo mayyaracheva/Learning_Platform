@@ -13,7 +13,7 @@
 </script>
 
 <form asp-controller="Courses" asp-action="@this.ViewData["Action"]" method="post">
-    <div class="form-group" style="display: @this.ViewData["BeerFormVisibility"]">
+    <div class="form-group" style="display: @this.ViewData["FormVisibility"]">
         <label asp-for="Title"></label>
         <br />
         <input asp-for="Title" type="text" class="form-control" />

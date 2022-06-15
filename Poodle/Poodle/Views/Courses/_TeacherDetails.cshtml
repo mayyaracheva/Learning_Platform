@@ -1,5 +1,4 @@
-﻿
-@{
+﻿@{
     this.ViewData["Title"] = "Details";
 }
 @model Course
@@ -18,64 +17,67 @@
 @{
     foreach (var item in this.Model.Sections.OrderBy(s => s.Rank))
     {
-    <dl align="left">
-        <dt>
-            <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
-        </dt>  
-        <dt>
-            <span>
-                <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Edit</a>
+        <dl align="left">
+            <dt>
+                <a asp-controller="Section" asp-action="Details" asp-route-id="@item.Id">@item.Title</a>
+            </dt>
+            <dt>
+                <span>
+                    <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Edit</a>
 
-                <a style="color: black" href="#myModal" data-toggle="modal" class="badge rounded-pill bg-secondary">Delete</a>
-                <!-- Modal HTML start-->
-                <div id="myModal" class="modal fade">
-                    <div class="modal-dialog modal-confirm">
-                        <div class="modal-content">
-                            <div class="modal-header flex-column">
-                                <div class="icon-box">
-                                    <i class="material-icons">&#xE5CD;</i>
-                                </div>
-                                <h4 class="modal-title w-100">Are you sure?</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <p>Do you really want to delete this section?</p>
-                            </div>
-                            <div class="modal-footer justify-content-center">
-                                <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                <form asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id">
-                                    <div>
-                                        <input type="submit" value="Delete Section" class="btn btn-danger" />
+                    <a style="color: black" href="#myModal" data-toggle="modal" class="badge rounded-pill bg-secondary">Delete</a>
+                    <!-- Modal HTML start-->
+                    <div id="myModal" class="modal fade">
+                        <div class="modal-dialog modal-confirm">
+                            <div class="modal-content">
+                                <div class="modal-header flex-column">
+                                    <div class="icon-box">
+                                        <i class="material-icons">&#xE5CD;</i>
                                     </div>
-                                </form>
+                                    <h4 class="modal-title w-100">Are you sure?</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Do you really want to delete this section?</p>
+                                </div>
+                                <div class="modal-footer justify-content-center">
+                                    <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
+                                    <form asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id">
+                                        <div>
+                                            <input type="submit" value="Delete Section" class="btn btn-danger" />
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Modal HTML end-->
+                    <!-- Modal HTML end-->
+                    @if (item.IsRestricted)
+                    {
+                        <a style="color: black" asp-controller="Section" asp-action="ShowSection" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Publish Section</a>
+                    }
+                    else
+                    {
+                        <a style="color: black" asp-controller="Section" asp-action="HideSection" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Hide Section</a>
+                    }
+                </span>
+            </dt>
 
-                @if (item.IsRestricted)
-                {
-                    <a style="color: black" asp-controller="Section" asp-action="ShowSection" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Publish Section</a>
-                }
-                else
-                {
-                    <a style="color: black" asp-controller="Section" asp-action="HideSection" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Hide Section</a>
-                }
-            </span>
-        </dt>
-
-        @*<dt>@item.Title</dt>*@
-        @*<dd>- @item.Content</dd>*@
-    </dl>
+            @*<dt>@item.Title</dt>*@
+            @*<dd>- @item.Content</dd>*@
+        </dl>
     }
 }
 
 <h4>Students</h4>
 
-<p>
-    <a class="btn bg-dark text-white float-right" asp-controller="Courses" asp-action="EnrollStudents" asp-route-id="@Model.Id">Enroll Students</a>
-</p>
+@if (Model.Category.Name == "Private")
+{
+    <p>
+        <a class="btn bg-dark text-white float-right" asp-controller="Courses" asp-action="EnrollStudents" asp-route-id="@Model.Id">Enroll Students</a>
+    </p>
+}
+
 
 
 <ul>
