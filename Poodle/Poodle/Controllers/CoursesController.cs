@@ -62,7 +62,7 @@ namespace Poodle.Web.Controllers
 			{
 				var user = await GetUser();
 				var course = await this.coursesService.Get(id, user);
-				//courseId = course.Id;
+				courseId = course.Id;
 				if (AuthorizationHelper.IsStudent(user))
 				{
 					var model = new StudentCourseViewModel(course);
