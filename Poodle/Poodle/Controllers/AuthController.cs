@@ -34,8 +34,9 @@ namespace Poodle.Web.Controllers
         }
 
         //POST: /auth/login
+     
         [HttpPost]
-        public async Task<IActionResult> Login([Bind("Email, Password")] LoginDto userLoginModel)
+        public async Task<IActionResult> Login(LoginDto userLoginModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -49,7 +50,7 @@ namespace Poodle.Web.Controllers
                 this.HttpContext.Session.SetString("CurrentUserName", user.FirstName);
                 this.HttpContext.Session.SetString("CurrentRole", user.Role.Name);
                 this.HttpContext.Session.SetString("CurrentImage", user.Image.ImageUrl);
-                return this.RedirectToAction("Index", "Home", user);
+                return this.RedirectToAction("Index", "Home");
             }
             catch (UnauthorizedOperationException e)
             {
@@ -66,7 +67,7 @@ namespace Poodle.Web.Controllers
         }
        
         [HttpPost]
-        public async Task<IActionResult> Register([Bind("FirstName, LastName, Email, Password, ImageFile")] UserCreateDto userRegisterModel)
+        public async Task<IActionResult> Register( UserCreateDto userRegisterModel)
         {
             if (!this.ModelState.IsValid)
             {
