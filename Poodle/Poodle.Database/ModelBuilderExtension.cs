@@ -367,7 +367,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -378,7 +379,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -389,7 +391,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -400,7 +403,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -411,7 +415,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -422,7 +427,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -433,7 +439,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -444,7 +451,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -455,7 +463,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -466,7 +475,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -477,7 +487,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -488,7 +499,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -499,7 +511,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -510,7 +523,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -521,7 +535,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -532,7 +547,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -542,7 +558,8 @@ namespace Poodle.Data
 				CourseId = 6,
 				Rank = 2,
 				IsDeleted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -553,7 +570,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -564,7 +582,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -575,7 +594,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -586,7 +606,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -597,7 +618,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -608,7 +630,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -630,7 +653,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -641,7 +665,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -652,7 +677,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -663,7 +689,8 @@ namespace Poodle.Data
 				Rank = 1,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -674,7 +701,8 @@ namespace Poodle.Data
 				Rank = 2,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 			sections.Add(new Section
 			{
@@ -685,7 +713,8 @@ namespace Poodle.Data
 				Rank = 3,
 				IsDeleted = false,
 				IsRestricted = false,
-				IsEmbeded = false
+				IsEmbeded = false,
+				UnlockOn = null
 			});
 
 			return sections;
