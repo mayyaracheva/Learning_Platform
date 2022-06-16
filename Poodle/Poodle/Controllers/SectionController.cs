@@ -119,14 +119,19 @@ namespace Poodle.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(int id, SectionViewModel viewModel, string selectedRank)
+        public async Task<IActionResult> Edit(int id, SectionViewModel viewModel, string selectedRank, string restriction)
         {
             if (!this.ModelState.IsValid)
             {
                 this.RedirectToAction("Edit", "Section");
             }
                         
-            viewModel.Rank = selectedRank;            
+            viewModel.Rank = selectedRank;
+
+            if (restriction != null)
+            {
+                viewModel.Restriction = restriction;
+            }
             int courseId = CoursesController.courseId;
             await this.sectionService.UpdateSection(courseId, id, viewModel);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });

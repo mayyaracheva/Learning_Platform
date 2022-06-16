@@ -151,7 +151,7 @@ namespace Poodle.Services
 
             sectionToUpdate.Content = !string.IsNullOrEmpty(sectionDto.Content) ? sectionDto.Content : sectionToUpdate.Content;
             sectionToUpdate.Title = !string.IsNullOrEmpty(sectionDto.Title) ? sectionDto.Title : sectionToUpdate.Title;
-            sectionToUpdate.ModifiedOn = DateTime.Now;
+            sectionToUpdate.ModifiedOn = DateTime.UtcNow;
 
             return this.sectionMapper.ConvertToDto(await this.sectionRepository.UpdateFromApi(sectionToUpdate));
         }
@@ -175,13 +175,28 @@ namespace Poodle.Services
             {
                 sectionToUpdate.Content = sectionDto.Content;
             }
-
+               
             if (!sectionDto.Rank.Equals("NoChange"))
             {
                 var allSectionsInCourse = await this.GetByCourseId(courseId);
 
                 this.UpdateRanksOnEdit(sectionDto.Rank, sectionToUpdate, allSectionsInCourse);
             }
+            
+            if (sectionDto.Restriction == "true")
+            {
+                sectionToUpdate.IsRestricted = true;                
+            }
+
+            if (sectionDto.Restriction == "false")
+            {
+                sectionToUpdate.IsRestricted = false;
+            }
+
+            if (sectionDto.UnlockOn != null)
+            {
+                sectionToUpdate.UnlockOn = sectionDto.UnlockOn;
+            }            
 
             sectionToUpdate.ModifiedOn = DateTime.Now;
             return this.sectionMapper.ConvertToDto(await this.sectionRepository.UpdateFromView(sectionToUpdate));
@@ -189,7 +204,14 @@ namespace Poodle.Services
 
         public async Task<Section> RestrictSection(int id, bool isRestricted)
         {
-            return await this.sectionRepository.RestrictSection(id, isRestricted);
+            var sectionToUpdate = await this.GetById(id);
+            sectionToUpdate.IsRestricted = isRestricted;
+            if (isRestricted == false)
+            {
+                sectionToUpdate.UnlockOn = null;
+            }
+            sectionToUpdate.ModifiedOn = DateTime.UtcNow;
+            return await this.sectionRepository.RestrictSection(sectionToUpdate);
         }
 
         private void UpdateRanksOnCreate(string newRank, Section newSection, List<Section> allSectionsInCourse)

@@ -1,4 +1,5 @@
-﻿@{ this.ViewData["Title"] = "Section";}
+﻿@{ this.ViewData["Title"] = "Section";  
+}
 @model SectionViewModel
 
 <script src="~/js/ckeditor/ckeditor.js"></script>
@@ -48,7 +49,31 @@
 
                             </select>
                         </div>
+                        <div class="form-group">
 
+                            @if (@Model.IsRestricted)
+                            {                            
+                                <p class="margin12">Current ViewMode: <b>Restricted</b></p> 
+                                <label>Unlock View on<span>*</span></label>
+                                <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                <i class="fas fa-calendar-alt"></i>
+                            }
+                            else
+                            {
+                                <p class="margin12">Current ViewMode: <b>Not Restricted</b></p>
+                                <label asp-for="Restriction">Change View</label>
+                                <span asp-validation-for="Restriction" class="text-danger"></span>
+                                <select asp-for="@Model.Restriction" name="restriction">
+                                    <option value=""></option>
+                                    <option value="true">Hide Section</option>
+                                </select>
+                                <div class="form-group">
+                                    <label>Unlock View on<span>*</span></label>
+                                    <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                            }
+                        </div>              
                         <div class="form-group">
                             <br />
                             <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>

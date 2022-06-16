@@ -14,7 +14,7 @@ namespace Poodle.Repositories.Contracts
         Task<int> Delete(Section sectionToDelete);
         Task<Section> UpdateFromApi(Section sectionToUpdate);
         Task<Section> UpdateFromView(Section sectionToUpdate);
-        Task<Section> RestrictSection(int id, bool isRestricted);
+        Task<Section> RestrictSection(Section sectionToUpdate);
 
     }
 }
