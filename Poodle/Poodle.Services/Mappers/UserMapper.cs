@@ -48,5 +48,15 @@ namespace Poodle.Services.Mappers
             return newUser;
         }
 
+        public UserCreateDto ConvertToApiDto(RegisterViewModel userModel)
+        {
+            UserCreateDto newUser = new UserCreateDto();
+            newUser.FirstName = userModel.FirstName;
+            newUser.LastName = userModel.LastName;
+            newUser.Email = userModel.Email;
+            newUser.Password = userModel.Password;           
+            return newUser;
+        }
+
     }
 }

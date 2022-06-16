@@ -23,7 +23,6 @@ namespace Poodle.Services.Dtos
 
         public string ImageUrl { get; set; }
 
-        [Display(Name = "Profile Photo")]
-        public IFormFile ImageFile { get; set; }
+       
     }
 }

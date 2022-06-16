@@ -37,12 +37,14 @@ namespace Poodle.Services
 
         public async Task<List<Section>> GetByCourseId(int id)
            => (await this.GetAll()).Where(Section => Section.CourseId == id).OrderBy(section => section.Rank).ToList();
-
-        //sorted by Rank asc
-        //the course page displays only the title which incl link to the section page
-        //if section currently restricted, displays no link to page but restricted message instead
-        //restricted not excl from DB pull as we need to replace their title with restricted message
-
+                
+        
+        /// <summary>
+        /// Method used for the Api whereby restricted not excl from DB pull as we need to replace their title with restricted message, for the Web this is done via button in the view
+        /// </summary>
+        /// <param name="courseId"></param>
+        /// <param name="requester"></param>
+        /// <returns></returns>
         public async Task<List<SectionDto>> GetByCourseId(int courseId, User requester)
         {
 
@@ -79,11 +81,6 @@ namespace Poodle.Services
             return restrictedSections.ToList();
 
         }
-
-
-        //option to change the rank to any int not used by current section in the course
-        //restriction option - by date, by user (only enrolled in current course), no restriction by default
-        //configure as new page(by default) or embedded
 
         public async Task<SectionDto> CreateSection(SectionDto sectionDto, int courseId, User requester)
         {
