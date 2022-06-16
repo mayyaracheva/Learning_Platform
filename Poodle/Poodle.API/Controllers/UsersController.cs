@@ -102,8 +102,7 @@ namespace Poodle.Services.Controllers
 		{
 			//all newly created users are students by default
 			try
-			{
-				
+			{				
 				var createdUser = await this.usersService.Create(userCreateDto, userCreateDto.ImageUrl);
 
 				return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.USER_CREATED);

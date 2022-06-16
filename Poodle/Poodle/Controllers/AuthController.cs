@@ -5,6 +5,7 @@ using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
+using Poodle.Services.Mappers;
 using Poodle.Web.Helpers;
 using System;
 using System.IO;
@@ -17,12 +18,14 @@ namespace Poodle.Web.Controllers
         private readonly AuthHelper authHelper;       
         private readonly IWebHostEnvironment webHostEnvironment;
         private readonly IUsersService usersService;
+        private readonly UserMapper userMapper;
 
-        public AuthController(AuthHelper authHelper, IUsersService usersService, IWebHostEnvironment webHostEnvironment)
+        public AuthController(AuthHelper authHelper, IUsersService usersService, IWebHostEnvironment webHostEnvironment, UserMapper userMapper)
         {
             this.authHelper = authHelper;
             this.usersService = usersService;           
             this.webHostEnvironment = webHostEnvironment;
+            this.userMapper = userMapper;
         }
 
         //GET: /auth/login
@@ -61,13 +64,13 @@ namespace Poodle.Web.Controllers
 
         public IActionResult Register()
         {
-            var userRegisterModel = new UserCreateDto();
+            var userRegisterModel = new RegisterViewModel();
 
             return this.View(userRegisterModel);
         }
        
         [HttpPost]
-        public async Task<IActionResult> Register( UserCreateDto userRegisterModel)
+        public async Task<IActionResult> Register( RegisterViewModel userRegisterModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -84,14 +87,14 @@ namespace Poodle.Web.Controllers
                     string path = Path.Combine(webHostEnvironment.WebRootPath, folder);
                     await userRegisterModel.ImageFile.CopyToAsync(new FileStream(path, FileMode.Create));
 
-                    var createdUser = await this.usersService.Create(userRegisterModel, imageUrl);
+                    var createdUser = await this.usersService.Create(this.userMapper.ConvertToApiDto(userRegisterModel), imageUrl);
 
                     return this.RedirectToAction("Login");
                 }
                 else
                 {
                     string imageUrl = ConstantsContainer.DEFAULT_IMAGEURL;
-                    var createdUser = await this.usersService.Create(userRegisterModel, imageUrl);
+                    var createdUser = await this.usersService.Create(this.userMapper.ConvertToApiDto(userRegisterModel), imageUrl);
 
                     return this.RedirectToAction("Login"); 
                 }
