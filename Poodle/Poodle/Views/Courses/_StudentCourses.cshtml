@@ -1,5 +1,5 @@
 ﻿
-@model List<StudentCourseViewModel>
+@model PaginatedList<StudentCourseViewModel>
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -33,3 +33,31 @@
         </div>
     </div>
 </div>
+    @{
+            string previousButtonState = (this.Model.HasPreviosPage) ? "" : "disabled";
+            string nextButtonState = (this.Model.HasNextPage) ? "" : "disabled";
+        }
+        <div class=" align-center">
+        
+                <ul class="pagination">
+                    <li class="page-item @previousButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item @previousButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber - 1)">
+                            @($"{this.Model.PageNumber - 1}")
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link">@this.Model.PageNumber<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item @nextButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber + 1)">
+                            @($"{this.Model.PageNumber + 1}")
+                        </a>
+                    </li>
+                    <li class="page-item @nextButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber + 1)">Next</a>
+                    </li>
+                </ul>
+        </div>

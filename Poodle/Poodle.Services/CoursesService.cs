@@ -58,8 +58,6 @@ namespace Poodle.Services
         {
             AuthorizationHelper.ValidateAccess(user.Role.Name);
             var users = await GetUsersNotEnroled(id);
-
-
         }
 
 		//public List<T> GetCourses<T>(User user) where T : CourseViewModel,new()
@@ -85,16 +83,27 @@ namespace Poodle.Services
 				.Select(course => new StudentCourseViewModel(course))
 				.ToListAsync();
 
-				return courses;
+			IEnumerable<StudentCourseViewModel> paginatedCourses = courses
+					.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize)
+					.Take(filterParameters.PageSize);
+
+			int totalPages = (courses.Count - 1) / filterParameters.PageSize + 1;
+			return new PaginatedList<StudentCourseViewModel>(paginatedCourses, totalPages, filterParameters.PageNumber);
 		}
-		public async Task<List<TeacherCourseViewModel>> TeacherGetCourses(CourseQueryParameters filterParameters, User user)
+		public async Task<PaginatedList<TeacherCourseViewModel>> TeacherGetCourses(CourseQueryParameters filterParameters, User user)
 		{
 			var courses = await this.coursesRepository
-			.Get(filterParameters)
-			.Select(course => new TeacherCourseViewModel(course))
-			.ToListAsync();
+				.Get(filterParameters)
+				.Select(course => new TeacherCourseViewModel(course))
+				.ToListAsync();
 
-			return courses;
+			IEnumerable<TeacherCourseViewModel> paginatedCourses = courses
+					.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize)
+					.Take(filterParameters.PageSize);
+
+			int totalPages = (courses.Count - 1) / filterParameters.PageSize + 1;
+
+			return new PaginatedList<TeacherCourseViewModel>(paginatedCourses, totalPages, filterParameters.PageNumber);
 		}
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
