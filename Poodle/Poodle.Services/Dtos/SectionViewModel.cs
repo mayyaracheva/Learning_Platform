@@ -13,8 +13,11 @@ namespace Poodle.Services.Dtos
         [Display(Name = "Restrict View")]
         public string Restriction { get; set; }
 
+        public bool IsRestricted { get; set; }
+
         [Display(Name = "Unlock on")]
         [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? UnlockOn { get; set; }
 
         public bool IsEmbeded { get; set; }
