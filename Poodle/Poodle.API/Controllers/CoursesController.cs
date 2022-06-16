@@ -38,7 +38,7 @@ namespace Poodle.Services.Controllers
 		public async Task<IActionResult> GetById(int id, [FromHeader] string email, [FromHeader] string password)
 		{
 				var user = await this.authenticationHelper.TryGetUser(email, password);
-				var course = this.coursesService.Get(id, user);
+				var course = this.coursesService.EnrollStudentInPublicCourse(id, user);
 				return this.StatusCode(StatusCodes.Status200OK, course);
 		}
 

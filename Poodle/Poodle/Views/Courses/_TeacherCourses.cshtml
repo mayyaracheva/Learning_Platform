@@ -40,7 +40,7 @@
                             <td>
                                 <a asp-controller="Courses" asp-action="Edit" asp-route-id="@course.CourseId">Edit</a>
                                 <a href="#myModal" class="text-danger" data-toggle="modal">Delete</a>
-                                <!-- Modal HTML start-->
+                                <!-- Delete Modal HTML start-->
                                 <div id="myModal" class="modal fade">
                                     <div class="modal-dialog modal-confirm">
                                         <div class="modal-content">
@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!-- Modal HTML end-->
+                                <!-- Delete Modal HTML end-->
                             </td>
                         </tr>
 
@@ -74,7 +74,7 @@
                 }
             </tbody>
         </table>
-
+        <!--Pagination Start -->
          @{
             string previousButtonState = (this.Model.HasPreviosPage) ? "" : "disabled";
             string nextButtonState = (this.Model.HasNextPage) ? "" : "disabled";
@@ -102,6 +102,7 @@
                     </li>
                 </ul>
         </nav>
+        <!--Pagination End -->
     </div>
 </div>
 

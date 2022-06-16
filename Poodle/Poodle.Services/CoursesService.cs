@@ -45,25 +45,15 @@ namespace Poodle.Services
 			return await this.coursesRepository.GetAll().ToListAsync();
 		}
 
-		/* - user type check - diff access level */
-		public async Task<Course> Get(int id, User user)
-		{
-			var course = await ExistingCourseCheck(id);
+		public async Task<Course> GetExistingCourse(int id)
+			=> await this.coursesRepository.Get(id).FirstOrDefaultAsync()
+				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
 
-			StudentEnrollInPublicCourse(user, course);
-			return course;
-		}
-
-		public async void EnrollInPrivateCourse(int id, User user)
-        {
-            AuthorizationHelper.ValidateAccess(user.Role.Name);
-            var users = await GetUsersNotEnroled(id);
-        }
 
 		//public List<T> GetCourses<T>(User user) where T : CourseViewModel,new()
-  //      {
+		//      {
 		//	if(AuthorizationHelper.IsStudent(user))
-  //          {
+		//          {
 		//		var courses = this.coursesRepository.GetAll()
 		//			.Where(course => (course.Category.Name == ConstantsContainer.PUBLIC_CATEGORY)
 		//					&& (course.Users.Contains(user)))
@@ -73,15 +63,15 @@ namespace Poodle.Services
 		//	}
 
 		//	throw new NotImplementedException();
-  //      }			
-		
+		//      }			
+
 		public async Task<List<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user)
 		{
-				var courses = await this.coursesRepository
-				.Get(filterParameters)
-				.Where(course => course.Users.Contains(user))
-				.Select(course => new StudentCourseViewModel(course))
-				.ToListAsync();
+			var courses = await this.coursesRepository
+			.Get(filterParameters)
+			.Where(course => course.Users.Contains(user))
+			.Select(course => new StudentCourseViewModel(course))
+			.ToListAsync();
 
 			IEnumerable<StudentCourseViewModel> paginatedCourses = courses
 					.Skip((filterParameters.PageNumber - 1) * filterParameters.PageSize)
@@ -116,56 +106,58 @@ namespace Poodle.Services
 			return newCourse;
 		}
 
-        public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
-        {
-            AuthorizationHelper.ValidateAccess(user.Role.Name);
-
-			var courseToUpdate = await ExistingCourseCheck(id); 
-                
-            var course = this.courseMapper.Convert(dto);
-
-            return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
-        }
-
-        public async Task<Course> DeleteAsync(int id, User user)
-        {
-            AuthorizationHelper.ValidateAccess(user.Role.Name);
-            var courseToDelete = await ExistingCourseCheck(id);
-
-            return await this.coursesRepository.DeleteAsync(courseToDelete);
-        }
-
-		public async Task<Course> ExistingCourseCheck(int id)
+		public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
 		{
-			var course = await this.coursesRepository.Get(id).FirstOrDefaultAsync()
-				?? throw new EntityNotFoundException(ConstantsContainer.COURSE_NOT_FOUND);
+			AuthorizationHelper.ValidateAccess(user.Role.Name);
+
+			var courseToUpdate = await GetExistingCourse(id);
+
+			var course = this.courseMapper.Convert(dto);
+
+			return await this.coursesRepository.UpdateAsync(courseToUpdate, course);
+		}
+
+		public async Task<Course> DeleteAsync(int id, User user)
+		{
+			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			var courseToDelete = await GetExistingCourse(id);
+
+			return await this.coursesRepository.DeleteAsync(courseToDelete);
+		}
+
+		public async Task<Course> EnrollStudentInPublicCourse(int id, User user)
+		{
+			var course = await GetExistingCourse(id);
+
+			if (AuthorizationHelper.IsStudent(user))
+			{
+				await this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
+			}
+			return course;
+		}
+
+		public async Task<Course> EnrollStudentsInPrivateCourse(int id, List<User> users)
+		{
+			var course = await GetExistingCourse(id);
+
+			await this.coursesRepository.EnrollInCourse(users, course);
 
 			return course;
 		}
 
-		private void StudentEnrollInPublicCourse(User user, Course course)
+		public async Task<List<User>> GetUsersNotEnrolled(int id)
 		{
-			if (AuthorizationHelper.IsStudent(user))
-			{
-				if (!course.Category.Name.Equals(ConstantsContainer.PUBLIC_CATEGORY) && !user.Courses.Contains(course))
-				{
-					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
-				}
-				this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
-			}
-			
-		}
-		private async Task<List<User>> GetUsersNotEnroled(int id)
-		{
-			var course = await ExistingCourseCheck(id);
-			var usersNotInCourse = await this.usersRepository.GetAll().Where(x => !x.Courses.Contains(course)).ToListAsync();
+			var course = await GetExistingCourse(id);
+			var usersNotInCourse = await this.usersRepository
+				.GetAll()
+				.Where(x => (!x.Courses.Contains(course)) && (x.Role.Name != ConstantsContainer.TEACHER))
+				.ToListAsync();
 			return usersNotInCourse;
 		}
-
-        private async Task DuplicateCourseCheck(string title)
+		private async Task DuplicateCourseCheck(string title)
 		{
 			var course = await this.coursesRepository.GetByTitle(title).FirstOrDefaultAsync();
-			if ( course != null)
+			if (course != null)
 			{
 				throw new DuplicateEntityException(ConstantsContainer.COURSE_EXISTS);
 			}

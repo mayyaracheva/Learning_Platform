@@ -61,7 +61,7 @@ namespace Poodle.Web.Controllers
 			try
 			{
 				var user = await GetUser();
-				var course = await this.coursesService.Get(id, user);
+				var course = await this.coursesService.EnrollStudentInPublicCourse(id, user);
 				courseId = course.Id;
 				if (AuthorizationHelper.IsStudent(user))
 				{
@@ -79,7 +79,6 @@ namespace Poodle.Web.Controllers
 				return this.NotFound(e);
 			}
 		}
-
 
 		public IActionResult Create()
 		{
@@ -124,7 +123,7 @@ namespace Poodle.Web.Controllers
 			}
 			try
 			{
-				var courseToEdit = await this.coursesService.ExistingCourseCheck(id);
+				var courseToEdit = await this.coursesService.GetExistingCourse(id);
 				return this.View(new CourseDTO(courseToEdit));
 			}
 			catch (EntityNotFoundException e)
@@ -174,6 +173,56 @@ namespace Poodle.Web.Controllers
 
 			return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
 		}
+
+		public async Task<IActionResult> Enroll(int id)
+		{
+			if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
+			{
+				return this.RedirectToAction("Login", "Auth");
+			}
+			try
+			{
+				var studentsNotEnrolled = await this.coursesService.GetUsersNotEnrolled(id);
+				return this.View(studentsNotEnrolled);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+		}
+
+		[HttpPost]
+		public async Task<IActionResult> Enroll(int id, string[] students)
+		{
+			if (!this.ModelState.IsValid)
+			{
+				return this.View();
+			}
+			ViewBag.Message = "Selected Items:\\n";
+			try
+			{
+				var user = await GetUser();
+				var studentsNotEnrolled = await this.coursesService.GetUsersNotEnrolled(id);
+				var enrolledStudents = new List<User>();
+
+                foreach (var student in studentsNotEnrolled)
+                {
+                    if (students.Contains(student.Id.ToString()))
+                    {
+						enrolledStudents.Add(student);
+						ViewBag.Message += string.Format("{0} {1}\\n", student.FirstName, student.LastName);
+					}
+                }
+				await this.coursesService.EnrollStudentsInPrivateCourse(id, enrolledStudents);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+
+			return this.RedirectToAction(actionName: "Details", controllerName: "Courses", new { id = id });
+		}
+
 		private async Task<User> GetUser()
 		{
 			var userEmail = this.HttpContext.Session.GetString("CurrentUserEmail");

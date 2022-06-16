@@ -1,0 +1,34 @@
+﻿@{
+    this.ViewData["Title"] = "Enroll Students";
+}
+
+@model List<User>
+
+
+<form method="post" asp-controller="Courses" asp-action="Enroll">
+        <table>
+            @foreach (var student in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="students" value="@student.Id" />
+                    </td>
+                    <td>
+                        <label for="@student.Id">@student.FirstName @student.LastName</label>
+                    </td>
+                </tr>
+            }
+        </table>
+        <br/>
+        <input type="submit" value="Submit"/>
+    </form>
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewBag.Message");
+            };
+        </script>
+    }
+
+
