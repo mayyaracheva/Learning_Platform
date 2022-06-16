@@ -1,4 +1,6 @@
 ﻿
+using System.ComponentModel.DataAnnotations;
+
 namespace Poodle.Data.EntityModels
 {
 	public class CourseQueryParameters
@@ -8,18 +10,24 @@ namespace Poodle.Data.EntityModels
 		public string SortBy { get; set; }
 		public string SortOrder { get; set; }
 
-		public bool NoQueryParameters
-		{
-			get
-			{
-				if (string.IsNullOrEmpty(Title) &&
-					string.IsNullOrEmpty(Category) &&
-					string.IsNullOrEmpty(SortBy) &&
-					string.IsNullOrEmpty(SortOrder))
-					return true;
+		[Range(1, int.MaxValue)]
+		public int PageNumber { get; set; } = 1;
 
-				return false;
-			}
-		}
+		[Range(1, int.MaxValue)]
+		public int PageSize { get; set; } = 6;
+
+		//public bool NoQueryParameters
+		//{
+		//	get
+		//	{
+		//		if (string.IsNullOrEmpty(Title) &&
+		//			string.IsNullOrEmpty(Category) &&
+		//			string.IsNullOrEmpty(SortBy) &&
+		//			string.IsNullOrEmpty(SortOrder))
+		//			return true;
+
+		//		return false;
+		//	}
+		//}
 	}
 }

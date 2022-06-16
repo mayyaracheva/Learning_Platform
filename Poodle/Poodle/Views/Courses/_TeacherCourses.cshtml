@@ -1,4 +1,4 @@
-﻿@model List<TeacherCourseViewModel>
+﻿@model PaginatedList<TeacherCourseViewModel>
 
 <div class="container-fluid py-5">
     <div class="container py-5">
@@ -56,7 +56,7 @@
                                             </div>
                                             <div class="modal-footer justify-content-center">
                                                 <button type="button" class="btn btn-success" data-dismiss="modal">Cancel</button>
-                                                <form  asp-controller="Courses" asp-action="Delete" asp-route-id="@course.CourseId">
+                                                <form asp-controller="Courses" asp-action="Delete" asp-route-id="@course.CourseId">
                                                     <div>
                                                         <input type="submit" value="Delete Course" class="btn btn-danger" />
                                                     </div>
@@ -74,5 +74,35 @@
                 }
             </tbody>
         </table>
+
+         @{
+            string previousButtonState = (this.Model.HasPreviosPage) ? "" : "disabled";
+            string nextButtonState = (this.Model.HasNextPage) ? "" : "disabled";
+        }
+        <nav aria-label="...">
+                <ul class="pagination">
+                    <li class="page-item @previousButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber - 1)" tabindex="-1">Previous</a>
+                    </li>
+                    <li class="page-item @previousButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber - 1)">
+                            @($"{this.Model.PageNumber - 1}")
+                        </a>
+                    </li>
+                    <li class="page-item active">
+                        <a class="page-link" href="#!">@this.Model.PageNumber<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="page-item @nextButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber + 1)">
+                            @($"{this.Model.PageNumber + 1}")
+                        </a>
+                    </li>
+                    <li class="page-item @nextButtonState">
+                        <a class="page-link" asp-controller="Courses" asp-action="Index" asp-route-PageNumber="@(this.Model.PageNumber + 1)">Next</a>
+                    </li>
+                </ul>
+        </nav>
     </div>
 </div>
+
+
