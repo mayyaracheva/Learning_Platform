@@ -2,6 +2,7 @@
 @model SectionViewModel
 
 <script src="~/js/ckeditor/ckeditor.js"></script>
+
 <p>
     <h4>Edit Section</h4>
 </p>
@@ -60,7 +61,9 @@
 
 </div>
 <script>
-    CKEDITOR.replace('Content');
+    CKEDITOR.replace('Content', {
+        allowedContent: true,
+    });
     var radioState = false;
     function test(element) {
         if (radioState == false) {
