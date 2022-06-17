@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Contact";
 }
+@model SendMailDto
 
 <!-- Registration Start -->
 <div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
@@ -25,26 +26,24 @@
             <div class="col-lg-5">
                 <div class="card border-0">
                     <div class="card-header bg-light text-center p-4">
-                        <h1 class="m-0">Sign Up Now</h1>
+                        <h1 class="m-0">Contact Us</h1>
                     </div>
                     <div class="card-body rounded-bottom bg-primary p-5">
-                        <form>
+                        <form asp-controller="Home" asp-action="Contact" method="post">
                             <div class="form-group">
-                                <input type="text" class="form-control border-0 p-4" placeholder="Your name" required="required" />
+                                <input type="text" name="name"asp-for="@Model.Name"class="form-control border-0 p-4" placeholder="Your name" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Name"></span>
                             </div>
                             <div class="form-group">
-                                <input type="email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
+                                <input type="email" name="email" asp-for="@Model.Email"class="form-control border-0 p-4" placeholder="Your email" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Email"></span>
                             </div>
                             <div class="form-group">
-                                <select class="custom-select border-0 px-4" style="height: 47px;">
-                                    <option selected>Select a course</option>
-                                    <option value="1">Course 1</option>
-                                    <option value="2">Course 1</option>
-                                    <option value="3">Course 1</option>
-                                </select>
+                                <textarea type="text" name="content"asp-for="@Model.Content"class="form-control border-0 p-4" placeholder="Your message" required="required"></textarea>
+                                <span class="text-danger" asp-validation-for="@Model.Content"></span>
                             </div>
                             <div>
-                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Sign Up Now</button>
+                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Send Mail</button>
                             </div>
                         </form>
                     </div>

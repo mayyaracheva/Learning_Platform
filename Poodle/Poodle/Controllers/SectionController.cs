@@ -155,14 +155,14 @@ namespace Poodle.Web.Controllers
             await this.sectionService.DeleteSection(id, requester);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
-        public IActionResult HideSection(int id)
+        public async Task<IActionResult> HideSection(int id)
         {           
-            this.sectionService.RestrictSection(id, true);
+            await this.sectionService.RestrictSection(id, true);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
-        public IActionResult ShowSection(int id)
+        public async Task<IActionResult> ShowSection(int id)
         {
-            this.sectionService.RestrictSection(id, false);
+            await this.sectionService.RestrictSection(id, false);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
 

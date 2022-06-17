@@ -1,14 +1,20 @@
 ﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
+using Poodle.Services.Dtos;
+using Poodle.Services.Exceptions;
 using Poodle.Web.Models;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
@@ -47,6 +53,41 @@ namespace Poodle.Web.Controllers
         public IActionResult Contact()
         {
             return this.View();
+        }
+
+        [HttpPost]
+        public IActionResult Contact(SendMailDto sendMailDto)
+        {
+            if (!ModelState.IsValid) return this.View();
+
+            try
+            {
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("zarko.y@gmail.com");
+                mail.To.Add("mayyaracheva@gmail.com");
+                mail.Subject = "Your Inquiry to Poodle E-Learning";
+                mail.IsBodyHtml = true;
+                string content = "Name: " + sendMailDto.Name;
+                content += "Email: " + sendMailDto.Email;
+                content += "<br/> Message: " + sendMailDto.Content;
+                mail.Body = content;
+                //pass mail server address
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
+                NetworkCredential networkCredential = new NetworkCredential("zarko.y@gmail.com", "!Y7u5I9nK]");
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = networkCredential;
+                smtpClient.Port = 587;//default port but anothe rone can be passed as well
+                smtpClient.EnableSsl = true;//if ssl required needs to be enabled
+                smtpClient.Send(mail);
+                ModelState.Clear();
+                this.ViewData["SuccessMessage"] = "Your inquiry is sent";
+                return this.View(viewName: "Success");
+            }
+            catch (Exception e)
+            {
+                this.ViewData["ErrorMessage"] = e.Message;
+                return this.View(viewName: "Error");
+            }
         }
 
         [HttpPost]

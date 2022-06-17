@@ -1,6 +1,8 @@
-﻿@{ this.ViewData["Title"] = "Section";  
+﻿@model SectionViewModel
+@{ this.ViewData["Title"] = "Section";
+    this.ViewBag.LockDate = string.Format("{0:yyyy-MM-dd}", Model.UnlockOn);
 }
-@model SectionViewModel
+
 
 <script src="~/js/ckeditor/ckeditor.js"></script>
 
@@ -25,14 +27,6 @@
                             <span asp-validation-for="Content" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <span>
-                                <label for="notembedded" class="radio">Open Content in New Page</label>
-                                <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
-                                <label for="embedded" class="radio">Embed Content in Course Page</label>
-                                <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
-                            </span>
-                        </div>
-                        <div class="form-group">
                             <label>Set New Rank</label>
                             <span asp-validation-for="Rank" class="text-danger"></span>
                             <select asp-for="@Model.Rank" name="selectedRank" class="custom-select">
@@ -50,39 +44,58 @@
                             </select>
                         </div>
                         <div class="form-group">
+                            @if (@Model.IsEmbeded)
+                            {   <span>
+                                    <label for="notembedded" class="radio">DisplayMode: <b>Embedded</b> Open Content in New Page</label>
+                                    <input type="radio" id="radioBtn" value="false" asp-for="@Model.IsEmbeded" />
+                                </span>
 
-                            @if (@Model.IsRestricted)
-                            {                            
-                                <p class="margin12">Current ViewMode: <b>Restricted</b></p> 
-                                <label>Unlock View on<span>*</span></label>
-                                <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
-                                <i class="fas fa-calendar-alt"></i>
                             }
                             else
                             {
-                                <p class="margin12">Current ViewMode: <b>Not Restricted</b></p>
-                                <label asp-for="Restriction">Change View</label>
-                                <span asp-validation-for="Restriction" class="text-danger"></span>
-                                <select asp-for="@Model.Restriction" name="restriction">
-                                    <option value=""></option>
-                                    <option value="true">Hide Section</option>
-                                </select>
-                                <div class="form-group">
-                                    <label>Unlock View on<span>*</span></label>
-                                    <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
-                                    <i class="fas fa-calendar-alt"></i>
-                                </div>
+                                <span>
+                                    <label for="embedded" class="radio">DisplayMode: <b>Not Embedded</b> Embed Content in Course Page</label>
+                                    <input type="radio" id="radioBtn2" value="true" asp-for="@Model.IsEmbeded" />
+                                </span>
+
                             }
-                        </div>              
-                        <div class="form-group">
-                            <br />
-                            <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>
                         </div>
+                            <div class="form-group">
+
+                                @if (@Model.IsRestricted)
+                                {
+                                    <span>
+                                        @*<p class="margin12">Current ViewMode: <b>Restricted</b></p>*@
+                                        <label>ViewMode:<b>Restricted @this.ViewBag.LockDate</b> Unlock View on<span>*</span></label>
+                                        <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <p class="margin12">ViewMode: <b>Not Restricted</b></p>
+                                    <label asp-for="Restriction">Change View</label>
+                                    <span asp-validation-for="Restriction" class="text-danger"></span>
+                                    <select asp-for="@Model.Restriction" name="restriction">
+                                        <option value=""></option>
+                                        <option value="true">Hide Section</option>
+                                    </select>
+                                    <div class="form-group">
+                                        <label>Unlock View on<span>*</span></label>
+                                        <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                        <i class="fas fa-calendar-alt"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div class="form-group">
+                                <br />
+                                <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>
+                            </div>
                     </form>
-                </div>
             </div>
-        </section>
     </div>
+    </section>
+</div>
 
 </div>
 <script>
@@ -101,9 +114,11 @@
     }
     function check() {
         document.getElementById("radioBtn").checked = true;
+        document.getElementById("radioBtn2").checked = true;
     }
     function uncheck() {
         document.getElementById("radioBtn").checked = false;
+        document.getElementById("radioBtn2").checked = false;
     }
 </script>
 

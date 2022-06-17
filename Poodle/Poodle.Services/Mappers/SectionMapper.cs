@@ -1,6 +1,5 @@
 ﻿using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
-using Poodle.Web.Models;
 
 namespace Poodle.Services.Mappers
 {
@@ -48,6 +47,7 @@ namespace Poodle.Services.Mappers
             section.Content = sectionModel.Content;
             section.Title = sectionModel.Title;
             section.IsRestricted = sectionModel.IsRestricted;
+            section.IsEmbeded = sectionModel.IsEmbeded;
             if (sectionModel.IsRestricted)
             {
                 section.Restriction = "true";
