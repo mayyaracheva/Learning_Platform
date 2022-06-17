@@ -16,5 +16,6 @@ namespace Poodle.Repositories.Contracts
 		Task<Course> DeleteAsync(Course course);
 
 		Task EnrollInCourse(List<User> users, Course course);
+		Task Unenroll(User user, Course course);
 	}
 }

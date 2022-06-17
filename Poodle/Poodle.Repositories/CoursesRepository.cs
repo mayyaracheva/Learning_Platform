@@ -32,6 +32,11 @@ namespace Poodle.Repositories
 			course.Users.AddRange(user);
 			await this.context.SaveChangesAsync();
 		}
+		public async Task Unenroll(User user, Course course)
+		{
+			course.Users.Remove(user);
+			await this.context.SaveChangesAsync();
+		}
 		public IQueryable<Course> Get(CourseQueryParameters filterParameters)
 		{
 			string title = !string.IsNullOrEmpty(filterParameters.Title) ? filterParameters.Title.ToLowerInvariant() : string.Empty;

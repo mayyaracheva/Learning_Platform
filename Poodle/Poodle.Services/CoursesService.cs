@@ -154,6 +154,13 @@ namespace Poodle.Services
 				.ToListAsync();
 			return usersNotInCourse;
 		}
+
+		public async Task Unenroll(int id, User user)
+		{
+			var course = await GetExistingCourse(id);
+
+			await this.coursesRepository.Unenroll(user, course);
+		}
 		private async Task DuplicateCourseCheck(string title)
 		{
 			var course = await this.coursesRepository.GetByTitle(title).FirstOrDefaultAsync();
