@@ -2,10 +2,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using NewsAPI;
+using NewsAPI.Constants;
+using NewsAPI.Models;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
 using Poodle.Web.Models;
+using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -37,6 +41,20 @@ namespace Poodle.Web.Controllers
 
         public IActionResult About()
         {
+            var newsApiClient = new NewsApiClient("77114c2a46ee4aa781a1286afe5986a6");
+            var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
+            {
+                Q = "Jokes",
+                SortBy = SortBys.Popularity,
+                Language = Languages.EN,
+                From = DateTime.UtcNow.AddDays(-3)
+            });
+
+            if (articlesResponse.Status == Statuses.Ok)
+            {
+                return View(articlesResponse);
+            }
+
             return this.View();
         }
         public IActionResult Privacy()

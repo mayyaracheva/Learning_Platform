@@ -18,5 +18,6 @@ namespace Poodle.Services.Contracts
 		Task<List<User>> GetUsersNotEnrolled(int id);
 		Task<Course> EnrollStudentInPublicCourse(int id, User user);
 		Task<Course> EnrollStudentsInPrivateCourse(int id, List<User> users);
+		Task Unenroll(int id, User user);
 	}
 }

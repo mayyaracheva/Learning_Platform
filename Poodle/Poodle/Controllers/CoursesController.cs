@@ -223,6 +223,27 @@ namespace Poodle.Web.Controllers
 			return this.RedirectToAction(actionName: "Details", controllerName: "Courses", new { id = id });
 		}
 
+		[HttpPost]
+		public async Task<IActionResult> Unenroll(int id)
+		{
+			if (!this.ModelState.IsValid)
+			{
+				return this.View();
+			}
+
+			try
+			{
+				var user = await GetUser();
+				await this.coursesService.Unenroll(id, user);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+
+			return this.RedirectToAction(actionName: "Index", controllerName: "Courses");
+		}
+
 		private async Task<User> GetUser()
 		{
 			var userEmail = this.HttpContext.Session.GetString("CurrentUserEmail");
