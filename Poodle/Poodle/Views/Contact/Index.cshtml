@@ -1,59 +1,82 @@
-﻿@model Poodle.Web.Helpers.StudentContactViewModel
+﻿@{
+    ViewData["Title"] = "Contact";
+}
+@model UserContactViewModel
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <h3>Contact  Form</h3>
-    @ViewBag.msg
-    <form asp-controller="contact" asp-action="send">
-        <table cellpadding="2" cellspacing="2">
-            <tr>
-                <td>Name</td>
-                <td>
-                    <input type="text" asp-for="Name" />
-                </td>
-            </tr>
-             <tr>
-                <td>Phone</td>
-                <td>
-                    <input type="text" asp-for="Phone" />
-                </td>
-            </tr>
-             <tr>
-                <td>Email</td>
-                <td>
-                    <input type="text" asp-for="Email" />
-                </td>
-            </tr>
-             <tr>
-                <td>Address</td>
-                <td>
-                    <input type="text" asp-for="Address" />
-                </td>
-            </tr>
-             <tr>
-                <td>Subject</td>
-                <td>
-                    <input type="text" asp-for="Subject" />
-                </td>
-            </tr>
-             <tr>
-                <td>Content</td>
-                <td>
-                    <textarea cols="20" rows="5" asp-for="Content"><</textarea>
-
-                </td>
-            </tr>
-             <tr>
-                <td>&nbsp;</td>
-                <td>
-                    <input type="submit" value="Send" />
-                </td>
-            </tr>
-        </table>
-        </form>
-</body>
-</html>
+<!-- Registration Start -->
+<div class="container-fluid bg-registration py-5" style="margin: 90px 0;">
+    <div class="container py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-5 mb-lg-0">
+                <ul class="list-inline text-white m-0">
+                    <li class="font-weight-semi-bold mb-1 text-white text-uppercase">meet us in person</li>
+                    <a class="py-2" ><i class="fa fa-2x fa-map-marker-alt text-primary mr-3"></i>123 Str, Sofia, Bulgaria</a>
+                    <hr />
+                    <li class="font-weight-semi-bold mb-1 text-white text-uppercase">direct contact</li>
+                    <a class="py-2"><i class="fa fa-2x fa-envelope text-primary mr-3"></i>info@Poodle.com</a>
+                    <br />
+                    <a class="py-2"><i class="fa fa-2x fa-phone text-primary mr-3"></i>+359 2 3456789</a>
+                </ul>
+                <hr />
+                <hr />
+                <div class="mb-4">
+                    <h5 class="text-primary text-uppercase mb-3" style="letter-spacing: 5px;">Need More Information</h5>
+                    <h1 class="text-white">We Are Always Here For You</h1>
+                </div>
+                <p class="text-white">
+                    What you get when asking your question
+                </p>
+                <ul class="list-inline text-white m-0">
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Less than 12-hour response to your question</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Thoroughness and expertise of a Certified Exchange Specialist</li>
+                    <li class="py-2"><i class="fa fa-check text-primary mr-3"></i>Plan of action summarized in an email follow up</li>
+                </ul>
+            </div>
+            <div class="col-lg-5">
+                <div class="card border-0">
+                    <div class="card-header bg-light text-center p-4">
+                        <h1 class="m-0">Contact Us</h1>
+                    </div>
+                    <div class="card-body rounded-bottom bg-primary p-5">
+                        <form asp-controller="Contact" asp-action="Send">
+                            <div class="form-group">
+                                <input type="text" name="name" asp-for="@Model.Name" class="form-control border-0 p-4" placeholder="Your name" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Name"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="phone" asp-for="@Model.Phone" class="form-control border-0 p-4" placeholder="Your phone number" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Phone"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" name="email" asp-for="@Model.Email" class="form-control border-0 p-4" placeholder="Your email" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Email"></span>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="subject" asp-for="@Model.Subject" class="form-control border-0 p-4" placeholder="Subject" required="required" />
+                                <span class="text-danger" asp-validation-for="@Model.Subject"></span>
+                            </div>
+                            <div class="form-group">
+                                <textarea cols="20" rows="5" name="content" asp-for="@Model.Content" class="form-control border-0 p-4" placeholder="Your message" required="required"></textarea>
+                                <span class="text-danger" asp-validation-for="@Model.Content"></span>
+                            </div>
+                            <div>
+                                <button class="btn btn-dark btn-block border-0 py-3" type="submit">Send Mail</button>
+                            </div>
+                            @{
+                                if (@ViewBag.msg == "Success")
+                                {
+                                    <div class="text-primary">@ViewBag.msg</div>
+                                }
+                                else
+                                {
+                                    <div class="text-danger">@ViewBag.msg</div>
+                                }
+                            }
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Registration End -->

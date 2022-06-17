@@ -7,17 +7,13 @@ namespace Poodle.Web.Controllers
     //[Route("contact")]
     public class ContactController : Controller
     {
-        //[Route("")]
-        //[Route("~/")]
-        //[Route("index")]
         public IActionResult Index()
         {
             return View();
         }
 
         [HttpPost]
-        //[Route("send")]
-        public IActionResult Index(UserContactViewModel contact)
+        public IActionResult Send(UserContactViewModel contact)
         {
             string content = "Name: " + contact.Name;
             content += "<br>Phone: " + contact.Phone;
