@@ -9,15 +9,11 @@ using NewsAPI.Models;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
-using Poodle.Services.Dtos;
-using Poodle.Services.Exceptions;
 using Poodle.Web.Models;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Net;
-using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
@@ -67,12 +63,7 @@ namespace Poodle.Web.Controllers
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            return this.View();
-        }
-
-        [HttpPost]
+       /* [HttpPost]
         public IActionResult Contact(SendMailDto sendMailDto)
         {
             if (!ModelState.IsValid) return this.View();
@@ -105,7 +96,7 @@ namespace Poodle.Web.Controllers
                 this.ViewData["ErrorMessage"] = e.Message;
                 return this.View(viewName: "Error");
             }
-        }
+        }*/
 
         [HttpPost]
         public IActionResult SignUp(string email)

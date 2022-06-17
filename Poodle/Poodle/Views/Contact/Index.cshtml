@@ -1,0 +1,59 @@
+﻿@model Poodle.Web.Helpers.StudentContactViewModel
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <h3>Contact  Form</h3>
+    @ViewBag.msg
+    <form asp-controller="contact" asp-action="send">
+        <table cellpadding="2" cellspacing="2">
+            <tr>
+                <td>Name</td>
+                <td>
+                    <input type="text" asp-for="Name" />
+                </td>
+            </tr>
+             <tr>
+                <td>Phone</td>
+                <td>
+                    <input type="text" asp-for="Phone" />
+                </td>
+            </tr>
+             <tr>
+                <td>Email</td>
+                <td>
+                    <input type="text" asp-for="Email" />
+                </td>
+            </tr>
+             <tr>
+                <td>Address</td>
+                <td>
+                    <input type="text" asp-for="Address" />
+                </td>
+            </tr>
+             <tr>
+                <td>Subject</td>
+                <td>
+                    <input type="text" asp-for="Subject" />
+                </td>
+            </tr>
+             <tr>
+                <td>Content</td>
+                <td>
+                    <textarea cols="20" rows="5" asp-for="Content"><</textarea>
+
+                </td>
+            </tr>
+             <tr>
+                <td>&nbsp;</td>
+                <td>
+                    <input type="submit" value="Send" />
+                </td>
+            </tr>
+        </table>
+        </form>
+</body>
+</html>

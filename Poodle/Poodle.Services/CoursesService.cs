@@ -65,7 +65,7 @@ namespace Poodle.Services
 		//	throw new NotImplementedException();
 		//      }			
 
-		public async Task<List<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user)
+		public async Task<PaginatedList<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user)
 		{
 			var courses = await this.coursesRepository
 			.Get(filterParameters)

@@ -10,7 +10,7 @@ namespace Poodle.Services.Contracts
 	{
 		Task<dynamic> GetAsync(User user);
 		Task<Course> GetExistingCourse(int id);
-		Task<List<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user);
+		Task<PaginatedList<StudentCourseViewModel>> StudentGetCourses(CourseQueryParameters filterParameters, User user);
 		Task<PaginatedList<TeacherCourseViewModel>> TeacherGetCourses(CourseQueryParameters filterParameters, User user);
 		Task<Course> CreateAsync(CourseDTO dto, User user);
 		Task<Course> UpdateAsync(int id, User user, CourseDTO dto);
