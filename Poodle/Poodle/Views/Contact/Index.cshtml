@@ -36,6 +36,16 @@
                 <div class="card border-0">
                     <div class="card-header bg-light text-center p-4">
                         <h1 class="m-0">Contact Us</h1>
+                        @{
+                                if (@ViewBag.msg == "Success!")
+                                {
+                                    <p class="text-primary">@ViewBag.msg</p>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">@ViewBag.msg</p>
+                                }
+                            }
                     </div>
                     <div class="card-body rounded-bottom bg-primary p-5">
                         <form asp-controller="Contact" asp-action="Send">
@@ -62,16 +72,6 @@
                             <div>
                                 <button class="btn btn-dark btn-block border-0 py-3" type="submit">Send Mail</button>
                             </div>
-                            @{
-                                if (@ViewBag.msg == "Success")
-                                {
-                                    <div class="text-primary">@ViewBag.msg</div>
-                                }
-                                else
-                                {
-                                    <div class="text-danger">@ViewBag.msg</div>
-                                }
-                            }
                         </form>
                     </div>
                 </div>

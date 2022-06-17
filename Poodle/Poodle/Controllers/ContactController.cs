@@ -20,7 +20,7 @@ namespace Poodle.Web.Controllers
             content += "<br>Content: " + contact.Content;
             if (MailHelper.Send(contact.Email, "Zahari.V.Yordanov@gmail.com", contact.Subject, content))
             {
-                ViewBag.msg = "Success";
+                ViewBag.msg = "Success!";
             }
             else
             {
