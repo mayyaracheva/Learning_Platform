@@ -1,4 +1,5 @@
 ﻿using Ganss.XSS;
+using NewsAPI.Models;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Dtos;
 using System.Collections.Generic;
@@ -25,8 +26,7 @@ namespace Poodle.Web.Models
 		}
 
 		public int CourseId { get; set; }
-
-		public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Description);
+        public string SanitizedContent => new HtmlSanitizer().Sanitize(this.Description);
 		public string ShortDescription
 		{
 			get

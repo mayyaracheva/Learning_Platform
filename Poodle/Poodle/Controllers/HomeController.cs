@@ -9,6 +9,7 @@ using NewsAPI.Models;
 using Poodle.Data.EntityModels;
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
+using Poodle.Services.Dtos;
 using Poodle.Web.Models;
 using System;
 using System.Diagnostics;
@@ -32,30 +33,30 @@ namespace Poodle.Web.Controllers
 
 		public async Task<IActionResult> Index()
         {
+            HomeViewModel viewModel = new HomeViewModel();
             var publicCourses = await this.homeService
                 .GetPublicCoursrsesAsync()
                 .Select(course => new StudentCourseViewModel(course))
                 .ToListAsync();
-
-            return View(publicCourses);
-        }
-
-        public IActionResult About()
-        {
+            viewModel.PublicCourses = publicCourses;
             var newsApiClient = new NewsApiClient("77114c2a46ee4aa781a1286afe5986a6");
             var articlesResponse = newsApiClient.GetEverything(new EverythingRequest
             {
-                Q = "Jokes",
+                Q = "News",
                 SortBy = SortBys.Popularity,
                 Language = Languages.EN,
                 From = DateTime.UtcNow.AddDays(-3)
             });
-
+            
             if (articlesResponse.Status == Statuses.Ok)
             {
-                return View(articlesResponse);
+                viewModel.Articles = articlesResponse;
             }
+            return View(viewModel);
+        }
 
+        public IActionResult About()
+        {
             return this.View();
         }
         public IActionResult Privacy()
