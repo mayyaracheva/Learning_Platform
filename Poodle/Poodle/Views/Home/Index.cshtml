@@ -140,6 +140,7 @@
             foreach (var article in Model.Articles.Articles.Take(3))
             {
                     <div class="text-dark text-justify"><b>Content: </b>@article.Content</div>
+                    <a class="text-primary text-justify" target="_blank" href="@article.Url"><b>Click here for more details!</b></a>
                     <h6 class="text-dark text-right">@article.Author</h6>
                     <h6 class="text-dark text-right">@article.PublishedAt</h6>
                 <hr />
