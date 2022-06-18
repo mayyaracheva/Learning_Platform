@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Poodle.Services.Constants;
 using Poodle.Web.Helpers;
 using Poodle.Web.Models;
 
@@ -19,13 +20,9 @@ namespace Poodle.Web.Controllers
             content += "<br>Content: " + contact.Content;
             if (MailHelper.Send(contact.Email, "Zahari.V.Yordanov@gmail.com", contact.Subject, content))
             {
-                ViewBag.msg = "Success!";
+                this.ViewData["SuccessMessage"] = ConstantsContainer.EMAIL_SUCCESS;
             }
-            else
-            {
-                ViewBag.msg = "Error";
-            }
-            return View("Index");
+            return this.View(viewName: "Success");
         }
     }
 }
