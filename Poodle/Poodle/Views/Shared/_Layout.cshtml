@@ -2,6 +2,8 @@
     this.ViewData["IsAuthenticated"] = this.Context.Session.Keys.Contains("CurrentUserEmail");
     this.ViewData["CurrentImage"] = this.Context.Session.GetString("CurrentImage");
     this.ViewData["CurrentUserName"] = this.Context.Session.GetString("CurrentUserName");
+    this.ViewData["CurrentRole"] = this.Context.Session.GetString("CurrentRole");
+
 }
 
 <!DOCTYPE html>
@@ -212,7 +214,6 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             @{
-
                                 if ((bool)this.ViewData["IsAuthenticated"])
                                 {
                                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
@@ -221,15 +222,19 @@
                                             <a class="nav-item nav-link" asp-area="" asp-controller="Home" asp-action="About">About</a>
                                             <a class="nav-item nav-link" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
                                             <a class="nav-item nav-link" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
-                                           
-                                                <div class="nav-item dropdown">
-                                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@this.ViewData["CurrentUserName"]</a>
-                                                    <div class="dropdown-menu rounded-0 m-0">
-                                                        <a asp-controller="Profile" asp-action="Index" class="dropdown-item">My Profile</a>
+
+                                            <div class="nav-item dropdown">
+                                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">@this.ViewData["CurrentUserName"]</a>
+                                                <div class="dropdown-menu rounded-0 m-0">
+                                                    <a asp-controller="Profile" asp-action="Index" class="dropdown-item">My Profile</a>
+                                                    @if (this.ViewData["CurrentRole"].ToString().ToLower() == "teacher")
+                                                    {
                                                         <a asp-controller="Subscription" asp-action="Index" class="dropdown-item">Newsletter</a>
-                                                        <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">Logout</a>
-                                                    </div>
-                                                </div>                                           
+                                                    }
+
+                                                    <a asp-controller="Auth" asp-action="Logout" class="dropdown-item">Logout</a>
+                                                </div>
+                                            </div>
 
                                             <div>
                                                 <img class="rounded-circle z-depth-0" alt="Profile Photo" src="@this.ViewData["CurrentImage"]" height="65" />
