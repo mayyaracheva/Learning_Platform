@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Poodle.Data.Migrations
 {
-    public partial class NewOn16June : Migration
+    public partial class New18June : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -45,6 +45,19 @@ namespace Poodle.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Subscriptions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmailAddress = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Subscriptions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,20 +207,25 @@ namespace Poodle.Data.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "Subscriptions",
+                columns: new[] { "Id", "EmailAddress" },
+                values: new object[] { 1, "Ragnar.Lodbrock@abv.com" });
+
+            migrationBuilder.InsertData(
                 table: "Courses",
                 columns: new[] { "Id", "CategoryId", "CreatedOn", "Description", "IsDeleted", "ModifiedOn", "PhotoURL", "Title" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8273), "The course gives you a broad range of fundamental knowledge for all IT careers. Through a combination of lecture, hands-on labs, and self-study, you will learn how to install, operate, configure, and verify basic IPv4 and IPv6 networks. The course covers configuring network components such as switches, routers, and wireless LAN controllers; managing network devices; and identifying basic security threats. The course also gives you a foundation in network programmability, automation, and software-defined networking.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8278), "img/course-1.jpg", "Implementing and Administering Solutions(CCNA)" },
-                    { 7, 2, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8326), "A Guided Study Group offers you a 180-day journey of certification preparation. This approach offers a best-of-all-worlds path toward certification, with the flexibility and convenience of e-learning plus the motivation and accountability of working with a live coach. A mix of participants from various backgrounds and skill levels encourages collaboration.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8327), "img/course-7.jpg", "Guided Study Group - CyberOps (GSG-CBROPS) 1.0" },
-                    { 6, 2, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8323), "The course, Mulitcloud Automation and Orchestration with  CloudCenter Suite (CLDAO) v1.0 teaches you how to configure simplified orchestration and workflow automation that provides seamless integration within the Cisco® CloudCenter suite. Through lessons and hands-on experiences, you will learn to use the tools of the CloudCenter Suite to streamline business processes, automate tasks, and increase efficiency in business processes.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8324), "img/course-6.jpg", "Multicloud Automation and Orchestration with CloudCenter Suite (CLDAO) 1.0" },
-                    { 5, 2, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8317), "The course shows you how to implement, manage, and troubleshoot  Nexus® 9000 Series Switches in Cisco® NX-OS mode. Through expert instruction and extensive hands-on learning, you will learn how to deploy capabilities including Virtual Extensible LAN (VXLAN), Multiprotocol Label Switching (MPLS), high availability features, Intelligent Traffic Director, troubleshooting tools and techniques, NX-OS programmability features, and open interface technologies.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8318), "img/course-5.jpg", "Nexus 9000 Switches in NX-OS Mode" },
-                    { 10, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8335), "Create a basic GitHub Action and use that action in a workflow.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8336), "img/course-10.jpg", "Automate development tasks by using GitHub Actions" },
-                    { 8, 2, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8329), "Through a combination of lessons and hands-on learning, you will practice operating, managing, and integrating Cisco DNA Center, programmable network infrastructure, and Cisco SD-Access fundamentals. You will learn how Cisco delivers intent-based networking across the campus, branch, WAN, and extended enterprise and ensures that your network is operating as intended.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8329), "img/course-8.jpg", "Transforming to a Intent Based Network (IBNTRN) 1.0" },
-                    { 4, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8314), "The course shows you how to deploy and manage the  Nexus® 9000 Series Switches in Cisco Application Centric Infrastructure (Cisco ACI®) mode. You will learn how to configure and manage Cisco Nexus 9000 Series Switches in ACI mode, how to connect the Cisco ACI fabric to external networks and services, and the fundamentals of Virtual Machine Manager (VMM) integration. You will gain hands-on practice implementing key capabilities such as fabric discovery, policies, connectivity, VMM integration, and more.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8315), "img/course-4.jpg", "Implementing Application Centric Infrastructure (DCACI)" },
-                    { 3, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8311), "The course shows you how to deploy, secure, operate, and maintain Unified Computing System™ (Cisco UCS®) B-series blade servers, Cisco UCS C-Series, and S-Series rack servers for use in data centers. You will learn how to implement management and orchestration software for Cisco UCS. You will gain hands-on practice: configuring key features of Cisco UCS, Cisco UCS Director, and Cisco UCS Manager; implementing UCS management software including Cisco UCS Manager and Cisco Intersight™; and more.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8312), "img/course-3.jpg", "Configuring Unified Computing System (DCCUCS)" },
-                    { 2, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8308), "The course helps you prepare for DevNet Professional certification and for professional-level network automation engineer roles. You will learn how to implement network applications using Cisco® platforms as a base, from initial software design to diverse system integration, as well as testing and deployment automation. The course gives you hands-on experience solving real world problems using Cisco Application Programming Interfaces (APIs) and modern development tools.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8309), "img/course-2.jpg", "Developing Applications Using Core Platforms and APIs (DEVCOR)" },
-                    { 9, 1, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8331), "In this module, you'll learn how to take advantage of several virtualization services in Azure compute, which can help your applications scale out quickly and efficiently to meet increasing demands.", false, new DateTime(2022, 6, 16, 6, 49, 18, 597, DateTimeKind.Utc).AddTicks(8332), "img/course-9.jpg", "Microsoft Azure Fundamentals: Describe core Azure services" }
+                    { 1, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1437), "The course gives you a broad range of fundamental knowledge for all IT careers. Through a combination of lecture, hands-on labs, and self-study, you will learn how to install, operate, configure, and verify basic IPv4 and IPv6 networks. The course covers configuring network components such as switches, routers, and wireless LAN controllers; managing network devices; and identifying basic security threats. The course also gives you a foundation in network programmability, automation, and software-defined networking.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1493), "img/course-1.jpg", "Implementing and Administering Solutions(CCNA)" },
+                    { 7, 2, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1904), "A Guided Study Group offers you a 180-day journey of certification preparation. This approach offers a best-of-all-worlds path toward certification, with the flexibility and convenience of e-learning plus the motivation and accountability of working with a live coach. A mix of participants from various backgrounds and skill levels encourages collaboration.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1909), "img/course-7.jpg", "Guided Study Group - CyberOps (GSG-CBROPS) 1.0" },
+                    { 6, 2, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1887), "The course, Mulitcloud Automation and Orchestration with  CloudCenter Suite (CLDAO) v1.0 teaches you how to configure simplified orchestration and workflow automation that provides seamless integration within the Cisco® CloudCenter suite. Through lessons and hands-on experiences, you will learn to use the tools of the CloudCenter Suite to streamline business processes, automate tasks, and increase efficiency in business processes.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1894), "img/course-6.jpg", "Multicloud Automation and Orchestration with CloudCenter Suite (CLDAO) 1.0" },
+                    { 5, 2, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1739), "The course shows you how to implement, manage, and troubleshoot  Nexus® 9000 Series Switches in Cisco® NX-OS mode. Through expert instruction and extensive hands-on learning, you will learn how to deploy capabilities including Virtual Extensible LAN (VXLAN), Multiprotocol Label Switching (MPLS), high availability features, Intelligent Traffic Director, troubleshooting tools and techniques, NX-OS programmability features, and open interface technologies.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1843), "img/course-5.jpg", "Nexus 9000 Switches in NX-OS Mode" },
+                    { 10, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1953), "Create a basic GitHub Action and use that action in a workflow.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1958), "img/course-10.jpg", "Automate development tasks by using GitHub Actions" },
+                    { 8, 2, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1918), "Through a combination of lessons and hands-on learning, you will practice operating, managing, and integrating Cisco DNA Center, programmable network infrastructure, and Cisco SD-Access fundamentals. You will learn how Cisco delivers intent-based networking across the campus, branch, WAN, and extended enterprise and ensures that your network is operating as intended.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1922), "img/course-8.jpg", "Transforming to a Intent Based Network (IBNTRN) 1.0" },
+                    { 4, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1725), "The course shows you how to deploy and manage the  Nexus® 9000 Series Switches in Cisco Application Centric Infrastructure (Cisco ACI®) mode. You will learn how to configure and manage Cisco Nexus 9000 Series Switches in ACI mode, how to connect the Cisco ACI fabric to external networks and services, and the fundamentals of Virtual Machine Manager (VMM) integration. You will gain hands-on practice implementing key capabilities such as fabric discovery, policies, connectivity, VMM integration, and more.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1730), "img/course-4.jpg", "Implementing Application Centric Infrastructure (DCACI)" },
+                    { 3, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1702), "The course shows you how to deploy, secure, operate, and maintain Unified Computing System™ (Cisco UCS®) B-series blade servers, Cisco UCS C-Series, and S-Series rack servers for use in data centers. You will learn how to implement management and orchestration software for Cisco UCS. You will gain hands-on practice: configuring key features of Cisco UCS, Cisco UCS Director, and Cisco UCS Manager; implementing UCS management software including Cisco UCS Manager and Cisco Intersight™; and more.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1714), "img/course-3.jpg", "Configuring Unified Computing System (DCCUCS)" },
+                    { 2, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1682), "The course helps you prepare for DevNet Professional certification and for professional-level network automation engineer roles. You will learn how to implement network applications using Cisco® platforms as a base, from initial software design to diverse system integration, as well as testing and deployment automation. The course gives you hands-on experience solving real world problems using Cisco Application Programming Interfaces (APIs) and modern development tools.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1690), "img/course-2.jpg", "Developing Applications Using Core Platforms and APIs (DEVCOR)" },
+                    { 9, 1, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1930), "In this module, you'll learn how to take advantage of several virtualization services in Azure compute, which can help your applications scale out quickly and efficiently to meet increasing demands.", false, new DateTime(2022, 6, 18, 5, 7, 41, 877, DateTimeKind.Utc).AddTicks(1934), "img/course-9.jpg", "Microsoft Azure Fundamentals: Describe core Azure services" }
                 });
 
             migrationBuilder.InsertData(
@@ -215,16 +233,16 @@ namespace Poodle.Data.Migrations
                 columns: new[] { "Id", "CreatedOn", "Email", "FirstName", "ImageId", "IsDeleted", "LastName", "ModifiedOn", "Password", "RoleId" },
                 values: new object[,]
                 {
-                    { 9, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8330), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8331), "hardiR789*", 2 },
-                    { 1, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(7237), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(7633), "adminADMIN123?", 1 },
-                    { 2, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8303), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8306), "johnJOHN123!", 1 },
-                    { 3, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8309), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8310), "jondav123*", 2 },
-                    { 4, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8312), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8313), "ignitalo123*", 2 },
-                    { 5, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8315), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8316), "jamesonN123*", 2 },
-                    { 6, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8321), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8322), "johnsonN123*", 2 },
-                    { 7, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8324), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8325), "horspanP123*", 2 },
-                    { 8, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8327), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8328), "hurspenM456!", 2 },
-                    { 10, new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8389), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 6, 16, 6, 49, 18, 596, DateTimeKind.Utc).AddTicks(8390), "marrob123!", 2 }
+                    { 9, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3885), "Harriet.Dark@gmail.com", "Harriet", 9, false, "Dark", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3890), "hardiR789*", 2 },
+                    { 1, new DateTime(2022, 6, 18, 5, 7, 41, 869, DateTimeKind.Utc).AddTicks(6327), "Ragnar.Lodbrock@abv.com", "Ragnar", 1, false, "Lodbrock", new DateTime(2022, 6, 18, 5, 7, 41, 869, DateTimeKind.Utc).AddTicks(8835), "adminADMIN123?", 1 },
+                    { 2, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3724), "Jack.Richmond@yahoo.com", "Jack", 2, false, "Richmond", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3744), "johnJOHN123!", 1 },
+                    { 3, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3761), "Jonathan.Davis@gmail.com", "Jonathan", 3, false, "Davis", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3768), "jondav123*", 2 },
+                    { 4, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3778), "Ignatio.Italiano@gmail.com", "Ignatio", 4, false, "Italiano", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3783), "ignitalo123*", 2 },
+                    { 5, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3792), "Reginald.Hargreeves@gmail.com", "Reginald", 5, false, "Hargreeves", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3798), "jamesonN123*", 2 },
+                    { 6, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3839), "John.Hanes@gmail.com", "John", 6, false, "Hanes", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3846), "johnsonN123*", 2 },
+                    { 7, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3856), "Horatio.Spanish@gmail.com", "Horatio", 7, false, "Spanish", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3860), "horspanP123*", 2 },
+                    { 8, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3870), "Herbert.Spencer@gmail.com", "Herbert", 8, false, "Spencer", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(3875), "hurspenM456!", 2 },
+                    { 10, new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(4221), "Mario.Caruso@gmail.com", "Mario", 10, false, "Caruso", new DateTime(2022, 6, 18, 5, 7, 41, 870, DateTimeKind.Utc).AddTicks(4231), "marrob123!", 2 }
                 });
 
             migrationBuilder.InsertData(
@@ -287,6 +305,13 @@ namespace Poodle.Data.Migrations
                 column: "CourseId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Subscriptions_EmailAddress",
+                table: "Subscriptions",
+                column: "EmailAddress",
+                unique: true,
+                filter: "[EmailAddress] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
                 table: "Users",
                 column: "Email",
@@ -312,6 +337,9 @@ namespace Poodle.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Sections");
+
+            migrationBuilder.DropTable(
+                name: "Subscriptions");
 
             migrationBuilder.DropTable(
                 name: "Users");

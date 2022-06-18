@@ -25,6 +25,7 @@ namespace Poodle.Services.Constants
 		public const string SECTIONS_NOT_FOUND = "The course contains no sections";
 		public const string SECTIONS_DELETED = "The section was removed";
 
+
 		//Categories
 		public const string PUBLIC_CATEGORY = "Public";
 
@@ -37,6 +38,13 @@ namespace Poodle.Services.Constants
 
 		//FileLogger
 		public const string FILELOGGER_FILE = "filelogger.txt";
+
+		//newsletter subscriptions
+		public const string SUBSCRIPTION_NOT_FOUND = "Subscription email was not found";
+		public const string SUBSCRIPTION_EXISTS = "You are already subscribed";
+		public const string SUBSCRIPTION_REMOVED = "Your Subscription has been deleted";
+		public const string SUBSCRIPTION_SUCCESS = "You successfully signed up to our newsletter";
+		
 
 
 

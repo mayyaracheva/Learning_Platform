@@ -51,6 +51,7 @@ namespace Poodle.Web
             services.AddScoped<ICoursesRepository, CoursesRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<ISectionRepository, SectionRepository>();
+            services.AddScoped<ISubscriptionRepository, SubscriptionRepository>();
 
 
             //services
@@ -58,6 +59,7 @@ namespace Poodle.Web
             services.AddScoped<ISectionService, SectionService>();
             services.AddScoped<ICoursesService, CoursesService>();
             services.AddScoped<IHomeService, HomeService>();
+            services.AddScoped<ISubscriptionService, SubscriptionService>();
           
 
 

@@ -24,6 +24,8 @@ namespace Poodle.Data
 		public DbSet<Category> Categories { get; set; }
 		public DbSet<Role> Roles { get; set; }
 		public DbSet<Image> Images { get; set; }
+		public DbSet<Subscription> Subscriptions { get; set; }
+
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -37,6 +39,11 @@ namespace Poodle.Data
 			modelBuilder
 			.Entity<Course>()
 			.HasIndex(c => c.Title)
+			.IsUnique();
+
+			modelBuilder
+			.Entity<Subscription>()
+			.HasIndex(s => s.EmailAddress)
 			.IsUnique();
 
 			modelBuilder.Seed();

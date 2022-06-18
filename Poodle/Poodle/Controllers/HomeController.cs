@@ -63,53 +63,7 @@ namespace Poodle.Web.Controllers
         {
             return View();
         }
-
-       /* [HttpPost]
-        public IActionResult Contact(SendMailDto sendMailDto)
-        {
-            if (!ModelState.IsValid) return this.View();
-
-            try
-            {
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("zarko.y@gmail.com");
-                mail.To.Add("mayyaracheva@gmail.com");
-                mail.Subject = "Your Inquiry to Poodle E-Learning";
-                mail.IsBodyHtml = true;
-                string content = "Name: " + sendMailDto.Name;
-                content += "Email: " + sendMailDto.Email;
-                content += "<br/> Message: " + sendMailDto.Content;
-                mail.Body = content;
-                //pass mail server address
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com");
-                NetworkCredential networkCredential = new NetworkCredential("zarko.y@gmail.com", "!Y7u5I9nK]");
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = networkCredential;
-                smtpClient.Port = 587;//default port but anothe rone can be passed as well
-                smtpClient.EnableSsl = true;//if ssl required needs to be enabled
-                smtpClient.Send(mail);
-                ModelState.Clear();
-                this.ViewData["SuccessMessage"] = "Your inquiry is sent";
-                return this.View(viewName: "Success");
-            }
-            catch (Exception e)
-            {
-                this.ViewData["ErrorMessage"] = e.Message;
-                return this.View(viewName: "Error");
-            }
-        }*/
-
-        [HttpPost]
-        public IActionResult SignUp(string email)
-        {
-            string fileName = ConstantsContainer.FILELOGGER_FILE;
-            string logPath = Path.Combine(webHostEnvironment.WebRootPath, fileName);
-            FileLogger fileLogger = new FileLogger(logPath);
-            fileLogger.LogMessage(email);
-            this.ViewData["SuccessMessage"] = "You successfully signed up to our newsletter";
-
-            return this.View(viewName: "Success");
-        }
+                
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
