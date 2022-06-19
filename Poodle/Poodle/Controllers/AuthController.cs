@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
 {
+    
     public class AuthController : Controller
     {
         private readonly AuthHelper authHelper;       
@@ -39,6 +40,7 @@ namespace Poodle.Web.Controllers
        
      
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginDto userLoginModel)
         {
             if (!this.ModelState.IsValid)
@@ -70,6 +72,7 @@ namespace Poodle.Web.Controllers
         }
        
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register( RegisterViewModel userRegisterModel)
         {
             if (!this.ModelState.IsValid)

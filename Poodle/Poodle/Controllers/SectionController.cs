@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
 {
+    
     public class SectionController : Controller
     {
         private readonly ISectionService sectionService;
@@ -70,6 +71,7 @@ namespace Poodle.Web.Controllers
 
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSection(SectionViewModel sectionModel, string selectedRank, string restriction)
         {
             if (!this.ModelState.IsValid)
@@ -116,6 +118,7 @@ namespace Poodle.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, SectionViewModel viewModel, string selectedRank, string restriction)
         {
             if (!this.ModelState.IsValid)

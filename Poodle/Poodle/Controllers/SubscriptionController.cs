@@ -24,7 +24,7 @@ namespace Poodle.Web.Controllers
             return this.View();
         }
 
-        [HttpPost]
+        [HttpPost]        
         public async Task<IActionResult> SignUp(string email)
         {
             if (email == null)
@@ -45,7 +45,7 @@ namespace Poodle.Web.Controllers
             }
            
         }
-    
+        
         public async Task<IActionResult> Delete()
         {
             try
@@ -64,6 +64,7 @@ namespace Poodle.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Send(NewsLetterModel newsletter)
         {
             var subscribers = await this.subscriptionService.GetAll();

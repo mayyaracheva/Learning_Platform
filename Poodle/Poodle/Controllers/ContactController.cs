@@ -5,6 +5,7 @@ using Poodle.Web.Models;
 
 namespace Poodle.Web.Controllers
 {
+    
     public class ContactController : Controller
     {
         public IActionResult Index()

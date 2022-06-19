@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace Poodle.Web.Controllers
 {
+   
     public class ProfileController : Controller
     {
         private readonly IUsersService usersService;
@@ -34,6 +35,7 @@ namespace Poodle.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(UserUpdateDto userModel)
         {
             if (!this.ModelState.IsValid)

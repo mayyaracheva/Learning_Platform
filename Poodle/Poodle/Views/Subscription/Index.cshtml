@@ -12,7 +12,8 @@
                         <h1 class="m-0">Create NewsLetter</h1>                        
                     </div>
                     <div class="card-body rounded-bottom bg-primary p-5">
-                        <form asp-controller="Subscription" asp-action="Send" method="post">                            
+                        <form asp-controller="Subscription" asp-action="Send" method="post">
+                            @Html.AntiForgeryToken()
                             <div class="form-group">
                                 <input type="text" name="subject" asp-for="@Model.Subject" class="form-control border-0 p-4" placeholder="Subject" required="required" />
                                 <span class="text-danger" asp-validation-for="@Model.Subject"></span>

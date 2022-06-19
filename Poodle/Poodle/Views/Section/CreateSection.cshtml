@@ -12,58 +12,59 @@
             <div class="panel-body">
                 <div class="form">
                     <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
                         <div class="form-group">
                             <label asp-for="Title"></label>
-                            <input type="text" asp-for="Title" class="form-control" required/>
+                            <input type="text" asp-for="Title" class="form-control" required />
                             <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Content"></label>
                             <textarea asp-for="Content" name="Content" id="Content" class="ckeditor" required></textarea>
                             <span asp-validation-for="Content" class="text-danger"></span>
-                        </div>                      
-                            <div class="form-group">
-                                <span>
-                                    <label for="notembedded" class="radio">Open Content in New Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded"asp-for="@Model.IsEmbeded" checked />
-                                    <label for="embedded" class="radio">Embed Content in Course Page</label>
-                                    <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded"asp-for="@Model.IsEmbeded" />
-                                </span>
-                            </div>
-                            <div class="form-group">
-                                <label asp-for="Restriction">Select View</label>
-                                <span asp-validation-for="Restriction" class="text-danger"></span>
-                                <select asp-for="@Model.Restriction" name="restriction">
-                                    <option value="false">Publish Section</option>
-                                    <option value="true">Hide Section</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Unlock View on<span>*</span></label>
-                                <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
-                                <i class="fas fa-calendar-alt"></i>
-                            </div>
-                            <div class="form-group">
-                                <label>Select Rank</label>
-                                <span asp-validation-for="Rank" class="text-danger"></span>
-                                <select asp-for="@Model.Rank" name="selectedRank" class="custom-select" placeholder="section position in course view">
+                        </div>
+                        <div class="form-group">
+                            <span>
+                                <label for="notembedded" class="radio">Open Content in New Page</label>
+                                <input type="radio" id="radioBtn" onclick="test(this)" value="false" name="IsEmbeded" asp-for="@Model.IsEmbeded" checked />
+                                <label for="embedded" class="radio">Embed Content in Course Page</label>
+                                <input type="radio" id="radioBtn" onclick="test(this)" value="true" name="IsEmbeded" asp-for="@Model.IsEmbeded" />
+                            </span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Restriction">Select View</label>
+                            <span asp-validation-for="Restriction" class="text-danger"></span>
+                            <select asp-for="@Model.Restriction" name="restriction">
+                                <option value="false">Publish Section</option>
+                                <option value="true">Hide Section</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Unlock View on<span>*</span></label>
+                            <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Rank</label>
+                            <span asp-validation-for="Rank" class="text-danger"></span>
+                            <select asp-for="@Model.Rank" name="selectedRank" class="custom-select" placeholder="section position in course view">
 
-                                    @{
-                                        int count = this.ViewBag.SectionsCount;
+                                @{
+                                    int count = this.ViewBag.SectionsCount;
 
-                                        for (int i = 0; i < count; i++)
-                                        {
-                                            <option value="@this.ViewBag.Sections[i]">@this.ViewBag.Sections[i]</option>
-                                        }
+                                    for (int i = 0; i < count; i++)
+                                    {
+                                        <option value="@this.ViewBag.Sections[i]">@this.ViewBag.Sections[i]</option>
                                     }
+                                }
 
-                                </select>
-                            </div>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <br />
-                                <button type="submit" asp-controller="Section" asp-action="CreateSection" class="btn-primary">Create</button>
-                            </div>
+                        <div class="form-group">
+                            <br />
+                            <button type="submit" asp-controller="Section" asp-action="CreateSection" class="btn-primary">Create</button>
+                        </div>
                     </form>
                 </div>
             </div>

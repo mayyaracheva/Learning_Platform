@@ -1,13 +1,14 @@
-﻿@{   
-    this.ViewData["SubmitButton"] = "Update";    
+﻿@{
+    this.ViewData["SubmitButton"] = "Update";
 }
 
 @model UserUpdateDto
 
 
-<form asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data">
 <a class="nav-item nav-link" asp-controller="Subscription" asp-action="Delete">Unsubscribe from the NewsLetter</a>
-    <br/>
+
+<form asp-controller="Profile" asp-action="Edit" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
     <div class="form-group">
         <label asp-for="FirstName"></label>
         <input type="text" asp-for="FirstName" class="form-control" />

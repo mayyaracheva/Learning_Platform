@@ -16,6 +16,7 @@
             <div class="panel-body">
                 <div class="form">
                     <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
                         <div class="form-group">
                             <label asp-for="@Model.Title"></label>
                             <input type="text" asp-for="@Model.Title" class="form-control" />
@@ -45,7 +46,7 @@
                         </div>
                         <div class="form-group">
                             @if (@Model.IsEmbeded)
-                            {   <span>
+                            {<span>
                                     <label for="notembedded" class="radio">DisplayMode: <b>Embedded</b> Open Content in New Page</label>
                                     <input type="radio" id="radioBtn" value="false" asp-for="@Model.IsEmbeded" />
                                 </span>
@@ -60,37 +61,37 @@
 
                             }
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
 
-                                @if (@Model.IsRestricted)
-                                {
-                                    <span>
-                                        @*<p class="margin12">Current ViewMode: <b>Restricted</b></p>*@
-                                        <label>ViewMode:<b>Restricted @this.ViewBag.LockDate</b> Unlock View on<span>*</span></label>
-                                        <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </span>
-                                }
-                                else
-                                {
-                                    <p class="margin12">ViewMode: <b>Not Restricted</b></p>
-                                    <label asp-for="Restriction">Change View</label>
-                                    <span asp-validation-for="Restriction" class="text-danger"></span>
-                                    <select asp-for="@Model.Restriction" name="restriction">
-                                        <option value=""></option>
-                                        <option value="true">Hide Section</option>
-                                    </select>
-                                    <div class="form-group">
-                                        <label>Unlock View on<span>*</span></label>
-                                        <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
-                                        <i class="fas fa-calendar-alt"></i>
-                                    </div>
-                                }
-                            </div>
-                            <div class="form-group">
-                                <br />
-                                <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>
-                            </div>
+                            @if (@Model.IsRestricted)
+                            {
+                                <span>
+                                    @*<p class="margin12">Current ViewMode: <b>Restricted</b></p>*@
+                                    <label>ViewMode:<b>Restricted @this.ViewBag.LockDate</b> Unlock View on<span>*</span></label>
+                                    <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                    <i class="fas fa-calendar-alt"></i>
+                                </span>
+                            }
+                            else
+                            {
+                                <p class="margin12">ViewMode: <b>Not Restricted</b></p>
+                                <label asp-for="Restriction">Change View</label>
+                                <span asp-validation-for="Restriction" class="text-danger"></span>
+                                <select asp-for="@Model.Restriction" name="restriction">
+                                    <option value=""></option>
+                                    <option value="true">Hide Section</option>
+                                </select>
+                                <div class="form-group">
+                                    <label>Unlock View on<span>*</span></label>
+                                    <input id="restriction" type="date" name="UnlockOn" asp-for="@Model.UnlockOn" />
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <br />
+                            <button type="submit" asp-controller="Section" asp-action="Edit" method="post" class="btn-primary">Update</button>
+                        </div>
                     </form>
             </div>
     </div>
