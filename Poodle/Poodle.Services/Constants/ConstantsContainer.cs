@@ -44,7 +44,10 @@ namespace Poodle.Services.Constants
 		public const string SUBSCRIPTION_EXISTS = "You are already subscribed";
 		public const string SUBSCRIPTION_REMOVED = "Your Subscription has been deleted";
 		public const string SUBSCRIPTION_SUCCESS = "You successfully signed up to our newsletter";
-		
+
+		//Email sending
+		public const string EMAIL_SUCCESS = "Your email was successfully sent";
+		public const string EMAIL_ERROR = "Something happened and the email wasn't sent";
 
 
 

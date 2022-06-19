@@ -358,8 +358,8 @@ namespace Poodle.Data
             courses.Add(new Course
             {
                 Id = 10,
-                Title = "Automate development tasks by using GitHub Actions",
-                Description = "Create a basic GitHub Action and use that action in a workflow.",
+                Title = "Automate development tasks by using GitHub Actions.",
+                Description = "Create a basic GitHub Action and use that action in a workflow. Create a container action and have it run in a workflow triggered by a push event to your GitHub repository",
                 CategoryId = 1,
                 PhotoURL = "img/course-10.jpg",
                 IsDeleted = false,

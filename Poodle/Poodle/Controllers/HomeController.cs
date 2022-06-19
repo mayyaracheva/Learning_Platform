@@ -6,14 +6,11 @@ using Microsoft.Extensions.Logging;
 using NewsAPI;
 using NewsAPI.Constants;
 using NewsAPI.Models;
-using Poodle.Data.EntityModels;
-using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
 using Poodle.Web.Models;
 using System;
 using System.Diagnostics;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -45,7 +42,7 @@ namespace Poodle.Web.Controllers
                 Q = "News",
                 SortBy = SortBys.Popularity,
                 Language = Languages.EN,
-                From = DateTime.UtcNow.AddDays(-3)
+                From = DateTime.UtcNow.AddDays(-1)
             });
             
             if (articlesResponse.Status == Statuses.Ok)
