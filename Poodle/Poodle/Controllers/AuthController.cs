@@ -28,7 +28,7 @@ namespace Poodle.Web.Controllers
             this.userMapper = userMapper;
         }
 
-        //GET: /auth/login
+        
         public IActionResult Login()
         {
             var userLoginModel = new LoginDto();
@@ -36,7 +36,7 @@ namespace Poodle.Web.Controllers
             return this.View(userLoginModel);
         }
 
-        //POST: /auth/login
+       
      
         [HttpPost]
         public async Task<IActionResult> Login(LoginDto userLoginModel)
@@ -82,7 +82,7 @@ namespace Poodle.Web.Controllers
                 if (userRegisterModel.ImageFile != null)
                 {
                     string folder = "img";
-                    folder += Guid.NewGuid().ToString() + "_" + userRegisterModel.ImageFile.FileName;
+                    folder += "/" + Guid.NewGuid().ToString() + "_" + userRegisterModel.ImageFile.FileName;
                     string imageUrl = "/" + folder;
                     string path = Path.Combine(webHostEnvironment.WebRootPath, folder);
                     await userRegisterModel.ImageFile.CopyToAsync(new FileStream(path, FileMode.Create));
@@ -100,11 +100,11 @@ namespace Poodle.Web.Controllers
                 }
 
             }
-            catch
+            catch (DuplicateEntityException)
             {
-
+                this.ModelState.AddModelError("Email", ConstantsContainer.USER_EXISTS);
                 return this.View(userRegisterModel);
-            }
+            }         
                        
 
         }

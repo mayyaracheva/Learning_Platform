@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Poodle.Data.EntityModels;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
 using Poodle.Services.Mappers;
 using Poodle.Web.Helpers;
-using Poodle.Web.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,7 +43,6 @@ namespace Poodle.Web.Controllers
             {
                 this.Response.StatusCode = StatusCodes.Status404NotFound;
                 this.ViewData["ErrorMessage"] = $"Section with id {id} does not exist.";
-
                 return this.View(viewName: "Error");
             }
 
@@ -64,6 +60,7 @@ namespace Poodle.Web.Controllers
             {
                 this.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 this.ViewData["ErrorMessage"] = $"You are not authorized to access this page.";
+                return this.View("Error");
             }
 
             int currentCourseId = id;            
@@ -91,7 +88,6 @@ namespace Poodle.Web.Controllers
             {
                 this.Response.StatusCode = StatusCodes.Status400BadRequest;
                 this.ViewData["ErrorMessage"] = $"Section with this name already exists.";
-
                 return this.View(viewName: "Error");
             }            
         }
@@ -108,6 +104,7 @@ namespace Poodle.Web.Controllers
             {
                 this.Response.StatusCode = StatusCodes.Status401Unauthorized;
                 this.ViewData["ErrorMessage"] = $"You are not authorized to access this page.";
+                return this.View("Error");
             }
             
             var section = await this.sectionService.GetById(id);
@@ -125,16 +122,25 @@ namespace Poodle.Web.Controllers
             {
                 this.RedirectToAction("Edit", "Section");
             }
-                        
-            viewModel.Rank = selectedRank;
-
-            if (restriction != null)
+            try
             {
-                viewModel.Restriction = restriction;
+                viewModel.Rank = selectedRank;
+
+                if (restriction != null)
+                {
+                    viewModel.Restriction = restriction;
+                }
+                int courseId = CoursesController.courseId;
+                await this.sectionService.UpdateSection(courseId, id, viewModel);
+                return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
             }
-            int courseId = CoursesController.courseId;
-            await this.sectionService.UpdateSection(courseId, id, viewModel);
-            return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
+            catch (DuplicateEntityException)
+            {
+                this.Response.StatusCode = StatusCodes.Status400BadRequest;
+                this.ViewData["ErrorMessage"] = $"Section with this name already exists.";
+                return this.View(viewName: "Error");
+            }
+            
         }
 
        
@@ -146,9 +152,9 @@ namespace Poodle.Web.Controllers
             }
 
             if (!this.HttpContext.Session.GetString("CurrentRole").Equals("teacher", StringComparison.InvariantCultureIgnoreCase))
-            {
-                this.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            {                
                 this.ViewData["ErrorMessage"] = $"You are not authorized to access this page.";
+                return this.View("Error");
             }
 
             var requester = await this.authHelper.TryGetUser(this.HttpContext.Session.GetString("CurrentUserEmail"));
@@ -178,6 +184,6 @@ namespace Poodle.Web.Controllers
             return sections;
         }
 
-
+        
     }
 }

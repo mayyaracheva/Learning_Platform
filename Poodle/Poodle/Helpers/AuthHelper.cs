@@ -2,8 +2,6 @@
 using Poodle.Services.Constants;
 using Poodle.Services.Contracts;
 using Poodle.Services.Exceptions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 

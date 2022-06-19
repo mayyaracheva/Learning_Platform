@@ -2,7 +2,6 @@
 using Poodle.Data.EntityModels;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
@@ -71,7 +70,7 @@ namespace Poodle.Services.Services
 
             if (userExists)
             {
-                throw new Exceptions.DuplicateEntityException(ConstantsContainer.USER_EXISTS);
+                throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }
 
             if (imageUrl == null)
@@ -101,10 +100,20 @@ namespace Poodle.Services.Services
             return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);            
         }
 
-        public async Task<User> UpdateWeb(int id, UserUpdateDto userUpdateDto)         
-         =>   await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
-        
+        public async Task<User> UpdateWeb(int id, UserUpdateDto userUpdateDto)
+        {
+            var userExists = await this.repository.GetAll().AnyAsync(u => u.Email == userUpdateDto.Email);
 
+            if (userExists)
+            {
+                throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
+            }
+
+            return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
+        }  
+         
+            
+         
         public async Task<int> Delete(int id, User requester)
         {
             var userToDelete = await this.GetById(id);       
