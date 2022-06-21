@@ -1,7 +1,10 @@
 ﻿
 @{
-    this.ViewData["Title"] = "Section";
+    this.ViewData["Title"] = Model.Title;
     this.ViewData["CurrentRole"] = this.Context.Session.GetString("CurrentRole");
+    ViewBag.MetaDescription = Model.Content;
+    string[] keywords = Model.Title.Split(" ").ToArray();
+    ViewBag.MetaKeywords = string.Join(",", keywords);
 
 }
 @model Section
