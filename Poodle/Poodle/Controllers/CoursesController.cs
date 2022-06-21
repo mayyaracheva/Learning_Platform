@@ -61,7 +61,8 @@ namespace Poodle.Web.Controllers
 			try
 			{
 				var user = await GetUser();
-				var course = await this.coursesService.EnrollStudentInPublicCourse(id, user);
+				var course = await this.coursesService.GetExistingCourse(id);
+				await this.coursesService.EnrollInPublicCourse(course, user);
 				courseId = course.Id;
 				if (AuthorizationHelper.IsStudent(user))
 				{
@@ -77,6 +78,10 @@ namespace Poodle.Web.Controllers
 			catch (EntityNotFoundException e)
 			{
 				return this.NotFound(e);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.Unautorized(e);
 			}
 		}
 
@@ -198,21 +203,21 @@ namespace Poodle.Web.Controllers
 			{
 				return this.View();
 			}
-			ViewBag.Message = "Selected Items:\\n";
+			//ViewBag.Message = "Selected Items:\\n";
 			try
 			{
 				var user = await GetUser();
 				var studentsNotEnrolled = await this.coursesService.GetUsersNotEnrolled(id);
 				var enrolledStudents = new List<User>();
 
-                foreach (var student in studentsNotEnrolled)
-                {
-                    if (students.Contains(student.Id.ToString()))
-                    {
+				foreach (var student in studentsNotEnrolled)
+				{
+					if (students.Contains(student.Id.ToString()))
+					{
 						enrolledStudents.Add(student);
-						ViewBag.Message += string.Format("{0} {1}\\n", student.FirstName, student.LastName);
+						//ViewBag.Message += string.Format("{0} {1}\\n", student.FirstName, student.LastName);
 					}
-                }
+				}
 				await this.coursesService.EnrollStudentsInPrivateCourse(id, enrolledStudents);
 			}
 			catch (EntityNotFoundException e)

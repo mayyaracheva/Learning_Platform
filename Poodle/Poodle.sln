@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.32413.511
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Web", "Poodle\Poodle.Web.csproj", "{7FA768A5-8355-42EE-852C-928D7ADBB427}"
 EndProject
@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.API", "Poodle.API\Po
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Services", "Poodle.Services\Poodle.Services.csproj", "{47978BA9-F05C-4B8A-A508-A116EE507A23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.Repositories", "Poodle.Repositories\Poodle.Repositories.csproj", "{B630EEEC-36B6-4618-8FFF-33AB5D972439}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Poodle.Repositories", "Poodle.Repositories\Poodle.Repositories.csproj", "{B630EEEC-36B6-4618-8FFF-33AB5D972439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Poodle.Tests", "Poodle.Tests\Poodle.Tests.csproj", "{C189A6AD-CABF-47E5-B6B3-4A2F4FCDC15D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B630EEEC-36B6-4618-8FFF-33AB5D972439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C189A6AD-CABF-47E5-B6B3-4A2F4FCDC15D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C189A6AD-CABF-47E5-B6B3-4A2F4FCDC15D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C189A6AD-CABF-47E5-B6B3-4A2F4FCDC15D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C189A6AD-CABF-47E5-B6B3-4A2F4FCDC15D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

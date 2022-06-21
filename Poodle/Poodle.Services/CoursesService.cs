@@ -125,15 +125,21 @@ namespace Poodle.Services
 			return await this.coursesRepository.DeleteAsync(courseToDelete);
 		}
 
-		public async Task<Course> EnrollStudentInPublicCourse(int id, User user)
+		public async Task EnrollInPublicCourse(Course course, User user)
 		{
-			var course = await GetExistingCourse(id);
-
 			if (AuthorizationHelper.IsStudent(user))
 			{
-				await this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
+				if (course.Category.Name == ConstantsContainer.PUBLIC_CATEGORY)
+				{
+					await this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
+
+				}
+				else if (course.Category.Name != ConstantsContainer.PUBLIC_CATEGORY)
+				{
+					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
+				}
 			}
-			return course;
+			
 		}
 
 		public async Task<Course> EnrollStudentsInPrivateCourse(int id, List<User> users)

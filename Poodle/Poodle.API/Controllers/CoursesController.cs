@@ -10,66 +10,67 @@ namespace Poodle.Services.Controllers
 {
 	[ApiController]
 	[Route("api/[controller]")]
-	public class CoursesController :ControllerBase
+	public class CoursesController : ControllerBase
 	{
 		private readonly ICoursesService coursesService;
 		private readonly ISectionService sectionService;
 		private readonly AuthenticationHelper authenticationHelper;
 
-		public CoursesController(ICoursesService coursesService, 
-								 ISectionService sectionService, 
+		public CoursesController(ICoursesService coursesService,
+								 ISectionService sectionService,
 								 AuthenticationHelper authenticationHelper)
 		{
 			this.coursesService = coursesService;
-            this.sectionService = sectionService;
-            this.authenticationHelper = authenticationHelper;
-        }
+			this.sectionService = sectionService;
+			this.authenticationHelper = authenticationHelper;
+		}
 
 		[HttpGet("")]
 		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
 		{
-				var user = await this.authenticationHelper.TryGetUser(email, password);
-				var courses = await this.coursesService.GetAsync(user);
+			var user = await this.authenticationHelper.TryGetUser(email, password);
+			var courses = await this.coursesService.GetAsync(user);
 
-				return this.StatusCode(StatusCodes.Status200OK, courses);
+			return this.StatusCode(StatusCodes.Status200OK, courses);
 		}
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id, [FromHeader] string email, [FromHeader] string password)
 		{
-				var user = await this.authenticationHelper.TryGetUser(email, password);
-				var course = this.coursesService.EnrollStudentInPublicCourse(id, user);
-				return this.StatusCode(StatusCodes.Status200OK, course);
+			var user = await this.authenticationHelper.TryGetUser(email, password);
+			var course = await this.coursesService.GetExistingCourse(id);
+			await this.coursesService.EnrollInPublicCourse(course, user);
+			return this.StatusCode(StatusCodes.Status200OK, course);
 		}
 
 
 		[HttpPost("")]
 		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
 		{
-				var user = await this.authenticationHelper.TryGetUser(email, password); 
-				await this.coursesService.CreateAsync(course, user);
+			var user = await this.authenticationHelper.TryGetUser(email, password);
+			await this.coursesService.CreateAsync(course, user);
 
-            return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
-        }
+			return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
+		}
 
 		[HttpPut("{id}")]
 		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
 		{
-				var user = await this.authenticationHelper.TryGetUser(email, password);
+			var user = await this.authenticationHelper.TryGetUser(email, password);
 
-				await this.coursesService.UpdateAsync(id, user, dto);
-				
-				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
+			await this.coursesService.UpdateAsync(id, user, dto);
+
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
 		}
 
 		[HttpDelete("{id}")]
 		public async Task<IActionResult> Delete(int id, [FromHeader] string email, [FromHeader] string password)
 		{
-				var user = await this.authenticationHelper.TryGetUser(email, password);
+			var user = await this.authenticationHelper.TryGetUser(email, password);
 
-				await this.coursesService.DeleteAsync(id, user);
+			await this.coursesService.DeleteAsync(id, user);
 
-				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_DELETED);
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_DELETED);
 		}
 
 		[HttpGet("{id}/sections")]
@@ -77,9 +78,9 @@ namespace Poodle.Services.Controllers
 		{
 			//only teacher set to be authorized to get all sections
 			//authorization checked in services
-				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				var sections = await this.sectionService.GetByCourseId(id, requester);
-				return this.StatusCode(StatusCodes.Status200OK, sections);
+			var requester = await this.authenticationHelper.TryGetUser(email, password);
+			var sections = await this.sectionService.GetByCourseId(id, requester);
+			return this.StatusCode(StatusCodes.Status200OK, sections);
 		}
 
 		[HttpPost("{id}/sections")]
@@ -88,27 +89,27 @@ namespace Poodle.Services.Controllers
 		{
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
-				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				var sectionId = await this.sectionService.CreateSection(sectionDto, id, requester);
-				return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
+			var requester = await this.authenticationHelper.TryGetUser(email, password);
+			var sectionId = await this.sectionService.CreateSection(sectionDto, id, requester);
+			return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
 		}
-				
+
 		[HttpDelete("sections/{id}")]
 		public async Task<IActionResult> DeleteSection(int id, [FromHeader] string email, [FromHeader] string password)
 		{
-				var requester = await this.authenticationHelper.TryGetUser(email, password);
-				await this.sectionService.DeleteSection(id, requester);
-				return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.SECTIONS_DELETED);
+			var requester = await this.authenticationHelper.TryGetUser(email, password);
+			await this.sectionService.DeleteSection(id, requester);
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.SECTIONS_DELETED);
 		}
 
-		
+
 		[HttpPut("{courseId}/sections/{sectionId}")]
 		public async Task<IActionResult> UpdateSection(int courseId, int sectionId, [FromBody] SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
 		{
-				var requester = await this.authenticationHelper.TryGetUser(email, password);				
-				var result = await this.sectionService.UpdateSection(courseId, sectionId, sectionDto, requester);
+			var requester = await this.authenticationHelper.TryGetUser(email, password);
+			var result = await this.sectionService.UpdateSection(courseId, sectionId, sectionDto, requester);
 
-				return this.StatusCode(StatusCodes.Status200OK, result);
+			return this.StatusCode(StatusCodes.Status200OK, result);
 		}
 	}
 }
