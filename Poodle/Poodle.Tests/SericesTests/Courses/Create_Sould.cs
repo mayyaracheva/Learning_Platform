@@ -5,12 +5,7 @@ using Poodle.Repositories.Contracts;
 using Poodle.Services;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
-using Poodle.Services.Exceptions;
 using Poodle.Services.Mappers;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Poodle.Tests.SericesTests.Courses
@@ -19,7 +14,7 @@ namespace Poodle.Tests.SericesTests.Courses
 	public class Create_Sould
 	{
 		[TestMethod]
-		public async Task ReturnCorrectBeer_When_ParamsAreValid()
+		public async Task ReturnCorrectCourse_When_ParamsAreValid()
 		{
 			// Arrange
 			var courseDTO = new CourseDTO
@@ -52,17 +47,18 @@ namespace Poodle.Tests.SericesTests.Courses
 			var mapperMock = new Mock<CourseMapper>();
 			var usersRepositoryMock = new Mock<IUsersRepository>();
 			var coursesServiceMock = new Mock<ICoursesService>();
-			 mapperMock
-				.Setup(map => map.Convert(courseDTO))
-				.Returns(expectedCourse);
+			//var helper = new Mock<AuthorizationHelper>();
+			 //mapperMock
+				//.Setup(map => map.Convert(It.IsAny<CourseDTO>()))
+				//.Returns(expectedCourse);
 
-			//await coursesServiceMock
-			//	.Setup(repo => repo.(It.IsAny<string>()))
-			//	.Throws(new DuplicateEntityException());
+			//coursesServiceMock
+			//	.Setup(service => service.DuplicateCourseCheck(It.IsAny<string>()))
+			//	.ThrowsAsync(new DuplicateEntityException());
 
-			//await coursesRepositoryMock
-			//	.Setup(repo => repo.CreateAsync(It.IsAny<Course>()))
-			//	.Returns(expectedCourse);
+			coursesRepositoryMock
+				.Setup(repo => repo.CreateAsync(It.IsAny<Course>()))
+				.ReturnsAsync(expectedCourse);
 
 			var sut = new CoursesService(coursesRepositoryMock.Object, 
 				mapperMock.Object,

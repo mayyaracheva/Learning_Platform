@@ -84,7 +84,7 @@ namespace Poodle.Services
 
         public async Task<SectionDto> CreateSection(SectionDto sectionDto, int courseId, User requester)
         {
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            AuthorizationHelper.ValidateAccess(requester);
 
             var allSections = await this.GetAll();
 
@@ -146,7 +146,7 @@ namespace Poodle.Services
 
         public async Task<SectionDto> UpdateSection(int courseId, int sectionId, SectionDto sectionDto, User requester)
         {
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            AuthorizationHelper.ValidateAccess(requester);
             var sectionToUpdate = await this.GetById(sectionId);
 
             sectionToUpdate.Content = !string.IsNullOrEmpty(sectionDto.Content) ? sectionDto.Content : sectionToUpdate.Content;

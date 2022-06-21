@@ -49,7 +49,7 @@ namespace Poodle.Services.Services
 
         public async Task<List<UserResponseDto>> GetAll(User requester)
         {            
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            AuthorizationHelper.ValidateAccess(requester);
             var users = await this.GetAll();
             var userResponseDtos = users.Select(u => userMapper.ConvertToDto(u)).ToList();
             return userResponseDtos;
@@ -57,7 +57,7 @@ namespace Poodle.Services.Services
 
         public async Task<UserResponseDto> GetById(int id, User requester)
         {            
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            AuthorizationHelper.ValidateAccess(requester);
             var user = await this.GetById(id);
             return this.userMapper.ConvertToDto(user); 
         }
@@ -118,7 +118,7 @@ namespace Poodle.Services.Services
         public async Task<int> Delete(int id, User requester)
         {
             var userToDelete = await this.GetById(id);       
-            AuthorizationHelper.ValidateAccess(requester.Role.Name);
+            AuthorizationHelper.ValidateAccess(requester);
             return await this.repository.Delete(userToDelete);
         }
 

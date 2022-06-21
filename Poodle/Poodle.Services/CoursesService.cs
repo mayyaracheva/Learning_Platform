@@ -11,7 +11,6 @@ using Poodle.Services.Helpers;
 using System.Collections.Generic;
 using System.Linq;
 using Poodle.Web.Models;
-using System;
 
 namespace Poodle.Services
 {
@@ -97,7 +96,7 @@ namespace Poodle.Services
 		}
 		public async Task<Course> CreateAsync(CourseDTO dto, User user)
 		{
-			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			AuthorizationHelper.ValidateAccess(user);
 			await this.DuplicateCourseCheck(dto.Title);
 
 			var newCourse = this.courseMapper.Convert(dto);
@@ -108,7 +107,7 @@ namespace Poodle.Services
 
 		public async Task<Course> UpdateAsync(int id, User user, CourseDTO dto)
 		{
-			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			AuthorizationHelper.ValidateAccess(user);
 
 			var courseToUpdate = await GetExistingCourse(id);
 
@@ -119,7 +118,7 @@ namespace Poodle.Services
 
 		public async Task<Course> DeleteAsync(int id, User user)
 		{
-			AuthorizationHelper.ValidateAccess(user.Role.Name);
+			AuthorizationHelper.ValidateAccess(user);
 			var courseToDelete = await GetExistingCourse(id);
 
 			return await this.coursesRepository.DeleteAsync(courseToDelete);
