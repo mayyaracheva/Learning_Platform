@@ -24,10 +24,10 @@
             <dt>
                 <span>
                     <a style="color: black" asp-controller="Section" asp-action="Edit" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Edit</a>
-
-                    <a style="color: black" href="#myModal" data-toggle="modal" class="badge rounded-pill bg-secondary">Delete</a>
+                    <a style="color: black" asp-controller="Section" asp-action="Delete" asp-route-id="@item.Id" class="badge rounded-pill bg-secondary">Delete</a>
+                    <!--<a style="color: black" href="#myModal" data-toggle="modal" class="badge rounded-pill bg-secondary">Delete</a>-->
                     <!-- Modal HTML start-->
-                    <div id="myModal" class="modal fade">
+                    <!--<div id="myModal" class="modal fade">
                         <div class="modal-dialog modal-confirm">
                             <div class="modal-content">
                                 <div class="modal-header flex-column">
@@ -50,7 +50,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
                     <!-- Modal HTML end-->
                     @if (item.IsRestricted)
                     {

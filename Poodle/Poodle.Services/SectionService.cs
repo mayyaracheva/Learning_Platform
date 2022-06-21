@@ -159,13 +159,14 @@ namespace Poodle.Services
         public async Task<SectionDto> UpdateSection(int courseId, int sectionId, SectionViewModel sectionDto)
         {
             var allSectionsInCourse = await this.GetByCourseId(courseId);
+            var sectionToUpdate = await this.GetById(sectionId);
+            allSectionsInCourse.Remove(sectionToUpdate);
 
             if (allSectionsInCourse.Any(s => s.Title == sectionDto.Title))
             {
                 throw new DuplicateEntityException(ConstantsContainer.SECTION_EXISTS);
             }
 
-            var sectionToUpdate = await this.GetById(sectionId);
             
             if (!sectionDto.IsEmbeded.Equals(sectionToUpdate.IsEmbeded))
             {
