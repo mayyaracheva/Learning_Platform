@@ -102,9 +102,10 @@ namespace Poodle.Services.Services
 
         public async Task<User> UpdateWeb(int id, UserUpdateDto userUpdateDto)
         {
+            var user = await this.GetById(id);
             var userExists = await this.repository.GetAll().AnyAsync(u => u.Email == userUpdateDto.Email);
 
-            if (userExists)
+            if (userExists && user.Email != userUpdateDto.Email)
             {
                 throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }

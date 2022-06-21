@@ -2,12 +2,15 @@
 @{
     this.ViewData["Title"] = "Section";
     this.ViewData["CurrentRole"] = this.Context.Session.GetString("CurrentRole");
+
 }
 @model Section
 
 <h2>@this.Model.Title</h2>
 <br />
 <p class="margin12">@Html.Raw(Model.Content)</p>
+
+<a href="/courses/details/@this.ViewBag.CourseId">Go Back</a>
 
 
 

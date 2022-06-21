@@ -38,6 +38,7 @@ namespace Poodle.Web.Controllers
             try
             {
                 var section = await this.sectionService.GetById(id);
+                this.ViewBag.CourseId = CoursesController.courseId;
                 return this.View(section);
             }
             catch (EntityNotFoundException)
