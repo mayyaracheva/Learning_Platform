@@ -147,7 +147,7 @@ namespace Poodle.Web.Controllers
             
         }
 
-       
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
@@ -165,11 +165,13 @@ namespace Poodle.Web.Controllers
             await this.sectionService.DeleteSection(id, requester);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
+        
         public async Task<IActionResult> HideSection(int id)
         {           
             await this.sectionService.RestrictSection(id, true);
             return this.RedirectToAction("Details", "Courses", new { id = CoursesController.courseId });
         }
+       
         public async Task<IActionResult> ShowSection(int id)
         {
             await this.sectionService.RestrictSection(id, false);

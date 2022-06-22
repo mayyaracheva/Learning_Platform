@@ -15,8 +15,7 @@
         <section class="panel">
             <div class="panel-body">
                 <div class="form">
-                    <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
-                        @Html.AntiForgeryToken()
+                    <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">                        
                         <div class="form-group">
                             <label asp-for="@Model.Title"></label>
                             <input type="text" asp-for="@Model.Title" class="form-control" />
