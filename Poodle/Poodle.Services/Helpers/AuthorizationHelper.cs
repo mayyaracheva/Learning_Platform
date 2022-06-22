@@ -11,7 +11,7 @@ namespace Poodle.Services.Helpers
         public static void ValidateAccess(User user)
         {
 
-            if (user.RoleId != 1)
+            if (user.RoleId != ConstantsContainer.TEACHER_ID)
             {
                 throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
             }
