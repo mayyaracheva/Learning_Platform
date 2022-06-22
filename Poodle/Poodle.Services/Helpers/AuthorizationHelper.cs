@@ -8,10 +8,10 @@ namespace Poodle.Services.Helpers
 {
 	public static class AuthorizationHelper
 	{
-        public static void ValidateAccess(string requesterRole)
+        public static void ValidateAccess(User user)
         {
 
-            if (!requesterRole.Equals("teacher", StringComparison.CurrentCultureIgnoreCase))
+            if (user.RoleId != ConstantsContainer.TEACHER_ID)
             {
                 throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
             }

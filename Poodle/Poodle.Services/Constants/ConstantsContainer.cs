@@ -17,7 +17,10 @@ namespace Poodle.Services.Constants
 		public const string USER_DELETED = "User has been deleted";
 		public const string USER_NOT_FOUND = "User was not found";
 		public const string TEACHER = "Teacher";
-		public const string Student = "Student";
+		public const string STUDENT = "Student";
+		public const int USERS_COUNT = 10;
+		public const int TEACHER_ID = 1;
+
 
 		//Section
 		public const string SECTION_EXISTS = "Section with such title already exists";
