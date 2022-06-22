@@ -23,7 +23,7 @@ namespace Poodle.Services.Controllers
 		public async Task<IActionResult> PublicCourses()
 		{
 			var courses = await this.homeservice
-				.GetPublicCoursrsesAsync()
+				.GetPublicCoursrses()
 				.Select(p => new CourseResponseDTO(p))
 				.ToListAsync();
 

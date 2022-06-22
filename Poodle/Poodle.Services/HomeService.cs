@@ -15,7 +15,7 @@ namespace Poodle.Services
             this.coursesRepository = coursesRepository;
         }
 
-        public IQueryable<Course> GetPublicCoursrsesAsync()
+        public IQueryable<Course> GetPublicCoursrses()
         {
             var allPublicCourses = this.coursesRepository.GetAll()
                 .Where(x => x.Category.Name == ConstantsContainer.PUBLIC_CATEGORY);

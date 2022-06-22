@@ -7,6 +7,6 @@ namespace Poodle.Services.Contracts
 {
 	public interface IHomeService
 	{
-		IQueryable<Course> GetPublicCoursrsesAsync();
+		IQueryable<Course> GetPublicCoursrses();
 	}
 }

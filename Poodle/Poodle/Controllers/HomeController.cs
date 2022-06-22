@@ -32,7 +32,7 @@ namespace Poodle.Web.Controllers
         {
             HomeViewModel viewModel = new HomeViewModel();
             var publicCourses = await this.homeService
-                .GetPublicCoursrsesAsync()
+                .GetPublicCoursrses()
                 .Select(course => new StudentCourseViewModel(course))
                 .ToListAsync();
             viewModel.PublicCourses = publicCourses;

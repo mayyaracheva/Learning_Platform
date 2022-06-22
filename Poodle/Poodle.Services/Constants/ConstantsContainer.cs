@@ -9,6 +9,7 @@ namespace Poodle.Services.Constants
 		public const string COURSE_CREATED = "Course has been created";
 		public const string COURSE_UPDATED = "Course has been updated";
 		public const string COURSE_DELETED = "Course has been deleted";
+		public const int PUBLIC_COURSES_COUNT = 6;
 
 		//User
 		public const string USER_EXISTS = "This user already exists";
