@@ -14,6 +14,7 @@ namespace Poodle.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Send(UserContactViewModel contact)
         {
             string content = "Name: " + contact.Name;

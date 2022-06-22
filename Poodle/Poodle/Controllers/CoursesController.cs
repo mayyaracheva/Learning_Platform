@@ -94,6 +94,7 @@ namespace Poodle.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Create(CourseDTO model)
 		{
 
@@ -136,6 +137,7 @@ namespace Poodle.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Edit(int id, CourseDTO model)
 		{
 			if (!this.ModelState.IsValid)
@@ -157,6 +159,7 @@ namespace Poodle.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Delete(int id)
 		{
 			if (!this.ModelState.IsValid)
@@ -195,6 +198,7 @@ namespace Poodle.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Enroll(int id, string[] students)
 		{
 			if (!this.ModelState.IsValid)
@@ -227,6 +231,7 @@ namespace Poodle.Web.Controllers
 		}
 
 		[HttpPost]
+		[ValidateAntiForgeryToken]
 		public async Task<IActionResult> Unenroll(int id)
 		{
 			if (!this.ModelState.IsValid)
