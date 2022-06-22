@@ -1,6 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Poodle.Data;
-using Poodle.Data.EntityModels;
 using Poodle.Repositories;
 using Poodle.Services.Dtos;
 using Poodle.Services.Exceptions;
@@ -14,9 +13,11 @@ using System.Threading.Tasks;
 
 namespace Poodle.Tests.SericesTests.Users
 {
-	[TestClass]
-	public class UpdateUser_Should : BaseTest
-	{
+    [TestClass]
+    public class UpdateWeb_User_Should : BaseTest
+    {
+		//UpdateWeb tests
+
 		[TestMethod]
 		public async Task Return_TheUpdatedUser()
 		{
@@ -30,49 +31,28 @@ namespace Poodle.Tests.SericesTests.Users
 				Email = "Mario.Caruso@gmail.com",
 				ImageUrl = "string"
 			};
-			var requester = new User
-			{
-				Id = 10,
-				Password = "marrob123!",
-				FirstName = "Mario",
-				LastName = "Caruso",
-				Email = "Mario.Caruso@gmail.com",
-				RoleId = 2,
-				ImageId = 10,
-			};
 			//Act
 			var context = new ApplicationContext(base.options);
 			var repository = new UsersRepository(context);
 			var mapper = new UserMapper();
 			var sut = new UsersService(repository, mapper);
-			var updatedUser = await sut.UpdateApi(id, userUpdateDto, requester);
+			var updatedUser = await sut.UpdateWeb(id, userUpdateDto);
 			//Assert
 			Assert.AreEqual(userUpdateDto.FirstName, updatedUser.FirstName);
 		}
 
-		[TestMethod]
-
-		public void ThrowsException_If_Requester_IsUnauthorized()
+        [TestMethod]
+		public void ThrowsException_If_User_eMail_IsNotUnique()
 		{
 			//Arrange
 			int id = 10;
 			var userUpdateDto = new UserUpdateDto()
 			{
 				Password = "marrob123!",
-				FirstName = "Ignatio",
+				FirstName = "Mario",
 				LastName = "Caruso",
-				Email = "Mario.Caruso@gmail.com",
-				ImageUrl = "string"
-			};
-			var requester = new User
-			{
-				Id = 9,
-				Password = "hardiR789*",
-				FirstName = "Harriet",
-				LastName = "Dark",
 				Email = "Harriet.Dark@gmail.com",
-				RoleId = 2,
-				ImageId = 9,
+				ImageUrl = "string"
 			};
 			//Act
 			var context = new ApplicationContext(base.options);
@@ -81,7 +61,7 @@ namespace Poodle.Tests.SericesTests.Users
 			var sut = new UsersService(repository, mapper);
 
 			//Assert
-			Assert.ThrowsExceptionAsync<UnauthorizedOperationException>(() => sut.UpdateApi(id, userUpdateDto, requester));
+			Assert.ThrowsExceptionAsync<DuplicateEntityException>(() => sut.UpdateWeb(id, userUpdateDto));
 		}
 	}
 }

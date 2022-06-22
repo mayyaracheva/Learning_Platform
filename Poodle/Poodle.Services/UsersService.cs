@@ -114,15 +114,11 @@ namespace Poodle.Services.Services
             return await this.repository.Update(id, this.userMapper.ConvertToModel(userUpdateDto), userUpdateDto.ImageUrl);
         }  
          
-            
-         
         public async Task<int> Delete(int id, User requester)
         {
             var userToDelete = await this.GetById(id);       
             AuthorizationHelper.ValidateAccess(requester);
             return await this.repository.Delete(userToDelete);
         }
-
-        
     }
 }

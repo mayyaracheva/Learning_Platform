@@ -1,20 +1,23 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Moq;
+using Poodle.Data;
 using Poodle.Data.EntityModels;
-using Poodle.Repositories.Contracts;
+using Poodle.Repositories;
 using Poodle.Services;
-using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
+using Poodle.Services.Exceptions;
 using Poodle.Services.Mappers;
-using System.Threading.Tasks;
 
 namespace Poodle.Tests.SericesTests.Courses
 {
 	[TestClass]
-	public class Create_Sould
+	public class Create_Should : BaseTest
 	{
-		[TestMethod]
-		public async Task ReturnCorrectCourse_When_ParamsAreValid()
+		//[TestMethod]
+		//public async Task ReturnCorrectCourse_When_ParamsAreValid()
+		//{ }
+
+			[TestMethod]
+		public void ThrowsException_When_CourseExists()
 		{
 			// Arrange
 			var courseDTO = new CourseDTO
@@ -26,7 +29,7 @@ namespace Poodle.Tests.SericesTests.Courses
 			};
 			var expectedCourse = new Course
 			{
-				Id = 1,
+				Id = 11,
 				Title = "Implementing and Administering Solutions(CCNA)",
 				Description = "The course gives you a broad range of fundamental knowledge for all IT careers. Through a combination of lecture, hands-on labs, and self-study, you will learn how to install, operate, configure, and verify basic IPv4 and IPv6 networks. The course covers configuring network components such as switches, routers, and wireless LAN controllers; managing network devices; and identifying basic security threats. The course also gives you a foundation in network programmability, automation, and software-defined networking.",
 				CategoryId = 1,
@@ -43,34 +46,19 @@ namespace Poodle.Tests.SericesTests.Courses
 				RoleId = 1,
 				ImageId = 1,
 			};
-			var coursesRepositoryMock = new Mock<ICoursesRepository>();
-			var mapperMock = new Mock<CourseMapper>();
-			var usersRepositoryMock = new Mock<IUsersRepository>();
-			var coursesServiceMock = new Mock<ICoursesService>();
-			//var helper = new Mock<AuthorizationHelper>();
-			 //mapperMock
-				//.Setup(map => map.Convert(It.IsAny<CourseDTO>()))
-				//.Returns(expectedCourse);
-
-			//coursesServiceMock
-			//	.Setup(service => service.DuplicateCourseCheck(It.IsAny<string>()))
-			//	.ThrowsAsync(new DuplicateEntityException());
-
-			coursesRepositoryMock
-				.Setup(repo => repo.CreateAsync(It.IsAny<Course>()))
-				.ReturnsAsync(expectedCourse);
-
-			var sut = new CoursesService(coursesRepositoryMock.Object, 
-				mapperMock.Object,
-				usersRepositoryMock.Object);
 
 			// Act
-			var actualCourse = await sut.CreateAsync(courseDTO, user);
 
-			// Assert
-			Assert.AreEqual(expectedCourse.Id, actualCourse.Id);
-			Assert.AreEqual(expectedCourse.Title, actualCourse.Title);
-			Assert.AreEqual(expectedCourse.Description, actualCourse.Description);
+			var context = new ApplicationContext(base.options);
+			var coursesRepository = new CoursesRepository(context);
+			var mapper = new CourseMapper();
+			var usersRepository = new UsersRepository(context);
+			var sut = new CoursesService(coursesRepository,
+										mapper, 
+										usersRepository);
+
+            // Assert
+            Assert.ThrowsExceptionAsync<DuplicateEntityException>(() => sut.CreateAsync(courseDTO, user));
 		}
 	}
 }
