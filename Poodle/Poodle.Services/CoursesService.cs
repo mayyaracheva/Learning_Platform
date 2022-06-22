@@ -133,7 +133,7 @@ namespace Poodle.Services
 					await this.coursesRepository.EnrollInCourse(new List<User> { user }, course);
 
 				}
-				else if (course.Category.Name != ConstantsContainer.PUBLIC_CATEGORY)
+				else if (course.Category.Name != ConstantsContainer.PUBLIC_CATEGORY && !course.Users.Contains(user))
 				{
 					throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
 				}
