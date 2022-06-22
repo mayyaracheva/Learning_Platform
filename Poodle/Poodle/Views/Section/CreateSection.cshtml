@@ -12,7 +12,7 @@
             <div class="panel-body">
                 <div class="form">
                     <form asp-controller="Section" asp-action="CreateSection" enctype="multipart/form-data">
-                        @Html.AntiForgeryToken()
+                        @*@Html.AntiForgeryToken()*@
                         <div class="form-group">
                             <label asp-for="Title"></label>
                             <input type="text" asp-for="Title" class="form-control" required />
