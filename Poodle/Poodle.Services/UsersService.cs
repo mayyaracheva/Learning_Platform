@@ -86,13 +86,14 @@ namespace Poodle.Services.Services
         public async Task<User> UpdateApi(int id, UserUpdateDto userUpdateDto, User requester)
         {
             var userToBeUpdated = await this.GetById(id);
+            var userEmailExists = await this.repository.GetAll().AnyAsync(u => u.Email == userUpdateDto.Email);
 
             if (userToBeUpdated.Email != requester.Email | userToBeUpdated.Password != requester.Password)
             {
                 throw new UnauthorizedOperationException(ConstantsContainer.RESTRICTED_ACCESS);
             }
 
-            if (userToBeUpdated.Email == userUpdateDto.Email)
+            if (userEmailExists && userToBeUpdated.Email != userUpdateDto.Email)
             {
                 throw new DuplicateEntityException(ConstantsContainer.USER_EXISTS);
             }

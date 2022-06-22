@@ -147,7 +147,7 @@ namespace Poodle.Web.Controllers
             
         }
 
-        [ValidateAntiForgeryToken]
+       
         public async Task<IActionResult> Delete(int id)
         {
             if (!this.HttpContext.Session.Keys.Contains("CurrentUserEmail"))
