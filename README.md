@@ -3,6 +3,9 @@
 
  ___e-Learning Platform___
 
+# Getting started 😃 😅 🇧🇬
+![AppPreview](App preview.jpg "AppPreview")
+
 # [Project Description](#)
 
 Your task is to design the new system that will be used by Telerik Academy trainers to deliver online learning content.
