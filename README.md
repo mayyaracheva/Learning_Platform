@@ -145,3 +145,6 @@ Besides all requirements marked as should and could, here are some more _optiona
 
 # [Database Diagram](#)
 ![Entities diagram](Poodle.Diagram.jpg "DB Diagram")
+
+# [Database Diagram](#)
+![Swagger](Swagger.png "Swagger")
