@@ -4,7 +4,7 @@
  ___e-Learning Platform___
 
 # Getting started 😃 😅 🇧🇬
-![AppPreview](App preview.jpg "AppPreview")
+![AppPreview](AppPreview.jpg "AppPreview")
 
 # [Project Description](#)
 
