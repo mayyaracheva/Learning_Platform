@@ -12,8 +12,8 @@ namespace Poodle.Data
 
         public static void Seed(this ModelBuilder modelBuilder)
         {
-            List<Image> Images = GetImages();
-            modelBuilder.Entity<Image>().HasData(Images);
+            List<Image> images = GetImages();
+            modelBuilder.Entity<Image>().HasData(images);
 
             List<User> users = GetUsers();
             modelBuilder.Entity<User>().HasData(users);
