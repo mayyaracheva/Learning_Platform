@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using Poodle.Services.Helpers;
 using Poodle.Services.Dtos;
 using Poodle.Services.Constants;
+using Microsoft.AspNetCore.Cors;
 
 namespace Poodle.Services.Controllers
 {
-	[ApiController]
+	[EnableCors("MyPolicy")]
+	[Produces("application/json")]
 	[Route("api/[controller]")]
+	[ApiController]	
 	public class CoursesController : ControllerBase
 	{
 		private readonly ICoursesService coursesService;
@@ -25,9 +28,9 @@ namespace Poodle.Services.Controllers
 			this.authenticationHelper = authenticationHelper;
 		}
 
-		[HttpGet("")]
+		[HttpGet("")]		
 		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
-		{
+		{		
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 			var courses = await this.coursesService.GetAsync(user);
 
@@ -50,22 +53,26 @@ namespace Poodle.Services.Controllers
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 			await this.coursesService.CreateAsync(course, user);
 
-			return this.StatusCode(StatusCodes.Status201Created, ConstantsContainer.COURSE_CREATED);
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_CREATED);
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
+		public async Task<IActionResult> Update(int id, CourseDTO dto)
 		{
+			var email = "Ragnar.Lodbrock@abv.com";
+			var password = "adminADMIN123?";
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 
-			await this.coursesService.UpdateAsync(id, user, dto);
+			var course = await this.coursesService.UpdateAsync(id, user, dto);
 
-			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_CREATED);
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> Delete(int id)
 		{
+			var email = "Ragnar.Lodbrock@abv.com";
+			var password = "adminADMIN123?";
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 
 			await this.coursesService.DeleteAsync(id, user);
@@ -74,10 +81,12 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpGet("{id}/sections")]
-		public async Task<IActionResult> GetSections(int id, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> GetSections(int id)
 		{
 			//only teacher set to be authorized to get all sections
 			//authorization checked in services
+			var email = "Ragnar.Lodbrock@abv.com";
+			var password = "adminADMIN123?";
 			var requester = await this.authenticationHelper.TryGetUser(email, password);
 			var sections = await this.sectionService.GetByCourseId(id, requester);
 			return this.StatusCode(StatusCodes.Status200OK, sections);
@@ -85,13 +94,13 @@ namespace Poodle.Services.Controllers
 
 		[HttpPost("{id}/sections")]
 
-		public async Task<IActionResult> CreateSection(int id, [FromBody] SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
+		public async Task<IActionResult> CreateSection(int id, SectionDto sectionDto, [FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to create sections
 			//authorization checked in services			
 			var requester = await this.authenticationHelper.TryGetUser(email, password);
 			var sectionId = await this.sectionService.CreateSection(sectionDto, id, requester);
-			return this.StatusCode(StatusCodes.Status201Created, $"Section with Id {sectionId} created");
+			return this.StatusCode(StatusCodes.Status201Created);
 		}
 
 		[HttpDelete("sections/{id}")]
@@ -99,7 +108,7 @@ namespace Poodle.Services.Controllers
 		{
 			var requester = await this.authenticationHelper.TryGetUser(email, password);
 			await this.sectionService.DeleteSection(id, requester);
-			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.SECTIONS_DELETED);
+			return this.StatusCode(StatusCodes.Status200OK);
 		}
 
 

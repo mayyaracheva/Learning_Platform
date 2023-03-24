@@ -13,6 +13,8 @@ using Poodle.Data;
 using Poodle.Repositories;
 using Poodle.Repositories.Contracts;
 using Poodle.Services.Contracts;
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
 
 namespace Poodle.Services
 {
@@ -30,6 +32,19 @@ namespace Poodle.Services
 		{
 			services.AddDbContext<ApplicationContext>(options =>
 			options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
+			services.AddCors(options =>
+			{
+				options.AddPolicy(name: "MyPolicy",
+					policy =>
+					{
+						policy.WithOrigins(
+								"http://localhost:3000",
+								"http://localhost:5000")
+							.WithMethods("PUT", "DELETE", "GET", "POST")
+							.WithHeaders("*");
+					});
+			});
 
 			services.AddControllers().AddNewtonsoftJson(
 				options => options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
@@ -57,7 +72,9 @@ namespace Poodle.Services
 			services.AddScoped<ISectionService, SectionService>();
 			services.AddScoped<ICoursesService, CoursesService>();
 			services.AddScoped<IHomeService, HomeService>();
+
 			
+
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,19 +89,32 @@ namespace Poodle.Services
 			}
 			// migrate database changes on startup (includes initial db creation)
 			//context.Database.Migrate();
+			app.UseDefaultFiles();			
 
 			app.UseRouting();
 
+			app.UseCors("MyPolicy");
+			app.UseStaticFiles();
+
 			// global error handler
 			app.UseMiddleware<ExceptionHandlingMiddleware>(); //error handling step 3
-			//app.UseAuthentication();
+															  //app.UseAuthentication();
 
 			app.UseAuthorization();
+
+			//client.Headers[HttpRequestHeader.Accept] = "application/json";
 
 			app.UseEndpoints(endpoints =>
 			{
 				endpoints.MapDefaultControllerRoute();
+				endpoints.Map("api/{**slug}", HandleApiFallback);
 			});
+		}
+
+		private Task HandleApiFallback(HttpContext context)
+		{
+			context.Response.StatusCode = StatusCodes.Status404NotFound;
+			return Task.FromResult(0);
 		}
 	}
 }

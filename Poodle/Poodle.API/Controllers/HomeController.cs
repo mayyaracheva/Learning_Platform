@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Poodle.Services.Contracts;
 using Poodle.Services.Dtos;
+using Poodle.Web.Models;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,10 +22,11 @@ namespace Poodle.Services.Controllers
 
 		[HttpGet("")]
 		public async Task<IActionResult> PublicCourses()
-		{
+	{
 			var courses = await this.homeservice
 				.GetPublicCoursrses()
-				.Select(p => new CourseResponseDTO(p))
+				.Select(course => new StudentCourseViewModel(course))
+				//.Select(p => new CourseResponseDTO(p))
 				.ToListAsync();
 
 			return this.StatusCode(StatusCodes.Status200OK, courses);
