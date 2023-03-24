@@ -7,7 +7,7 @@
  - Clone the repository
  - Setup your database connection in appsettings.json in the API / Web project
  - In Package Manager console select the Poodle.Data project and run Update-Database command
- - Run either the Poodle.API or the Poodle.Web project
+ - Run either the Poodle.API or the Poodle.Web project - setup on localhost:5000
  
  
  
