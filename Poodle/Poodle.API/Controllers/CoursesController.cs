@@ -57,22 +57,18 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpPut("{id}")]
-		public async Task<IActionResult> Update(int id, CourseDTO dto)
-		{
-			var email = "Ragnar.Lodbrock@abv.com";
-			var password = "adminADMIN123?";
+		public async Task<IActionResult> Update(int id, [FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO dto)
+		{			
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 
-			var course = await this.coursesService.UpdateAsync(id, user, dto);
+			await this.coursesService.UpdateAsync(id, user, dto);
 
 			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_CREATED);
 		}
 
 		[HttpDelete("{id}")]
-		public async Task<IActionResult> Delete(int id)
-		{
-			var email = "Ragnar.Lodbrock@abv.com";
-			var password = "adminADMIN123?";
+		public async Task<IActionResult> Delete(int id, [FromHeader] string email, [FromHeader] string password)
+		{			
 			var user = await this.authenticationHelper.TryGetUser(email, password);
 
 			await this.coursesService.DeleteAsync(id, user);
@@ -81,12 +77,10 @@ namespace Poodle.Services.Controllers
 		}
 
 		[HttpGet("{id}/sections")]
-		public async Task<IActionResult> GetSections(int id)
+		public async Task<IActionResult> GetSections(int id, [FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to get all sections
-			//authorization checked in services
-			var email = "Ragnar.Lodbrock@abv.com";
-			var password = "adminADMIN123?";
+			//authorization checked in services			
 			var requester = await this.authenticationHelper.TryGetUser(email, password);
 			var sections = await this.sectionService.GetByCourseId(id, requester);
 			return this.StatusCode(StatusCodes.Status200OK, sections);

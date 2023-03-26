@@ -6,10 +6,13 @@ using Poodle.Services.Contracts;
 using System.Threading.Tasks;
 using Poodle.Services.Helpers;
 using Poodle.Services.Constants;
+using Microsoft.AspNetCore.Cors;
 
 namespace Poodle.Services.Controllers
 {
-    [ApiController]
+	[EnableCors("MyPolicy")]
+	[Produces("application/json")]
+	[ApiController]
     [Route("api/[controller]")]
     public class UsersController : ControllerBase
     {
@@ -24,7 +27,23 @@ namespace Poodle.Services.Controllers
 			this.authenticationHelper = authenticationHelper;
         }
 
-		[HttpGet("")]
+		[Route("[action]")]
+		[HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        {
+            try
+            {
+                var user = await this.authenticationHelper.TryGetUser(loginDto.Email, loginDto.Password);
+                return this.StatusCode(StatusCodes.Status200OK, user);
+            }
+            catch (EntityNotFoundException e)
+            {
+
+                return this.StatusCode(StatusCodes.Status404NotFound, e.Message);
+            }
+        }
+
+        [HttpGet("")]
 		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
 		{
 			//only teacher set to be authorized to get all users
