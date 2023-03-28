@@ -6,6 +6,10 @@ using Poodle.Services.Helpers;
 using Poodle.Services.Dtos;
 using Poodle.Services.Constants;
 using Microsoft.AspNetCore.Cors;
+using Poodle.Data.EntityModels;
+using Poodle.Web.Models;
+using System.Linq;
+using Poodle.Services.Exceptions;
 
 namespace Poodle.Services.Controllers
 {
@@ -28,14 +32,67 @@ namespace Poodle.Services.Controllers
 			this.authenticationHelper = authenticationHelper;
 		}
 
-		[HttpGet("")]		
+		[Route("[action]")]
+		[HttpGet]		
 		public async Task<IActionResult> Get([FromHeader] string email, [FromHeader] string password)
 		{		
 			var user = await this.authenticationHelper.TryGetUser(email, password);
-			var courses = await this.coursesService.GetAsync(user);
+			var filterParams = new CourseQueryParameters();
+			if (AuthorizationHelper.IsStudent(user))
+			{
+				var studentCourses = await this.coursesService.StudentGetCourses(filterParams, user);
+				return this.StatusCode(StatusCodes.Status200OK, studentCourses);
+			}
 
-			return this.StatusCode(StatusCodes.Status200OK, courses);
+			var teacherCourses = await this.coursesService.TeacherGetCourses(filterParams, user);			
+			return this.StatusCode(StatusCodes.Status200OK, teacherCourses);
 		}
+		
+		[HttpGet("{id}/details")]
+		public async Task<IActionResult> Details(int id, [FromHeader] string email, [FromHeader] string password)
+		{			
+			try
+			{
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+				var course = await this.coursesService.GetExistingCourse(id);
+				await this.coursesService.EnrollInPublicCourse(course, user);				
+				if (AuthorizationHelper.IsStudent(user))
+				{
+					var model = new StudentCourseViewModel(course);
+					return this.StatusCode(StatusCodes.Status200OK, model);
+				}
+				else
+				{
+					var model = new TeacherCourseViewModel(course);
+					return this.StatusCode(StatusCodes.Status200OK, model);
+				}
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+			catch (UnauthorizedOperationException e)
+			{
+				return this.StatusCode(StatusCodes.Status401Unauthorized);
+			}
+		}
+				
+		[HttpGet("{id}/unenroll")]		
+		public async Task<IActionResult> Unenroll(int id, [FromHeader] string email, [FromHeader] string password)
+		{
+			try
+			{
+				var user = await this.authenticationHelper.TryGetUser(email, password);
+				await this.coursesService.Unenroll(id, user);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.StatusCode(StatusCodes.Status404NotFound, "Course not found");
+			}
+						
+			return this.StatusCode(StatusCodes.Status200OK, "Successfully unenrolled");
+		}
+
 
 		[HttpGet("{id}")]
 		public async Task<IActionResult> GetById(int id, [FromHeader] string email, [FromHeader] string password)
@@ -45,7 +102,6 @@ namespace Poodle.Services.Controllers
 			await this.coursesService.EnrollInPublicCourse(course, user);
 			return this.StatusCode(StatusCodes.Status200OK, course);
 		}
-
 
 		[HttpPost("")]
 		public async Task<IActionResult> Create([FromHeader] string email, [FromHeader] string password, [FromBody] CourseDTO course)
