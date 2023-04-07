@@ -68,7 +68,7 @@ namespace Poodle.Repositories
 		{
 			courseToUpdate.Title = course.Title != null ? course.Title : courseToUpdate.Title;
 			courseToUpdate.Description = course.Description != null ? course.Description : courseToUpdate.Description;
-			courseToUpdate.CategoryId = course.CategoryId == 0 ? course.CategoryId : courseToUpdate.CategoryId;
+			courseToUpdate.CategoryId = course.CategoryId != 0 ? course.CategoryId : courseToUpdate.CategoryId;
 			courseToUpdate.PhotoURL = course.PhotoURL != null ? course.PhotoURL : courseToUpdate.PhotoURL;
 
 			courseToUpdate.ModifiedOn = DateTime.UtcNow;

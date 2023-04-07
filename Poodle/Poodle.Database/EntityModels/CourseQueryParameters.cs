@@ -14,7 +14,7 @@ namespace Poodle.Data.EntityModels
 		public int PageNumber { get; set; } = 1;
 
 		[Range(1, int.MaxValue)]
-		public int PageSize { get; set; } = 6;
+		public int PageSize { get; set; } = 15;
 
 		//public bool NoQueryParameters
 		//{

@@ -10,6 +10,7 @@ using Poodle.Data.EntityModels;
 using Poodle.Web.Models;
 using System.Linq;
 using Poodle.Services.Exceptions;
+using System.Collections.Generic;
 
 namespace Poodle.Services.Controllers
 {
@@ -77,6 +78,45 @@ namespace Poodle.Services.Controllers
 			}
 		}
 				
+		[HttpGet("{id}/enroll")]
+		public async Task<IActionResult> Enroll(int id)
+		{			
+			try
+			{				
+				var studentsNotEnrolled = await this.coursesService.GetUsersNotEnrolled(id);
+				return this.StatusCode(StatusCodes.Status200OK, studentsNotEnrolled);
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+		}
+
+		[HttpPost("{id}/enroll")]	
+		public async Task<IActionResult> Enroll(int id, string[] students)
+		{			
+			try
+			{				
+				var studentsNotEnrolled = await this.coursesService.GetUsersNotEnrolled(id);
+				var enrolledStudents = new List<User>();
+
+				foreach (var student in studentsNotEnrolled)
+				{
+					if (students.Contains(student.Id.ToString()))
+					{
+						enrolledStudents.Add(student);						
+					}
+				}
+				await this.coursesService.EnrollStudentsInPrivateCourse(id, enrolledStudents);
+				return this.StatusCode(StatusCodes.Status200OK, "Students successfully enrolled");
+			}
+			catch (EntityNotFoundException e)
+			{
+				return this.NotFound(e);
+			}
+			
+		}
+
 		[HttpGet("{id}/unenroll")]		
 		public async Task<IActionResult> Unenroll(int id, [FromHeader] string email, [FromHeader] string password)
 		{
@@ -119,7 +159,7 @@ namespace Poodle.Services.Controllers
 
 			await this.coursesService.UpdateAsync(id, user, dto);
 
-			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_CREATED);
+			return this.StatusCode(StatusCodes.Status200OK, ConstantsContainer.COURSE_UPDATED);
 		}
 
 		[HttpDelete("{id}")]
